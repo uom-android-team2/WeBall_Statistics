@@ -1,4 +1,4 @@
-package uom.team2.weballstatistics;
+package uom.team2.weball_statistics;
 
 import org.junit.Test;
 

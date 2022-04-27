@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">WeBall-Statistics</string>
-    <!-- Strings used for fragments for navigation -->
+
+    <!--    Home Strings-->
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
+
+    <!-- Strings used for fragments for navigation -->
     <string name="live_game_tab_text">Live Progress</string>
     <string name="live_comments_tab_text">Live Comments</string>
     <string name="live_statistics_tab_text">Live Statistics</string>
@@ -12,4 +15,7 @@
 
     <!--    String Label for TabContainer-->
     <string name="tab_container_Label">Live Game</string>
+
+    <!--    Live Statistics Strings-->
+
 </resources>

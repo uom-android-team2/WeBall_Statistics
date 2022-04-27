@@ -14,17 +14,9 @@ import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding
 public class LiveGameStatistics extends Fragment {
 
     private FragmentLiveGameStatisticsBinding binding;
-    private static LiveGameStatistics instance;
 
-    private LiveGameStatistics() {
+    public LiveGameStatistics() {
         // Required empty public constructor
-    }
-
-    public static LiveGameStatistics getInstance() {
-        if(instance == null){
-            instance = new LiveGameStatistics();
-        }
-        return instance;
     }
 
     @Override

@@ -29,12 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         int index = position + 1;
 
-        switch (index){
-            case 3:
-                return LiveGameStatistics.getInstance();
-            default:
-                return new Home();
-        }
+        return new LiveGameStatistics();
     }
 
     @Nullable

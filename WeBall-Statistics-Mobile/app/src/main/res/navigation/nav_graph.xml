@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/tabContainer"
         android:name="uom.team2.weball_statistics.UI_Controller.TabContainer"
-        android:label="fragment_tab_container"
+        android:label="@string/tab_container_Label"
         tools:layout="@layout/fragment_tab_container" />
 </navigation>

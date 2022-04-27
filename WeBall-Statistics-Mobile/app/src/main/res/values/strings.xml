@@ -6,6 +6,10 @@
     <string name="live_game_tab_text">Live Progress</string>
     <string name="live_comments_tab_text">Live Comments</string>
     <string name="live_statistics_tab_text">Live Statistics</string>
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment %1$d</string>
+
+    <!--    String Label for TabContainer-->
+    <string name="tab_container_Label">Live Game</string>
 </resources>

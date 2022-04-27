@@ -28,8 +28,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         int index = position + 1;
-
-        return new LiveGameStatistics();
+        switch (index){
+            case 3:
+                return new LiveGameStatistics();
+            default:
+                return new PlaceHolder(index);
+        }
     }
 
     @Nullable

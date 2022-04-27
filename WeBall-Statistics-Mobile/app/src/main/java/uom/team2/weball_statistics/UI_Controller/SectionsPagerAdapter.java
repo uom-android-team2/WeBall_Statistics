@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

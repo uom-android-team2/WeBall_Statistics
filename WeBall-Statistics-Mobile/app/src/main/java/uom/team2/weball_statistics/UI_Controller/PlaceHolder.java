@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentPlaceHolderBinding;
 
 public class PlaceHolder extends Fragment {
@@ -33,8 +32,8 @@ public class PlaceHolder extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPlaceHolderBinding.inflate(inflater, container, false);
-        String fomatedText = String.format(binding.placeHolderViewText.getText().toString(), index);
-        binding.placeHolderViewText.setText(fomatedText);
+        String formattedText = String.format(binding.placeHolderViewText.getText().toString(), index);
+        binding.placeHolderViewText.setText(formattedText);
 
         return binding.getRoot();
     }

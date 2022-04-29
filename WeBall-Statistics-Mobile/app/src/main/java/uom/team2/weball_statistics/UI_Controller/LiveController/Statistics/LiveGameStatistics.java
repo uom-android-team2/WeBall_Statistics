@@ -19,6 +19,10 @@ public class LiveGameStatistics extends Fragment {
         // Required empty public constructor
     }
 
+    public static LiveGameStatistics getInstance(){
+        return new LiveGameStatistics();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

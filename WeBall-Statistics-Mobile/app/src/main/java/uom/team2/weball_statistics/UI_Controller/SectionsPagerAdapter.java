@@ -30,7 +30,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         int index = position + 1;
         switch (index){
             case 3:
-                return new LiveGameStatistics();
+                return LiveGameStatistics.getInstance();
             default:
                 return new PlaceHolder(index);
         }

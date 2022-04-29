@@ -10,13 +10,16 @@
         android:id="@+id/appbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            app:tabMode="fixed">
+            app:tabBackground="@color/background_player_live_stats_button_color"
+            app:tabIndicator="@color/red_buttons"
+            app:tabIndicatorColor="@color/red_buttons"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/white">
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>

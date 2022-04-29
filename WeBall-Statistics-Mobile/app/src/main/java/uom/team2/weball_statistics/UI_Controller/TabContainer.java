@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentTabContainerBinding;
 
 
 public class TabContainer extends Fragment {
+
     private FragmentTabContainerBinding binding;
 
     public TabContainer() {
@@ -37,6 +39,25 @@ public class TabContainer extends Fragment {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.view.setBackgroundColor(getResources().getColor(R.color.red_buttons));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.view.setBackgroundColor(getResources().getColor(R.color.background_player_live_stats_button_color));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        tabs.getTabAt(tabs.getSelectedTabPosition()).view.setBackgroundColor(getResources().getColor(R.color.red_buttons));
 
         return binding.getRoot();
     }

@@ -35,6 +35,7 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //Test comment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         binding.button.setOnClickListener(e -> {
             NavHostFragment.findNavController(this)

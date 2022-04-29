@@ -46,6 +46,7 @@
                 android:layout_marginTop="24dp"
                 android:text="164 - 82"
                 android:textSize="48sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/team2_logo"
                 app:layout_constraintStart_toEndOf="@+id/team1_logo"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +58,8 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="8dp"
                 android:text="Team 1"
-                android:textSize="24sp"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/team1_logo" />
 
@@ -68,7 +70,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="14dp"
                 android:text="Team 2"
-                android:textSize="24sp"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/team2_logo" />
 
@@ -78,6 +81,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
                 android:background="?android:attr/listDivider"
+                android:foreground="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/team2_name" />
@@ -88,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Game"
-                android:textSize="24sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +105,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
                 android:background="?android:attr/listDivider"
+                android:foreground="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/game_text" />
@@ -109,17 +115,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="#8B1A10"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="32:15"
                 android:textColor="@color/cardview_light_background"
-                android:textSize="24sp"
+                android:textSize="19sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.81"
-                app:layout_constraintStart_toEndOf="@+id/game_text"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

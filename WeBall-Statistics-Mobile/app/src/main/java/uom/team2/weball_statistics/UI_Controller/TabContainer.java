@@ -34,7 +34,7 @@ public class TabContainer extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentTabContainerBinding.inflate(inflater, container, false);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(),getActivity().getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(),getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;

@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
-
+/*
+ * @author Leonard Pepa ics20033
+ */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes

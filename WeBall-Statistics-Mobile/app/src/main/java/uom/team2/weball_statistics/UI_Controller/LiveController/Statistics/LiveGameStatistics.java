@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
 
-
+/*
+ * @author Leonard Pepa ics20033
+ */
 public class LiveGameStatistics extends Fragment {
 
     private FragmentLiveGameStatisticsBinding binding;

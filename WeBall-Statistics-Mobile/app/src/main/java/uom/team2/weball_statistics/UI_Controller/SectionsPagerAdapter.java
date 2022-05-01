@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
-
+/*
+ * @author Leonard Pepa ics20033
+ */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
@@ -28,8 +30,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         int index = position + 1;
-
-        return new LiveGameStatistics();
+        switch (index){
+            case 3:
+                return LiveGameStatistics.getInstance();
+            default:
+                return new PlaceHolder(index);
+        }
     }
 
     @Nullable

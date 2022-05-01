@@ -1,11 +1,27 @@
 <resources>
     <string name="app_name">WeBall-Statistics</string>
-    <!-- Strings used for fragments for navigation -->
+
+    <!--    Home Strings-->
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
+
+    <!-- Strings used for fragments for navigation -->
     <string name="live_game_tab_text">Live Progress</string>
     <string name="live_comments_tab_text">Live Comments</string>
     <string name="live_statistics_tab_text">Live Statistics</string>
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment %1$d</string>
+
+    <!--    String Label for TabContainer-->
+    <string name="tab_container_Label">Live Game</string>
+
+    <!--    Live Statistics Strings-->
+    <string name="score_text">164 - 82</string>
+    <string name="team1_name_text">Team 1</string>
+    <string name="team2_name_text">Team 2</string>
+    <string name="game_live_text">Game</string>
+    <string name="clock_text">32:15</string>
+    <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
+    <string name="team_logo_description">team_logo</string>
 </resources>

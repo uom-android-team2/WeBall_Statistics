@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
+package uom.team2.weball_statistics.UI_Controller;
 
 import android.os.Bundle;
 
@@ -8,21 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
-
+import uom.team2.weball_statistics.databinding.FragmentPlaceHolderBinding;
 /*
  * @author Leonard Pepa ics20033
  */
-public class LiveGameStatistics extends Fragment {
+public class PlaceHolder extends Fragment {
 
-    private FragmentLiveGameStatisticsBinding binding;
+    private FragmentPlaceHolderBinding binding;
+    private int index;
 
-    public LiveGameStatistics() {
+    public PlaceHolder() {
         // Required empty public constructor
     }
 
-    public static LiveGameStatistics getInstance(){
-        return new LiveGameStatistics();
+    public PlaceHolder(int position) {
+        index = position;
     }
 
     @Override
@@ -33,8 +33,10 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
+        binding = FragmentPlaceHolderBinding.inflate(inflater, container, false);
+        String formattedText = String.format(binding.placeHolderViewText.getText().toString(), index);
+        binding.placeHolderViewText.setText(formattedText);
+
         return binding.getRoot();
     }
 

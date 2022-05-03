@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="5sp">
 
 
     <TextView
@@ -19,15 +20,17 @@
         android:id="@+id/progress_team1_eustoxes"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".47"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:max="100"
+        android:progress="50"
         android:rotationX="180"
         android:rotationY="180"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eustoxes_prospathies" />
+        app:layout_constraintTop_toBottomOf="@+id/eustoxes_prospathies"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".47" />
 
     <TextView
         android:id="@+id/team1_eustoxes_text"
@@ -42,13 +45,15 @@
         android:id="@+id/progress_team2_eustoxes"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".47"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:max="100"
+        android:progress="50"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eustoxes_prospathies" />
+        app:layout_constraintTop_toBottomOf="@+id/eustoxes_prospathies"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".47" />
 
     <TextView
         android:id="@+id/team2_eustoxes_text"
@@ -58,6 +63,16 @@
         android:text="50%"
         app:layout_constraintBottom_toTopOf="@+id/progress_team2_eustoxes"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/helper_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_team1_eustoxes" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -133,59 +133,68 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-            <TextView
-                android:id="@+id/eustoxes_prospathies"
+            <include
+                android:id="@+id/include2"
+                layout="@layout/live_statistics_progressbar_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Ευστοχες προσπαθειες"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
-            <ProgressBar
-                android:id="@+id/progress_team1_eustoxes"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".47"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:rotationX="180"
-                android:rotationY="180"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eustoxes_prospathies" />
-
-            <TextView
-                android:id="@+id/team1_eustoxes_text"
+            <include
+                android:id="@+id/include3"
+                layout="@layout/live_statistics_progressbar_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="50%"
-                app:layout_constraintBottom_toTopOf="@+id/progress_team1_eustoxes"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ProgressBar
-                android:id="@+id/progress_team2_eustoxes"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".47"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eustoxes_prospathies" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include2" />
 
-            <TextView
-                android:id="@+id/team2_eustoxes_text"
+            <include
+                android:id="@+id/include4"
+                layout="@layout/live_statistics_progressbar_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="50%"
-                app:layout_constraintBottom_toTopOf="@+id/progress_team2_eustoxes"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include3" />
+
+            <include
+                android:id="@+id/include5"
+                layout="@layout/live_statistics_progressbar_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include4" />
+
+            <include
+                android:id="@+id/include6"
+                layout="@layout/live_statistics_progressbar_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include5" />
+
+            <include
+                android:id="@+id/include7"
+                layout="@layout/live_statistics_progressbar_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include6" />
+
+            <include
+                layout="@layout/live_statistics_progressbar_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include7" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

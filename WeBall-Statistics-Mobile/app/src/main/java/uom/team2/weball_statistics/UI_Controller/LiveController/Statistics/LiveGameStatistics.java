@@ -37,12 +37,6 @@ public class LiveGameStatistics extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
 
-        binding.progressTeam1Eustoxes.setMax(100);
-        binding.progressTeam2Eustoxes.setMax(100);
-        binding.progressTeam1Eustoxes.setProgress(50);
-        binding.progressTeam2Eustoxes.setProgress(50);
-
-
         return binding.getRoot();
     }
 

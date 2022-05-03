@@ -143,6 +143,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/background_player_live_stats_button_color"
         android:text="@string/view_players_live_statistics_button_text"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

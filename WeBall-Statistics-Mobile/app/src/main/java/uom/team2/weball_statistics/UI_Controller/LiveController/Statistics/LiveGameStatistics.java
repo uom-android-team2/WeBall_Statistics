@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
 
 /*
@@ -35,6 +36,7 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 

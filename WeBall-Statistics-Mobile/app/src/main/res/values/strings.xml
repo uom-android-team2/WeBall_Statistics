@@ -24,4 +24,5 @@
     <string name="clock_text">32:15</string>
     <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
     <string name="team_logo_description">team_logo</string>
+    <string name="stadium_name_text">Stadium Name</string>
 </resources>

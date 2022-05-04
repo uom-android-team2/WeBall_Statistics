@@ -23,23 +23,22 @@ public class Home extends Fragment {
     }
 
     public static Home newInstance() {
+
         return new Home();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //Test comment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         binding.button.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_home_to_tabContainer);
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
         });
         return binding.getRoot();
     }

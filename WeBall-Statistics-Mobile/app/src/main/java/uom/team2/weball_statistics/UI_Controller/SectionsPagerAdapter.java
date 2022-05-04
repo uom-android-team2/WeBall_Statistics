@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Comments.LiveGameComments;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGameProgress;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
 /*
  * @author Leonard Pepa ics20033
@@ -31,10 +33,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         int index = position + 1;
         switch (index){
+            case 1:
+                return LiveGameProgress.getInstance();
             case 3:
                 return LiveGameStatistics.getInstance();
             default:
-                return new PlaceHolder(index);
+                return LiveGameComments.getInstance();
         }
     }
 

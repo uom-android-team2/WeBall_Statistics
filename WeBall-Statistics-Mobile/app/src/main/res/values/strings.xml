@@ -10,9 +10,6 @@
     <string name="live_comments_tab_text">Comments</string>
     <string name="live_statistics_tab_text">Statistics</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment %1$d</string>
-
     <!--    String Label for TabContainer-->
     <string name="tab_container_Label">Live Game</string>
 
@@ -23,6 +20,9 @@
     <string name="game_live_text">Game</string>
     <string name="clock_text">32:15</string>
     <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
-    <string name="team_logo_description">team_logo</string>
+    <string name="team_logo_description">Team Logo</string>
     <string name="stadium_name_text">Stadium Name</string>
+    <string name="statistic_name_text">Statistic Name</string>
+    <string name="team1_progress_text">0</string>
+    <string name="team2_progress_text">0</string>
 </resources>

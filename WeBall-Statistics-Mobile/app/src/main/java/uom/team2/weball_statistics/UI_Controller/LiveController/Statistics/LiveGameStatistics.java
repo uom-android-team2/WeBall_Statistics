@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,21 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
+
+        binding.include2.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include2.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+        binding.include4.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include4.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+        binding.include3.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include3.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+        binding.include5.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include5.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+        binding.include6.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include6.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+        binding.include7.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include7.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+        binding.include8.progressTeam1Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        binding.include8.progressTeam2Eustoxes.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
 
         return binding.getRoot();
     }

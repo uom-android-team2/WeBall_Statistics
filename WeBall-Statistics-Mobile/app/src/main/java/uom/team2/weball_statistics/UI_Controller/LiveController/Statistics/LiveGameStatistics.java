@@ -64,9 +64,8 @@ public class LiveGameStatistics extends Fragment {
 
     public void initializeAndAddProgressLayouts(LinearLayout progressBarContainer){
         String[] statisticsArray = getResources().getStringArray(R.array.statistics);
-        List<String> statistics = new ArrayList<String>(Arrays.asList(statisticsArray));
 
-        for(String stat: statistics){
+        for(String stat: statisticsArray){
             progressBarContainer.addView(createProgressBarLayout(stat));
         }
     }

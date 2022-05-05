@@ -25,4 +25,20 @@
     <string name="statistic_name_text">Statistic Name</string>
     <string name="team1_progress_text">0</string>
     <string name="team2_progress_text">0</string>
+
+    <string-array name="statistics">
+<!--        <item>successful efforts</item>-->
+        <item>field goals(%)</item>
+        <item>successful shots</item>
+        <item>total shots</item>
+        <item>successful 2-pointers</item>
+        <item>successful 3-pointers</item>
+        <item>total 2-pointer</item>
+        <item>total 3-pointer</item>
+        <item>number of steals</item>
+        <item>number of blocks</item>
+        <item>number of assists</item>
+        <item>number of rebounds</item>
+        <item>number of turnovers</item>
+    </string-array>
 </resources>

@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/container"
+            android:id="@+id/progressbar_layout_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >

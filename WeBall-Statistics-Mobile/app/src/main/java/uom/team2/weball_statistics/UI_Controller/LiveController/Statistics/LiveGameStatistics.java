@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public class LiveGameStatistics extends Fragment {
 
     public View createProgressBarLayout(String name){
         View progressBarLayout = getLayoutInflater().inflate(R.layout.live_statistics_progressbar_layout, null);
-        progressBarLayout.setId(Objects.hash(name));
+        progressBarLayout.setTag(name);
         TextView statsName = progressBarLayout.findViewById(R.id.name_of_statistic);
         statsName.setText(name);
         return progressBarLayout;

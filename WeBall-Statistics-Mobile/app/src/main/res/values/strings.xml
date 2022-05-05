@@ -25,4 +25,6 @@
     <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
     <string name="team_logo_description">team_logo</string>
     <string name="stadium_name_text">Stadium Name</string>
+    <string name="time_text">8.28\'</string>
+    <string name="action_desc_text">3 points by Giannis Antetokounmpo</string>
 </resources>

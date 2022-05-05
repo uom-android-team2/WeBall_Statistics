@@ -111,7 +111,7 @@
         android:id="@+id/player_Live_stats_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/background_player_live_stats_button_color"
         android:text="@string/view_players_live_statistics_button_text"
         android:textAllCaps="false"

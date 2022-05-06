@@ -3,6 +3,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,9 @@ public class LiveGameStatistics extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
         initializeAndAddProgressLayouts(binding.progressbarLayoutContainer);
+        navigateToLivePlayerStats();
+
+
         return binding.getRoot();
     }
 
@@ -69,6 +73,12 @@ public class LiveGameStatistics extends Fragment {
         for(String stat: statisticsArray){
             progressBarContainer.addView(createProgressBarLayout(stat));
         }
+    }
+
+    public void navigateToLivePlayerStats(){
+        binding.playerLiveStatsButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics);
+        });
     }
 
 }

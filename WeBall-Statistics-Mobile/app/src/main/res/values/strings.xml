@@ -27,7 +27,7 @@
     <string name="team2_progress_text">0</string>
 
     <string-array name="statistics">
-<!--        <item>successful efforts</item>-->
+        <!--        <item>successful efforts</item>-->
         <item>field goals(%)</item>
         <item>successful shots</item>
         <item>total shots</item>
@@ -40,5 +40,11 @@
         <item>number of assists</item>
         <item>number of rebounds</item>
         <item>number of turnovers</item>
+    </string-array>
+
+
+    <string-array name="teams_in_match">
+        <item>Team 1</item>
+        <item>Team 2</item>
     </string-array>
 </resources>

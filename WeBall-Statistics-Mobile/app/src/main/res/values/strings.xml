@@ -13,7 +13,7 @@
     <!--    String Label for TabContainer-->
     <string name="tab_container_Label">Live Game</string>
 
-    <!--    Live Statistics Strings-->
+    <!--    Live Game Strings-->
     <string name="score_text">164 - 82</string>
     <string name="team1_name_text">Team 1</string>
     <string name="team2_name_text">Team 2</string>
@@ -22,14 +22,11 @@
     <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
     <string name="team_logo_description">Team Logo</string>
     <string name="stadium_name_text">Stadium Name</string>
-<<<<<<< HEAD
     <string name="time_text">8.28\'</string>
     <string name="action_desc_text">3 points by Giannis Antetokounmpo</string>
-=======
     <string name="statistic_name_text">Statistic Name</string>
     <string name="team1_progress_text">0</string>
     <string name="team2_progress_text">0</string>
-
     <string-array name="statistics">
 <!--        <item>successful efforts</item>-->
         <item>field goals(%)</item>
@@ -45,5 +42,4 @@
         <item>number of rebounds</item>
         <item>number of turnovers</item>
     </string-array>
->>>>>>> Live-Statistics-R5
 </resources>

@@ -5,6 +5,7 @@ import android.view.*;
 
 import androidx.fragment.app.Fragment;
 
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
@@ -33,6 +34,13 @@ public class LiveGameProgress extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameProgressBinding.inflate(inflater, container, false);
 
+        //Just for testing...Improvements will made
+        for (int i = 0; i <= 10; i++) {
+            View actionLayoutLandlord = getLayoutInflater().inflate(R.layout.card_progress_layout_landlord, null);
+            View actionLayoutGuest = getLayoutInflater().inflate(R.layout.card_progress_layout_guest, null);
+            binding.actionsLayoutContainer.addView(actionLayoutLandlord);
+            binding.actionsLayoutContainer.addView(actionLayoutGuest);
+        }
         return binding.getRoot();
     }
 

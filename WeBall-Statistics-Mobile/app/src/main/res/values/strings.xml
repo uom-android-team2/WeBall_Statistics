@@ -23,12 +23,12 @@
     <string name="team_logo_description">Team Logo</string>
     <string name="stadium_name_text">Stadium Name</string>
     <string name="time_text">8.28\'</string>
-    <string name="action_desc_text">3 points by Giannis AntetokogfdddddddddddddddddAntetokogfddddddddddddddddddddddddddddddddddddddddddddddddddddfgdfgunmpo</string>
+    <string name="action_small_desc_landlord_text">+3 (G. Antetokounmpo)</string>
     <string name="statistic_name_text">Statistic Name</string>
     <string name="team1_progress_text">0</string>
     <string name="team2_progress_text">0</string>
     <string name="time_happened_guest_text">9.30\'</string>
-    <string name="action_small_desc_guest_text">3 points by Giannis Antetokounmfdsfdsfdsffdsfdsfdsfdsfdsfdsfsdfsdfffffffffffffffffffffffffffffffffffffffffffffffffffffffsdfsdfsdfdsfsdfpo</string>
+    <string name="action_small_desc_guest_text">(G. Antetokounmpo) +3</string>
     <string-array name="statistics">
 <!--        <item>successful efforts</item>-->
         <item>field goals(%)</item>

@@ -7,19 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-<<<<<<< HEAD
             <value value="C:\Users\User\.android\avd\Nexus_5_API_30.avd" />
-=======
-            <value value="C:\Users\leop\.android\avd\Nexus_5_API_30.avd" />
->>>>>>> Live-Statistics-R5
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2022-05-05T00:58:20.271566Z" />
-=======
-    <timeTargetWasSelectedWithDropDown value="2022-05-05T02:09:59.389278800Z" />
->>>>>>> Live-Statistics-R5
   </component>
 </project>

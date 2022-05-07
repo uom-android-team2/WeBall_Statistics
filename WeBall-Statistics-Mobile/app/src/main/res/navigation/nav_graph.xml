@@ -21,7 +21,11 @@
         tools:layout="@layout/fragment_live_tab_container" >
         <action
             android:id="@+id/action_tabContainer_to_livePlayerStatistics"
-            app:destination="@id/livePlayerStatistics" />
+            app:destination="@id/livePlayerStatistics"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_up" />
     </fragment>
     <fragment
         android:id="@+id/livePlayerStatistics"

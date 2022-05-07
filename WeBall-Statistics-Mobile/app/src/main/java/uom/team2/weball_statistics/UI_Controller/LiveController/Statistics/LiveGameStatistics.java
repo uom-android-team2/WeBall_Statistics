@@ -46,7 +46,7 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
-        initializeAndAddProgressLayouts(binding.progressbarLayoutContainer);
+//        initializeAndAddProgressLayouts(binding.progressbarLayoutContainer);
         navigateToLivePlayerStats();
 
 

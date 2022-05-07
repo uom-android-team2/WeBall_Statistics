@@ -12,13 +12,17 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout_guest.xml" value="0.34375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout_landlord.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/clock_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_comments.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_progress.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_statistics.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_player_statistics.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_tab_container.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_place_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_tab_container.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/live_player_statistics_header_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/live_statistics_progressbar_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/match_header_layout.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />

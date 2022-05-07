@@ -16,9 +16,9 @@
     </fragment>
     <fragment
         android:id="@+id/tabContainer"
-        android:name="uom.team2.weball_statistics.UI_Controller.TabContainer"
+        android:name="uom.team2.weball_statistics.UI_Controller.LiveController.LiveTabContainer"
         android:label="@string/tab_container_Label"
-        tools:layout="@layout/fragment_tab_container" >
+        tools:layout="@layout/fragment_live_tab_container" >
         <action
             android:id="@+id/action_tabContainer_to_livePlayerStatistics"
             app:destination="@id/livePlayerStatistics" />

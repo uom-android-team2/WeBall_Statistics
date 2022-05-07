@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller;
+package uom.team2.weball_statistics.UI_Controller.LiveController;
 
 
 import android.content.Context;

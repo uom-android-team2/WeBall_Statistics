@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller;
+package uom.team2.weball_statistics.UI_Controller.LiveController;
 
 import android.os.Bundle;
 
@@ -12,16 +12,16 @@ import android.view.ViewGroup;
 import com.google.android.material.tabs.TabLayout;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.databinding.FragmentTabContainerBinding;
+import uom.team2.weball_statistics.databinding.FragmentLiveTabContainerBinding;
 
 /*
  * @author Leonard Pepa ics20033
  */
-public class TabContainer extends Fragment {
+public class LiveTabContainer extends Fragment {
 
-    private FragmentTabContainerBinding binding;
+    private FragmentLiveTabContainerBinding binding;
 
-    public TabContainer() {
+    public LiveTabContainer() {
         // Required empty public constructor
     }
 
@@ -58,7 +58,7 @@ public class TabContainer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentTabContainerBinding.inflate(inflater, container, false);
+        binding = FragmentLiveTabContainerBinding.inflate(inflater, container, false);
 
         // configure tablayout with view pager
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(),getChildFragmentManager());

@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_of_statistic"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".47" />
+        app:layout_constraintWidth_percent=".46" />
 
     <TextView
         android:id="@+id/team1_progress_text"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_of_statistic"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".47" />
+        app:layout_constraintWidth_percent=".46" />
 
     <TextView
         android:id="@+id/team2_progress_text"

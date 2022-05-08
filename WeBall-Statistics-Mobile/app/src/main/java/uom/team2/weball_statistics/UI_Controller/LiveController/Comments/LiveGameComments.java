@@ -5,6 +5,7 @@ import android.view.*;
 
 import androidx.fragment.app.Fragment;
 
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameCommentsBinding;
 
@@ -30,6 +31,11 @@ public class LiveGameComments extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameCommentsBinding.inflate(inflater, container, false);
+
+        //Create comments for Testing
+        for (int i = 0; i <= 12; i++) {
+            binding.commentsLayoutContainer.addView(getLayoutInflater().inflate(R.layout.match_comment_layout, null));
+        }
 
         return binding.getRoot();
     }

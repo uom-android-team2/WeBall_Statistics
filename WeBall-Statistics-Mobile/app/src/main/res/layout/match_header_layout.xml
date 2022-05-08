@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/team_logo_description"
-        android:src="@android:drawable/ic_dialog_info"
+        android:src="@drawable/bucks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck,ImageContrastCheck" />
@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/team_logo_description"
-        android:src="@android:drawable/ic_dialog_info"
+        android:src="@drawable/golden_state_warriors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -30,6 +30,8 @@
     <string name="time_happened_guest_text">9.30\'</string>
     <string name="action_small_desc_guest_text">(G. Antetokounmpo) +3</string>
     <string name="quarter_text">Quarter</string>
+    <string name="time_happened_comment_text">3.45\'</string>
+    <string name="comment_text">CommentCommentCommentCommentCommentCommentCommentCommentCommentCommentComment</string>
     <string-array name="statistics">
         <!--        <item>successful efforts</item>-->
         <item>field goals(%)</item>

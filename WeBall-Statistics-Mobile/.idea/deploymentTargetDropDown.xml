@@ -7,11 +7,19 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+<<<<<<< HEAD
             <value value="C:\Users\User\.android\avd\Pixel_3_XL_API_29.avd" />
+=======
+            <value value="C:\Users\leop\.android\avd\Pixel_5_API_30.avd" />
+>>>>>>> Live-Statistics-R5
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2022-05-07T10:59:01.384789200Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2022-05-08T00:00:06.474022300Z" />
+>>>>>>> Live-Statistics-R5
   </component>
 </project>

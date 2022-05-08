@@ -9,52 +9,83 @@
         android:id="@+id/logoImage"
         android:layout_width="37dp"
         android:layout_height="37dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/playerImage"
         android:layout_width="54dp"
         android:layout_height="89dp"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="47dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/cityTeamNumberPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="2dp"
         android:text="City TeamName | #No | Position"
         android:textColor="#000000"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="36dp" />
+        app:layout_constraintBottom_toTopOf="@+id/firstnameLastname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/playerImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/firstnameLastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="2dp"
         android:text="Firstname Lastname"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="62dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/playerImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
 
     <TextView
         android:id="@+id/plusMinus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="17sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
         android:text="Week plus/minus: "
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="99dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/playerImage"
+        app:layout_constraintTop_toBottomOf="@+id/firstnameLastname" />
 
     <TextView
         android:id="@+id/plusMinusValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
         android:text="+ No"
-        tools:layout_editor_absoluteX="281dp"
-        tools:layout_editor_absoluteY="103dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/plusMinus"
+        app:layout_constraintTop_toBottomOf="@+id/firstnameLastname"
+        app:layout_constraintVertical_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,6 @@
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
+    <string name="playerStatsTab">Players Stats</string>
+    <string name="teamStatsTab">Team Stats</string>
 </resources>

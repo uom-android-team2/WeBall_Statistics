@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:context=".UI_Controller.LiveController.Statistics.LiveGameStatistics">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/team1_logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
@@ -15,10 +15,9 @@
         android:contentDescription="@string/team_logo_description"
         android:src="@android:drawable/ic_dialog_info"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DuplicateSpeakableTextCheck,ImageContrastCheck" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/team2_logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
@@ -108,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="8dp"
         android:background="#8B1A10"
         android:paddingStart="10dp"

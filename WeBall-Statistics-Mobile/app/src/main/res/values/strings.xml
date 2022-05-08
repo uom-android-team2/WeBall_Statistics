@@ -21,7 +21,7 @@
     <string name="clock_text">32:45</string>
     <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
     <string name="team_logo_description">Team Logo</string>
-    <string name="stadium_name_text">Stadium Name</string>
+    <string name="match_start_date_text">10/06/2020 16:00</string>
     <string name="time_text">8.28\'</string>
     <string name="action_small_desc_landlord_text">+3 (G. Antetokounmpo)</string>
     <string name="statistic_name_text">Statistic Name</string>
@@ -32,6 +32,11 @@
     <string name="quarter_text">Quarter</string>
     <string name="time_happened_comment_text">3.45\'</string>
     <string name="comment_text">CommentCommentCommentCommentCommentCommentCommentCommentCommentCommentComment</string>
+    <string name="head_referee_text">Referee</string>
+    <string name="stadium_text">Stadium</string>
+    <string name="head_referee_name_text">Vissel L.</string>
+    <string name="stadium_name_text">OAKA</string>
+    <string name="match_info_label_text">Match Information</string>
     <string-array name="statistics">
         <!--        <item>successful efforts</item>-->
         <item>field goals(%)</item>

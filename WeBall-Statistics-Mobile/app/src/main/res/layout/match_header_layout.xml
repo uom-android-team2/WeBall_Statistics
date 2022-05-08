@@ -104,11 +104,11 @@
         app:layout_constraintTop_toBottomOf="@+id/game_text" />
 
     <TextView
-        android:id="@+id/stadium_name"
+        android:id="@+id/match_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/stadium_name_text"
+        android:text="@string/match_start_date_text"
         android:textSize="11sp"
         app:layout_constraintBottom_toTopOf="@+id/header_top_divider"
         app:layout_constraintEnd_toStartOf="@+id/team2_logo"

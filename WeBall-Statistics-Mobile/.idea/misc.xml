@@ -8,6 +8,9 @@
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/menu/menu_main.xml" value="0.1796875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25329280648429586" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.25329280648429586" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25329280648429586" />
         <entry key="app/src/main/res/layout/fragment_player_stats.xml" value="0.3691123188405797" />
         <entry key="app/src/main/res/layout/fragment_shared_tab_container.xml" value="0.3691123188405797" />
       </map>
@@ -18,5 +21,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.25329280648429586" />
+      </ProjectState>
+    </option>
   </component>
 </project>

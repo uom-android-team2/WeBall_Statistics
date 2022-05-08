@@ -5,4 +5,5 @@
     <string name="home_fragment_label">Home</string>
     <string name="playerStatsTab">Players Stats</string>
     <string name="teamStatsTab">Team Stats</string>
+    <string name="playerStats">playerStats</string>
 </resources>

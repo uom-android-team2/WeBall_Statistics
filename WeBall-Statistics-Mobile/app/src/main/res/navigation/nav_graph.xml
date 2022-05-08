@@ -9,5 +9,14 @@
         android:id="@+id/home"
         android:name="uom.team2.weball_statistics.UI_Controller.Home"
         android:label="@string/home_fragment_label"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_sharedTabContainer"
+            app:destination="@id/sharedTabContainer" />
+    </fragment>
+    <fragment
+        android:id="@+id/sharedTabContainer"
+        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatistics.SharedTabContainer"
+        android:label="fragment_shared_tab_container"
+        tools:layout="@layout/fragment_shared_tab_container" />
 </navigation>

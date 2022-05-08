@@ -29,6 +29,7 @@
     <string name="team2_progress_text">0</string>
     <string name="time_happened_guest_text">9.30\'</string>
     <string name="action_small_desc_guest_text">(G. Antetokounmpo) +3</string>
+    <string name="quarter_text">Quarter</string>
     <string-array name="statistics">
         <!--        <item>successful efforts</item>-->
         <item>field goals(%)</item>

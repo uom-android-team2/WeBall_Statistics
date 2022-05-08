@@ -19,12 +19,12 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linear_layout_progress_guest"
+            android:id="@+id/linear_layout_progress"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/time_happened_landlord"
+                android:id="@+id/time_happened"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -36,17 +36,17 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <ImageView
-                android:id="@+id/action_happened_photo_landlord"
+                android:id="@+id/action_happened_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/time_happened_landlord"
+                app:layout_constraintStart_toEndOf="@+id/time_happened"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_dialog_info" />
 
             <TextView
-                android:id="@+id/action_small_desc_landlord"
+                android:id="@+id/action_small_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/action_happened_photo_landlord"
+                app:layout_constraintStart_toEndOf="@+id/action_happened_photo"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

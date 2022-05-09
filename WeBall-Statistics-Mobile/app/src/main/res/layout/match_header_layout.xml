@@ -75,7 +75,7 @@
         android:foreground="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/team2_name" />
+        app:layout_constraintTop_toBottomOf="@+id/match_start_date" />
 
     <TextView
         android:id="@+id/game_text"
@@ -107,14 +107,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/match_start_date_text"
         android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/header_top_divider"
         app:layout_constraintEnd_toStartOf="@+id/team2_logo"
         app:layout_constraintStart_toEndOf="@+id/team1_logo"
-        app:layout_constraintTop_toBottomOf="@+id/score_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/score_text" />
 
     <include
         layout="@layout/clock_layout"

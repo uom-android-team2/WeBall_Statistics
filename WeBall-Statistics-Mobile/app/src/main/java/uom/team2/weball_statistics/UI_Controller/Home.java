@@ -3,11 +3,13 @@ package uom.team2.weball_statistics.UI_Controller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentHomeBinding;
 
 public class Home extends Fragment {
@@ -32,6 +34,12 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding.teamScoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_teamScore);
+            }
+        });
         return binding.getRoot();
     }
 }

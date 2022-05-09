@@ -9,5 +9,14 @@
         android:id="@+id/home"
         android:name="uom.team2.weball_statistics.UI_Controller.Home"
         android:label="@string/home_fragment_label"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_teamScore"
+            app:destination="@id/teamScore" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamScore"
+        android:name="uom.team2.weball_statistics.UI_Controller.TeamScore.TeamScore"
+        android:label="fragment_team_score"
+        tools:layout="@layout/fragment_team_score" />
 </navigation>

@@ -15,6 +15,7 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGam
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
 /*
  * @author Leonard Pepa ics20033
+ * @author Minas - Theodoros Charakopoulos ics20072
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

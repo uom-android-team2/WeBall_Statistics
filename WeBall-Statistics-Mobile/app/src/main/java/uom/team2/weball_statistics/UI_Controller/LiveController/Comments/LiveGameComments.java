@@ -34,7 +34,8 @@ public class LiveGameComments extends Fragment {
 
         //Create comments for Testing
         for (int i = 0; i <= 12; i++) {
-            binding.commentsLayoutContainer.addView(getLayoutInflater().inflate(R.layout.match_comment_layout, null));
+            View comment = (View)getLayoutInflater().inflate(R.layout.match_comment_layout, null);
+            binding.commentsLayoutContainer.addView(comment);
         }
 
         return binding.getRoot();

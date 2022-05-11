@@ -47,13 +47,14 @@
             app:layout_constraintVertical_bias="0.199" />
 
         <TableLayout
+            android:id="@+id/scoreTable"
             android:layout_width="409dp"
             android:layout_height="545dp"
             android:stretchColumns="*"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintVertical_bias="0.989">
 
             <TableRow
                 android:layout_width="match_parent"

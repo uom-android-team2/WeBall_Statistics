@@ -1,8 +1,10 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Comments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.*;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import uom.team2.weball_statistics.R;
@@ -35,6 +37,10 @@ public class LiveGameComments extends Fragment {
         //Create comments for Testing
         for (int i = 0; i <= 12; i++) {
             View comment = (View)getLayoutInflater().inflate(R.layout.match_comment_layout, null);
+            if (i % 2 == 0) {
+                comment.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_gray));
+                comment.findViewById(R.id.card_view_comment).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_gray));
+            }
             binding.commentsLayoutContainer.addView(comment);
         }
 

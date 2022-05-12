@@ -11,4 +11,5 @@
     <color name="background_player_live_stats_button_color">#1F5673</color>
     <color name="red_buttons">#902D41</color>
     <color name="light_gray">#EBEBEB</color>
+    <color name="dark_red">#902D41</color>
 </resources>

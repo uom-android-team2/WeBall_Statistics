@@ -58,4 +58,23 @@
         <item>Team 1</item>
         <item>Team 2</item>
     </string-array>
+
+    <!-- Strings for Progress -->
+    <string name="match_start">Start of the Match</string>
+    <string name="match_pause">Match paused!</string>
+    <string name="match_completed">Match completed!</string>
+    <!-- Correction by admin ??-->
+    <string name="current_period">%1$s period</string> <!-- 1 || 2 || 3 || 4 as parameters-->
+    <string name="shot_1_in">A well-aimed shot by %1$s!</string> <!-- The name of the player who scores as parameter -->
+    <string name="shot_1_missed">Missed shot by %1$s!</string> <!-- The name of the player who miss the shot as parameter -->
+    <string name="shot_2_in">A well-aimed 2 points shot by %1$s! %2$s</string> <!-- The name of the player who scores as parameter and the name of the player who assists if exists-->
+    <string name="shot_3_in">A well-aimed 3 points shot by %1$s! %2$s</string> <!-- The name of the player who scores as parameter and the name of the player who assists if exists-->
+    <string name="foul_done">Foul by %1$s!</string> <!-- The name of the player who does the foul as parameter -->
+    <string name="rebound_done">Rebound by %1$s!</string> <!-- The name of the player who gets the rebound as parameter -->
+    <string name="block_done">Block by %1$s!</string> <!-- The name of the player who achieves the block as parameter -->
+    <string name="ball_stolen">Ball was stolen by %1$s!</string> <!-- The name of the player who achieves the steal as parameter -->
+    <string name="ball_lost">Loss of the ball by mistake</string>
+    <string name="substitution">Substitution (%1$s in %2$s)</string>
+    <string name="time_happened_general_text">0.01\'</string>
+    <string name="action_desc_general_text">Match Started!</string> <!-- The names of the two players -->
 </resources>

@@ -38,6 +38,7 @@ public class LiveGameProgress extends Fragment {
 
         // Generate action for test
         startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
+        binding.actionsLayoutContainer.addView(getLayoutInflater().inflate(R.layout.card_progress_layout_general, null), 0);
         for (int i = 0; i <= 10; i++) {
             addActionToFragment(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.card_progress_layout_guest, null), i);
             addActionToFragment(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.card_progress_layout_landlord, null), i);

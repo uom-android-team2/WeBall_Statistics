@@ -13,4 +13,5 @@
     <color name="light_gray">#EBEBEB</color>
     <color name="dark_red">#902D41</color>
     <color name="custom_blue">#1F5673</color>
+    <color name="greyRank">#C4C4C4</color>
 </resources>

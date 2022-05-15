@@ -15,46 +15,54 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:textAlignment="center">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@android:color/holo_red_dark"
-                    android:gravity="center_vertical"
+                    android:background="@color/custom_blue"
+                    android:gravity="center_horizontal|center_vertical"
                     android:text="1"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
         </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="Team1"
+            android:textAlignment="center"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="16"
+            android:textAlignment="center"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="14"
+            android:textAlignment="center"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="2"
+            android:textAlignment="center"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="30"
+            android:textAlignment="center"
             android:textSize="16sp" />
 
 </TableRow>

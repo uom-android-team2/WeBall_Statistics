@@ -6,7 +6,6 @@ import androidx.annotation.*;
 import androidx.fragment.app.*;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.*;
 
 
 public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
@@ -28,11 +27,11 @@ public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
         switch (index)
         {
             case 1:
-                return new PlayerStats();
+                return new LeadersStats();
             case 2:
-                return new PlayerStats(); // ARAVELLAS TEAM STATS()
+                return new LeadersStats(); // ARAVELLAS TEAM STATS()
             default:
-                return new PlayerStats();
+                return new LeadersStats();
         }
 
     }

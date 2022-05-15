@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/lightGrey"
-    tools:context=".UI_Controller.CompletedStatistics.Players.PlayerLayout">
+    tools:context=".UI_Controller.CompletedStatistics.PlayersStats.PlayerLayout">
 
     <TextView
         android:id="@+id/prank"

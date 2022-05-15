@@ -7,21 +7,21 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import uom.team2.weball_statistics.databinding.FragmentPlayerStatsBinding;
+import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
 
-public class PlayerStats extends Fragment {
+public class LeadersStats extends Fragment {
 
-    private FragmentPlayerStatsBinding binding;
+    private FragmentLeadersStatsBinding binding;
 
 
-    public PlayerStats() {
+    public LeadersStats() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static PlayerStats newInstance(String param1, String param2) {
-        PlayerStats fragment = new PlayerStats();
+    public static LeadersStats newInstance(String param1, String param2) {
+        LeadersStats fragment = new LeadersStats();
 
         return fragment;
     }
@@ -36,7 +36,7 @@ public class PlayerStats extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        binding = FragmentPlayerStatsBinding.inflate(inflater,container,false);
+        binding = FragmentLeadersStatsBinding.inflate(inflater,container,false);
         return binding.getRoot();
 
     }

@@ -24,12 +24,12 @@
         android:id="@+id/top_player_name"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="top player name"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/statistic_value"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,8 +49,8 @@
     <TextView
         android:id="@+id/stitle"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginEnd="18dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="PPG"
         android:textAlignment="textEnd"
@@ -58,8 +58,6 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/number"
         app:layout_constraintTop_toBottomOf="@+id/statistic_value"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -93,19 +91,16 @@
     <TextView
         android:id="@+id/statistic_value"
         android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginStart="116dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="30.6"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toEndOf="@+id/top_player_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"

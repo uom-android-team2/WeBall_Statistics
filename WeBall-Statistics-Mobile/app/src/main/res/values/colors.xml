@@ -12,4 +12,5 @@
     <color name="red_buttons">#902D41</color>
     <color name="light_gray">#EBEBEB</color>
     <color name="dark_red">#902D41</color>
+    <color name="custom_blue">#1F5673</color>
 </resources>

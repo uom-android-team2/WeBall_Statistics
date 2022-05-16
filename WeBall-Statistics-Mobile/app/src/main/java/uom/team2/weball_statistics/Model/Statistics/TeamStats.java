@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.Model.Statistics;
 
+
 public class TeamStats extends Stats {
 
     protected int teamId;
@@ -7,13 +8,16 @@ public class TeamStats extends Stats {
     private int wins;
     private int looses;
 
-    public TeamStats(String fTP, String twoPP, String threePP, int tI, int tM, int w, int l, int tS, int tR, int tA, int tB,
-                     int tFouls, int tT){
+    public TeamStats(String fTP, String twoPP, String threePP, int tI, int tM, int w, int l)  {
 
-        initializeStats(fTP, twoPP, threePP, tS, tR, tA, tB, tFouls, tT);// This method exists in class called Stats.
+        initializeStats(fTP, twoPP, threePP);// This method exists in class called Stats.
         teamId = tI;
         totalMatches = tM;
         wins = w;
         looses = l;
+
+
+
+
     }
 }

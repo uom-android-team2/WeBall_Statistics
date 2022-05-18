@@ -2,13 +2,18 @@ package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Chronometer;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +21,11 @@ import uom.team2.weball_statistics.R;
  * create an instance of this fragment.
  */
 public class AdminsView extends Fragment {
+    private FragmentAdminsViewBinding binding;
+    private Chronometer chronometer;
+    private boolean running=false;
+    private Button start_end_button;
+    private long pauseOffset;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,16 +61,63 @@ public class AdminsView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admins_view, container, false);
+
+        binding = FragmentAdminsViewBinding.inflate(inflater,container,false);
+        return binding.getRoot();
+
     }
+//Start Button
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!running) {
+                   binding.clock.setBase(SystemClock.elapsedRealtime());
+                   binding.clock.start();
+                    running = true;
+
+                }
+            }
+
+        });
+//Pause Button
+        binding.pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!running) {
+                    binding.clock.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+                    binding.clock.start();
+                    running = true;
+
+                } else {
+                    binding.clock.stop();
+                    pauseOffset = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                    running = false;
+                }
+            }
+        });
+
+//Freethrow Button
+        
+
+
+
+    }
+
+
+
+
+
+
 }

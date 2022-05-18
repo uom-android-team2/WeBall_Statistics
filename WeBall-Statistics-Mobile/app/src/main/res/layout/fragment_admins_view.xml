@@ -119,31 +119,24 @@
         app:layout_constraintVertical_bias="0.529">
 
 
-        <Chronometer
-            android:id="@+id/clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/team2_banner"
-            app:layout_constraintStart_toEndOf="@+id/team1_banner"
-            app:layout_constraintTop_toBottomOf="@+id/score_text" />
-
         <TextView
             android:id="@+id/score_text"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
             android:text="0-0"
+            android:textAlignment="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/team2_banner"
+            app:layout_constraintStart_toEndOf="@+id/team1_banner"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:onClick="team1Select"
             android:id="@+id/team1_banner"
-            android:layout_width="82dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:onClick="team1Select"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/score_text"
             app:layout_constraintHorizontal_bias="0.253"
@@ -152,16 +145,27 @@
             app:srcCompat="@drawable/clipart549449" />
 
         <ImageView
-            android:onClick="team2Select"
             android:id="@+id/team2_banner"
-            android:layout_width="86dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:onClick="team2Select"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.774"
             app:layout_constraintStart_toEndOf="@+id/score_text"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/clipart549449" />
+
+        <Chronometer
+            android:id="@+id/clock"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/team2_banner"
+            app:layout_constraintStart_toEndOf="@+id/team1_banner"
+            app:layout_constraintTop_toBottomOf="@+id/score_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -177,40 +181,48 @@
         app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:onClick="s_e_clock"
             android:id="@+id/start_button"
-            android:layout_width="88dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="@color/alt_green"
+
             android:text="Start"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pause_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline8" />
+            app:layout_constraintTop_toBottomOf="@+id/game_status" />
 
         <Button
             android:id="@+id/undo_button"
-            android:layout_width="75dp"
-            android:layout_height="39dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="@color/alt_green"
             android:text="UNDO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline8" />
+            app:layout_constraintStart_toEndOf="@+id/pause_button"
+            app:layout_constraintTop_toBottomOf="@+id/game_status" />
 
         <Button
-            android:onClick="pauseGameFunction"
             android:id="@+id/pause_button"
-            android:layout_width="88dp"
-            android:layout_height="38dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="@color/alt_green"
             android:text="Pause"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/undo_button"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toEndOf="@+id/start_button"
-            app:layout_constraintTop_toTopOf="@+id/guideline8" />
+            app:layout_constraintTop_toBottomOf="@+id/game_status" />
 
         <TextView
             android:id="@+id/game_status"
@@ -220,7 +232,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline8"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -229,7 +241,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35227272" />
+            app:layout_constraintGuide_percent="0.33" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -245,21 +258,21 @@
 
         <Button
             android:id="@+id/rebound_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginBottom="-10dp"
             android:backgroundTint="@color/alt_blue"
             android:text="Rebound"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/assist_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.202" />
 
         <Button
             android:id="@+id/assist_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-10dp"
             android:backgroundTint="@color/alt_blue"
@@ -273,49 +286,49 @@
 
         <Button
             android:id="@+id/block_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_marginBottom="-10dp"
             android:backgroundTint="@color/alt_blue"
             android:text="Block"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/assist_button"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.202" />
 
         <Button
             android:id="@+id/steal_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="-15dp"
             android:backgroundTint="@color/alt_blue"
             android:text="Steal"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/turnover_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rebound_button"
             app:layout_constraintVertical_bias="0.283" />
 
         <Button
             android:id="@+id/foul_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="-14dp"
-            android:layout_marginEnd="16dp"
             android:backgroundTint="@color/alt_blue"
             android:text="Foul"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/turnover_button"
             app:layout_constraintTop_toBottomOf="@+id/block_button"
             app:layout_constraintVertical_bias="0.289" />
 
         <Button
             android:id="@+id/turnover_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="-14dp"
             android:backgroundTint="@color/alt_blue"
@@ -386,19 +399,20 @@
 
         <Button
             android:id="@+id/freethrow_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundTint="@color/alt_blue"
             android:text="Freethrow"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/two_point_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
         <Button
             android:id="@+id/two_point_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundTint="@color/alt_blue"
             android:text="2-Pointer"
             app:cornerRadius="50dp"
@@ -409,13 +423,14 @@
 
         <Button
             android:id="@+id/three_point_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundTint="@color/alt_blue"
             android:text="3-Pointer"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/two_point_button"
             app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -445,7 +460,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38030097" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

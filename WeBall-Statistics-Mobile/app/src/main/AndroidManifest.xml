@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeBallStatistics" >
         <activity
+            android:name=".LoginAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeScreenActivity"
             android:exported="false" />
         <activity

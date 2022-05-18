@@ -2,6 +2,8 @@ package uom.team2.weball_statistics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,16 +18,21 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.welcome_screen);
 
         btnLoginAdmin = (Button) findViewById(R.id.btnLoginAdmin);
-        addHandlerBTNLoginAdmin();
+        addHandlerBTNLoginAdmin(this);
 
 
     }
 
-    private void addHandlerBTNLoginAdmin(){
+    private void addHandlerBTNLoginAdmin(AppCompatActivity a){
         btnLoginAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               
+
+                finish();
+                Intent i = new Intent(a, LoginAdminActivity.class);
+                startActivity(i);
+
+
             }
         });
     }

@@ -6,4 +6,7 @@
     <string name="Continue_Guest">Continue as a Guest</string>
     <string name="Login_Admin">Login as Admin</string>
     <string name="Welcome_ESAKE">Welcome to ESAKE</string>
+    <string name="Username">Username</string>
+    <string name="Login">Login</string>
+
 </resources>

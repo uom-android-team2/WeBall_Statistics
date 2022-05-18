@@ -3,4 +3,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
+    <string name="Continue_Guest">Continue as a Guest</string>
+    <string name="Login_Admin">Login as Admin</string>
+    <string name="Welcome_ESAKE">Welcome to ESAKE</string>
 </resources>

@@ -5,10 +5,13 @@ import android.view.*;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import uom.team2.weball_statistics.Model.Action;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
 /*
@@ -17,6 +20,7 @@ import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 public class LiveGameProgress extends Fragment {
 
     private FragmentLiveGameProgressBinding binding;
+    private DAOAction daoAction;
 
     public LiveGameProgress() { }
 
@@ -35,6 +39,8 @@ public class LiveGameProgress extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameProgressBinding.inflate(inflater, container, false);
+        //Initialize DAOAction
+        daoAction = new DAOAction();
 
         // Generate action for test
         startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
@@ -46,6 +52,16 @@ public class LiveGameProgress extends Fragment {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
         }
+
+        //Testing write in firebase
+        Action actionTest = new Action("+3 correct", "Minas - Ch", "osfp", "2.38");
+        daoAction.insert(actionTest).addOnSuccessListener(s -> {
+            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(f -> {
+            Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
+        });
+
+        daoAction.remove("-N2S_WODhrDEWl7xJnRF");
 
         return binding.getRoot();
     }

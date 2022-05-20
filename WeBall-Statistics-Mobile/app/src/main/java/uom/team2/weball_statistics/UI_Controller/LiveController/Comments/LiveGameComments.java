@@ -45,17 +45,6 @@ public class LiveGameComments extends Fragment {
             binding.commentsLayoutContainer.addView(comment);
         }
 
-        //Testing parameters to Strings in strings.xml
-        String text1 = String.format(getResources().getString(R.string.current_period), "1st");
-        String text2 = String.format(getResources().getString(R.string.current_period), "2nd");
-        String text3 = String.format(getResources().getString(R.string.shot_2_in), "Minas", "(Minas 2)");
-        String text4 = String.format(getResources().getString(R.string.current_period), "4th");
-
-        Toast.makeText(getContext(), text1, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), text2, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), text3, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), text4, Toast.LENGTH_SHORT).show();
-
         return binding.getRoot();
     }
 

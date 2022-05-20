@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
@@ -24,6 +27,24 @@ public class LivePlayerStatistics extends Fragment {
         return fragment;
     }
 
+    private void handleUIMode(){
+        int nightModeFlags =
+                getContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                binding.cardview.setCardBackgroundColor(Color.BLACK);
+                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.BLACK);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                binding.cardview.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.BLACK);
+                break;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                break;
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +57,7 @@ public class LivePlayerStatistics extends Fragment {
 
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
         ProgressBarLayoutFactory.initializeAndAddProgressLayouts(this, binding.progressbarContainer);
+        handleUIMode();
         return binding.getRoot();
     }
 }

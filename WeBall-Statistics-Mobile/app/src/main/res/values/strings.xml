@@ -3,4 +3,6 @@
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
+
+    <string name="welcome_label">Welcome, username!</string>
 </resources>

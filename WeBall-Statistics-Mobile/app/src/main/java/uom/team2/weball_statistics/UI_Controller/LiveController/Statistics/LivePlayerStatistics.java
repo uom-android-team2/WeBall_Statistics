@@ -22,7 +22,7 @@ public class LivePlayerStatistics extends Fragment {
         // Required empty public constructor
     }
 
-    public static LivePlayerStatistics newInstance(String param1, String param2) {
+    public static LivePlayerStatistics newInstance() {
         LivePlayerStatistics fragment = new LivePlayerStatistics();
         return fragment;
     }
@@ -37,8 +37,8 @@ public class LivePlayerStatistics extends Fragment {
                 binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.BLACK);
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
-                binding.cardview.setBackgroundColor(getResources().getColor(R.color.light_gray));
-                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.BLACK);
+                binding.cardview.setCardBackgroundColor(getResources().getColor(R.color.light_gray));
+                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(getResources().getColor(R.color.light_gray));
                 break;
             case Configuration.UI_MODE_NIGHT_UNDEFINED:
                 break;
@@ -54,7 +54,6 @@ public class LivePlayerStatistics extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
         ProgressBarLayoutFactory.initializeAndAddProgressLayouts(this, binding.progressbarContainer);
         handleUIMode();

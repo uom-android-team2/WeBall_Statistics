@@ -35,7 +35,7 @@ public class LivePlayerStatistics extends Fragment {
         // Inflate the layout for this fragment
 
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
-
+        ProgressBarLayoutFactory.initializeAndAddProgressLayouts(this, binding.progressbarContainer);
         return binding.getRoot();
     }
 }

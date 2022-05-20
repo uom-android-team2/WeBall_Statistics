@@ -48,6 +48,7 @@
             android:fillViewport="true">
 
             <LinearLayout
+                android:id="@+id/progressbar_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -57,50 +58,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <include
-                    layout="@layout/live_statistics_progressbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

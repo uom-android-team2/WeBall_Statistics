@@ -1,6 +1,8 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -38,11 +40,15 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ProgressBarLayoutFactory.initializeAndAddProgressLayouts(this, binding.progressbarLayoutContainer);
         navigateToLivePlayerStats();
 
-
-        return binding.getRoot();
     }
 
     @Override
@@ -50,22 +56,6 @@ public class LiveGameStatistics extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-//    public View createProgressBarLayout(String name){
-//        View progressBarLayout = getLayoutInflater().inflate(R.layout.live_statistics_progressbar_layout, null);
-//        progressBarLayout.setTag(name);
-//        TextView statsName = progressBarLayout.findViewById(R.id.name_of_statistic);
-//        statsName.setText(name);
-//        return progressBarLayout;
-//    }
-//
-//    public void initializeAndAddProgressLayouts(LinearLayout progressBarContainer){
-//        String[] statisticsArray = getResources().getStringArray(R.array.team_statistics);
-//
-//        for(String stat: statisticsArray){
-//            progressBarContainer.addView(createProgressBarLayout(stat));
-//        }
-//    }
 
     public void navigateToLivePlayerStats(){
         binding.playerLiveStatsButton.setOnClickListener(e -> {

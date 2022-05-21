@@ -2,6 +2,8 @@ package uom.team2.weball_statistics.UI_Controller.LiveController;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -60,6 +62,13 @@ public class LiveTabContainer extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveTabContainerBinding.inflate(inflater, container, false);
 
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // configure tablayout with view pager
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(),getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
@@ -70,7 +79,6 @@ public class LiveTabContainer extends Fragment {
         // handles the background color of the selected tab
         tabBackgroundColorHandler(tabs);
 
-        return binding.getRoot();
     }
 
     @Override

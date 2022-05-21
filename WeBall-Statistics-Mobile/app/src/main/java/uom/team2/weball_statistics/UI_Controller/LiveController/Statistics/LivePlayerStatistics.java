@@ -35,8 +35,8 @@ public class LivePlayerStatistics extends Fragment {
                         Configuration.UI_MODE_NIGHT_MASK;
         switch (nightModeFlags) {
             case Configuration.UI_MODE_NIGHT_YES:
-                binding.cardview.setCardBackgroundColor(Color.BLACK);
-                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.BLACK);
+                binding.cardview.setCardBackgroundColor(Color.DKGRAY);
+                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.DKGRAY);
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
                 binding.cardview.setCardBackgroundColor(getResources().getColor(R.color.light_gray));

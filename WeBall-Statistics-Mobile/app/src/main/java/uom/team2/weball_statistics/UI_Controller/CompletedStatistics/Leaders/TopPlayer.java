@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.PlayersStats;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.Leaders;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import uom.team2.weball_statistics.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RankTab#newInstance} factory method to
+ * Use the {@link TopPlayer#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RankTab extends Fragment {
+public class TopPlayer extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class RankTab extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public RankTab() {
+    public TopPlayer() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class RankTab extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment RankTab.
+     * @return A new instance of fragment TopPlayerLayout.
      */
     // TODO: Rename and change types and number of parameters
-    public static RankTab newInstance(String param1, String param2) {
-        RankTab fragment = new RankTab();
+    public static TopPlayer newInstance(String param1, String param2) {
+        TopPlayer fragment = new TopPlayer();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class RankTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rank_tab, container, false);
+        return inflater.inflate(R.layout.fragment_top_player_layout, container, false);
     }
 }

@@ -42,10 +42,6 @@ public class LiveGameComments extends Fragment {
         //Create comments for Testing
         for (int i = 0; i <= 12; i++) {
             View comment = (View)getLayoutInflater().inflate(R.layout.match_comment_layout, null);
-            if (i % 2 == 0) {
-                comment.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_gray));
-                comment.findViewById(R.id.card_view_comment).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_gray));
-            }
             binding.commentsLayoutContainer.addView(comment);
         }
     }

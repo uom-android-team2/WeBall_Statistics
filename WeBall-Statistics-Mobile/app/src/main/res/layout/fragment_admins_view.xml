@@ -207,7 +207,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/end_button"
+            app:layout_constraintEnd_toStartOf="@+id/undo_button"
             app:layout_constraintStart_toEndOf="@+id/start_button"
             app:layout_constraintTop_toBottomOf="@+id/game_status"
             app:layout_constraintVertical_bias="1.0" />
@@ -220,7 +220,7 @@
             android:layout_marginEnd="10dp"
             android:background="@color/alt_green"
             android:gravity="center"
-            android:text="Start"
+            android:text="️️Start"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -233,14 +233,14 @@
 
 
         <TextView
-            android:id="@+id/end_button"
+            android:id="@+id/undo_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:background="@color/alt_green"
             android:gravity="center"
-            android:text="End"
+            android:text="Undo↩️"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -571,7 +571,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toEndOf="@+id/undo_button"
+        app:layout_constraintStart_toEndOf="@+id/substitution_button"
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -589,14 +589,14 @@
         app:layout_constraintGuide_percent="0.99" />
 
     <TextView
-        android:id="@+id/undo_button"
+        android:id="@+id/substitution_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/rounded_corners_textview"
         android:gravity="center"
 
-        android:text="UNDO↩️"
+        android:text="Substitution"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="16sp"

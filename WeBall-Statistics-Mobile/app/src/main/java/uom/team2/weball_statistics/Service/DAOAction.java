@@ -40,9 +40,6 @@ public class DAOAction {
     }
 
     public void getdata() {
-
-        // calling add value event listener method
-        // for getting the values from database.
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -50,16 +47,10 @@ public class DAOAction {
                 // updates in the data.
                 // this method is called when the data is
                 // changed in our Firebase console.
-                // below line is for getting the data from
-                // snapshot of our database.
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     Action action = ds.getValue(Action.class);
                     System.out.println(action.getActionType());
                 }
-
-                // after getting the value we are setting
-                // our value to our text view in below line.
-
             }
 
             @Override

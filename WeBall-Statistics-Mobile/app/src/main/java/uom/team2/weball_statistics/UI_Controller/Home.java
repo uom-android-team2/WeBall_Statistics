@@ -37,7 +37,7 @@ public class Home extends Fragment {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_administrator_screen1);
+                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_sharedMatches);
             }
         });
         return binding.getRoot();

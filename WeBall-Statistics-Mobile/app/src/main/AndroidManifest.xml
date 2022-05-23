@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeBallStatistics">
         <activity
-            android:name=".UI_Controller.R1.administrator_screen1"
+            android:name=".UI_Controller.R1.SharedMatches"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

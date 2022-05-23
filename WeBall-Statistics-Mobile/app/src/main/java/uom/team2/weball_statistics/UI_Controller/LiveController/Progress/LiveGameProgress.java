@@ -20,7 +20,7 @@ import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 public class LiveGameProgress extends Fragment {
 
     private FragmentLiveGameProgressBinding binding;
-    private DAOAction daoAction;
+    private DAOAction daoAction = new DAOAction();;
 
     public LiveGameProgress() { }
 
@@ -33,6 +33,7 @@ public class LiveGameProgress extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        daoAction.getdata();
     }
 
     @Override
@@ -40,7 +41,6 @@ public class LiveGameProgress extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameProgressBinding.inflate(inflater, container, false);
         //Initialize DAOAction
-        daoAction = new DAOAction();
 
         // Generate action for test
         startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
@@ -61,7 +61,7 @@ public class LiveGameProgress extends Fragment {
             Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
         });
 
-        daoAction.remove("-N2S_WODhrDEWl7xJnRF");
+        
 
         return binding.getRoot();
     }

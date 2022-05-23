@@ -3,18 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UI_Controller.R1.LiveMatches" >
+    android:layout_height="wrap_content"
+    tools:context=".UI_Controller.R1.fragment_previous_matches">
 
     <include
-        layout="@layout/fragment_date_of_match"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include" />
-
-    <include
-        android:id="@+id/include"
+        android:id="@+id/include7"
         layout="@layout/fragment_match_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,62 +16,72 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/include9"
         layout="@layout/fragment_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/include"
-        app:layout_constraintTop_toTopOf="@+id/include" />
+        app:layout_constraintBottom_toBottomOf="@+id/include7"
+        app:layout_constraintEnd_toEndOf="@+id/include7"
+        app:layout_constraintStart_toStartOf="@+id/include7"
+        app:layout_constraintTop_toTopOf="@+id/include7"
+        app:layout_constraintVertical_bias="0.503" />
 
     <include
         layout="@layout/fragment_date_of_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintStart_toStartOf="@+id/include7"
+        app:layout_constraintTop_toTopOf="@+id/include7" />
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include8"
         layout="@layout/fragment_match_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include7" />
 
     <include
         layout="@layout/fragment_date_of_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/include7" />
 
     <include
-        android:id="@+id/include4"
+        android:id="@+id/include10"
+        layout="@layout/fragment_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/include8"
+        app:layout_constraintEnd_toEndOf="@+id/include8"
+        app:layout_constraintStart_toStartOf="@+id/include8"
+        app:layout_constraintTop_toBottomOf="@+id/include7" />
+
+    <include
+        android:id="@+id/include11"
         layout="@layout/fragment_match_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/include8" />
+
+    <include
+        layout="@layout/fragment_date_of_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/include11"
+        app:layout_constraintTop_toBottomOf="@+id/include8" />
 
     <include
         layout="@layout/fragment_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/include2"
-        app:layout_constraintEnd_toEndOf="@+id/include2"
-        app:layout_constraintStart_toStartOf="@+id/include2"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <include
-        layout="@layout/fragment_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/include4"
-        app:layout_constraintEnd_toEndOf="@+id/include4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/include11"
+        app:layout_constraintStart_toStartOf="@+id/include11"
+        app:layout_constraintTop_toBottomOf="@+id/include8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

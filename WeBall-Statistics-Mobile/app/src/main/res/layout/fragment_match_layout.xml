@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UI_Controller.R1.fragment_live_match_layout">
+    tools:context=".UI_Controller.R1.fragment_match_layout">
 
     <ImageView
         android:id="@+id/teamA_imageView"
-        android:layout_width="60pd"
+        android:layout_width="60dp"
         android:layout_height="90dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,10 +20,10 @@
 
     <ImageView
         android:id="@+id/teamB_imageView"
-        android:layout_width="60pd"
+        android:layout_width="60dp"
         android:layout_height="90dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="60dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:text="TextView"
+        android:text="Team A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamA_imageView"
         tools:layout_editor_absoluteX="60dp" />
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:text="TextView"
+        android:text="Team B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamB_imageView"
         tools:layout_editor_absoluteX="291dp" />

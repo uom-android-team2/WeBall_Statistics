@@ -10,4 +10,5 @@
     <color name="greyRank">#C4C4C4</color>
     <color name="lightBlueTopPlayer">#BBBFD4</color>
     <color name="lightGrey">#EBEBEB</color>
+    <color name="grey">#656667</color>
 </resources>

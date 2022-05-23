@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.Toast;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
@@ -109,8 +112,27 @@ public class AdminsView extends Fragment {
         });
 
 //Freethrow Button
-        
+        binding.freethrowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(getContext()); // Context, this, etc.
+                dialog.setContentView(R.layout.popup_window);
+                dialog.setTitle("title");
+                dialog.show();            }
+        });
 
+//banners
+        binding.team1Banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(getContext()); // Context, this, etc.
+                dialog.setContentView(R.layout.popup_window);
+                dialog.setTitle("title");
+                dialog.show();
+                //
+
+            }
+        });
 
 
     }

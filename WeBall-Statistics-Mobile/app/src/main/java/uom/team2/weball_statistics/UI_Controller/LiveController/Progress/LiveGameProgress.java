@@ -7,6 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import uom.team2.weball_statistics.Model.Action;
@@ -42,6 +44,11 @@ public class LiveGameProgress extends Fragment {
         binding = FragmentLiveGameProgressBinding.inflate(inflater, container, false);
         //Initialize DAOAction
 
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Generate action for test
         startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
         binding.actionsLayoutContainer.addView(getLayoutInflater().inflate(R.layout.card_progress_layout_general, null), 0);
@@ -60,10 +67,7 @@ public class LiveGameProgress extends Fragment {
         }).addOnFailureListener(f -> {
             Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
         });
-
         
-
-        return binding.getRoot();
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

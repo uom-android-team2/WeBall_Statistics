@@ -37,26 +37,42 @@
     <string name="head_referee_name_text">Vissel L.</string>
     <string name="stadium_name_text">OAKA</string>
     <string name="match_info_label_text">Match Information</string>
-    <string-array name="statistics">
-        <!--        <item>successful efforts</item>-->
-        <item>field goals(%)</item>
-        <item>successful shots</item>
-        <item>total shots</item>
-        <item>successful 2-pointers</item>
-        <item>successful 3-pointers</item>
-        <item>total 2-pointer</item>
-        <item>total 3-pointer</item>
-        <item>number of steals</item>
-        <item>number of blocks</item>
-        <item>number of assists</item>
-        <item>number of rebounds</item>
-        <item>number of turnovers</item>
+
+    <string-array name="team_statistics">
+        <item>Field goals</item>
+        <item>Successful shots</item>
+        <item>Total shots</item>
+        <item>Successful 2-pointers</item>
+        <item>Successful 3-pointers</item>
+        <item>Total 2-pointer</item>
+        <item>Total 3-pointer</item>
+        <item>Number of steals</item>
+        <item>Number of blocks</item>
+        <item>Number of assists</item>
+        <item>Number of rebounds</item>
+        <item>Number of turnovers</item>
+    </string-array>
+
+    <string-array name="player_statistics">
+        <item>Field goals</item>
+        <item>Successful shots</item>
+        <item>Total shots</item>
+        <item>Successful 2-pointers</item>
+        <item>Successful 3-pointers</item>
+        <item>Total 2-pointer</item>
+        <item>Total 3-pointer</item>
+        <item>Number of steals</item>
+        <item>Number of blocks</item>
+        <item>Number of assists</item>
+        <item>Number of rebounds</item>
+        <item>Number of turnovers</item>
+        <item>Total minutes played</item>
     </string-array>
 
 
     <string-array name="teams_in_match">
-        <item>Team 1</item>
-        <item>Team 2</item>
+        <item name="team1">Team 1</item>
+        <item name="team2">Team 2</item>
     </string-array>
 
     <!-- Strings for Progress -->

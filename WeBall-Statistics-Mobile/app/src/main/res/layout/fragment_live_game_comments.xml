@@ -18,6 +18,7 @@
         android:id="@+id/nestedScrollView_comments"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/black_to_white_color"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +32,7 @@
             android:id="@+id/comments_layout_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/black_to_white_color"
             android:orientation="vertical"></LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

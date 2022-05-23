@@ -1,15 +1,14 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Comments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameCommentsBinding;
 
 /*
@@ -35,17 +34,16 @@ public class LiveGameComments extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameCommentsBinding.inflate(inflater, container, false);
 
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //Create comments for Testing
         for (int i = 0; i <= 12; i++) {
             View comment = (View)getLayoutInflater().inflate(R.layout.match_comment_layout, null);
-            if (i % 2 == 0) {
-                comment.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_gray));
-                comment.findViewById(R.id.card_view_comment).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.light_gray));
-            }
             binding.commentsLayoutContainer.addView(comment);
         }
-
-        return binding.getRoot();
     }
 
     @Override

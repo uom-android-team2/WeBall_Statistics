@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.Leaders;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import uom.team2.weball_statistics.R;
 
 /**
  * A simple {@link Fragment} subclass.

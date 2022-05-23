@@ -53,7 +53,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="PPG"
-        android:textAlignment="textEnd"
+        android:textAlignment="viewEnd"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
         android:id="@+id/team2"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="team "
@@ -86,6 +86,7 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dash"
         app:layout_constraintStart_toEndOf="@+id/imageView" />
 
     <TextView
@@ -96,25 +97,11 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="30.6"
-        android:textAlignment="textEnd"
+        android:textAlignment="viewEnd"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="63dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/dash"
@@ -129,5 +116,19 @@
         app:layout_constraintEnd_toStartOf="@+id/position"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/team2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="63dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@mipmap/ic_launcher" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,16 +18,18 @@
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/menu/menu_main.xml" value="0.1796875" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_down.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bottom_round_layout.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/top_round_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25329280648429586" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25329280648429586" />
+        <entry key="app/src/main/res/layout/fragment_bottom_button.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25329280648429586" />
         <entry key="app/src/main/res/layout/fragment_leaders_stats.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_player_layout.xml" value="0.25835866261398177" />
+        <entry key="app/src/main/res/layout/fragment_player_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_player_stats.xml" value="0.3691123188405797" />
-        <entry key="app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/fragment_rank_tab.xml" value="0.25835866261398177" />
+        <entry key="app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.6531204644412192" />
+        <entry key="app/src/main/res/layout/fragment_rank_tab.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_shared_tab_container.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_stat_title.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_top_player_layout.xml" value="0.5" />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".StatTitle">
+    tools:context=".UI_Controller.CompletedStatistics.Leaders.StatTitle">
 
     <TextView
         android:id="@+id/statTitle"
@@ -14,7 +14,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Points Per Game"
-        android:textColor="@color/black"
+        android:textColor="@color/grey"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/TOP_PLAYER"

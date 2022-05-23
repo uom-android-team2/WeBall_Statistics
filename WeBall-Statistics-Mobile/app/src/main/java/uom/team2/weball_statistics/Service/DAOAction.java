@@ -52,11 +52,14 @@ public class DAOAction {
                 // changed in our Firebase console.
                 // below line is for getting the data from
                 // snapshot of our database.
-                Action value = snapshot.getValue(Action.class);
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    Action action = ds.getValue(Action.class);
+                    System.out.println(action.getActionType());
+                }
 
                 // after getting the value we are setting
                 // our value to our text view in below line.
-                System.out.println(value.getActionType());
+
             }
 
             @Override

@@ -6,6 +6,10 @@ public class Action {
     private String teamName; //Team of the player who does the action (can be empty)
     private String timeHappened; //The time that the action happened
 
+    public Action() {
+        //Empty constructor required by the documentation
+    }
+
     public Action(String actionType, String playerName, String teamName, String timeHappened) {
         this.actionType = actionType;
         this.playerName = playerName;

@@ -22,7 +22,7 @@ import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 public class LiveGameProgress extends Fragment {
 
     private FragmentLiveGameProgressBinding binding;
-    private DAOAction daoAction = new DAOAction();;
+    private DAOAction daoAction;
 
     public LiveGameProgress() { }
 
@@ -35,6 +35,7 @@ public class LiveGameProgress extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        daoAction = new DAOAction();
         daoAction.getdata();
     }
 
@@ -58,15 +59,23 @@ public class LiveGameProgress extends Fragment {
             if (i == 4 || i == 7) {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
-        }
+        };
 
-        //Testing write in firebase
-        Action actionTest = new Action("+3 correct", "Minas - Ch", "osfp", "2.38");
-        daoAction.insert(actionTest).addOnSuccessListener(s -> {
-            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(f -> {
-            Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
-        });
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        //Testing write in firebase
+                        Action actionTest = new Action("+3 correct", "Minas - Ch", "osfp", "2.38");
+                        daoAction.insert(actionTest).addOnSuccessListener(s -> {
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(f -> {
+                            Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                },
+                10000
+        );
         
     }
 

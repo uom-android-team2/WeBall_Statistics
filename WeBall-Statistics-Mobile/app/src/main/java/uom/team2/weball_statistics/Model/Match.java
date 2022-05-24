@@ -12,7 +12,7 @@ public class Match {
     private Team guest;
     private Date matchDate;
     private Status status; // UPCOMING, ONGOING, COMPLETED
-    private ArrayList<Action> actions; //Class Action implemented in other branch
+    //private ArrayList<Action> actions; //Class Action implemented in other branch
     //Will added fields specified for comments and progress to appear them after the match completed
 
     public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status) {
@@ -21,12 +21,12 @@ public class Match {
         this.guest = guest;
         this.matchDate = matchDate;
         this.status = status;
-        actions = new ArrayList<Action>();
+     //   actions = new ArrayList<Action>();
     }
 
-    public void addAction(Action action) {
-        this.actions.add(action);
-    }
+//    public void addAction(Action action) {
+//        this.actions.add(action);
+//    }
 
     public int getId() {
         return id;
@@ -68,7 +68,7 @@ public class Match {
         this.status = status;
     }
 
-    public ArrayList<Action> getActions() {
-        return actions;
-    }
+//    public ArrayList<Action> getActions() {
+//        return actions;
+//    }
 }

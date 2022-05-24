@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
@@ -34,7 +33,7 @@ public class LiveGameStatistics extends Fragment {
     public void addProgressBars(LinearLayout progressBarContainer){
         String[] statisticsArray = Utils.getStringArray(getContext(), R.array.team_statistics);
         for(String statName: statisticsArray){
-            progressBarContainer.addView(ProgressBarLayoutFactory.createProgressBarLayout(this, statName));
+            progressBarContainer.addView(ViewLayoutFactory.createProgressBarLayout(this, statName));
         }
     }
 

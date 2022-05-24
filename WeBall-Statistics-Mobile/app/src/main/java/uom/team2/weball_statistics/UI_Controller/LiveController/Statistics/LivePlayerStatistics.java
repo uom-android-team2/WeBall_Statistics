@@ -1,7 +1,5 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
@@ -34,7 +31,7 @@ public class LivePlayerStatistics extends Fragment {
     public void addProgressBars(LinearLayout progressBarContainer){
         String[] statisticsArray = Utils.getStringArray(getContext(), R.array.player_statistics);
         for(String stat: statisticsArray){
-            progressBarContainer.addView(ProgressBarLayoutFactory.createProgressBarLayout(this, stat));
+            progressBarContainer.addView(ViewLayoutFactory.createProgressBarLayout(this, stat));
         }
     }
 

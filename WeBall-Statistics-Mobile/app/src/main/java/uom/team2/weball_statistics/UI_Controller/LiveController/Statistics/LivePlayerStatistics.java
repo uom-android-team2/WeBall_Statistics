@@ -29,24 +29,6 @@ public class LivePlayerStatistics extends Fragment {
         return fragment;
     }
 
-    private void handleUIMode(){
-        int nightModeFlags =
-                getContext().getResources().getConfiguration().uiMode &
-                        Configuration.UI_MODE_NIGHT_MASK;
-        switch (nightModeFlags) {
-            case Configuration.UI_MODE_NIGHT_YES:
-                binding.cardview.setCardBackgroundColor(Color.DKGRAY);
-                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(Color.DKGRAY);
-                break;
-            case Configuration.UI_MODE_NIGHT_NO:
-                binding.cardview.setCardBackgroundColor(getResources().getColor(R.color.light_gray));
-                binding.horizontalPlayerContainer.cardview.setCardBackgroundColor(getResources().getColor(R.color.light_gray));
-                break;
-            case Configuration.UI_MODE_NIGHT_UNDEFINED:
-                break;
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +38,6 @@ public class LivePlayerStatistics extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ProgressBarLayoutFactory.initializeAndAddProgressLayouts(this, binding.progressbarContainer);
-        handleUIMode();
     }
 
     @Override

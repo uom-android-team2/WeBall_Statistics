@@ -17,4 +17,5 @@
     <!-- Customizable for light and dark mode -->
     <color name="black_to_white_color">#FF000000</color>
     <color name="black_to_light_gray_color">#FF000000</color>
+    <color name="statistics_background">#454749</color>
 </resources>

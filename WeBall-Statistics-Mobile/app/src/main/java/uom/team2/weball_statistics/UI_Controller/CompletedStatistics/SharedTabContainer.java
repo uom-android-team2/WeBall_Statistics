@@ -37,10 +37,13 @@ public class SharedTabContainer extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSharedTabContainerBinding.inflate(inflater, container,false);
         PageAdapterCompletedStatistics sectionsPagerAdapter = new PageAdapterCompletedStatistics(getContext(),getChildFragmentManager());
+
+        // configure table layout with view pager
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+
         return binding.getRoot();
     }
 }

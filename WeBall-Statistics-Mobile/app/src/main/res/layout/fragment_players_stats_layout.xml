@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UI_Controller.CompletedStatistics.Leaders.PlayersStatsLayout"><![CDATA[>
+    tools:context=".UI_Controller.CompletedStatistics.LeadersStatsController.PlayersStatsLayout"><![CDATA[>
 
     ]]>
 

@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/expandedLeadersStat"
-        android:name="uom.team2.weball_statistics.ExpandedLeadersStat"
+        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatistics.LeadersStatsController.ExpandedLeadersStat"
         android:label="fragment_expanded_leaders_stat"
         tools:layout="@layout/fragment_expanded_leaders_stat" />
 </navigation>

@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.Leaders;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.LeadersStatsController;
 
 import android.os.Bundle;
 
@@ -10,12 +10,8 @@ import android.view.ViewGroup;
 
 import uom.team2.weball_statistics.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StatTitle#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StatTitle extends Fragment {
+
+public class ExpandedLeadersStat extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +22,7 @@ public class StatTitle extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StatTitle() {
+    public ExpandedLeadersStat() {
         // Required empty public constructor
     }
 
@@ -36,11 +32,11 @@ public class StatTitle extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StatTitle.
+     * @return A new instance of fragment ExpandedLeadersStat.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatTitle newInstance(String param1, String param2) {
-        StatTitle fragment = new StatTitle();
+    public static ExpandedLeadersStat newInstance(String param1, String param2) {
+        ExpandedLeadersStat fragment = new ExpandedLeadersStat();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +57,6 @@ public class StatTitle extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stat_title, container, false);
+        return inflater.inflate(R.layout.fragment_expanded_leaders_stat, container, false);
     }
 }

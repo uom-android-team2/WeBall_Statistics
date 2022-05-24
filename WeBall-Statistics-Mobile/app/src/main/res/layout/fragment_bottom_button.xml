@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UI_Controller.CompletedStatistics.Leaders.BottomButton"
+    tools:context=".UI_Controller.CompletedStatistics.LeadersStatsController.BottomButton"
     android:background="@drawable/bottom_round_layout">
 
     <ImageButton

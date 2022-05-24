@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.Leaders;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatistics.LeadersStatsController;
 
 import android.os.Bundle;
 

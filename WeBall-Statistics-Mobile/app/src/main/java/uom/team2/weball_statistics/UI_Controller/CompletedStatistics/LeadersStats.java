@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
 
@@ -37,7 +39,14 @@ public class LeadersStats extends Fragment {
 
         // Inflate the layout for this fragment
         binding = FragmentLeadersStatsBinding.inflate(inflater,container,false);
+        navigate();
         return binding.getRoot();
 
+    }
+
+    public void navigate(){
+        binding.PPG.BUTTON.expButton.setOnClickListener(e ->{
+                NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat);
+        });
     }
 }

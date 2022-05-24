@@ -24,8 +24,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25329280648429586" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25329280648429586" />
         <entry key="app/src/main/res/layout/fragment_bottom_button.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_expanded_leaders_stat.xml" value="0.25759878419452886" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25329280648429586" />
-        <entry key="app/src/main/res/layout/fragment_leaders_stats.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_leaders_stats.xml" value="0.39055299539170507" />
         <entry key="app/src/main/res/layout/fragment_player_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_player_stats.xml" value="0.3691123188405797" />
         <entry key="app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.6531204644412192" />

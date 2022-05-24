@@ -7,7 +7,9 @@ import androidx.fragment.app.*;
 
 import uom.team2.weball_statistics.R;
 
-
+/*
+ *  @author Evmorfia Elpida Dasyra ics20006
+ */
 public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
 
     @StringRes

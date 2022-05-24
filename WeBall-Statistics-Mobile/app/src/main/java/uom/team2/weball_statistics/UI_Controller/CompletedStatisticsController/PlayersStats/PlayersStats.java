@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.CompletedStatistics;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.PlayersStats;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,21 +9,27 @@ import androidx.fragment.app.Fragment;
 
 import uom.team2.weball_statistics.databinding.FragmentPlayerStatsBinding;
 
+/*
+ *   author: Evmorfia Elpida Dasyra ics20006
+ */
 
-public class PlayerStats extends Fragment {
+public class PlayersStats extends Fragment {
 
     private FragmentPlayerStatsBinding binding;
 
-
-    public PlayerStats() {
+    public PlayersStats() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static PlayerStats newInstance(String param1, String param2) {
-        PlayerStats fragment = new PlayerStats();
+    public static PlayersStats newInstance(String param1, String param2) {
+        PlayersStats fragment = new PlayersStats();
 
         return fragment;
+    }
+
+    public static Fragment getInstance() {
+
+        return new PlayersStats();
     }
 
     @Override

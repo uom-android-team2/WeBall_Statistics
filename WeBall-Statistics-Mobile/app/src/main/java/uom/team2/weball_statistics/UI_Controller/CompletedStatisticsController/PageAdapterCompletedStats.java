@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.CompletedStatistics;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController;
 
 import android.content.Context;
 
@@ -6,16 +6,15 @@ import androidx.annotation.*;
 import androidx.fragment.app.*;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.*;
+import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.PlayersStats.PlayersStats;
 
-
-public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
+public class PageAdapterCompletedStats extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.playerStatsTab,R.string.teamStatsTab};
+    private static final int[] TAB_TITLES = new int[]{R.string.playerStatsTab, R.string.teamStatsTab};
     private final Context mContext;
 
-    public PageAdapterCompletedStatistics(Context context, FragmentManager fm) {
+    public PageAdapterCompletedStats(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
@@ -28,11 +27,11 @@ public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
         switch (index)
         {
             case 1:
-                return new PlayerStats();
+                return PlayersStats.getInstance();
             case 2:
-                return new PlayerStats(); // ARAVELLAS TEAM STATS()
+                return new PlayersStats(); // ARAVELLAS TEAM STATS()
             default:
-                return new PlayerStats();
+                return PlayersStats.getInstance();
         }
 
     }

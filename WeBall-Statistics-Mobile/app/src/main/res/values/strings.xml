@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WeBall-Statistics</string>
     <!-- Strings used for fragments for navigation -->
+    <string name="statsTabContainer">Championship Statistics</string>
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
     <string name="playerStatsTab">Players Stats</string>

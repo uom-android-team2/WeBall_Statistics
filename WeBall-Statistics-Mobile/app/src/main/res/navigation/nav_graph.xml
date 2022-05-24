@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/sharedTabContainer"
-        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatistics.SharedTabContainer"
-        android:label="fragment_shared_tab_container"
-        tools:layout="@layout/fragment_shared_tab_container" />
+        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.CompletedStatsTabContainer"
+        android:label="@string/statsTabContainer"
+        tools:layout="@layout/fragment_completed_stats_tab_container" />
 </navigation>

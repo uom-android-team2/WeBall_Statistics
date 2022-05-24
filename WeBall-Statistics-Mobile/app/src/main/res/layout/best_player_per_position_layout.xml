@@ -69,12 +69,25 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
-        android:text="Week plus/minus: "
+        android:text="Plus-Minus "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/playerImage"
         app:layout_constraintTop_toBottomOf="@+id/firstnameLastname" />
+
+    <TextView
+        android:id="@+id/efficiency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Efficiency"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toEndOf="@+id/plusMinusValue"
+        app:layout_constraintTop_toBottomOf="@+id/firstnameLastname"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/plusMinusValue"
@@ -88,4 +101,16 @@
         app:layout_constraintStart_toEndOf="@+id/plusMinus"
         app:layout_constraintTop_toBottomOf="@+id/firstnameLastname"
         app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/efficiencyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ No"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toEndOf="@+id/efficiency"
+        app:layout_constraintTop_toBottomOf="@+id/firstnameLastname"
+        app:layout_constraintVertical_bias="0.45" />
 </androidx.constraintlayout.widget.ConstraintLayout>

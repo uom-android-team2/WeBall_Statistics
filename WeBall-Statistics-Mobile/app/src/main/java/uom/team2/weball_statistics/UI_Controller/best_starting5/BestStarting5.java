@@ -40,12 +40,12 @@ public class BestStarting5 extends Fragment {
         binding = null;
     }
 
-    public static View createBestPlayerPerPositionLayout(Fragment fragment,int logo,
-                                                         int playerPhoto,
-                                                         String cityNameNumberPosition,
-                                                         String firstnameLastname,int plusMinusValue){
+    public View createBestPlayerPerPositionLayout(int logo,
+                                                  int playerPhoto,
+                                                  String cityNameNumberPosition,
+                                                  String firstnameLastname, int plusMinusValue){
         //Deriving View from layout fragment
-        View bestPlayerPerPositionLayout = fragment.getLayoutInflater().inflate(R.layout.best_player_per_position_layout,null);
+        View bestPlayerPerPositionLayout = this.getLayoutInflater().inflate(R.layout.best_player_per_position_layout,null);
         //Changing View data based on input
             //City-Team name-Number-Position field
             TextView newCityNameNumberPosition = bestPlayerPerPositionLayout.findViewById(R.id.cityTeamNumberPosition);

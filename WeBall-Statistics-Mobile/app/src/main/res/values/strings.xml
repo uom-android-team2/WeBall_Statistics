@@ -92,5 +92,6 @@
     <string name="ball_lost">Loss of the ball by mistake</string>
     <string name="substitution">Substitution (%1$s in %2$s)</string>
     <string name="time_happened_general_text">0.01\'</string>
-    <string name="action_desc_general_text">Match Started!</string> <!-- The names of the two players -->
+    <string name="action_desc_general_text">Match Started!</string>
+    <string name="player_name">player name</string> <!-- The names of the two players -->
 </resources>

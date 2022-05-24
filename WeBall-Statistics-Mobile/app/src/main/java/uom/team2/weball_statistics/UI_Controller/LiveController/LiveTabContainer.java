@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLiveTabContainerBinding;
+import uom.team2.weball_statistics.utils.Utils;
 
 /*
  * @author Leonard Pepa ics20033
@@ -28,8 +29,8 @@ public class LiveTabContainer extends Fragment {
     }
 
     private void tabBackgroundColorHandler(TabLayout tabs){
-        int backgroundSelectedColor = getResources().getColor(R.color.red_buttons);
-        int backgroundDefaultColor = getResources().getColor(R.color.background_player_live_stats_button_color);
+        int backgroundSelectedColor = Utils.getColor(getContext(), R.color.red_buttons);
+        int backgroundDefaultColor = Utils.getColor(getContext(), R.color.background_player_live_stats_button_color);
 
         tabs.getTabAt(tabs.getSelectedTabPosition()).view.setBackgroundColor(backgroundSelectedColor);
 

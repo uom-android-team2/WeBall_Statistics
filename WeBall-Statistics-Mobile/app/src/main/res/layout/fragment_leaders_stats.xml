@@ -34,29 +34,35 @@
                     android:layout_height="wrap_content" />
 
                 <include
+                    android:id="@+id/RPG"
                     layout="@layout/fragment_players_stats_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <include
+                    android:id="@+id/APG"
                     layout="@layout/fragment_players_stats_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <include
+                    android:id="@+id/SPG"
                     layout="@layout/fragment_players_stats_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <include
+                    android:id="@+id/BPG"
                     layout="@layout/fragment_players_stats_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <include
+                    android:id="@+id/FGM3"
                     layout="@layout/fragment_players_stats_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
+import uom.team2.weball_statistics.utils.Utils;
 
 /*
  * @author Leonard Pepa ics20033
@@ -29,6 +30,14 @@ public class LiveGameStatistics extends Fragment {
     public static LiveGameStatistics getInstance(){
         return new LiveGameStatistics();
     }
+
+    public void addProgressBars(LinearLayout progressBarContainer){
+        String[] statisticsArray = Utils.getStringArray(getContext(), R.array.team_statistics);
+        for(String statName: statisticsArray){
+            progressBarContainer.addView(ProgressBarLayoutFactory.createProgressBarLayout(this, statName));
+        }
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +55,8 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ProgressBarLayoutFactory.initializeAndAddProgressLayouts(this, binding.progressbarLayoutContainer);
+        addProgressBars(binding.progressbarLayoutContainer);
         navigateToLivePlayerStats();
-
     }
 
     @Override

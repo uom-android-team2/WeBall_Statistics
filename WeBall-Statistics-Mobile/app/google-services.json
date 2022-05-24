@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "728944178021",
+    "project_id": "weball-statistics-actions",
+    "storage_bucket": "weball-statistics-actions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728944178021:android:a9aa399404b5806e99678c",
+        "android_client_info": {
+          "package_name": "uom.team2.weball_statistics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728944178021-6v1vp1bbin6m1r543nmg61kfbo38imkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgYfPJIe4Iwrpbn4J9mcdrwgOdGwSIRC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728944178021-6v1vp1bbin6m1r543nmg61kfbo38imkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

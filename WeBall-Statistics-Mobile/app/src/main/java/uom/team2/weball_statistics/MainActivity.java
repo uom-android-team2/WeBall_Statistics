@@ -15,8 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import uom.team2.weball_statistics.databinding.ActivityMainBinding;
 
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 

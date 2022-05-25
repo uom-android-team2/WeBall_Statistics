@@ -1,8 +1,15 @@
 package uom.team2.weball_statistics.Model.Statistics;
 
 
-public abstract class Stats {
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+public abstract class Stats implements editFieldsFromDB {
+    
     protected String fieldGoalsPercentage;
     protected String freeThrowsPercentage;
     protected int successfulFreethrows;
@@ -89,8 +96,41 @@ public abstract class Stats {
       return  totalFouls;
     }
 
-    protected int setTotalTurnovers(){
+    protected int getTotalTurnovers(){
        return totalTurnovers;
     }
 
+    @Override
+    public void editJON(String data) {
+        try {
+            JSONObject json = new JSONObject(data);
+            Iterator<String> keys = json.keys();
+            HashMap<String , String> hashMapData = new HashMap<String , String>();
+
+            while(keys.hasNext()) {
+                String key = keys.next();
+                String dataFromKey = json.get(key).toString();
+                hashMapData.put(key, dataFromKey);
+
+                if(keys.equals("turnover")) break;
+
+            }
+
+            successfulFreethrows = Integer.parseInt(hashMapData.get("successful_freethrow"));
+            totalFreethrows = Integer.parseInt(hashMapData.get("total_freethrow"));
+            successfulTwoPoints = Integer.parseInt(hashMapData.get("successful_twopointer"));
+            totalTwoPoints = Integer.parseInt(hashMapData.get("total_freethrow"));
+            successfulThreePoints = Integer.parseInt(hashMapData.get("successful_threepointer"));
+            totalThreePoints = Integer.parseInt(hashMapData.get("total_threepointer"));
+            totalSteels = Integer.parseInt(hashMapData.get("steel"));
+            totalRebounds = Integer.parseInt(hashMapData.get("rebound"));
+            totalAssists = Integer.parseInt(hashMapData.get("assist"));
+            totalBocks = Integer.parseInt(hashMapData.get("block"));
+            totalFouls = Integer.parseInt(hashMapData.get("foul"));
+            totalTurnovers = Integer.parseInt(hashMapData.get("turnover"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

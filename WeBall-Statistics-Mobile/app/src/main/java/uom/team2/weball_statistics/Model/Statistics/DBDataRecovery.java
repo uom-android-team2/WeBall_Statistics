@@ -7,6 +7,7 @@ import org.json.*;
 import java.io.IOException;
 import java.util.*;
 import okhttp3.*;
+import uom.team2.weball_statistics.Model.Config;
 
 import java.util.ArrayList;
 
@@ -17,37 +18,44 @@ public class DBDataRecovery {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public ArrayList<String> readData() throws Exception {
+    public ArrayList<String> readData(String api, String id) throws Exception {
+        String query = "";
+        query = !id.equals("") ?  "?player_id=" + id : query;
         ArrayList<String> dataar = new ArrayList<String>();
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType, "");
+        MediaType mediaType = MediaType.parse("application/json");
         Request request = new Request.Builder()
-                .url("http://192.168.56.1/WeBall_Statistics-Backend/API/player.php?id=1")
-                .method("POST", body)
+                .url(Config.API_URL + api + query)
+                .method("GET", null)
                 .build();
         Response response = client.newCall(request).execute();
         String data = response.body().string();
-        System.out.println(data);
-
-//        try {
-//            JSONObject json = new JSONObject(data);
-//            Iterator<String> keys = json.keys();
-//            while(keys.hasNext()) {
-//                String brand = keys.next();
-//                String models = json.get(brand).toString();
-//
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
 
 
+       Stats f = createObjectStats(api);
+
+
+        f.editJON(data);
+
+         return dataar;
+
+    }
+
+    private Stats createObjectStats(String api){
+        if(api.equals(Config.API_PLAYER_STATS_LIVE)){
+            return new PlayerStatsLive();
+        }else if(api.equals(Config.API_PLAYER_STATS_CHAMPIONSHIP)){
+            return new PlayerStats();
+        }else if(api.equals(Config.API_TEAM_STATS_CHAMPIONSHIP)){
+            return new TeamStats();
+        }else {
+            return null;
+        }
 
 
 
-        return dataar;
+
 
     }
 

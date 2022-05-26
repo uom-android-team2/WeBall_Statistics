@@ -2,18 +2,28 @@ package uom.team2.weball_statistics.UI_Controller.R1;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
+import uom.team2.weball_statistics.R;
+
+import android.content.Context;
+
 import androidx.annotation.*;
 import androidx.fragment.app.*;
 
 import uom.team2.weball_statistics.R;
 
-public class PageAdapterMatches extends FragmentPagerAdapter {
+public class UserPageAdapterMatches extends FragmentPagerAdapter {
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.liveMatches,R.string.upcomingMatches};
+    private static final int[] TAB_TITLES = new int[]{R.string.liveMatches,R.string.previousMatches};
     private final Context mContext;
 
 
-    public PageAdapterMatches(Context context, FragmentManager fm) {
+    public UserPageAdapterMatches(Context context, FragmentManager fm) {
         super(fm);
         this.mContext = context;
     }
@@ -28,7 +38,7 @@ public class PageAdapterMatches extends FragmentPagerAdapter {
             case 1:
                 return new LiveMatches();
             case 2:
-                return new UpcomingMatches(); // upcoming()
+                return new PreviousMatches(); // upcoming()
             default:
                 return new LiveMatches();
         }
@@ -47,3 +57,4 @@ public class PageAdapterMatches extends FragmentPagerAdapter {
         return TAB_TITLES.length;
     }
 }
+

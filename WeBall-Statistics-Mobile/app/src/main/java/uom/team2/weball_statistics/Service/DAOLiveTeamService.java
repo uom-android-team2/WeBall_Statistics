@@ -10,9 +10,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 
-public class DAOLiveTeamService {
+public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
     private DatabaseReference databaseReference;
 
     public DAOLiveTeamService() {
@@ -20,12 +22,7 @@ public class DAOLiveTeamService {
         databaseReference = db.getReference(TeamLiveStatistics.class.getSimpleName());
     }
 
-    public Task<Void> insertData(TeamLiveStatistics teamStatisticsUpdated){
-        return databaseReference.push().setValue(teamStatisticsUpdated);
-    }
-
-
-    public void dataChangeListener() {
+    public void setDataChangeListener() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -44,6 +41,30 @@ public class DAOLiveTeamService {
         });
     }
 
+    @Override
+    public Task<Void> insert(TeamLiveStatistics data) {
+        return databaseReference.push().setValue(data);
+    }
+
+    @Override
+    public Task<Void> update(HashMap<String, TeamLiveStatistics> data) {
+        return null;
+    }
+
+    @Override
+    public Task<Void> delete(TeamLiveStatistics data) {
+        return null;
+    }
+
+    @Override
+    public Task<Void> get() {
+        return null;
+    }
+
+    @Override
+    public Task<Void> get(TeamLiveStatistics data) {
+        return null;
+    }
 }
 
 

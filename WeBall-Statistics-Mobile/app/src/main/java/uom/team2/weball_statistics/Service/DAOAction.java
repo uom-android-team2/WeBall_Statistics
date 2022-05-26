@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Action;
 
-public class DAOAction {
+public class DAOAction implements DAOCRUDService <Action> {
     private DatabaseReference databaseReference;
 
     public DAOAction() {
@@ -24,22 +24,31 @@ public class DAOAction {
         databaseReference = db.getReference(Action.class.getSimpleName());
     }
 
+    @Override
     public Task<Void> insert(Action action) {
 
         return databaseReference.push().setValue(action);
     }
 
+    @Override
+    public Task<Void> update(HashMap<String, Action> data) {
+        return null;
+    }
+
+    //We will keep this
     public Task<Void> update(String key, HashMap<String, Object> hashMap) {
 
         return  databaseReference.child(key).updateChildren(hashMap);
     }
 
-    public Task<Void> remove(String key) {
-
-        return databaseReference.child(key).removeValue();
+    @Override
+    public Task<Void> delete(Action data) {
+        //need to traverse the records maybe
+        return null;
     }
 
-    public void getdata() {
+    @Override
+    public Task<Void> get() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -60,5 +69,13 @@ public class DAOAction {
                 System.out.println("Failed");
             }
         });
+
+        return null;
+    }
+
+    @Override
+    public Task<Void> get(Action data) {
+        //retrieve based on a field of the object
+        return null;
     }
 }

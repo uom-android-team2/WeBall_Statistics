@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_home_to_teamScore"
             app:destination="@id/teamScore" />
+        <action
+            android:id="@+id/action_home_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/tabContainer"
@@ -49,4 +52,8 @@
         android:name="uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5"
         android:label="BestStarting5" />
 
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="uom.team2.weball_statistics.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

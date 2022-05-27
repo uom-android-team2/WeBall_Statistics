@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavHost;
 import androidx.navigation.NavHostController;
-
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -40,6 +39,7 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
@@ -47,13 +47,16 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.button.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
-
+        binding.imageView.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
         });
 
-        binding.teamScoreButton.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
+        binding.btnContinueGuest.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
+        });
+
+        binding.btnLoginAdmin.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_loginFragment);
         });
 
     }

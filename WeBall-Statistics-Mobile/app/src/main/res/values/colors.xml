@@ -19,4 +19,5 @@
     <color name="statistics_background">#D3D3D3</color>
     <color name="greyRank">#C4C4C4</color>
 
+    <color name="gray_login">#EBEBEB</color>
 </resources>

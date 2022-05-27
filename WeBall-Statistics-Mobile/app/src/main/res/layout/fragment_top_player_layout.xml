@@ -9,34 +9,39 @@
     <TextView
         android:id="@+id/dash2"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="- "
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/number"
+        app:layout_constraintEnd_toStartOf="@+id/topNumber"
         app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toEndOf="@+id/position" />
+        app:layout_constraintStart_toEndOf="@+id/topPosition"
+        app:layout_constraintTop_toBottomOf="@+id/topPlayerName"
+        app:layout_constraintVertical_bias="0.176" />
 
     <TextView
-        android:id="@+id/top_player_name"
+        android:id="@+id/topPlayerName"
         android:layout_width="wrap_content"
-        android:layout_height="23dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="top player name"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/topPlayerImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.303" />
 
     <TextView
-        android:id="@+id/number"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
+        android:id="@+id/topNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="num "
@@ -44,27 +49,29 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dash2" />
+        app:layout_constraintStart_toEndOf="@+id/dash2"
+        app:layout_constraintTop_toBottomOf="@+id/topPlayerName"
+        app:layout_constraintVertical_bias="0.176" />
 
     <TextView
-        android:id="@+id/stitle"
+        android:id="@+id/topStatistic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="PPG"
-        android:textAlignment="viewEnd"
+        android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statistic_value"
+        app:layout_constraintTop_toBottomOf="@+id/topStatValue"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/position"
+        android:id="@+id/topPosition"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="pos "
@@ -72,12 +79,14 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dash2"
-        app:layout_constraintStart_toEndOf="@+id/dash" />
+        app:layout_constraintStart_toEndOf="@+id/dash"
+        app:layout_constraintTop_toBottomOf="@+id/topPlayerName"
+        app:layout_constraintVertical_bias="0.176" />
 
     <TextView
-        android:id="@+id/team2"
+        android:id="@+id/topTeamName"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
@@ -87,42 +96,47 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dash"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/topPlayerImage"
+        app:layout_constraintTop_toBottomOf="@+id/topPlayerName"
+        app:layout_constraintVertical_bias="0.176" />
 
     <TextView
-        android:id="@+id/statistic_value"
+        android:id="@+id/topStatValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="30.6"
-        android:textAlignment="viewEnd"
+        android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/dash"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="- "
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/position"
+        app:layout_constraintEnd_toStartOf="@+id/topPosition"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/team2" />
+        app:layout_constraintStart_toEndOf="@+id/topTeamName"
+        app:layout_constraintTop_toBottomOf="@+id/topPlayerName"
+        app:layout_constraintVertical_bias="0.176" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/topPlayerImage"
         android:layout_width="63dp"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"

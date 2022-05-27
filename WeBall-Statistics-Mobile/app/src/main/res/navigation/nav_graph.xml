@@ -11,7 +11,7 @@
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_home_to_tabContainer"
+          android:id="@+id/action_home_to_tabContainer"
             app:destination="@id/tabContainer" />
         <action
             android:id="@+id/action_home_to_teamScore"
@@ -40,5 +40,9 @@
         android:name="uom.team2.weball_statistics.UI_Controller.TeamScore.TeamScore"
         android:label="fragment_team_score"
         tools:layout="@layout/fragment_team_score" />
+    <fragment
+        android:id="@+id/bestStarting5"
+        android:name="uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5"
+        android:label="BestStarting5" />
 
 </navigation>

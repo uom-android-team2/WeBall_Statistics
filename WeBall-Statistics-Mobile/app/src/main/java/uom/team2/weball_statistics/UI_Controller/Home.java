@@ -38,13 +38,11 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        binding.button.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
-        });
 
         binding.teamScoreButton.setOnClickListener(e -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
         });
+
         return binding.getRoot();
     }
 

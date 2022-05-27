@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavHost;
 import androidx.navigation.NavHostController;
+
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -39,6 +40,10 @@ public class Home extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         binding.button.setOnClickListener(e -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
+        });
+
+        binding.teamScoreButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
         });
         return binding.getRoot();
     }

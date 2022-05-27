@@ -94,4 +94,6 @@
     <string name="time_happened_general_text">0.01\'</string>
     <string name="action_desc_general_text">Match Started!</string>
     <string name="player_name">player name</string> <!-- The names of the two players -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

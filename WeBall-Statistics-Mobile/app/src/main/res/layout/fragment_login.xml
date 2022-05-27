@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginAdminActivity"
+    tools:context=".MainActivity"
     tools:layout_editor_absoluteX="12dp"
     tools:layout_editor_absoluteY="3dp">
 
@@ -12,19 +12,19 @@
         android:id="@+id/imageView"
         android:layout_width="254dp"
         android:layout_height="130dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236"
+        app:layout_constraintVertical_bias="0.206"
         app:srcCompat="@drawable/esake" />
 
     <EditText
         android:id="@+id/textUsername"
         android:layout_width="186dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="32dp"
         android:background="@color/gray_login"
         android:drawableStart="@drawable/icons8_user_24px"
         android:ems="10"
@@ -36,24 +36,24 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textPassword" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="187dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="100dp"
-        android:background="@color/red_buttons"
-        android:text="@string/Login"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/Login_Admin"
+        android:textColor="@color/app_bar_color"
+        app:layout_constraintBottom_toTopOf="@+id/textUsername"
+        app:layout_constraintStart_toStartOf="@+id/textUsername"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/textPassword"
         android:layout_width="186dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="128dp"
         android:background="@color/gray_login"
         android:drawableStart="@drawable/icons8_lock_26px"
         android:ems="10"
@@ -63,18 +63,18 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/Login_Admin"
-        android:textColor="@color/app_bar_color"
-        app:layout_constraintBottom_toTopOf="@+id/textUsername"
-        app:layout_constraintStart_toStartOf="@+id/textUsername"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.969" />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="187dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="56dp"
+        android:background="@color/red_buttons"
+        android:text="@string/Login"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

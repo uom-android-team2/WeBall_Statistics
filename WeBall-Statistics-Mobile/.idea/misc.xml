@@ -19,8 +19,10 @@
         <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_player_stats.xml" value="0.15728607177734377" />
-        <entry key="app/src/main/res/layout/fragment_team_stats.xml" value="0.7915654500325521" />
-        <entry key="app/src/main/res/layout/table_row_layout.xml" value="0.5015187802522079" />
+        <entry key="app/src/main/res/layout/fragment_team_stats.xml" value="0.3119771321614581" />
+        <entry key="app/src/main/res/layout/table_row_layout.xml" value="0.6921926083772079" />
+        <entry key="app/src/main/res/layout/table_titles_layout.xml" value="0.3829427083333332" />
+        <entry key="app/src/main/res/layout/teams_table_layout.xml" value="0.30566609700520825" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.3098958333333333" />
       </map>
     </option>

@@ -10,4 +10,6 @@
     <color name="bar">#902D41</color>
     <color name="tabs">#C4C4C4</color>
     <color name="tabsInd">#B2B2B2</color>
+    <color name="grayback">#EBEBEB</color>
+    <color name="firstblue">#DEE3F2</color>
 </resources>

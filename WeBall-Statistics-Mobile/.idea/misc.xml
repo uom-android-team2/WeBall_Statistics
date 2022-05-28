@@ -8,11 +8,20 @@
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/menu/menu_main.xml" value="0.1796875" />
-        <entry key="app/src/main/res/drawable/tab_color_selector.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/tab_corners_background.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/try1.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24240121580547114" />
-        <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.18" />
+        <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_statistics.xml" value="0.3625" />
+        <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_player_statistics.xml" value="0.3625" />
+        <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_team_score.xml" value="0.3625" />
+        <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/player_image_layout.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/team_players_horizontal_layout.xml" value="0.3625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_player_stats.xml" value="0.15728607177734377" />
+        <entry key="app/src/main/res/layout/fragment_team_stats.xml" value="0.7915654500325521" />
+        <entry key="app/src/main/res/layout/table_row_layout.xml" value="0.5015187802522079" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.3098958333333333" />
       </map>
     </option>
   </component>

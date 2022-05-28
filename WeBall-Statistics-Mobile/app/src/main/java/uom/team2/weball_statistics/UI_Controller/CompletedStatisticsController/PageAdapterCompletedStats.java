@@ -7,6 +7,7 @@ import androidx.fragment.app.*;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.PlayersStats.PlayersStats;
+import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.TeamStats.TeamStatsFragment;
 
 public class PageAdapterCompletedStats extends FragmentPagerAdapter {
 
@@ -29,7 +30,7 @@ public class PageAdapterCompletedStats extends FragmentPagerAdapter {
             case 1:
                 return PlayersStats.getInstance();
             case 2:
-                return new PlayersStats(); // ARAVELLAS TEAM STATS()
+                return TeamStatsFragment.newInstance(); // ARAVELLAS TEAM STATS()
             default:
                 return PlayersStats.getInstance();
         }

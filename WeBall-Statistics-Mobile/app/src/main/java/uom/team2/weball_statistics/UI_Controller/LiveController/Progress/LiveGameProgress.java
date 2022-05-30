@@ -36,7 +36,7 @@ public class LiveGameProgress extends Fragment {
 
         super.onCreate(savedInstanceState);
         daoAction = new DAOAction();
-        daoAction.getdata();
+        daoAction.get();
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,7 @@ public class AdminsView extends Fragment {
     private Button start_end_button;
     private long pauseOffset;
     private boolean started=false;
+    private boolean teamSelected =false;
 
 
 
@@ -97,9 +99,55 @@ public class AdminsView extends Fragment {
 
     }
 
-//Start Button
+
+
+
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
+    // Banner1
+        binding.team1Banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                teamSelected=false;
+
+                //put background color to the banner so the admin knows which team is selected
+                GradientDrawable shape =  new GradientDrawable();
+                shape.setCornerRadius( 75 );
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
+
+                //remove the background color from the other banner
+                binding.team2Banner.setBackgroundColor(0x00000000);
+
+                //Load the data of the second team players.
+            }
+        });
+
+    // Banner2
+        binding.team2Banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                teamSelected=true;
+                //put background color to the banner so the admin knows which team is selected
+                GradientDrawable shape = new GradientDrawable();
+                shape.setCornerRadius(75);
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
+
+                //remove the background color from the other banner
+                binding.team1Banner.setBackgroundColor(0x00000000);
+
+                //Load the data of the second team players.
+
+            }
+        });
+
+//Start Button
         binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +173,7 @@ public class AdminsView extends Fragment {
             }
 
         });
+
 //Pause Button
         binding.pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,21 +226,9 @@ public class AdminsView extends Fragment {
 
 
 
-//banners
-        binding.team1Banner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-
-            }
-        });
 
 
     }
-
-
-
-
-
 
 }

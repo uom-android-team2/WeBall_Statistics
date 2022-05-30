@@ -19,7 +19,7 @@
         android:id="@+id/viewChampion_button"
         android:layout_width="364dp"
         android:layout_height="54dp"
-        android:backgroundTint="#9C1515"
+        android:backgroundTint="#902D41"
         android:text="@string/viewChampionshipStatistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

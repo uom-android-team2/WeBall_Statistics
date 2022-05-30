@@ -2,7 +2,6 @@ package uom.team2.weball_statistics.UI_Controller.R1;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.*;
@@ -10,21 +9,21 @@ import android.view.*;
 
 import com.google.android.material.tabs.TabLayout;
 
+import uom.team2.weball_statistics.databinding.FragmentDroppedDownSharedMatchesBinding;
 import uom.team2.weball_statistics.databinding.FragmentSharedMatchesBinding;
-import uom.team2.weball_statistics.databinding.FragmentUserScreenSharedMatchesBinding;
 
-public class UserScreenSharedMatches extends Fragment {
+public class DroppedDownSharedMatches extends Fragment {
 
-    private FragmentUserScreenSharedMatchesBinding binding;
+    private FragmentDroppedDownSharedMatchesBinding binding;
 
 
-    public UserScreenSharedMatches() {
+    public DroppedDownSharedMatches() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static UserScreenSharedMatches newInstance(String param1, String param2) {
-        UserScreenSharedMatches fragment = new UserScreenSharedMatches();
+    public static DroppedDownSharedMatches newInstance(String param1, String param2) {
+        DroppedDownSharedMatches fragment = new DroppedDownSharedMatches();
         return fragment;
     }
 
@@ -38,9 +37,9 @@ public class UserScreenSharedMatches extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        binding = FragmentUserScreenSharedMatchesBinding.inflate(inflater,container,false);
-        UserPageAdapterMatches sectionsPagesAdapter = new UserPageAdapterMatches(getContext(), getChildFragmentManager());
-        ViewPager2 viewPager = binding.ViewPager2;  //viewPager2 είναι το id του viewPager του fragment_user_screen_matches.xml
+        binding = FragmentDroppedDownSharedMatchesBinding.inflate(inflater,container,false);
+        PageAdapterMatches sectionsPagesAdapter = new PageAdapterMatches(getContext(), getChildFragmentManager());
+        ViewPager viewPager =binding.dropped_down_viewPager;
         viewPager.setAdapter(sectionsPagesAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);

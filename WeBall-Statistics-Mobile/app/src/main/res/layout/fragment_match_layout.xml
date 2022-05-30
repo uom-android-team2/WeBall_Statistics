@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UI_Controller.R1.fragment_match_layout">
+    tools:context=".UI_Controller.R1.MatchLayout">
 
     <ImageView
         android:id="@+id/teamA_imageView"

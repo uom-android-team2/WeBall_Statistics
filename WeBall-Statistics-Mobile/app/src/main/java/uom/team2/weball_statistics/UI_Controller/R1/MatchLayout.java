@@ -12,10 +12,10 @@ import uom.team2.weball_statistics.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_match_layout#newInstance} factory method to
+ * Use the {@link MatchLayout#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_match_layout extends Fragment {
+public class MatchLayout extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class fragment_match_layout extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_match_layout() {
+    public MatchLayout() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class fragment_match_layout extends Fragment {
      * @return A new instance of fragment fragment_live_match_layout.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_match_layout newInstance(String param1, String param2) {
-        fragment_match_layout fragment = new fragment_match_layout();
+    public static MatchLayout newInstance(String param1, String param2) {
+        MatchLayout fragment = new MatchLayout();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

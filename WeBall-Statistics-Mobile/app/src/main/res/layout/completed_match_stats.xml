@@ -17,8 +17,8 @@
     <include
         android:id="@+id/include8"
         layout="@layout/completed_quarter_scores"
-        android:layout_width="438dp"
-        android:layout_height="137dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.SystemClock;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +44,7 @@ public class AdminsView extends Fragment {
     private Button start_end_button;
     private long pauseOffset;
     private boolean started=false;
-    private Button bb;
-    private int pontoi;
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -96,6 +96,7 @@ public class AdminsView extends Fragment {
         return binding.getRoot();
 
     }
+
 //Start Button
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -109,10 +110,17 @@ public class AdminsView extends Fragment {
                     running = true;
                     started=true;
                     binding.startButton.setText("End");
+                    binding.pauseButton.setEnabled(true);
 
                 }
                 else{
                     binding.clock.stop();
+                    binding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                    binding.startButton.setText("Start/End");
+                    binding.startButton.setEnabled(false);
+                    binding.pauseButton.setEnabled(false);
+                    binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                    binding.pauseButton.setText("Pause/Continue");
                 }
             }
 

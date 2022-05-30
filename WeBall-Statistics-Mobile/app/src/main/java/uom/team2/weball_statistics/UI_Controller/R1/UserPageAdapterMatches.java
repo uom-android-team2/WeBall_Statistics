@@ -38,7 +38,7 @@ public class UserPageAdapterMatches extends FragmentPagerAdapter {
             case 1:
                 return new LiveMatches();
             case 2:
-                return new PreviousMatches(); // upcoming()
+                return new PreviousMatches(); // previous()
             default:
                 return new LiveMatches();
         }

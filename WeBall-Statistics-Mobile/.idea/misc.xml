@@ -12,11 +12,15 @@
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_match_layout.xml" value="0.536" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_matches.xml" value="0.264" />
+        <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_matches_dropped_down.xml" value="0.264" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_match_layout.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_previous_matches.xml" value="0.264" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_score.xml" value="0.1703125" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_shared_matches.xml" value="0.2" />
+        <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_substitutes_players.xml" value="0.4" />
+        <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_team_players.xml" value="0.25" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_upcoming_matches.xml" value="0.264" />
+        <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_upcoming_matches_dropped_down.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_user_screen_shared_matches.xml" value="0.10869565217391304" />
         <entry key="..\:/Users/Omerta/AndroidStudioProjects/WeBall/WeBall-Statistics-Mobile/app/src/main/res/layout/userscreen_appbar_fragment.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/Omerta/Documents/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.13" />

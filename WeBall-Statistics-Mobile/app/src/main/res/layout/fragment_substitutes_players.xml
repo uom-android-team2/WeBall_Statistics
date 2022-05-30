@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="viewEnd"
+    tools:context=".UI_Controller.R1.SubstitutesPlayers">
+
+    <ImageView
+        android:id="@+id/substitutePlayer5_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="126dp"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer6_imageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/substitutePlayer7_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="116dp"
+        android:text="Player 7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer6_textView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer7_imageView" />
+
+    <TextView
+        android:id="@+id/substitutePlayer6_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Player 6"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer7_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer5_textView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer6_imageView" />
+
+    <ImageView
+        android:id="@+id/substitutePlayer7_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="126dp"
+        android:layout_marginEnd="116dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer6_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutesTeam_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/substitutePlayer6_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="126dp"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer7_imageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer5_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/substitutePlayer5_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Player 5"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer6_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer5_imageView" />
+
+    <ImageView
+        android:id="@+id/substitutePlayer3_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer4_imageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer2_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutesTeam_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/substitutePlayer2_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer3_imageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer1_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/substitutePlayer4_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer3_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutesTeam_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/substitutes_textView"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
+        android:text="@string/substitutes_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toStartOf="@+id/substitutesTeam_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/substitutesTeam_textView"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
+        android:text="Team A"
+        android:textColor="#631515"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutes_textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/substitutePlayer1_imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer2_imageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/substitutePlayer1_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Player 1"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer2_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer1_imageView" />
+
+    <TextView
+        android:id="@+id/substitutePlayer2_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Player 2"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer3_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer1_textView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer2_imageView" />
+
+    <TextView
+        android:id="@+id/substitutePlayer3_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Player 3"
+        app:layout_constraintEnd_toStartOf="@+id/substitutePlayer4_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer2_textView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer3_imageView" />
+
+    <TextView
+        android:id="@+id/substitutePlayer4_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:text="Player 4 "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/substitutePlayer3_textView"
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer4_imageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

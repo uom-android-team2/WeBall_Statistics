@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI_Controller.R1.UpcomingMatchesDroppedDown">
+
+    <include
+        android:id="@+id/include16"
+        layout="@layout/fragment_match_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        layout="@layout/fragment_date_of_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/include16"
+        app:layout_constraintTop_toTopOf="@+id/include16" />
+
+    <TextView
+        android:id="@+id/players_upcomingmatches_textView"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:text="@string/players_text"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include16" />
+
+    <include
+        android:id="@+id/include18"
+        layout="@layout/fragment_team_players"
+        android:layout_width="177dp"
+        android:layout_height="179dp"
+        android:layout_marginStart="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/include17"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/players_upcomingmatches_textView" />
+
+    <include
+        android:id="@+id/include17"
+        layout="@layout/fragment_team_players"
+        android:layout_width="177dp"
+        android:layout_height="179dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/include18"
+        app:layout_constraintTop_toBottomOf="@+id/players_upcomingmatches_textView" />
+
+    <include
+        android:id="@+id/include19"
+        layout="@layout/fragment_substitutes_players"
+        android:layout_width="0dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include17" />
+
+    <Button
+        android:id="@+id/edit_upcomingmatches_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="#9C1515"
+        android:text="@string/edit_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include19" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

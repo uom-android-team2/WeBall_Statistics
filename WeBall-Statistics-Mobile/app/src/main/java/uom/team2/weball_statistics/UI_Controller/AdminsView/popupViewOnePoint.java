@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 import uom.team2.weball_statistics.databinding.FragmentPopupViewBinding;
 
-public class popupView extends Dialog implements
+public class popupViewOnePoint extends Dialog implements
         android.view.View.OnClickListener{
 
     public Activity c;
@@ -27,7 +28,7 @@ private String str;
 
 
 
-    public popupView(Activity a) {
+    public popupViewOnePoint(Activity a) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
@@ -38,6 +39,10 @@ private String str;
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.fragment_popup_view);
+
+        TextView text=(TextView)findViewById(R.id.dialog_info);
+        text.setText("Freethrow Basket Made?");
+
         yes = (Button) findViewById(R.id.dialog_Yes);
         no = (Button) findViewById(R.id.dialog_No);
         yes.setOnClickListener(this);

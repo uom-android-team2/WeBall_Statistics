@@ -6,9 +6,9 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-// @TODO fix the fields
 @IgnoreExtraProperties
-public  class TeamLiveStatistics implements firebaseModel{
+public class TeamLiveStatistics implements firebaseModel {
+
     private int matchId;
     private int teamId;
     private int successfulEffort;
@@ -16,6 +16,7 @@ public  class TeamLiveStatistics implements firebaseModel{
     private int successfulFreethrow;
     private int totalFreethrow;
     private int succesfulTwopointer;
+    private int totalTwopointer;
     private int succesfulThreepointer;
     private int totalThreepointer;
     private int steal;
@@ -25,11 +26,12 @@ public  class TeamLiveStatistics implements firebaseModel{
     private int foul;
     private int turnover;
 
-    public TeamLiveStatistics(){
+
+    public TeamLiveStatistics() {
 
     }
 
-    public TeamLiveStatistics(int matchId, int teamId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover) {
+    public TeamLiveStatistics(int matchId, int teamId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int totalTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover) {
         this.matchId = matchId;
         this.teamId = teamId;
         this.successfulEffort = successfulEffort;
@@ -37,6 +39,7 @@ public  class TeamLiveStatistics implements firebaseModel{
         this.successfulFreethrow = successfulFreethrow;
         this.totalFreethrow = totalFreethrow;
         this.succesfulTwopointer = succesfulTwopointer;
+        this.totalTwopointer = totalTwopointer;
         this.succesfulThreepointer = succesfulThreepointer;
         this.totalThreepointer = totalThreepointer;
         this.steal = steal;
@@ -54,14 +57,15 @@ public  class TeamLiveStatistics implements firebaseModel{
         result.put("matchId", matchId);
         result.put("teamId", teamId);
         result.put("successfulEffort", successfulEffort);
-        result.put("totalEffort",totalEffort);
-        result.put("successfulFreethrow", succesfulTwopointer);
+        result.put("totalEffort", totalEffort);
+        result.put("successfulFreethrow", successfulFreethrow);
         result.put("totalFreethrow", totalFreethrow);
         result.put("succesfulTwopointer", succesfulTwopointer);
+        result.put("totalTwopointer", totalTwopointer);
         result.put("succesfulThreepointer", succesfulThreepointer);
         result.put("totalThreepointer", totalThreepointer);
-        result.put("steal",steal);
-        result.put("assist",assist);
+        result.put("steal", steal);
+        result.put("assist", assist);
         result.put("block", block);
         result.put("rebound", rebound);
         result.put("foul", foul);
@@ -123,6 +127,14 @@ public  class TeamLiveStatistics implements firebaseModel{
 
     public void setSuccesfulTwopointer(int succesfulTwopointer) {
         this.succesfulTwopointer = succesfulTwopointer;
+    }
+
+    public int getTotalTwopointer() {
+        return totalTwopointer;
+    }
+
+    public void setTotalTwopointer(int totalTwopointer) {
+        this.totalTwopointer = totalTwopointer;
     }
 
     public int getSuccesfulThreepointer() {
@@ -188,7 +200,4 @@ public  class TeamLiveStatistics implements firebaseModel{
     public void setTurnover(int turnover) {
         this.turnover = turnover;
     }
-
-
-
 }

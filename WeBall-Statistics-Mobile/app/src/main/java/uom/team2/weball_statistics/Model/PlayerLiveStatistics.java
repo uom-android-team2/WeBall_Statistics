@@ -4,9 +4,9 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.HashMap;
 import java.util.Map;
-// @TODO fix the fields
+
 @IgnoreExtraProperties
-public class PlayerLiveStatistics implements firebaseModel{
+public class PlayerLiveStatistics implements firebaseModel {
     private int matchId;
     private int playerId;
     private int successfulEffort;
@@ -14,6 +14,7 @@ public class PlayerLiveStatistics implements firebaseModel{
     private int successfulFreethrow;
     private int totalFreethrow;
     private int succesfulTwopointer;
+    private int totalTwopointer;
     private int succesfulThreepointer;
     private int totalThreepointer;
     private int steal;
@@ -24,7 +25,13 @@ public class PlayerLiveStatistics implements firebaseModel{
     private int turnover;
     private double minutes;
 
-    public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
+
+    public PlayerLiveStatistics() {
+
+    }
+
+
+    public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int totalTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
         this.matchId = matchId;
         this.playerId = playerId;
         this.successfulEffort = successfulEffort;
@@ -32,6 +39,7 @@ public class PlayerLiveStatistics implements firebaseModel{
         this.successfulFreethrow = successfulFreethrow;
         this.totalFreethrow = totalFreethrow;
         this.succesfulTwopointer = succesfulTwopointer;
+        this.totalTwopointer = totalTwopointer;
         this.succesfulThreepointer = succesfulThreepointer;
         this.totalThreepointer = totalThreepointer;
         this.steal = steal;
@@ -46,13 +54,14 @@ public class PlayerLiveStatistics implements firebaseModel{
     @Override
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("matchId",matchId);
-        result.put("playerId",playerId);
-        result.put("successfulEffort",successfulEffort);
-        result.put("totalEffort",totalEffort);
+        result.put("matchId", matchId);
+        result.put("playerId", playerId);
+        result.put("successfulEffort", successfulEffort);
+        result.put("totalEffort", totalEffort);
         result.put("successfulFreethrow", successfulFreethrow);
-        result.put("totalFreethrow",totalFreethrow);
+        result.put("totalFreethrow", totalFreethrow);
         result.put("succesfulTwopointer", succesfulTwopointer);
+        result.put("totalTwopointer", totalTwopointer);
         result.put("succesfulThreepointer", succesfulThreepointer);
         result.put("totalThreepointer", totalThreepointer);
         result.put("steal", steal);
@@ -62,9 +71,9 @@ public class PlayerLiveStatistics implements firebaseModel{
         result.put("foul", foul);
         result.put("turnover", turnover);
         result.put("minutes", minutes);
+
         return result;
     }
-
 
     public int getMatchId() {
         return matchId;
@@ -120,6 +129,14 @@ public class PlayerLiveStatistics implements firebaseModel{
 
     public void setSuccesfulTwopointer(int succesfulTwopointer) {
         this.succesfulTwopointer = succesfulTwopointer;
+    }
+
+    public int getTotalTwopointer() {
+        return totalTwopointer;
+    }
+
+    public void setTotalTwopointer(int totalTwopointer) {
+        this.totalTwopointer = totalTwopointer;
     }
 
     public int getSuccesfulThreepointer() {
@@ -193,5 +210,4 @@ public class PlayerLiveStatistics implements firebaseModel{
     public void setMinutes(double minutes) {
         this.minutes = minutes;
     }
-
 }

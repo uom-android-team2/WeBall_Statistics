@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,28 +22,43 @@ import uom.team2.weball_statistics.R;
 public class LiveStatisticsUIHandler {
 
 
-    public void updateTeamImageInMatchHeader(String imageUrl, String name, View teamImageLayout) throws IOException {
-        TextView nameTextView = teamImageLayout.findViewById(R.id.team_name);
-        nameTextView.setText(name);
+    public static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) throws IOException {
         URL url = new URL(imageUrl);
         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        ImageView image = teamImageLayout.findViewById(R.id.team_logo);
-        image.setImageBitmap(bmp);
+        fragment.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView nameTextView = teamImageLayout.findViewById(R.id.team_name);
+                ImageView image = teamImageLayout.findViewById(R.id.team_logo);
+                nameTextView.setText(name);
+                image.setImageBitmap(bmp);
+            }
+        });
     }
 
-    public static  void updateSelectedPlayerImageLayout(String imageUrl, String name, View imageLayout) throws IOException {
-        TextView nameTextView = imageLayout.findViewById(R.id.player_name);
-        nameTextView.setText(name);
+    public static  void updateSelectedPlayerImageLayout(Fragment fragment, String imageUrl, String name, View imageLayout) throws IOException {
         URL url = new URL(imageUrl);
         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        ImageView image = imageLayout.findViewById(R.id.player_image);
-        image.setImageBitmap(bmp);
+        fragment.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView nameTextView = imageLayout.findViewById(R.id.player_name);
+                nameTextView.setText(name);
+                ImageView image = imageLayout.findViewById(R.id.player_image);
+                image.setImageBitmap(bmp);
+            }
+        });
     }
 
-    public static void updateTeamImage(String imageUrl, ImageView image) throws IOException {
+    public static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) throws IOException {
         URL url = new URL(imageUrl);
         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        image.setImageBitmap(bmp);
+        fragment.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                image.setImageBitmap(bmp);
+            }
+        });
     }
 
     public static void updateProgressBarLayoutTeam1(HashMap<String, View> mapOfProgressBarLayout, LiveStatistics key, int max, int value){

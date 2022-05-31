@@ -40,7 +40,7 @@ public class UserScreenSharedMatches extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentUserScreenSharedMatchesBinding.inflate(inflater,container,false);
         UserPageAdapterMatches sectionsPagesAdapter = new UserPageAdapterMatches(getContext(), getChildFragmentManager());
-        ViewPager2 viewPager = binding.ViewPager2;  //viewPager2 είναι το id του viewPager του fragment_user_screen_matches.xml
+        ViewPager viewPager = binding.ViewPager2;  //viewPager2 είναι το id του viewPager του fragment_user_screen_matches.xml
         viewPager.setAdapter(sectionsPagesAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);

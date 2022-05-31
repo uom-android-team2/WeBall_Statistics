@@ -39,7 +39,7 @@ public class DroppedDownSharedMatches extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentDroppedDownSharedMatchesBinding.inflate(inflater,container,false);
         PageAdapterMatches sectionsPagesAdapter = new PageAdapterMatches(getContext(), getChildFragmentManager());
-        ViewPager viewPager =binding.dropped_down_viewPager;
+        ViewPager viewPager =binding.droppedDownViewPager;
         viewPager.setAdapter(sectionsPagesAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);

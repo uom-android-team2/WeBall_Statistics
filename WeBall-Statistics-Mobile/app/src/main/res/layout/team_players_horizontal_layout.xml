@@ -36,7 +36,8 @@
                 <include
                     layout="@layout/player_image_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
 
                 <include
                     layout="@layout/player_image_layout"

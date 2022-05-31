@@ -24,6 +24,15 @@ public class LiveStatisticsUIHandler {
 
     }
 
+    public static  void updateSelectedPlayerImageLayout(String imageUrl, String name, View imageLayout) throws IOException {
+        TextView nameTextView = imageLayout.findViewById(R.id.player_name);
+        nameTextView.setText(name);
+        URL url = new URL(imageUrl);
+        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        ImageView image = imageLayout.findViewById(R.id.player_image);
+        image.setImageBitmap(bmp);
+    }
+
     public static void updateTeamImage(String imageUrl, ImageView image) throws IOException {
         URL url = new URL(imageUrl);
         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());

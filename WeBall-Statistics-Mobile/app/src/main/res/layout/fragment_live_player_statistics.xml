@@ -55,6 +55,7 @@
                 android:orientation="vertical">
 
                 <include
+                    android:id="@+id/selected_player_layout"
                     layout="@layout/player_image_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

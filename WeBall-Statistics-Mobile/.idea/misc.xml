@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_expanded_leaders_stat.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3745471014492754" />
-        <entry key="app/src/main/res/layout/fragment_leaders_stats.xml" value="0.22685185185185186" />
+        <entry key="app/src/main/res/layout/fragment_leaders_stats.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_player_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_rank_tab.xml" value="0.5" />

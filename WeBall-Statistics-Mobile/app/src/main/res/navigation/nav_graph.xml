@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_home_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_home_to_adminsView"
+            app:destination="@id/adminsView" />
     </fragment>
     <fragment
         android:id="@+id/tabContainer"
@@ -56,4 +59,10 @@
         android:id="@+id/loginFragment"
         android:name="uom.team2.weball_statistics.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/adminsView"
+        android:name="uom.team2.weball_statistics.UI_Controller.AdminsView.AdminsView"
+        android:label="fragment_admins_view"
+        tools:layout="@layout/fragment_admins_view" />
+
 </navigation>

@@ -12,7 +12,7 @@ public class Match {
     private Team guest;
     private Date matchDate;
     private Status status; // UPCOMING, ONGOING, COMPLETED
-    //private ArrayList<Action> actions; //Class Action implemented in other branch
+    private ArrayList<Action> actions;
     //Will added fields specified for comments and progress to appear them after the match completed
 
     public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status) {

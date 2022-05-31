@@ -60,23 +60,6 @@ public class LiveGameProgress extends Fragment {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
         };
-
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        //Testing write in firebase
-                        Action actionTest = new Action("+3 correct", "Minas - Ch", "osfp", "2.38");
-                        daoAction.insert(actionTest).addOnSuccessListener(s -> {
-                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                        }).addOnFailureListener(f -> {
-                            Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
-                        });
-                    }
-                },
-                10000
-        );
-        
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavHost;
 import androidx.navigation.NavHostController;
+
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -39,7 +40,6 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
@@ -57,6 +57,10 @@ public class Home extends Fragment {
 
         binding.btnLoginAdmin.setOnClickListener(e -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_home_to_loginFragment);
+        });
+
+        binding.textView.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_adminsView);
         });
 
     }

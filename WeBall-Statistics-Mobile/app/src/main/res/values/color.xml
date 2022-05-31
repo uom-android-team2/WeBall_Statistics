@@ -20,4 +20,9 @@
     <color name="greyRank">#C4C4C4</color>
 
     <color name="gray_login">#EBEBEB</color>
+    <color name="alt_blue">#759FBC</color>
+    <color name="alt_green">#1F5673</color>
+    <color name="red">#b60922</color>
+    <color name="green">#08a013</color>
+    <color name="alt_grey">#A1B3BF</color>
 </resources>

@@ -1,10 +1,16 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import uom.team2.weball_statistics.R;
 
@@ -16,6 +22,12 @@ public class LiveStatisticsUIHandler {
 
     public LiveStatisticsUIHandler(){
 
+    }
+
+    public static void updateTeamImage(String imageUrl, ImageView image) throws IOException {
+        URL url = new URL(imageUrl);
+        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        image.setImageBitmap(bmp);
     }
 
     public static void updateProgressBarLayoutTeam1(HashMap<String, View> mapOfProgressBarLayout, LiveStatistics key, int max, int value){

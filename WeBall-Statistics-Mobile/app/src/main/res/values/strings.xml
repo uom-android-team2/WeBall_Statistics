@@ -39,34 +39,38 @@
     <string name="match_info_label_text">Match Information</string>
 
     <string-array name="team_statistics">
-        <item>Field goals</item>
-        <item>Successful shots</item>
-        <item>Total shots</item>
-        <item>Successful 2-pointers</item>
-        <item>Successful 3-pointers</item>
-        <item>Total 2-pointer</item>
-        <item>Total 3-pointer</item>
-        <item>Number of steals</item>
-        <item>Number of blocks</item>
-        <item>Number of assists</item>
-        <item>Number of rebounds</item>
-        <item>Number of turnovers</item>
+        <item>Successful effort</item>
+        <item>Total effort</item>
+        <item>Successful freethrow</item>
+        <item>Total freethrow</item>
+        <item>Succesful twopointer</item>
+        <item>Total twopointer</item>
+        <item>Succesful threepointer</item>
+        <item>Total threepointer</item>
+        <item>Steel</item>
+        <item>Assist</item>
+        <item>Block</item>
+        <item>Rebound</item>
+        <item>Foul</item>
+        <item>Turnover</item>
     </string-array>
 
     <string-array name="player_statistics">
-        <item>Field goals</item>
-        <item>Successful shots</item>
-        <item>Total shots</item>
-        <item>Successful 2-pointers</item>
-        <item>Successful 3-pointers</item>
-        <item>Total 2-pointer</item>
-        <item>Total 3-pointer</item>
-        <item>Number of steals</item>
-        <item>Number of blocks</item>
-        <item>Number of assists</item>
-        <item>Number of rebounds</item>
-        <item>Number of turnovers</item>
-        <item>Total minutes played</item>
+        <item>Successful effort</item>
+        <item>Total effort</item>
+        <item>Successful freethrow</item>
+        <item>Total freethrow</item>
+        <item>Succesful twopointer</item>
+        <item>Total twopointer</item>
+        <item>Succesful threepointer</item>
+        <item>Total threepointer</item>
+        <item>Steel</item>
+        <item>Assist</item>
+        <item>Block</item>
+        <item>Rebound</item>
+        <item>Foul</item>
+        <item>Turnover</item>
+        <item>Minutes</item>
     </string-array>
 
 

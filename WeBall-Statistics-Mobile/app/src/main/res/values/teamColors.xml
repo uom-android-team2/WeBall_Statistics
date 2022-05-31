@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="warriors">#4D77EE</color>
+    <color name="celtics">#3B7F45</color>
+    <color name="mavericks">#0C2192</color>
+    <color name="heat">#E72A54</color>
+    <color name="lakers">#720993</color>
+    <color name="raptors">#BE3F3F</color>
+    <color name="suns">#D36D2B</color>
+    <color name="nets">#7B7B7B</color>
+    <color name="philadelphia">#3476CC</color>
+    <color name="bucks">#329351</color>
+    <color name="grizzlies">#6D97DE</color>
+    <color name="bulls">#D00707</color>
+    <color name="spurs">#A8A8A8</color>
+    <color name="timberwolves">#7D98CF</color>
+    <color name="pelicans">#D9DADC</color>
+    <color name="knicks">#D9DADC</color>
+    <color name="cavaliers">#764823</color>
+    <color name="jazz">#124007</color>
+    <color name="clippers">#22549A</color>
+    <color name="hornets">#0BC1BA</color>
+    <color name="hawks">#D60B20</color>
+    <color name="nuggets">#F3C712</color>
+    <color name="blazzers">#A52209</color>
+    <color name="rockets">#FB8DA4</color>
+    <color name="kings">#8A35FA</color>
+    <color name="thunder">#87BAD9</color>
+    <color name="pistons">#F5DAD5</color>
+    <color name="wizards">#104EA3</color>
+    <color name="pacers">#DBB91B</color>
+    <color name="other">#6AC6AC</color>
+</resources>

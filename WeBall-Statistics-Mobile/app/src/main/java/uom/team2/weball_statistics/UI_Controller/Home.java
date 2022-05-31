@@ -2,6 +2,8 @@ package uom.team2.weball_statistics.UI_Controller;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavHost;
 import androidx.navigation.NavHostController;
@@ -37,10 +39,26 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        binding.button.setOnClickListener(e -> {
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.imageView.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
+        });
+
+        binding.btnContinueGuest.setOnClickListener(e -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
         });
-        return binding.getRoot();
+
+        binding.btnLoginAdmin.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_loginFragment);
+        });
+
     }
 
     @Override

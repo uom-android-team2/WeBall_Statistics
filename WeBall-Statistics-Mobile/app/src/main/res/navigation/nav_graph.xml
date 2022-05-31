@@ -11,8 +11,14 @@
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_home_to_tabContainer"
+          android:id="@+id/action_home_to_tabContainer"
             app:destination="@id/tabContainer" />
+        <action
+            android:id="@+id/action_home_to_teamScore"
+            app:destination="@id/teamScore" />
+        <action
+            android:id="@+id/action_home_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/tabContainer"
@@ -32,4 +38,22 @@
         android:name="uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics"
         android:label="fragment_live_player_statistics"
         tools:layout="@layout/fragment_live_player_statistics" />
+    <fragment
+        android:id="@+id/teamScore"
+        android:name="uom.team2.weball_statistics.UI_Controller.TeamScore.TeamScore"
+        android:label="fragment_team_score"
+        tools:layout="@layout/fragment_team_score" >
+        <action
+            android:id="@+id/action_teamScore_to_bestStarting5"
+            app:destination="@id/bestStarting5" />
+    </fragment>
+    <fragment
+        android:id="@+id/bestStarting5"
+        android:name="uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5"
+        android:label="BestStarting5" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="uom.team2.weball_statistics.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

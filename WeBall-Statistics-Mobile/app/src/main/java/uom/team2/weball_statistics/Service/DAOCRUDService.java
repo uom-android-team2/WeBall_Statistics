@@ -16,4 +16,5 @@ public interface DAOCRUDService<T> {
       Task<Void> delete(T data);
       Task<Void> get();
       Task<Void> get(T data);
+      Task<Void> update(T data);
 }

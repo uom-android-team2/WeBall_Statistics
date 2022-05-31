@@ -3,6 +3,7 @@ package uom.team2.weball_statistics.Service;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,16 +13,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
+import uom.team2.weball_statistics.Model.Action;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 /*
  * @author Leonard Pepa ics20033
  */
 public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
     private DatabaseReference databaseReference;
+    public static DAOLiveTeamService instace;
 
-    public DAOLiveTeamService() {
+    private DAOLiveTeamService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(TeamLiveStatistics.class.getSimpleName());
+    }
+
+    public static DAOLiveTeamService getInstace(){
+        if(instace == null){
+            instace = new DAOLiveTeamService();
+        }
+        return instace;
     }
 
     public void setDataChangeListener() {
@@ -45,7 +55,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
 
     @Override
     public Task<Void> insert(TeamLiveStatistics data) {
-        return databaseReference.push().setValue(data);
+        return databaseReference.child(data.getMatchId()+"").setValue(data);
     }
 
     @Override
@@ -65,6 +75,20 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
 
     @Override
     public Task<Void> get(TeamLiveStatistics data) {
+        databaseReference.child(data.getMatchId() + "").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                TeamLiveStatistics team = dataSnapshot.getValue(TeamLiveStatistics.class);
+                System.out.println(team.getSuccessfulEffort());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Task<Void> update(TeamLiveStatistics data) {
+        HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
+        databaseReference.child(data.getMatchId() + "").updateChildren(h);
         return null;
     }
 }

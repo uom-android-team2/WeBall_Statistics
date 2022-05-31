@@ -1,6 +1,12 @@
 package uom.team2.weball_statistics.Model;
 
-public class PlayerLiveStatistics {
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+// @TODO fix the fields
+@IgnoreExtraProperties
+public class PlayerLiveStatistics implements firebaseModel{
     private int matchId;
     private int playerId;
     private int successfulEffort;
@@ -35,6 +41,28 @@ public class PlayerLiveStatistics {
         this.foul = foul;
         this.turnover = turnover;
         this.minutes = minutes;
+    }
+
+    @Override
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("matchId",matchId);
+        result.put("playerId",playerId);
+        result.put("successfulEffort",successfulEffort);
+        result.put("totalEffort",totalEffort);
+        result.put("successfulFreethrow", successfulFreethrow);
+        result.put("totalFreethrow",totalFreethrow);
+        result.put("succesfulTwopointer", succesfulTwopointer);
+        result.put("succesfulThreepointer", succesfulThreepointer);
+        result.put("totalThreepointer", totalThreepointer);
+        result.put("steal", steal);
+        result.put("assist", assist);
+        result.put("block", block);
+        result.put("rebound", rebound);
+        result.put("foul", foul);
+        result.put("turnover", turnover);
+        result.put("minutes", minutes);
+        return result;
     }
 
 
@@ -165,4 +193,5 @@ public class PlayerLiveStatistics {
     public void setMinutes(double minutes) {
         this.minutes = minutes;
     }
+
 }

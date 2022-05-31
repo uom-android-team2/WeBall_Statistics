@@ -1,6 +1,14 @@
 package uom.team2.weball_statistics.Model;
-public  class TeamLiveStatistics {
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+
+// @TODO fix the fields
+@IgnoreExtraProperties
+public  class TeamLiveStatistics implements firebaseModel{
     private int matchId;
     private int teamId;
     private int successfulEffort;
@@ -37,6 +45,28 @@ public  class TeamLiveStatistics {
         this.rebound = rebound;
         this.foul = foul;
         this.turnover = turnover;
+    }
+
+    @Override
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("matchId", matchId);
+        result.put("teamId", teamId);
+        result.put("successfulEffort", successfulEffort);
+        result.put("totalEffort",totalEffort);
+        result.put("successfulFreethrow", succesfulTwopointer);
+        result.put("totalFreethrow", totalFreethrow);
+        result.put("succesfulTwopointer", succesfulTwopointer);
+        result.put("succesfulThreepointer", succesfulThreepointer);
+        result.put("totalThreepointer", totalThreepointer);
+        result.put("steal",steal);
+        result.put("assist",assist);
+        result.put("block", block);
+        result.put("rebound", rebound);
+        result.put("foul", foul);
+        result.put("turnover", turnover);
+        return result;
     }
 
     public int getMatchId() {
@@ -158,4 +188,7 @@ public  class TeamLiveStatistics {
     public void setTurnover(int turnover) {
         this.turnover = turnover;
     }
+
+
+
 }

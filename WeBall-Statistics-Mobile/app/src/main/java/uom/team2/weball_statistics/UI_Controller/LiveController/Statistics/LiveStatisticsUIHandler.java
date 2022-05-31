@@ -20,8 +20,13 @@ import uom.team2.weball_statistics.R;
 public class LiveStatisticsUIHandler {
 
 
-    public LiveStatisticsUIHandler(){
-
+    public void updateTeamImageInMatchHeader(String imageUrl, String name, View teamImageLayout) throws IOException {
+        TextView nameTextView = teamImageLayout.findViewById(R.id.team_name);
+        nameTextView.setText(name);
+        URL url = new URL(imageUrl);
+        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        ImageView image = teamImageLayout.findViewById(R.id.team_logo);
+        image.setImageBitmap(bmp);
     }
 
     public static  void updateSelectedPlayerImageLayout(String imageUrl, String name, View imageLayout) throws IOException {

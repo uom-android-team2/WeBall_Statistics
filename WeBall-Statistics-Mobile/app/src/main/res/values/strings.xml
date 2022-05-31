@@ -15,7 +15,7 @@
 
     <!--    Live Game Strings-->
     <string name="score_text">164 - 182</string>
-    <string name="team1_name_text">Team 1</string>
+    <string name="team1_name_text">Team</string>
     <string name="team2_name_text">Team 2</string>
     <string name="game_live_text">Game</string>
     <string name="clock_text">32:45</string>
@@ -39,34 +39,38 @@
     <string name="match_info_label_text">Match Information</string>
 
     <string-array name="team_statistics">
-        <item>Field goals</item>
-        <item>Successful shots</item>
-        <item>Total shots</item>
-        <item>Successful 2-pointers</item>
-        <item>Successful 3-pointers</item>
-        <item>Total 2-pointer</item>
-        <item>Total 3-pointer</item>
-        <item>Number of steals</item>
-        <item>Number of blocks</item>
-        <item>Number of assists</item>
-        <item>Number of rebounds</item>
-        <item>Number of turnovers</item>
+        <item>Successful effort</item>
+        <item>Total effort</item>
+        <item>Successful freethrow</item>
+        <item>Total freethrow</item>
+        <item>Succesful twopointer</item>
+        <item>Total twopointer</item>
+        <item>Succesful threepointer</item>
+        <item>Total threepointer</item>
+        <item>Steel</item>
+        <item>Assist</item>
+        <item>Block</item>
+        <item>Rebound</item>
+        <item>Foul</item>
+        <item>Turnover</item>
     </string-array>
 
     <string-array name="player_statistics">
-        <item>Field goals</item>
-        <item>Successful shots</item>
-        <item>Total shots</item>
-        <item>Successful 2-pointers</item>
-        <item>Successful 3-pointers</item>
-        <item>Total 2-pointer</item>
-        <item>Total 3-pointer</item>
-        <item>Number of steals</item>
-        <item>Number of blocks</item>
-        <item>Number of assists</item>
-        <item>Number of rebounds</item>
-        <item>Number of turnovers</item>
-        <item>Total minutes played</item>
+        <item>Successful effort</item>
+        <item>Total effort</item>
+        <item>Successful freethrow</item>
+        <item>Total freethrow</item>
+        <item>Succesful twopointer</item>
+        <item>Total twopointer</item>
+        <item>Succesful threepointer</item>
+        <item>Total threepointer</item>
+        <item>Steel</item>
+        <item>Assist</item>
+        <item>Block</item>
+        <item>Rebound</item>
+        <item>Foul</item>
+        <item>Turnover</item>
+        <item>Minutes</item>
     </string-array>
 
 
@@ -94,4 +98,11 @@
     <string name="time_happened_general_text">0.01\'</string>
     <string name="action_desc_general_text">Match Started!</string>
     <string name="player_name">player name</string> <!-- The names of the two players -->
+    <string name="Continue_Guest">Continue as a Guest</string>
+    <string name="Login_Admin">Login as Admin</string>
+    <string name="Welcome_ESAKE">Welcome to ESAKE</string>
+    <string name="Username">Username</string>
+    <string name="Login">Login</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -1,16 +1,14 @@
 package uom.team2.weball_statistics.Model;
 
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @IgnoreExtraProperties
-public class TeamLiveStatistics implements firebaseModel {
-
+public class PlayerLiveStatistics implements firebaseModel {
     private int matchId;
-    private int teamId;
+    private int playerId;
     private int successfulEffort;
     private int totalEffort;
     private int successfulFreethrow;
@@ -25,15 +23,17 @@ public class TeamLiveStatistics implements firebaseModel {
     private int rebound;
     private int foul;
     private int turnover;
+    private double minutes;
 
 
-    public TeamLiveStatistics() {
+    public PlayerLiveStatistics() {
 
     }
 
-    public TeamLiveStatistics(int matchId, int teamId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int totalTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover) {
+
+    public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int totalTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
         this.matchId = matchId;
-        this.teamId = teamId;
+        this.playerId = playerId;
         this.successfulEffort = successfulEffort;
         this.totalEffort = totalEffort;
         this.successfulFreethrow = successfulFreethrow;
@@ -48,14 +48,14 @@ public class TeamLiveStatistics implements firebaseModel {
         this.rebound = rebound;
         this.foul = foul;
         this.turnover = turnover;
+        this.minutes = minutes;
     }
 
     @Override
-    @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("matchId", matchId);
-        result.put("teamId", teamId);
+        result.put("playerId", playerId);
         result.put("successfulEffort", successfulEffort);
         result.put("totalEffort", totalEffort);
         result.put("successfulFreethrow", successfulFreethrow);
@@ -70,6 +70,8 @@ public class TeamLiveStatistics implements firebaseModel {
         result.put("rebound", rebound);
         result.put("foul", foul);
         result.put("turnover", turnover);
+        result.put("minutes", minutes);
+
         return result;
     }
 
@@ -81,12 +83,12 @@ public class TeamLiveStatistics implements firebaseModel {
         this.matchId = matchId;
     }
 
-    public int getTeamId() {
-        return teamId;
+    public int getPlayerId() {
+        return playerId;
     }
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
     public int getSuccessfulEffort() {
@@ -199,5 +201,13 @@ public class TeamLiveStatistics implements firebaseModel {
 
     public void setTurnover(int turnover) {
         this.turnover = turnover;
+    }
+
+    public double getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(double minutes) {
+        this.minutes = minutes;
     }
 }

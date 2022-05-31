@@ -14,7 +14,7 @@ public interface DAOCRUDService<T> {
       Task<Void> insert(T data);
       Task<Void> update(HashMap<String, T> data);
       Task<Void> delete(T data);
-      Task<Void> get();
-      Task<Void> get(T data);
-      Task<Void> update(T data);
+      T get();
+      T get(T data);
+      void update(T data);
 }

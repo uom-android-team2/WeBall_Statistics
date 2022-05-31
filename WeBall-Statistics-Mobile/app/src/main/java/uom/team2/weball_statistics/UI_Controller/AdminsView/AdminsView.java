@@ -46,6 +46,7 @@ public class AdminsView extends Fragment {
     private long pauseOffset;
     private boolean started=false;
     private boolean teamSelected =false;
+    private int playerChecked=1;
 
 
 
@@ -227,8 +228,106 @@ public class AdminsView extends Fragment {
 
 
 
+//Player Buttons-
+        binding.player1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                GradientDrawable shape =  new GradientDrawable();
+                shape.setCornerRadius( 75 );
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
 
+                deleteThePreviousBackground();
+                playerChecked=1;
+
+            }
+        });
+        binding.player2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GradientDrawable shape =  new GradientDrawable();
+                shape.setCornerRadius( 75 );
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
+
+                deleteThePreviousBackground();
+                playerChecked=2;
+
+            }
+        });
+        binding.player3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GradientDrawable shape =  new GradientDrawable();
+                shape.setCornerRadius( 75 );
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
+
+                deleteThePreviousBackground();
+                playerChecked=3;
+            }
+        });
+        binding.player4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GradientDrawable shape =  new GradientDrawable();
+                shape.setCornerRadius( 75 );
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
+
+                deleteThePreviousBackground();
+                playerChecked=4;
+            }
+        });
+        binding.player5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GradientDrawable shape =  new GradientDrawable();
+                shape.setCornerRadius( 75 );
+                shape.setColor(getResources().getColor(R.color.alt_grey));
+                view.setBackground(shape);
+
+                deleteThePreviousBackground();
+                playerChecked=5;
+            }
+        });
+
+//Substitution Button
+        binding.substitutionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //steile ton paikti
+
+                //emfanise to popup
+                //SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity());
+               // ppv.show();
+            }
+        });
+
+    }
+
+//you call this function when you want to change player
+    public void deleteThePreviousBackground(){
+        if(playerChecked==1){
+            binding.player1.setBackgroundColor(0x00000000);
+        }
+        else if(playerChecked==2){
+            binding.player2.setBackgroundColor(0x00000000);
+        }
+        else if(playerChecked==3){
+            binding.player3.setBackgroundColor(0x00000000);
+        }
+        else if(playerChecked==4){
+            binding.player4.setBackgroundColor(0x00000000);
+        }
+        else if (playerChecked==5){
+            binding.player5.setBackgroundColor(0x00000000);
+        }
     }
 
 }

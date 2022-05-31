@@ -5,7 +5,9 @@ import com.google.android.gms.tasks.Task;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
-
+/*
+ * @author Leonard Pepa ics20033
+ */
 public class DAOLivePlayerStatistics implements DAOCRUDService<LivePlayerStatistics>{
     @Override
     public Task<Void> insert(LivePlayerStatistics data) {

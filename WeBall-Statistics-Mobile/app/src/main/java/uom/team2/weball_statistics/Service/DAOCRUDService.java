@@ -5,6 +5,11 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.HashMap;
 
+/*
+ * @author Leonard Pepa ics20033
+ */
+
+
 public interface DAOCRUDService<T> {
       Task<Void> insert(T data);
       Task<Void> update(HashMap<String, T> data);

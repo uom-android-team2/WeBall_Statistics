@@ -1,5 +1,8 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
+/*
+ * @author Leonard Pepa ics20033
+ */
 public enum LiveStatistics {
     successful_effort,
     total_freethrow,

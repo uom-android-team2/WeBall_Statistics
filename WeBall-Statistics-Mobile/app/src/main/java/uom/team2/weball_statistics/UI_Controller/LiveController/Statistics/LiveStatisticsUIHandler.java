@@ -7,10 +7,14 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import uom.team2.weball_statistics.R;
-public class UIHandler {
+
+/*
+ * @author Leonard Pepa ics20033
+ */
+public class LiveStatisticsUIHandler {
 
 
-    public UIHandler(){
+    public LiveStatisticsUIHandler(){
 
     }
 

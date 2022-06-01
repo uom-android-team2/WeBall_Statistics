@@ -23,7 +23,7 @@ public class SBFAction extends Action {
     }
 
     @Override
-    public String formatActionDesc() {
+    protected String formatActionDesc() {
 
         String playerName = this.playerObj.getName().charAt(0) + "." + playerObj.getSurname();
 

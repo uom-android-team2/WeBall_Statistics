@@ -10,7 +10,7 @@ public abstract class Action {
 
     //Method that will set the value that we want to appear to the action ui
     //set value to the actionDesc field cause this will returned to appear
-    public abstract String formatActionDesc ();
+    protected abstract String formatActionDesc ();
 
     public String getActionDesc() {
         return this.actionDesc;

@@ -17,7 +17,7 @@ public class Turnover extends Action {
     }
 
     @Override
-    public String formatActionDesc() {
+    protected String formatActionDesc() {
         return "Loss of possession!";
     }
 }

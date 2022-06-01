@@ -13,7 +13,7 @@ public class MatchFlow extends Action {
     }
 
     @Override
-    public String formatActionDesc() {
+    protected String formatActionDesc() {
         switch (this.flowType) {
             case PAUSE:
                 return "Match Paused!";

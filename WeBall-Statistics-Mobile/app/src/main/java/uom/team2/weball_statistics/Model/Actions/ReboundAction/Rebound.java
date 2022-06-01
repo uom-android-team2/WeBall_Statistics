@@ -16,7 +16,7 @@ public class Rebound extends Action {
     }
 
     @Override
-    public String formatActionDesc() {
+    protected String formatActionDesc() {
         String playerName = this.playerObj.getName().charAt(0) + "." + playerObj.getSurname();
 
         return ("Rebound from " + playerName);

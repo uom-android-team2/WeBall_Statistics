@@ -13,7 +13,13 @@
         <entry key="app/src/main/res/drawable/try1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24240121580547114" />
         <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.18" />
-      </map>
+        <entry key="app/src/main/res/layout/fragment_bottom_button.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_player_layout.xml" value="0.2573454913880446" />
+        <entry key="app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/fragment_rank_tab.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_shared_tab_container.xml" value="0.33" />
+  </map>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
@@ -21,5 +27,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>

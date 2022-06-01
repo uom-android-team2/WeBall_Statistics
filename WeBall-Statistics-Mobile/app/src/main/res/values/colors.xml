@@ -10,4 +10,8 @@
     <color name="bar">#902D41</color>
     <color name="tabs">#C4C4C4</color>
     <color name="tabsInd">#B2B2B2</color>
+    <color name="greyRank">#C4C4C4</color>
+    <color name="lightBlueTopPlayer">#BBBFD4</color>
+    <color name="lightGrey">#EBEBEB</color>
+    <color name="grey">#656667</color>
 </resources>

@@ -9,12 +9,16 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import uom.team2.weball_statistics.databinding.FragmentCompletedStatsTabContainerBinding;
+import uom.team2.weball_statistics.databinding.FragmentSharedTabContainerBinding;
 
+/*
+ *  @author Evmorfia Elpida Dasyra ics20006
+ */
+public class SharedTabContainer extends Fragment {
 
-public class CompletedStatsTabContainer extends Fragment {
-    private FragmentCompletedStatsTabContainerBinding binding;
+    private FragmentSharedTabContainerBinding binding;
 
-    public CompletedStatsTabContainer() {
+    public SharedTabContainer() {
         // Required empty public constructor
     }
 
@@ -24,11 +28,11 @@ public class CompletedStatsTabContainer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentCompletedStatsTabContainerBinding.inflate(inflater, container,false);
+        binding = FragmentSharedTabContainerBinding.inflate(inflater, container,false);
 
         // Configure table layout with view pager
-        PageAdapterCompletedStats sectionsPagerAdapter = new PageAdapterCompletedStats(getContext(),getChildFragmentManager());
+        PageAdapterCompletedStatistics sectionsPagerAdapter = new PageAdapterCompletedStatistics(getContext(),getChildFragmentManager());
+        // configure table layout with view pager
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;

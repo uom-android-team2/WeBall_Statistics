@@ -68,12 +68,6 @@ public class LiveGameProgress extends Fragment {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
         };
-
-        Player player1 = new Player("Minas", "Charakopoulos");
-        Player player2 = new Player("Leo", "Pepa");
-        Team team1 = new Team("TeamName");
-        Substitution substitution = new Substitution("432", player1, player2, team1);
-        System.out.println(substitution.getActionDesc() + substitution.getTimeHappened());
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

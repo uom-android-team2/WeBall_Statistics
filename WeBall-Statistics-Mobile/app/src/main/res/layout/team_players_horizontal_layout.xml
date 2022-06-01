@@ -31,7 +31,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal"
-                android:paddingBottom="10sp">
+                android:paddingBottom="7sp">
 
                 <include
                     layout="@layout/player_image_layout"

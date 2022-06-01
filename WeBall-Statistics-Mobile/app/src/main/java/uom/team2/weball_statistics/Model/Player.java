@@ -13,6 +13,12 @@ public class Player {
     private String imagePath;
     //Other fields for Statistics that made in other branch...
 
+    //only for testing
+    public Player(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public Player(int id, String name, String surname, int number, PlayerPosition playerPosition, Team team, String imagePath) {
         this.id = id;
         this.name = name;

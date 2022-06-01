@@ -14,6 +14,11 @@ public class Team {
     private ArrayList<Player> teamPlayers;
     private Championship championshipIn; //The championship that participates
 
+    //only for testing
+    public Team(String teamName) {
+        this.teamName = teamName;
+    }
+
     public Team(int id, String teamName, String teamCity, String badgePath, Coach teamCoach, ArrayList<Player> teamPlayers, Championship championshipIn) {
         this.id = id;
         this.teamName = teamName;

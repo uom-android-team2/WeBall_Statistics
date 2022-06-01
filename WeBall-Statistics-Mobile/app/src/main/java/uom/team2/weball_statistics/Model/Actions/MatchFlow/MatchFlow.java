@@ -15,26 +15,16 @@ public class MatchFlow extends Action {
     @Override
     public String formatActionDesc() {
         switch (this.flowType) {
-            case Pause:
+            case PAUSE:
                 return "Match Paused!";
-            case Resume:
+            case RESUME:
                 return "Match Continues!";
-            case Start:
+            case START:
                 return  "Match Started!";
-            case Completed:
+            case COMPLETED:
                 return  "Match Completed";
             default:
                 return "Undefined";
         }
-    }
-
-    @Override
-    public String getActionDesc() {
-        return this.actionDesc;
-    }
-
-    @Override
-    public String getTimeHappened() {
-        return this.timeHappened;
     }
 }

@@ -12,7 +12,11 @@ public abstract class Action {
     //set value to the actionDesc field cause this will returned to appear
     public abstract String formatActionDesc ();
 
-    public abstract String getActionDesc();
+    public String getActionDesc() {
+        return this.actionDesc;
+    };
 
-    public abstract String getTimeHappened();
+    public String getTimeHappened() {
+        return this.timeHappened;
+    };
 }

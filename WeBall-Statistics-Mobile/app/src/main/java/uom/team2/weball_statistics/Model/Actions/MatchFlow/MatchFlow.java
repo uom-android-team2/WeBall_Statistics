@@ -17,8 +17,12 @@ public class MatchFlow extends Action {
         switch (this.flowType) {
             case Pause:
                 return "Match Paused!";
+            case Resume:
+                return "Match Continues!";
             case Start:
                 return  "Match Started!";
+            case Completed:
+                return  "Match Completed";
             default:
                 return "Undefined";
         }

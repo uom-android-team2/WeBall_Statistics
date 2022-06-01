@@ -1,15 +1,14 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.util.HashMap;
 
@@ -22,6 +21,7 @@ public class LivePlayerStatistics extends Fragment {
 
     private FragmentLivePlayerStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
+
     public LivePlayerStatistics() {
         // Required empty public constructor
     }
@@ -31,9 +31,9 @@ public class LivePlayerStatistics extends Fragment {
         return fragment;
     }
 
-    public void addProgressBars(LinearLayout progressBarContainer){
+    public void addProgressBars(LinearLayout progressBarContainer) {
         String[] statisticsArray = Utils.getStringArray(getContext(), R.array.player_statistics);
-        for(String statName: statisticsArray){
+        for (String statName : statisticsArray) {
             View progressBarLayout = LayoutFactory.createProgressBarLayout(this, statName);
             progressBarContainer.addView(progressBarLayout);
             statName = statName.replace(" ", "_").toLowerCase();

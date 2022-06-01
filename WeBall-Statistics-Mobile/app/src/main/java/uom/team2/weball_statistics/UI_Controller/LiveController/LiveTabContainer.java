@@ -1,15 +1,14 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,7 +27,7 @@ public class LiveTabContainer extends Fragment {
         // Required empty public constructor
     }
 
-    private void tabBackgroundColorHandler(TabLayout tabs){
+    private void tabBackgroundColorHandler(TabLayout tabs) {
         int backgroundSelectedColor = Utils.getColor(getContext(), R.color.red_buttons);
         int backgroundDefaultColor = Utils.getColor(getContext(), R.color.background_player_live_stats_button_color);
 
@@ -71,7 +70,7 @@ public class LiveTabContainer extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // configure tablayout with view pager
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(),getChildFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;

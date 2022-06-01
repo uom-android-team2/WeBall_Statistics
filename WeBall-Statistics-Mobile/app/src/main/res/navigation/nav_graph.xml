@@ -11,19 +11,19 @@
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_home_to_leadersStats"
-            app:destination="@id/leadersStats" />
-    </fragment>
-    <fragment
-        android:id="@+id/leadersStats"
-        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStats"
-        android:label="LeadersStats" >
-        <action
-            android:id="@+id/action_leadersStats_to_expandedLeadersStat"
-            app:destination="@id/expandedLeadersStat" />
+            android:id="@+id/action_home_to_sharedTabContainer"
+            app:destination="@id/sharedTabContainer" />
     </fragment>
     <fragment
         android:id="@+id/expandedLeadersStat"
         android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.ExpandedLeadersStat"
         android:label="ExpandedLeadersStat" />
+    <fragment
+        android:id="@+id/sharedTabContainer"
+        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.SharedTabContainer"
+        android:label="SharedTabContainer" >
+        <action
+            android:id="@+id/action_sharedTabContainer_to_expandedLeadersStat"
+            app:destination="@id/expandedLeadersStat" />
+    </fragment>
 </navigation>

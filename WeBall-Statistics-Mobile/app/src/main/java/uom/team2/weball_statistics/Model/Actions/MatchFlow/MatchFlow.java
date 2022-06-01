@@ -1,6 +1,8 @@
-package uom.team2.weball_statistics.Model.Actions;
+package uom.team2.weball_statistics.Model.Actions.MatchFlow;
 
-public class MatchFlow extends Action{
+import uom.team2.weball_statistics.Model.Actions.Action;
+
+public class MatchFlow extends Action {
 
     private FlowType flowType; //Start or pause
 

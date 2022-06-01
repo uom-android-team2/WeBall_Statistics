@@ -35,23 +35,27 @@ public class Shot extends Action {
     protected String formatActionDesc() {
 
         //we want to appear only the successful tries
-        if (scored) {
+        if (this.scored) {
 
-            String playerName = this.playerObj.getName().charAt(0) + "." + playerObj.getSurname();
-            String description;
+            String playerName = this.playerObj.getName().charAt(0) + "." + this.playerObj.getSurname();
+            String description = "";
             
-            switch (shotType) {
+            switch (this.shotType) {
                 case FREETHROW:
                     description = "Freethrow from " + playerName;
+                    break;
                 case TWO_POINTER:
                     description = "+2 from " + playerName;
+                    break;
                 case THREE_POINTER:
                     description = "+3 from " + playerName;
+                    break;
                 default:
                     description  = "Undefined";
+                    break;
             }
 
-            if (assist != null) {
+            if (this.assist != null) {
                 description = description + " (" + assist.getPlayerObj().getName().charAt(0) + "." + assist.getPlayerObj().getSurname() + ")";
             }
 

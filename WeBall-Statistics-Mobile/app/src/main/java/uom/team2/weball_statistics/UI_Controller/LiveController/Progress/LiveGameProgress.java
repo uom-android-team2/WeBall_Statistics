@@ -67,15 +67,6 @@ public class LiveGameProgress extends Fragment {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
         };
-
-        Player player = new Player("Minas", "Charakopoulos");
-        Player playerAst = new Player("Leo", "Pepa");
-        Assist assist = new Assist(playerAst);
-        Team team = new Team("TestName");
-        Action action1 = new Shot("43.21", player, team, ShotType.FREETHROW, true);
-        Action action2 = new Shot("45.24", player, team, ShotType.THREE_POINTER, true, assist);
-        System.out.println(action1.getActionDesc() + action1.getTimeHappened());
-        System.out.println(action2.getActionDesc() + action2.getTimeHappened());
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

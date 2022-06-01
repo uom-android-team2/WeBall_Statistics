@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".UI_Controller.LiveController.Statistics.LiveGameStatistics">
+
+    <ImageView
+        android:id="@+id/team1_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/team_logo_description"
+        android:src="@drawable/bucks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/team2_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="38dp"
+        android:contentDescription="@string/team_logo_description"
+        android:src="@drawable/golden_state_warriors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/score_text"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/stadium_name"
+        app:layout_constraintEnd_toStartOf="@+id/team2_logo"
+        app:layout_constraintStart_toEndOf="@+id/team1_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/team1_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/team1_name_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/header_top_divider"
+        app:layout_constraintStart_toStartOf="@+id/team1_logo"
+        app:layout_constraintTop_toBottomOf="@+id/team1_logo" />
+
+    <TextView
+        android:id="@+id/team2_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/team2_name_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/header_top_divider"
+        app:layout_constraintEnd_toEndOf="@+id/team2_logo"
+        app:layout_constraintTop_toBottomOf="@+id/team2_logo" />
+
+    <View
+        android:id="@+id/header_top_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        android:foreground="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/match_start_date" />
+
+    <TextView
+        android:id="@+id/match_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/match_start_date_text"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/team2_logo"
+        app:layout_constraintStart_toEndOf="@+id/team1_logo"
+        app:layout_constraintTop_toBottomOf="@+id/score_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

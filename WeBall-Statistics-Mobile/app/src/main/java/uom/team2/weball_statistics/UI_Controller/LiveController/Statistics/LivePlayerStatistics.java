@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.HashMap;
+
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
@@ -19,7 +21,7 @@ import uom.team2.weball_statistics.utils.Utils;
 public class LivePlayerStatistics extends Fragment {
 
     private FragmentLivePlayerStatisticsBinding binding;
-
+    private HashMap<String, View> mapOfStatistics;
     public LivePlayerStatistics() {
         // Required empty public constructor
     }
@@ -31,14 +33,20 @@ public class LivePlayerStatistics extends Fragment {
 
     public void addProgressBars(LinearLayout progressBarContainer){
         String[] statisticsArray = Utils.getStringArray(getContext(), R.array.player_statistics);
-        for(String stat: statisticsArray){
-            progressBarContainer.addView(LayoutFactory.createProgressBarLayout(this, stat));
+        for(String statName: statisticsArray){
+            View progressBarLayout = LayoutFactory.createProgressBarLayout(this, statName);
+            progressBarContainer.addView(progressBarLayout);
+            statName = statName.replace(" ", "_").toLowerCase();
+            progressBarLayout.setTag(statName);
+            mapOfStatistics.put(statName, progressBarLayout);
         }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mapOfStatistics = new HashMap<>();
+
     }
 
     @Override

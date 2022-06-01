@@ -16,6 +16,7 @@ import uom.team2.weball_statistics.Model.Actions.ReboundAction.Rebound;
 import uom.team2.weball_statistics.Model.Actions.Shots.Assist;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
+import uom.team2.weball_statistics.Model.Actions.Substitution.Substitution;
 import uom.team2.weball_statistics.Model.Actions.Turnover.Turnover;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
@@ -67,6 +68,12 @@ public class LiveGameProgress extends Fragment {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
         };
+
+        Player player1 = new Player("Minas", "Charakopoulos");
+        Player player2 = new Player("Leo", "Pepa");
+        Team team1 = new Team("TeamName");
+        Substitution substitution = new Substitution("432", player1, player2, team1);
+        System.out.println(substitution.getActionDesc() + substitution.getTimeHappened());
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

@@ -3,6 +3,8 @@ package uom.team2.weball_statistics.Model;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import uom.team2.weball_statistics.Model.Actions.Action;
+
 /*
  * @author Minas - Theodoros Charakopoulos ics20072
  */

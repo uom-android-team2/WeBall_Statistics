@@ -1,20 +1,11 @@
 package uom.team2.weball_statistics.Service;
 
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import uom.team2.weball_statistics.Model.Action;
+import uom.team2.weball_statistics.Model.Actions.Action;
 
 public class DAOAction implements DAOCRUDService <Action> {
     private DatabaseReference databaseReference;

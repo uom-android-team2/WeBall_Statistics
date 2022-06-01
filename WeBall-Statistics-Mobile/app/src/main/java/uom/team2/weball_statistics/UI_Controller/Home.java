@@ -35,7 +35,7 @@ public class Home extends Fragment {
         binding.playerStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_sharedTabContainer);
+                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_leadersStats);
             }
         });
         return binding.getRoot();

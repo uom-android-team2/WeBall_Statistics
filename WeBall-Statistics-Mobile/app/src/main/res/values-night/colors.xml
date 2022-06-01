@@ -13,10 +13,25 @@
     <color name="light_gray">#EBEBEB</color>
     <color name="dark_red">#902D41</color>
     <color name="custom_blue">#1F5673</color>
-
     <!-- Customizable for light and dark mode -->
-    <color name="statistics_background">#454749</color>
+    <color name="black_to_white_color">#FFFFFFFF</color>
+    <color name="black_to_light_gray_color">#EBEBEB</color>
+    <color name="statistics_background">#D3D3D3</color>
+    <color name="greyRank">#C4C4C4</color>
 
-    <color name="black_to_white_color">#FF444444</color>
-    <color name="black_to_light_gray_color">#FF444444</color>
+    <color name="gray_login">#EBEBEB</color>
+    <color name="alt_blue">#759FBC</color>
+    <color name="alt_green">#1F5673</color>
+    <color name="red">#b60922</color>
+    <color name="green">#08a013</color>
+    <color name="alt_grey">#A1B3BF</color>
+
+    <color name="bar">#902D41</color>
+    <color name="tabs">#C4C4C4</color>
+    <color name="tabsInd">#B2B2B2</color>
+    <color name="grayback">#EBEBEB</color>
+    <color name="firstblue">#DEE3F2</color>
+    <color name="lightBlueTopPlayer">#BBBFD4</color>
+    <color name="lightGrey">#EBEBEB</color>
+    <color name="grey">#656667</color>
 </resources>

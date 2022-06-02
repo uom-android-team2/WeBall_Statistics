@@ -3,33 +3,26 @@ package uom.team2.weball_statistics.UI_Controller.AdminsView;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
-import uom.team2.weball_statistics.databinding.FragmentPopupViewBinding;
 
 public class SubstitutionPopupView extends Dialog implements
         android.view.View.OnClickListener{
 
     public Activity c;
     public Dialog d;
-    public TextView player1, player2;
+    public TextView sub1, sub2,sub3,sub4,sub5,xbutton;
     private String str;
+    private String n;
 
 
 
-
-    public SubstitutionPopupView(Activity a) {
+    public SubstitutionPopupView(Activity a,String name) {
         super(a);
+        n=name;
         // TODO Auto-generated constructor stub
         this.c = a;
     }
@@ -40,13 +33,23 @@ public class SubstitutionPopupView extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.substitution_popup_view);
 
-        TextView text=(TextView)findViewById(R.id.dialog_info);
-        text.setText("2-Pointer Basket Made?");
 
-        player1 = (TextView) findViewById(R.id.player1_text);
-        player2 = (TextView) findViewById(R.id.player2_text);
-        player1.setOnClickListener(this);
-        player2.setOnClickListener(this);
+        xbutton=(TextView) findViewById(R.id.x_button);
+        sub1 = (TextView) findViewById(R.id.sub1_text);
+        sub2 = (TextView) findViewById(R.id.sub2_text);
+        sub3 = (TextView) findViewById(R.id.sub2_text);
+        sub4 = (TextView) findViewById(R.id.sub2_text);
+        sub5 = (TextView) findViewById(R.id.sub2_text);
+
+
+
+
+        xbutton.setOnClickListener(this);
+        sub1.setOnClickListener(this);
+        sub2.setOnClickListener(this);
+        sub3.setOnClickListener(this);
+        sub4.setOnClickListener(this);
+        sub5.setOnClickListener(this);
 
         //
 
@@ -57,14 +60,34 @@ public class SubstitutionPopupView extends Dialog implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.dialog_Yes:
+            case R.id.x_button:
+                dismiss();
+                break;
+
+            case R.id.sub1_text:
+
+
+                dismiss();
+                break;
+            case R.id.sub2_text:
+                dismiss();
+                break;
+            case R.id.sub3_text:
 
 
                 //dismiss();
                 break;
-            case R.id.dialog_No:
-                dismiss();
+            case R.id.sub4_text:
+
+
+                //dismiss();
                 break;
+            case R.id.sub5_text:
+
+
+                //dismiss();
+                break;
+
             default:
                 break;
         }

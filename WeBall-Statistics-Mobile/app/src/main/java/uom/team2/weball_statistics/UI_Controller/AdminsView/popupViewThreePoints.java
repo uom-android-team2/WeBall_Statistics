@@ -24,12 +24,14 @@ public class popupViewThreePoints extends Dialog implements
     public Dialog d;
     public Button yes, no;
     private String str;
+private int points;
 
 
 
-
-    public popupViewThreePoints(Activity a) {
+    public popupViewThreePoints(Activity a,int p) {
         super(a);
+
+        points=p;
         // TODO Auto-generated constructor stub
         this.c = a;
     }

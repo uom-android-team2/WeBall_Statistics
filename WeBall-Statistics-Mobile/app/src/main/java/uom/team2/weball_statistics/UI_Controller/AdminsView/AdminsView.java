@@ -199,7 +199,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
 
-                popupViewOnePoint ppv=new popupViewOnePoint(getActivity());
+                popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1);
                 ppv.show();
             }
 
@@ -210,7 +210,7 @@ public class AdminsView extends Fragment {
         binding.twoPointerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupViewTwoPoints ppv=new popupViewTwoPoints(getActivity());
+                popupViewTwoPoints ppv=new popupViewTwoPoints(getActivity(),2);
                 ppv.show();
             }
         });
@@ -219,7 +219,7 @@ public class AdminsView extends Fragment {
         binding.threePointerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupViewThreePoints ppv=new popupViewThreePoints(getActivity());
+                popupViewThreePoints ppv=new popupViewThreePoints(getActivity(),3);
                 ppv.show();
             }
         });
@@ -238,8 +238,10 @@ public class AdminsView extends Fragment {
                 shape.setColor(getResources().getColor(R.color.alt_grey));
                 view.setBackground(shape);
 
-                deleteThePreviousBackground();
-                playerChecked=1;
+                if(!(playerChecked==1)){
+                    deleteThePreviousBackground();
+                    playerChecked=1;
+                }
 
             }
         });
@@ -252,8 +254,10 @@ public class AdminsView extends Fragment {
                 shape.setColor(getResources().getColor(R.color.alt_grey));
                 view.setBackground(shape);
 
-                deleteThePreviousBackground();
-                playerChecked=2;
+                if(!(playerChecked==2)){
+                    deleteThePreviousBackground();
+                    playerChecked=2;
+                }
 
             }
         });
@@ -266,8 +270,11 @@ public class AdminsView extends Fragment {
                 shape.setColor(getResources().getColor(R.color.alt_grey));
                 view.setBackground(shape);
 
-                deleteThePreviousBackground();
-                playerChecked=3;
+                if(!(playerChecked==3)){
+                    deleteThePreviousBackground();
+                    playerChecked=3;
+                }
+
             }
         });
         binding.player4.setOnClickListener(new View.OnClickListener() {
@@ -279,8 +286,11 @@ public class AdminsView extends Fragment {
                 shape.setColor(getResources().getColor(R.color.alt_grey));
                 view.setBackground(shape);
 
-                deleteThePreviousBackground();
-                playerChecked=4;
+                if(!(playerChecked==4)){
+                    deleteThePreviousBackground();
+                    playerChecked=4;
+                }
+
             }
         });
         binding.player5.setOnClickListener(new View.OnClickListener() {
@@ -292,8 +302,12 @@ public class AdminsView extends Fragment {
                 shape.setColor(getResources().getColor(R.color.alt_grey));
                 view.setBackground(shape);
 
-                deleteThePreviousBackground();
-                playerChecked=5;
+                if(!(playerChecked==5)){
+                    deleteThePreviousBackground();
+                    playerChecked=5;
+                }
+
+
             }
         });
 
@@ -304,8 +318,8 @@ public class AdminsView extends Fragment {
                 //steile ton paikti
 
                 //emfanise to popup
-                //SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity());
-               // ppv.show();
+                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(),"panais");
+                ppv.show();
             }
         });
 

@@ -11,6 +11,9 @@
         layout="@layout/fragment_match_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +23,8 @@
         layout="@layout/fragment_date_of_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/include12"
+        app:layout_constraintTop_toTopOf="@+id/include12" />
 
     <include
         layout="@layout/fragment_score"
@@ -71,8 +72,8 @@
     <include
         android:id="@+id/include15"
         layout="@layout/fragment_substitutes_players"
-        android:layout_width="384dp"
-        android:layout_height="280dp"
+        android:layout_width="395dp"
+        android:layout_height="253dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -85,7 +86,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginBottom="3dp"
         android:backgroundTint="#9C1515"
         android:text="@string/edit_button"
         android:textSize="16sp"

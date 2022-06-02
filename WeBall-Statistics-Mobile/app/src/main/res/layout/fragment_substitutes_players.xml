@@ -118,7 +118,7 @@
     <TextView
         android:id="@+id/substitutes_textView"
         android:layout_width="192dp"
-        android:layout_height="45dp"
+        android:layout_height="25dp"
         android:text="@string/substitutes_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="16sp"
@@ -131,7 +131,7 @@
     <TextView
         android:id="@+id/substitutesTeam_textView"
         android:layout_width="192dp"
-        android:layout_height="45dp"
+        android:layout_height="25dp"
         android:text="Team A"
         android:textColor="#902D41"
         android:textSize="16sp"

@@ -4,28 +4,31 @@ package uom.team2.weball_statistics.Model.Statistics;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import uom.team2.weball_statistics.Model.Config;
 
 public abstract class Stats implements editFieldsFromDB {
     
     protected String fieldGoalsPercentage;
     protected String freeThrowsPercentage;
-    protected int successfulFreethrows;
-    protected int totalFreethrows;
+    protected int succesful_effort;
+    protected int total_effort;
+    protected int successful_freethrow;
+    protected int total_freethrow;
     protected String twoPointsPercentage;
-    protected int successfulTwoPoints;
-    protected int totalTwoPoints;
+    protected int succesful_twopointer;
+    protected int total_twopointer;
     protected String threePointsPercentage;
-    protected int successfulThreePoints;
-    protected int totalThreePoints;
-    protected int totalSteels;
-    protected int totalRebounds;
-    protected int totalAssists;
-    protected int totalBocks;
-    protected int totalFouls;
-    protected int totalTurnovers;
+    protected int succesful_threepointer;
+    protected int total_threepointer;
+    protected int steal;
+    protected int rebound;
+    protected int assist;
+    protected int block;
+    protected int foul;
+    protected int turnover;
 
     // This method initialize the properties of class Stats.
     protected void initializeStats(String fTP, String twoPP, String threePP) {
@@ -34,74 +37,100 @@ public abstract class Stats implements editFieldsFromDB {
 
     }
 
+
     private  void formatStats(String fTP, String twoPP, String threePP){
-        freeThrowsPercentage = fTP;
-        String[] stringsFromfTP = fTP.split("\\/");
-        successfulFreethrows = Integer.parseInt(stringsFromfTP[0]);
-        totalFreethrows = Integer.parseInt(stringsFromfTP[1]);
 
-        twoPointsPercentage = twoPP;
-        String[] stringsFromtwoPP = twoPP.split("\\/");
-        successfulTwoPoints = Integer.parseInt(stringsFromtwoPP[0]);
-        totalTwoPoints = Integer.parseInt(stringsFromtwoPP[1]);
-
-        threePointsPercentage = threePP;
-        String[] stringsFromthreePP = threePP.split("\\/");
-        successfulThreePoints = Integer.parseInt(stringsFromthreePP[0]);
-        totalThreePoints = Integer.parseInt(stringsFromthreePP[1]);
-
-        calculateFielsGoalPercentage();
-        calculateFreeThrowsPercentage();
-        calculateTwoPointsPercentage();
-        calculateThreePointsPercentage();
     }
 
 
     /* This private method calculates the field goal percentage including two and three points attempts .
        Also returns this percentage in format of string.*/
-    private String calculateFielsGoalPercentage(){
-        return fieldGoalsPercentage = Integer.toString(successfulTwoPoints + successfulThreePoints).concat("/").concat(Integer.toString(totalTwoPoints + totalThreePoints));
+    public String calculateFieldGoalPercentageInString(){
+        return fieldGoalsPercentage = Integer.toString(succesful_effort).concat("/").concat(Integer.toString(total_effort));
     }
 
-    private double calculateFreeThrowsPercentage(){
-       return  (successfulFreethrows * 100)/totalFreethrows;
+    public String calculateTwoPointPercentageToString(){
+        return twoPointsPercentage = Integer.toString(successful_freethrow).concat("/").concat(Integer.toString(total_freethrow));
     }
 
-    private double calculateTwoPointsPercentage(){
-        return (successfulTwoPoints * 100)/totalTwoPoints;
+    public String calculateFreeThrowPercentageToString(){
+        return freeThrowsPercentage = Integer.toString(successful_freethrow).concat("/").concat(Integer.toString(total_freethrow));
     }
 
-    private double calculateThreePointsPercentage(){
-        return (successfulThreePoints * 100)/totalThreePoints;
+    private double calculateFreeThrowsPercentageToNumber(){
+       return  (successful_freethrow * 100)/total_freethrow;
     }
 
-
-    protected int getTotalSteels(){
-       return totalSteels;
+    private double calculateTwoPointsPercentageToNumber(){
+        return (succesful_twopointer * 100)/total_twopointer;
     }
 
-    protected int getTotalRebounds(){
-        return totalRebounds;
+    private double calculateThreePointsPercentageToNumber(){
+        return (succesful_threepointer * 100)/total_threepointer;
     }
 
-    protected int getTotalAssists(){
-       return totalAssists;
+    protected  int calculateTotalPoints(){
+        return succesful_twopointer * Config.COEFFICIENT_TWO_POINT + successful_freethrow * Config.COEFFICIENT_ONE_POINT + succesful_threepointer * Config.COEFFICIENT_THREE_POINT;
     }
 
-    protected int getTotalBlocks(){
-        return totalBocks;
+    public String getFieldGoalPercentage(){
+        return fieldGoalsPercentage;
     }
 
-    protected int getTotalFouls(){
-      return  totalFouls;
+    public int getSuccessfulFreeThrow(){
+        return successful_freethrow;
     }
 
-    protected int getTotalTurnovers(){
-       return totalTurnovers;
+    public int getSuccessFulTwoPointer(){
+        return succesful_twopointer;
     }
+
+    public int getSuccessFulThreePointer(){
+        return succesful_threepointer;
+    }
+
+    public int getTotalSteels(){
+       return steal;
+    }
+
+    public int getTotalRebounds(){
+        return rebound;
+    }
+
+    public int getTotalAssists(){
+       return assist;
+    }
+
+    public int getTotalBlocks(){
+        return block;
+    }
+
+    public int getTotalFouls(){
+      return  foul;
+    }
+
+    public int getTotalTurnovers(){
+        return turnover;
+    }
+
+    protected void setTotalSteels(){steal++; }
+
+    protected void setTotalRebounds(){ rebound++;}
+
+    protected void setTotalAssists(){ assist++;}
+
+    public void setTotalBlock(){ block++; }
+
+    public void setTotalFouls(){ foul++;}
+
+    protected void setTotalTurnovers(){ turnover++;}
+
+
 
     @Override
     public void editJON(String data) {
+
+
         try {
             JSONObject json = new JSONObject(data);
             Iterator<String> keys = json.keys();
@@ -111,26 +140,32 @@ public abstract class Stats implements editFieldsFromDB {
                 String key = keys.next();
                 String dataFromKey = json.get(key).toString();
                 hashMapData.put(key, dataFromKey);
-
+                 System.out.println(key + " " + dataFromKey);
                 if(keys.equals("turnover")) break;
 
             }
 
-            successfulFreethrows = Integer.parseInt(hashMapData.get("successful_freethrow"));
-            totalFreethrows = Integer.parseInt(hashMapData.get("total_freethrow"));
-            successfulTwoPoints = Integer.parseInt(hashMapData.get("successful_twopointer"));
-            totalTwoPoints = Integer.parseInt(hashMapData.get("total_freethrow"));
-            successfulThreePoints = Integer.parseInt(hashMapData.get("successful_threepointer"));
-            totalThreePoints = Integer.parseInt(hashMapData.get("total_threepointer"));
-            totalSteels = Integer.parseInt(hashMapData.get("steel"));
-            totalRebounds = Integer.parseInt(hashMapData.get("rebound"));
-            totalAssists = Integer.parseInt(hashMapData.get("assist"));
-            totalBocks = Integer.parseInt(hashMapData.get("block"));
-            totalFouls = Integer.parseInt(hashMapData.get("foul"));
-            totalTurnovers = Integer.parseInt(hashMapData.get("turnover"));
+
+
+            succesful_effort = Integer.parseInt(hashMapData.get("succesful_effort"));
+            total_effort = Integer.parseInt(hashMapData.get("total_effort"));
+            successful_freethrow = Integer.parseInt(hashMapData.get("successful_freethrow"));
+            total_freethrow = Integer.parseInt(hashMapData.get("total_freethrow"));
+            succesful_twopointer = Integer.parseInt(hashMapData.get("succesful_twopointer"));
+            total_twopointer = Integer.parseInt(hashMapData.get("total_twopointer"));
+            succesful_threepointer = Integer.parseInt(hashMapData.get("succesful_threepointer"));
+            total_threepointer = Integer.parseInt(hashMapData.get("total_threepointer"));
+            steal = Integer.parseInt(hashMapData.get("steal"));
+            rebound = Integer.parseInt(hashMapData.get("rebound"));
+            assist = Integer.parseInt(hashMapData.get("assist"));
+            block = Integer.parseInt(hashMapData.get("block"));
+            foul = Integer.parseInt(hashMapData.get("foul"));
+            turnover = Integer.parseInt(hashMapData.get("turnover"));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
 }

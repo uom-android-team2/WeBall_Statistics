@@ -9,16 +9,20 @@ import java.util.Objects;
 
 public class PlayerStats extends Stats {
 
-    protected int playerId;
+    protected int player_id;
     protected int gamesPlayed;
     protected int totalMinutes;
 
     // This method is the constructor of class PlayerStats which initialize the parameters of this class.
     public PlayerStats(){
-
-
+        player_id = 1;
     }
 
+    @Override
+    protected int calculateTotalPoints() {
+         return  super.calculateTotalPoints();
+
+    }
 
     @Override
     public void editJON(String data) {
@@ -39,7 +43,7 @@ public class PlayerStats extends Stats {
 
                 }
 
-                playerId = Integer.parseInt(hashMapData.get("player_id"));
+                player_id = Integer.parseInt(hashMapData.get("player_id"));
                 //totalMinutes = Integer.parseInt(hashMapData.get("minutes").substring(12,15));
 
 
@@ -56,8 +60,6 @@ public class PlayerStats extends Stats {
 
         super.editJON(data);
 
-
-        System.out.println(totalSteels);
 
 
     }

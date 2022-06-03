@@ -54,7 +54,7 @@ public class BestStarting5 extends Fragment {
             TextView newFirstnameLastname = bestPlayerPerPositionLayout.findViewById(R.id.firstnameLastname);
             newFirstnameLastname.setText(firstnameLastname);
             //Plus minus value field
-            TextView newPlusMinusValue = bestPlayerPerPositionLayout.findViewById(R.id.plusMinusValue);
+            TextView newPlusMinusValue = bestPlayerPerPositionLayout.findViewById(R.id.efficiencyValue);
             String plusMinusValueString = Integer.toString(plusMinusValue);
             newPlusMinusValue.setText(plusMinusValueString);
             //Logo field

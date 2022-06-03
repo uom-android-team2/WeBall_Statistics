@@ -147,13 +147,13 @@ public abstract class Stats implements editFieldsFromDB {
 
 
 
-            succesful_effort = Integer.parseInt(hashMapData.get("succesful_effort"));
+            succesful_effort = Integer.parseInt(hashMapData.get("successful_effort"));
             total_effort = Integer.parseInt(hashMapData.get("total_effort"));
             successful_freethrow = Integer.parseInt(hashMapData.get("successful_freethrow"));
             total_freethrow = Integer.parseInt(hashMapData.get("total_freethrow"));
-            succesful_twopointer = Integer.parseInt(hashMapData.get("succesful_twopointer"));
+            succesful_twopointer = Integer.parseInt(hashMapData.get("successful_twopointer"));
             total_twopointer = Integer.parseInt(hashMapData.get("total_twopointer"));
-            succesful_threepointer = Integer.parseInt(hashMapData.get("succesful_threepointer"));
+            succesful_threepointer = Integer.parseInt(hashMapData.get("successful_threepointer"));
             total_threepointer = Integer.parseInt(hashMapData.get("total_threepointer"));
             steal = Integer.parseInt(hashMapData.get("steal"));
             rebound = Integer.parseInt(hashMapData.get("rebound"));

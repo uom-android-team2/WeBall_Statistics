@@ -49,7 +49,7 @@ public class TeamStats extends Stats {
             wins = Integer.parseInt(hashMapData.get("win"));
             loses = Integer.parseInt(hashMapData.get("lose"));
             super.editJON(data);
-            System.out.println(teamId + " " + totalMatches + " " + wins + " " + loses + " " + " " + succesful_effort + " " + total_effort + " " + successful_freethrow + " " + total_freethrow + " " + succesful_twopointer + " " + total_twopointer + " " + succesful_threepointer + " " + total_freethrow + " " + steal + " " + block + " " + rebound + " " + assist + " " + foul + " " + turnover );
+
        } catch (JSONException e) {
             e.printStackTrace();
         }

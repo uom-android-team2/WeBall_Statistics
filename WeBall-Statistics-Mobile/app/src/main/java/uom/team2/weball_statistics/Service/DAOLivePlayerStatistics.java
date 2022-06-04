@@ -34,7 +34,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
 
     @Override
     public Task<Void> insert(PlayerLiveStatistics data) {
-        return databaseReference.child(String.valueOf(data.getMatch_id())).setValue(data);
+        return databaseReference.child("match_id: " + data.getMatch_id()).child("player_id: " + data.getPlayer_id()).setValue(data);
     }
 
     @Override
@@ -54,18 +54,12 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
 
     @Override
     public PlayerLiveStatistics get(PlayerLiveStatistics data) {
-        databaseReference.child(String.valueOf(data.getMatch_id())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                TeamLiveStatistics team = dataSnapshot.getValue(TeamLiveStatistics.class);
-            }
-        });
         return null;
     }
 
     @Override
     public void update(PlayerLiveStatistics data) {
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
-        databaseReference.child(String.valueOf(data.getMatch_id())).updateChildren(h);
+        databaseReference.child("match_id: " + data.getMatch_id()).child("player_id: " + data.getPlayer_id()).updateChildren(h);
     }
 }

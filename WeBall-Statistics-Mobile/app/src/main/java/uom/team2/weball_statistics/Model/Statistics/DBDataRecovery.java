@@ -24,7 +24,7 @@ public class DBDataRecovery {
 
     public Stats readData(String api, String id) throws Exception {
         String idName;
-        idName = api.equals(Config.API_PLAYER_STATS_CHAMPIONSHIP) ?  Config.PLAYER_ID : Config.TEAM_ID;
+        idName = api.equals(Config.API_PLAYER_STATISTICS_COMPLETED) ?  Config.PLAYER_ID : Config.TEAM_ID;
         String query = "";
         query = !id.equals("") ? "?" + idName + "=" + id : query;
 
@@ -46,11 +46,8 @@ public class DBDataRecovery {
 
         Stats statsObject = createObjectStats(api);
 
-        if (statsObject == null) return null;
-
 
         statsObject.editJON(data);
-
 
         return statsObject;
 
@@ -74,9 +71,9 @@ public class DBDataRecovery {
     }
 
     private Stats createObjectStats(String api) {
-        if (api.equals(Config.API_PLAYER_STATS_CHAMPIONSHIP)) {
+        if (api.equals(Config.API_PLAYER_STATISTICS_COMPLETED)) {
             return new PlayerStats();
-        } else if (api.equals(Config.API_TEAM_STATS_CHAMPIONSHIP)) {
+        } else if (api.equals(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED)) {
             return new TeamStats();
         } else {
             return null;

@@ -14,7 +14,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import uom.team2.weball_statistics.Model.Config;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.Stats;
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.databinding.ActivityMainBinding;
 
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
     }
 
     @Override

@@ -54,7 +54,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
 
     @Override
     public Task<Void> insert(TeamLiveStatistics data) {
-        return databaseReference.child(String.valueOf(data.getMatchId())).setValue(data);
+        return databaseReference.child(String.valueOf(data.getMatch_id())).setValue(data);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
 
     @Override
     public TeamLiveStatistics get(TeamLiveStatistics data) {
-        databaseReference.child(String.valueOf(data.getMatchId())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        databaseReference.child(String.valueOf(data.getMatch_id())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 TeamLiveStatistics team = dataSnapshot.getValue(TeamLiveStatistics.class);
@@ -86,7 +86,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics>{
     @Override
     public void update(TeamLiveStatistics data) {
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
-        databaseReference.child(String.valueOf(data.getMatchId())).updateChildren(h);
+        databaseReference.child(String.valueOf(data.getMatch_id())).updateChildren(h);
     }
 }
 

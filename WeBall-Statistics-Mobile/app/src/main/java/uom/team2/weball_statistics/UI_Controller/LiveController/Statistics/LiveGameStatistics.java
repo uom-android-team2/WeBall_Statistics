@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -68,6 +69,12 @@ public class LiveGameStatistics extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        DAOLiveTeamService.getInstace().setDataChangeListener(this, 1, 1, 2);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
@@ -79,4 +86,11 @@ public class LiveGameStatistics extends Fragment {
         });
     }
 
+    public FragmentLiveGameStatisticsBinding getBinding() {
+        return binding;
+    }
+
+    public HashMap<String, View> getMapOfStatistics() {
+        return mapOfStatistics;
+    }
 }

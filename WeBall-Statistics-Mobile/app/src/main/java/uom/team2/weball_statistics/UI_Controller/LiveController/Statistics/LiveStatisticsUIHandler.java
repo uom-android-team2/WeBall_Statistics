@@ -61,7 +61,7 @@ public class LiveStatisticsUIHandler {
         });
     }
 
-    public static void updateProgressBarLayoutTeam1(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatistics key, int max, int value) {
+    public static void updateProgressBarLayoutTeam1(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {
         View view = mapOfProgressBarLayout.get(key.name());
         TextView statisticProgress = view.findViewById(R.id.team1_progress_text);
         ProgressBar progressBar = view.findViewById(R.id.team1_progressbar);
@@ -80,7 +80,7 @@ public class LiveStatisticsUIHandler {
         });
     }
 
-    public static void updateProgressBarLayoutTeam2(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatistics key, int max, int value) {
+    public static void updateProgressBarLayoutTeam2(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {
         View view = mapOfProgressBarLayout.get(key.name());
         TextView statisticProgress = view.findViewById(R.id.team2_progress_text);
         ProgressBar progressBar = view.findViewById(R.id.team2_progressbar);

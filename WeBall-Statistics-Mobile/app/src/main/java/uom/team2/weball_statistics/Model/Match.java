@@ -10,8 +10,8 @@ import uom.team2.weball_statistics.Model.Actions.Action;
  */
 public class Match {
     private int id; //unique id for every match
-    private Team teamLandlord;
-    private Team guest;
+    private Team teamLandlord; //Home team
+    private Team guest; //Team away
     private Date matchDate;
     private Status status; // UPCOMING, ONGOING, COMPLETED
     private ArrayList<Action> actions;
@@ -23,12 +23,12 @@ public class Match {
         this.guest = guest;
         this.matchDate = matchDate;
         this.status = status;
-     //   actions = new ArrayList<Action>();
+        actions = new ArrayList<Action>();
     }
 
-//    public void addAction(Action action) {
-//        this.actions.add(action);
-//    }
+    public void addAction(Action action) {
+        this.actions.add(action);
+    }
 
     public int getId() {
         return id;
@@ -70,7 +70,7 @@ public class Match {
         this.status = status;
     }
 
-//    public ArrayList<Action> getActions() {
-//        return actions;
-//    }
+    public ArrayList<Action> getActions() {
+        return actions;
+    }
 }

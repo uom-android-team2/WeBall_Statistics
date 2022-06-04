@@ -1,7 +1,6 @@
 package uom.team2.weball_statistics.Model.Statistics;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +26,8 @@ public class TeamStats extends Stats {
     @Override
     public void editJON(String data) {
 
+
+        System.out.println(data);
         try {
 
             JSONObject json= new JSONObject(data);
@@ -62,7 +63,7 @@ public class TeamStats extends Stats {
     }
 
     public double calculatePointsPercentage(){
-        if(totalMatches != 0 ){
+        if(totalMatches > 0 ){
             return super.calculateTotalPoints() / totalMatches;
         }else{
             return 0;

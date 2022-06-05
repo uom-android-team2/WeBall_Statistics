@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Team;
@@ -77,22 +78,22 @@ public class LiveGameStatistics extends Fragment {
 
         DAOLiveTeamService.getInstace().setDataChangeListener(this, 1, 1, 2);
 
-//        TeamService teamService = new TeamService();
-//        // request team with id = 2 and when request is done get the object back
-//        teamService.findTeamById(2, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                View imageLayout = binding.headerContainer.findViewById(R.id.team1);
-//                try {
-//                    LiveStatisticsUIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-
+        TeamService teamService = new TeamService();
+        // request team with id = 2 and when request is done get the object back
+        teamService.findTeamById(2, new CallbackListener<Team>() {
+            @Override
+            public void callback(Team returnedObject) {
+                View imageLayout = binding.headerContainer.findViewById(R.id.team1);
+                try {
+                    LiveStatisticsUIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        
     }
 
     @Override

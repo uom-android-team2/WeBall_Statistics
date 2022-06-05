@@ -77,7 +77,7 @@ public class TeamService{
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url(Config.API_URL + "team.php")
+                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/team.php")
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();

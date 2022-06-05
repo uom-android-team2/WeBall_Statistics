@@ -76,29 +76,43 @@ public class LiveGameStatistics extends Fragment {
 
         DAOLiveTeamService.getInstace().setDataChangeListener(this, 1, 1, 2);
 
-        try {
-            // prepare request in thread
-            TeamService teamService = new TeamService().prepareFindById(1);
-            // execute request and wait to finish
-            teamService.start();
-            teamService.join();
-            // update ui
-            LiveStatisticsUIHandler.updateTeamImageInMatch(this, teamService, binding.headerContainer.findViewById(R.id.team1));
-
-            // prepare request in thread
-            teamService = new TeamService().prepareFindById(2);
-            // execute request and wait to finish
-            teamService.start();
-            teamService.join();
-            // update ui
-            LiveStatisticsUIHandler.updateTeamImageInMatch(this, teamService, binding.headerContainer.findViewById(R.id.team2));
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        TeamService teamService = new TeamService();
+//
+//        teamService.prepareFindById(1);
+//        teamService.executeRequest(new CallbackListener() {
+//           @Override
+//           public void callback() {
+//               View imageViewLayout = binding.headerContainer.findViewById(R.id.team1);
+//               try {
+//                   LiveStatisticsUIHandler.updateTeamImageInMatch(LiveGameStatistics.this,
+//                           teamService, imageViewLayout);
+//               } catch (IOException e) {
+//                   e.printStackTrace();
+//               } catch (InterruptedException e) {
+//                   e.printStackTrace();
+//               }catch (NullPointerException e) {
+//                   e.printStackTrace();
+//               }
+//           }
+//       });
+//
+//        teamService.prepareFindById(2);
+//        teamService.executeRequest(new CallbackListener() {
+//            @Override
+//            public void callback() {
+//                View imageViewLayout = binding.headerContainer.findViewById(R.id.team2);
+//                try {
+//                    LiveStatisticsUIHandler.updateTeamImageInMatch(LiveGameStatistics.this,
+//                            teamService, imageViewLayout);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (NullPointerException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     @Override

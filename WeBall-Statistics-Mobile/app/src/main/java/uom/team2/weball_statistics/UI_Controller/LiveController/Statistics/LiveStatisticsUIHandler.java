@@ -23,7 +23,7 @@ import uom.team2.weball_statistics.Service.TeamService;
 public class LiveStatisticsUIHandler {
 
 
-    public static void updateTeamImageInMatch(Fragment fragment, TeamService teamService, View teamImageLayout) throws IOException, InterruptedException {
+    public static void updateTeamImageInMatch(Fragment fragment, TeamService teamService, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
         LiveStatisticsUIHandler.updateTeamImageInMatchHeader(fragment,
                 "http://192.168.1.6/WeBall_Statistics-Backend/resources/team_images/" + teamService.getTeam().getBadgePath(),
                 teamService.getTeam().getTeamName(),
@@ -70,7 +70,7 @@ public class LiveStatisticsUIHandler {
         });
     }
 
-    public static void updateTeamImage(Fragment fragment, TeamService teamService, ImageView image) throws IOException, InterruptedException {
+    public static void updateTeamImage(Fragment fragment, TeamService teamService, ImageView image) throws IOException, InterruptedException, NullPointerException {
         updateTeamImage(fragment,
                 "http://192.168.1.6/WeBall_Statistics-Backend/resources/team_images/" + teamService.getTeam().getBadgePath(),
                 image);

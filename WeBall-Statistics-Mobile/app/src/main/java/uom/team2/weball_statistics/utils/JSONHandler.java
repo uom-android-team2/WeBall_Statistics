@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +29,11 @@ public class JSONHandler {
     public static ArrayList<Team> deserializeListOfTeams(String data
     ) throws JSONException {
         ArrayList<Team> teams = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray(data);
 
+        for (int i=0; i<jsonArray.length(); i++){
+            teams.add(deserializeTeam(jsonArray.getJSONObject(i).toString()));
+        }
 
         return teams;
     };

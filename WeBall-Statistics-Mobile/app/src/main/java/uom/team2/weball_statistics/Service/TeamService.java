@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.Service;
 
+import android.os.StrictMode;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import okhttp3.Response;
 import uom.team2.weball_statistics.MainActivity;
 import uom.team2.weball_statistics.Model.Config;
 import uom.team2.weball_statistics.Model.Team;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 /*
@@ -29,7 +31,14 @@ public class TeamService extends Thread{
 
     public TeamService() {
         listOfTeams = new ArrayList<>();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
+
+    public void executeRequest(CallbackListener callbackListener){
+        run();
+        callbackListener.callback();
+    };
 
     @Override
     public void run(){
@@ -79,7 +88,7 @@ public class TeamService extends Thread{
                     .build();
             MediaType mediaType = MediaType.parse("application/json");
             Request request = new Request.Builder()
-                    .url(Config.API_URL + "team.php?")
+                    .url(Config.API_URL + "team.php")
                     .method("GET", null)
                     .addHeader("Content-Type", "application/json")
                     .build();
@@ -87,13 +96,14 @@ public class TeamService extends Thread{
 
             String data = response.body().string();
             listOfTeams = JSONHandler.deserializeListOfTeams(data);
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
 
     public Team getTeam() {
         return team;

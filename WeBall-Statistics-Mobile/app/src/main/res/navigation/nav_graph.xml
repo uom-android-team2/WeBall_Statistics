@@ -58,7 +58,11 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="uom.team2.weball_statistics.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_adminsView"
+            app:destination="@id/adminsView" />
+    </fragment>
     <fragment
         android:id="@+id/adminsView"
         android:name="uom.team2.weball_statistics.UI_Controller.AdminsView.AdminsView"

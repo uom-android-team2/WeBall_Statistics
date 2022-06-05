@@ -26,11 +26,10 @@ public class LoginAdmin {
     public boolean isAdminInDB() throws IOException {
 
 
-        System.out.println(username + " " + password);
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-        RequestBody body = RequestBody.create(mediaType, "username=\"" + username + "\"&password=\"" + password + "\"");
+        RequestBody body = RequestBody.create(mediaType, "username=\"" + username + "\"&password=" + password);
         Request request = new Request.Builder()
                 .url(Config.API_URL + API_CHECK_CREDENTIALS)
                 .method("POST", body)
@@ -38,7 +37,12 @@ public class LoginAdmin {
                 .build();
         Response response = client.newCall(request).execute();
 
-        return  Boolean.parseBoolean(response.body().string());
+       System.out.println();
+
+
+            return Boolean.parseBoolean(response.body().string());
+
+
     }
 
 }

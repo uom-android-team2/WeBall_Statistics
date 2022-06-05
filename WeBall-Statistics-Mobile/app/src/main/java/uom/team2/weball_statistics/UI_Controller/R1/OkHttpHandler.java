@@ -1,54 +1,74 @@
 package uom.team2.weball_statistics.UI_Controller.R1;
 
-import android.os.StrictMode;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.IOException;
 
-import okhttp3.*;
+import uom.team2.weball_statistics.R;
 
-public class OkHttpHandler {
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
-    public OkHttpHandler() {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-    }
+public class OkHttpHandler extends AppCompatActivity {
 
-    //ΑΝ χρησιμοποιησω ArrayList να αλλάξω το CarBrand
-   /* ArrayList<CarBrand> populateDropDown(String url) throws Exception {
-        //ΑΛΛΑΓΗ του <CarBrand>
-        ArrayList<CarBrand> cbList = new ArrayList<>();
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-        RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
-        Request request = new Request.Builder().url(url).method("POST", body).build();
-        Response response = client.newCall(request).execute();
-        String data = response.body().string();
-        System.out.println("My Response: " + data);
-        try {
-            //ΑΛΛΑΓΕΣ ΣΕ ΠΟΛΛΑ
-            JSONObject json = new JSONObject(data);
-            Iterator<String> keys = json.keys();
-            while(keys.hasNext()) {
-                String brand = keys.next();
-                String models = json.getJSONObject(brand).getString("grouped_models").toString();
-                String images = json.getJSONObject(brand).getString("images").toString();
-                cbList.add(new CarBrand(brand, models, images));
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_shared_matches);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    String url = "http://192.168.1.12/WeBall//API/team.php";
+
+                    OkHttpClient client = new OkHttpClient().newBuilder().build();
+                    MediaType mediaType = MediaType.parse("application/json");
+                    RequestBody body = RequestBody.create(mediaType, "");
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .method("GET", null)
+                            .addHeader("Content-Type", "application/json")
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+                    String data = response.body().string();
+                    System.out.println(data);
+
+                    JSONObject jsonObject = new JSONObject(data);
+
+                    int id = jsonObject.getInt("id");
+                    String name = jsonObject.getString("name");
+                    String city = jsonObject.getString("city");
+                    String badge = jsonObject.getString("badge");
+
+                    Team team = new Team(id, name, city, badge);
+
+
+
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        });
 
-        return cbList;
-    }*/
 
-    public void logHistory(String url) throws Exception {
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-        RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
-        Request request = new Request.Builder().url(url).method("POST", body).build();
-        Response response = client.newCall(request).execute();
-        System.out.println("My Response: " + response);
     }
+
+
 }

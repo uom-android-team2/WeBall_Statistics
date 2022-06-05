@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -62,5 +64,24 @@ public class LivePlayerStatistics extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        try {
+            TeamService teamService = new TeamService().prepareFindById(1);
+            teamService.start();
+            teamService.join();
+
+            LiveStatisticsUIHandler.updateTeamImage(this, teamService, binding.header.teamImage);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

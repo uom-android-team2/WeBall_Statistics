@@ -70,18 +70,5 @@ public class LivePlayerStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 
-        try {
-            TeamService teamService = new TeamService().prepareFindById(1);
-            teamService.start();
-            teamService.join();
-
-            LiveStatisticsUIHandler.updateTeamImage(this, teamService, binding.header.teamImage);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 }

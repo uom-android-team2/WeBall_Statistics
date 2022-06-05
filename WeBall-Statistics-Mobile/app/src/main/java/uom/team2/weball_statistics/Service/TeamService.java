@@ -22,12 +22,10 @@ import uom.team2.weball_statistics.utils.JSONHandler;
 /*
  * @author Leonard Pepa ics20033
  */
-public class TeamService extends Thread{
+public class TeamService{
 
     private Team team;
     private ArrayList<Team> listOfTeams;
-    private boolean returnOneTeam = false;
-    private int id;
 
     public TeamService() {
         listOfTeams = new ArrayList<>();
@@ -35,81 +33,73 @@ public class TeamService extends Thread{
         StrictMode.setThreadPolicy(policy);
     }
 
-    public void executeRequest(CallbackListener callbackListener){
-        run();
-        callbackListener.callback();
-    };
 
-    @Override
-    public void run(){
-        if(returnOneTeam){
-            findTeamById(id);
-        }else{
-            findAllTeams();
-        }
-    }
+    public void findTeamById(int id, CallbackListener<Team> callbackListener) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("application/json");
+                    Request request = new Request.Builder()
+                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/" + "team.php?id=" + id)
+                            .method("GET", null)
+                            .addHeader("Content-Type", "application/json")
+                            .build();
+                    Response response = client.newCall(request).execute();
 
-    public TeamService prepareFindById(int id){
-        this.id = id;
-        returnOneTeam = true;
-        return this;
-    }
+                    String data = response.body().string();
+                    team = JSONHandler.deserializeTeam(data);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-    public TeamService prepareTaskFindAll(){
-        this.id = -1;
-        returnOneTeam = false;
-        return this;
-    }
-
-    private void findTeamById(int id) {
         try {
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .build();
-            MediaType mediaType = MediaType.parse("application/json");
-            Request request = new Request.Builder()
-                    .url("http://192.168.1.6/WeBall_Statistics-Backend/API/" + "team.php?id=" + id)
-                    .method("GET", null)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            Response response = client.newCall(request).execute();
-
-            String data = response.body().string();
-            team = JSONHandler.deserializeTeam(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+            thread.start();
+            thread.join();
+            callbackListener.callback(team);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void findAllTeams(){
+    public void findAllTeams(CallbackListener<ArrayList<Team>> callbackListener){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("application/json");
+                    Request request = new Request.Builder()
+                            .url(Config.API_URL + "team.php")
+                            .method("GET", null)
+                            .addHeader("Content-Type", "application/json")
+                            .build();
+                    Response response = client.newCall(request).execute();
+
+                    String data = response.body().string();
+                    listOfTeams = JSONHandler.deserializeListOfTeams(data);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         try {
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .build();
-            MediaType mediaType = MediaType.parse("application/json");
-            Request request = new Request.Builder()
-                    .url(Config.API_URL + "team.php")
-                    .method("GET", null)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            Response response = client.newCall(request).execute();
-
-            String data = response.body().string();
-            listOfTeams = JSONHandler.deserializeListOfTeams(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+            thread.start();
+            thread.join();
+            callbackListener.callback(listOfTeams);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 }

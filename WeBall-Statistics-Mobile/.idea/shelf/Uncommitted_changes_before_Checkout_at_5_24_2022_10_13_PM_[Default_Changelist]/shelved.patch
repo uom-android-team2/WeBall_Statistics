@@ -1,0 +1,19 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/activity_main.xml\" value=\"0.14130434782608695\" />\r\n        <entry key=\"..\\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/content_main.xml\" value=\"0.14130434782608695\" />\r\n        <entry key=\"..\\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_first.xml\" value=\"0.1796875\" />\r\n        <entry key=\"..\\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml\" value=\"0.14130434782608695\" />\r\n        <entry key=\"..\\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/menu/menu_main.xml\" value=\"0.1796875\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision c9040c402f51e34e3b9d2f777dbbf4d9b60c9564)
++++ b/.idea/misc.xml	(date 1653419502941)
+@@ -3,6 +3,8 @@
+   <component name="DesignSurface">
+     <option name="filePathToZoomLevelMap">
+       <map>
++        <entry key="..\:/Users/George/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/content_main.xml" value="0.33" />
++        <entry key="..\:/Users/George/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
+         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/content_main.xml" value="0.14130434782608695" />
+         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />

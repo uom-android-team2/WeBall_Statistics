@@ -46,6 +46,23 @@ public class LeadersStats extends Fragment {
     }
 
     public void navigate() {
+        binding.PPG.BUTTON.expButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
+
+        binding.RPG.BUTTON.expButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
+
+        binding.APG.BUTTON.expButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
+
+        binding.SPG.BUTTON.expButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
+
+        binding.BPG.BUTTON.expButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
+
+        binding.FGM3.BUTTON.expButton.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
 
     }
 

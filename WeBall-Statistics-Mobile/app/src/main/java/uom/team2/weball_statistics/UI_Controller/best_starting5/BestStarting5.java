@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.*;
+import androidx.navigation.fragment.NavHostFragment;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentBestStarting5Binding;
@@ -30,7 +31,7 @@ public class BestStarting5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentBestStarting5Binding.inflate(inflater, container, false);
-
+        navigate();
         return binding.getRoot();
     }
 
@@ -66,4 +67,9 @@ public class BestStarting5 extends Fragment {
 
         return bestPlayerPerPositionLayout;
     }
+     public void navigate(){
+        binding.bestStarting5Title.setOnClickListener(e ->{
+            NavHostFragment.findNavController(this).navigate(R.id.action_bestStarting5_to_sharedTabContainer);
+        });
+     }
 }

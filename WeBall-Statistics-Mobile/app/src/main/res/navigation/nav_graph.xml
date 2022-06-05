@@ -49,12 +49,19 @@
         <action
             android:id="@+id/action_teamScore_to_bestStarting5"
             app:destination="@id/bestStarting5" />
+        <action
+            android:id="@+id/action_teamScore_to_completedMatchStats3"
+            app:destination="@id/completedMatchStats3" />
     </fragment>
     <fragment
         android:id="@+id/bestStarting5"
         android:name="uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5"
         android:label="BestStarting5"
-        tools:layout="@layout/fragment_best_starting5"/>
+        tools:layout="@layout/fragment_best_starting5">
+        <action
+            android:id="@+id/action_bestStarting5_to_sharedTabContainer"
+            app:destination="@id/sharedTabContainer" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
@@ -66,5 +73,22 @@
         android:name="uom.team2.weball_statistics.UI_Controller.AdminsView.AdminsView"
         android:label="fragment_admins_view"
         tools:layout="@layout/fragment_admins_view" />
-
+    <fragment
+        android:id="@+id/sharedTabContainer"
+        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.SharedTabContainer"
+        android:label="SharedTabContainer"
+        tools:layout="@layout/fragment_shared_tab_container">
+        <action
+            android:id="@+id/action_sharedTabContainer_to_expandedLeadersStat"
+            app:destination="@id/expandedLeadersStat" />
+    </fragment>
+    <fragment
+        android:id="@+id/expandedLeadersStat"
+        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.ExpandedLeadersStat"
+        android:label="ExpandedLeadersStat"
+        tools:layout="@layout/fragment_expanded_leaders_stat" />
+    <fragment
+        android:id="@+id/completedMatchStats3"
+        android:name="uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats"
+        android:label="CompletedMatchStats" />
 </navigation>

@@ -13,6 +13,7 @@ import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.T
 
 /*
  *  @author Evmorfia Elpida Dasyra ics20006
+ *  @author Aravella Lousta ics20032
  */
 public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
 
@@ -33,11 +34,11 @@ public class PageAdapterCompletedStatistics extends FragmentPagerAdapter {
         int index = position + 1;
         switch (index) {
             case 1:
-                return new LeadersStats();
+                return LeadersStats.newInstance(); //first tab LeadersStats
             case 2:
-                return TeamStatsFragment.newInstance(); // ARAVELLAS TEAM STATS()
+                return TeamStatsFragment.newInstance(); //second tab TeamStats
             default:
-                return new LeadersStats();
+                return LeadersStats.newInstance();
         }
 
     }

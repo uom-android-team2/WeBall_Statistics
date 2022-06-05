@@ -22,5 +22,7 @@
     <fragment
         android:id="@+id/userScreenSharedMatches"
         android:name="uom.team2.weball_statistics.UI_Controller.R1.UserScreenSharedMatches"
-        android:label="UserScreenSharedMatches" />
+        android:label="UserScreenSharedMatches"
+        tools:layout="@layout/fragment_user_screen_shared_matches"
+        />
 </navigation>

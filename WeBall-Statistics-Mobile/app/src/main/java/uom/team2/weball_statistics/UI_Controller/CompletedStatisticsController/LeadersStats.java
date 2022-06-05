@@ -24,10 +24,8 @@ public class LeadersStats extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static LeadersStats newInstance(String param1, String param2) {
+    public static LeadersStats newInstance() {
         LeadersStats fragment = new LeadersStats();
-
         return fragment;
     }
 

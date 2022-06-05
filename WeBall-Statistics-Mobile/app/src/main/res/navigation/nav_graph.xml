@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_teamScore_to_bestStarting5"
             app:destination="@id/bestStarting5" />
+        <action
+            android:id="@+id/action_teamScore_to_completedMatchStats3"
+            app:destination="@id/completedMatchStats3" />
     </fragment>
     <fragment
         android:id="@+id/bestStarting5"
@@ -84,5 +87,8 @@
         android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.ExpandedLeadersStat"
         android:label="ExpandedLeadersStat"
         tools:layout="@layout/fragment_expanded_leaders_stat" />
-
+    <fragment
+        android:id="@+id/completedMatchStats3"
+        android:name="uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats"
+        android:label="CompletedMatchStats" />
 </navigation>

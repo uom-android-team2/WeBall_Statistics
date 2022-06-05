@@ -47,5 +47,9 @@ public class TeamScore extends Fragment {
         binding.bestPerPositionButton.setOnClickListener(e -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_teamScore_to_bestStarting5);
         });
+
+        binding.imageView2.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_teamScore_to_completedMatchStats3);
+        });
     }
 }

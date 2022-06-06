@@ -14,11 +14,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-<<<<<<< HEAD
+
 import java.io.IOException;
 
 import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Factory;
-=======
+
 import uom.team2.weball_statistics.Model.Config;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
@@ -27,7 +27,7 @@ import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
->>>>>>> main
+
 import uom.team2.weball_statistics.databinding.ActivityMainBinding;
 
 

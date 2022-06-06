@@ -13,6 +13,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Comments.LiveGameComments;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGameProgress;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
+
 /*
  * @author Leonard Pepa ics20033
  * @author Minas - Theodoros Charakopoulos ics20072
@@ -33,7 +34,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         int index = position + 1;
-        switch (index){
+        switch (index) {
             case 1:
                 return LiveGameProgress.getInstance();
             case 3:

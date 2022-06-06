@@ -53,12 +53,14 @@
     <fragment
         android:id="@+id/bestStarting5"
         android:name="uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5"
-        android:label="BestStarting5" />
+        android:label="BestStarting5"
+        tools:layout="@layout/fragment_best_starting5"/>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="uom.team2.weball_statistics.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
     <fragment
         android:id="@+id/adminsView"
         android:name="uom.team2.weball_statistics.UI_Controller.AdminsView.AdminsView"

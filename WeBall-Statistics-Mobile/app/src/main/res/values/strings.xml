@@ -35,15 +35,15 @@
     <string name="match_info_label_text">Match Information</string>
 
     <string-array name="team_statistics">
-        <item>Successful effort</item>
-        <item>Total effort</item>
-        <item>Successful freethrow</item>
-        <item>Total freethrow</item>
-        <item>Succesful twopointer</item>
-        <item>Total twopointer</item>
-        <item>Succesful threepointer</item>
-        <item>Total threepointer</item>
-        <item>Steel</item>
+        <item>Successful_effort</item>
+        <item>Total_effort</item>
+        <item>Successful_freethrow</item>
+        <item>Total_freethrow</item>
+        <item>Succesful_twopointer</item>
+        <item>Total_twopointer</item>
+        <item>Succesful_threepointer</item>
+        <item>Total_threepointer</item>
+        <item>Steal</item>
         <item>Assist</item>
         <item>Block</item>
         <item>Rebound</item>

@@ -16,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.169"
         app:layout_constraintWidth_percent=".60"
-        app:srcCompat="@drawable/esake" />
+        app:srcCompat="@drawable/logo"
+        tools:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView"

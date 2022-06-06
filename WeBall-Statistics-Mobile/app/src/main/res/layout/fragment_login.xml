@@ -18,7 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.169"
         app:layout_constraintWidth_percent=".60"
-        app:srcCompat="@drawable/esake" />
+        app:srcCompat="@drawable/logo"
+        tools:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView2"
@@ -67,9 +68,12 @@
             android:layout_height="wrap_content"
             android:background="@color/gray_login"
             android:drawableStart="@drawable/icons8_lock_26px"
+            android:drawablePadding="10sp"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10sp" />
+            android:padding="10sp"
+            android:password="true" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -88,10 +92,11 @@
             android:layout_height="wrap_content"
             android:background="@color/gray_login"
             android:drawableStart="@drawable/icons8_user_24px"
+            android:drawablePadding="10sp"
             android:ems="10"
+            android:hint="Username"
             android:inputType="textPersonName"
             android:padding="10sp"
-            android:text="@string/Username"
             app:cornerRadius="50dp" />
     </androidx.cardview.widget.CardView>
 

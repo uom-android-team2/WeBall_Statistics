@@ -7,16 +7,16 @@ import java.util.Map;
 
 @IgnoreExtraProperties
 public class PlayerLiveStatistics implements firebaseModel {
-    private int matchId;
-    private int playerId;
-    private int successfulEffort;
-    private int totalEffort;
-    private int successfulFreethrow;
-    private int totalFreethrow;
-    private int succesfulTwopointer;
-    private int totalTwopointer;
-    private int succesfulThreepointer;
-    private int totalThreepointer;
+    private int match_id;
+    private int player_id;
+    private int successful_effort;
+    private int total_effort;
+    private int successful_freethrow;
+    private int total_freethrow;
+    private int succesful_twopointer;
+    private int total_twopointer;
+    private int succesful_threepointer;
+    private int total_threepointer;
     private int steal;
     private int assist;
     private int block;
@@ -32,16 +32,16 @@ public class PlayerLiveStatistics implements firebaseModel {
 
 
     public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int totalTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
-        this.matchId = matchId;
-        this.playerId = playerId;
-        this.successfulEffort = successfulEffort;
-        this.totalEffort = totalEffort;
-        this.successfulFreethrow = successfulFreethrow;
-        this.totalFreethrow = totalFreethrow;
-        this.succesfulTwopointer = succesfulTwopointer;
-        this.totalTwopointer = totalTwopointer;
-        this.succesfulThreepointer = succesfulThreepointer;
-        this.totalThreepointer = totalThreepointer;
+        this.match_id = matchId;
+        this.player_id = playerId;
+        this.successful_effort = successfulEffort;
+        this.total_effort = totalEffort;
+        this.successful_freethrow = successfulFreethrow;
+        this.total_freethrow = totalFreethrow;
+        this.succesful_twopointer = succesfulTwopointer;
+        this.total_twopointer = totalTwopointer;
+        this.succesful_threepointer = succesfulThreepointer;
+        this.total_threepointer = totalThreepointer;
         this.steal = steal;
         this.assist = assist;
         this.block = block;
@@ -54,16 +54,16 @@ public class PlayerLiveStatistics implements firebaseModel {
     @Override
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("matchId", matchId);
-        result.put("playerId", playerId);
-        result.put("successfulEffort", successfulEffort);
-        result.put("totalEffort", totalEffort);
-        result.put("successfulFreethrow", successfulFreethrow);
-        result.put("totalFreethrow", totalFreethrow);
-        result.put("succesfulTwopointer", succesfulTwopointer);
-        result.put("totalTwopointer", totalTwopointer);
-        result.put("succesfulThreepointer", succesfulThreepointer);
-        result.put("totalThreepointer", totalThreepointer);
+        result.put("match_id", match_id);
+        result.put("player_id", player_id);
+        result.put("successful_effort", successful_effort);
+        result.put("total_effort", total_effort);
+        result.put("successful_freethrow", successful_freethrow);
+        result.put("total_freethrow", total_freethrow);
+        result.put("succesful_twopointer", succesful_twopointer);
+        result.put("total_twopointer", total_twopointer);
+        result.put("succesful_threepointer", succesful_threepointer);
+        result.put("total_threepointer", total_threepointer);
         result.put("steal", steal);
         result.put("assist", assist);
         result.put("block", block);
@@ -75,84 +75,84 @@ public class PlayerLiveStatistics implements firebaseModel {
         return result;
     }
 
-    public int getMatchId() {
-        return matchId;
+    public int getMatch_id() {
+        return match_id;
     }
 
-    public void setMatchId(int matchId) {
-        this.matchId = matchId;
+    public void setMatch_id(int match_id) {
+        this.match_id = match_id;
     }
 
-    public int getPlayerId() {
-        return playerId;
+    public int getPlayer_id() {
+        return player_id;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setPlayer_id(int player_id) {
+        this.player_id = player_id;
     }
 
-    public int getSuccessfulEffort() {
-        return successfulEffort;
+    public int getSuccessful_effort() {
+        return successful_effort;
     }
 
-    public void setSuccessfulEffort(int successfulEffort) {
-        this.successfulEffort = successfulEffort;
+    public void setSuccessful_effort(int successful_effort) {
+        this.successful_effort = successful_effort;
     }
 
-    public int getTotalEffort() {
-        return totalEffort;
+    public int getTotal_effort() {
+        return total_effort;
     }
 
-    public void setTotalEffort(int totalEffort) {
-        this.totalEffort = totalEffort;
+    public void setTotal_effort(int total_effort) {
+        this.total_effort = total_effort;
     }
 
-    public int getSuccessfulFreethrow() {
-        return successfulFreethrow;
+    public int getSuccessful_freethrow() {
+        return successful_freethrow;
     }
 
-    public void setSuccessfulFreethrow(int successfulFreethrow) {
-        this.successfulFreethrow = successfulFreethrow;
+    public void setSuccessful_freethrow(int successful_freethrow) {
+        this.successful_freethrow = successful_freethrow;
     }
 
-    public int getTotalFreethrow() {
-        return totalFreethrow;
+    public int getTotal_freethrow() {
+        return total_freethrow;
     }
 
-    public void setTotalFreethrow(int totalFreethrow) {
-        this.totalFreethrow = totalFreethrow;
+    public void setTotal_freethrow(int total_freethrow) {
+        this.total_freethrow = total_freethrow;
     }
 
-    public int getSuccesfulTwopointer() {
-        return succesfulTwopointer;
+    public int getSuccesful_twopointer() {
+        return succesful_twopointer;
     }
 
-    public void setSuccesfulTwopointer(int succesfulTwopointer) {
-        this.succesfulTwopointer = succesfulTwopointer;
+    public void setSuccesful_twopointer(int succesful_twopointer) {
+        this.succesful_twopointer = succesful_twopointer;
     }
 
-    public int getTotalTwopointer() {
-        return totalTwopointer;
+    public int getTotal_twopointer() {
+        return total_twopointer;
     }
 
-    public void setTotalTwopointer(int totalTwopointer) {
-        this.totalTwopointer = totalTwopointer;
+    public void setTotal_twopointer(int total_twopointer) {
+        this.total_twopointer = total_twopointer;
     }
 
-    public int getSuccesfulThreepointer() {
-        return succesfulThreepointer;
+    public int getSuccesful_threepointer() {
+        return succesful_threepointer;
     }
 
-    public void setSuccesfulThreepointer(int succesfulThreepointer) {
-        this.succesfulThreepointer = succesfulThreepointer;
+    public void setSuccesful_threepointer(int succesful_threepointer) {
+        this.succesful_threepointer = succesful_threepointer;
     }
 
-    public int getTotalThreepointer() {
-        return totalThreepointer;
+    public int getTotal_threepointer() {
+        return total_threepointer;
     }
 
-    public void setTotalThreepointer(int totalThreepointer) {
-        this.totalThreepointer = totalThreepointer;
+    public void setTotal_threepointer(int total_threepointer) {
+        this.total_threepointer = total_threepointer;
     }
 
     public int getSteal() {

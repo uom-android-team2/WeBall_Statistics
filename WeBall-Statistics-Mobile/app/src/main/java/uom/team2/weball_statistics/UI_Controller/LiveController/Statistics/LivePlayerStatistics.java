@@ -10,9 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.PlayerService;
+import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -62,5 +67,33 @@ public class LivePlayerStatistics extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        PlayerService playerService = new PlayerService();
+//
+//        playerService.findPlayerById(1, new CallbackListener<Player>() {
+//            @Override
+//            public void callback(Player returnedObject) {
+//                System.out.println(returnedObject.getName());
+//                System.out.println(returnedObject.getPlayerPosition());
+//            }
+//        });
+
+//        playerService.findAllPlayers(new CallbackListener<ArrayList<Player>>() {
+//            @Override
+//            public void callback(ArrayList<Player> returnedObject) {
+//                System.out.println(returnedObject);
+//            }
+//        });
+
+//        playerService.findAllPlayersByTeamName("Bulls", new CallbackListener<ArrayList<Player>>() {
+//            @Override
+//            public void callback(ArrayList<Player> returnedObject) {
+//                System.out.println(returnedObject);
+//            }
+//        });
     }
 }

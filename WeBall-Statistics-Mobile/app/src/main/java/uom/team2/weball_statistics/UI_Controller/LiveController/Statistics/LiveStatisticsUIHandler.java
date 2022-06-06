@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.TeamService;
 
 /*
  * @author Leonard Pepa ics20033
@@ -22,18 +24,37 @@ import uom.team2.weball_statistics.R;
 public class LiveStatisticsUIHandler {
 
 
-    public static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) throws IOException {
-        URL url = new URL(imageUrl);
-        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        fragment.requireActivity().runOnUiThread(new Runnable() {
+    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
+        LiveStatisticsUIHandler.updateTeamImageInMatchHeader(fragment,
+                "http://192.168.1.6/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
+                team.getTeamName(),
+                teamImageLayout);
+    }
+
+    private static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) throws IOException, InterruptedException {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                TextView nameTextView = teamImageLayout.findViewById(R.id.team_name);
-                ImageView image = teamImageLayout.findViewById(R.id.team_logo);
-                nameTextView.setText(name);
-                image.setImageBitmap(bmp);
+                try {
+                    URL url = new URL(imageUrl);
+                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    fragment.requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TextView nameTextView = teamImageLayout.findViewById(R.id.team_name);
+                            ImageView image = teamImageLayout.findViewById(R.id.team_logo);
+                            nameTextView.setText(name);
+                            image.setImageBitmap(bmp);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
+        thread.start();
+        thread.join();
     }
 
     public static void updateSelectedPlayerImageLayout(Fragment fragment, String imageUrl, String name, View imageLayout) throws IOException {
@@ -50,15 +71,34 @@ public class LiveStatisticsUIHandler {
         });
     }
 
-    public static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) throws IOException {
-        URL url = new URL(imageUrl);
-        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        fragment.requireActivity().runOnUiThread(new Runnable() {
+    public static void updateTeamImage(Fragment fragment, Team team, ImageView image) throws IOException, InterruptedException, NullPointerException {
+        updateTeamImage(fragment,
+                "http://192.168.1.6/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
+                image);
+    }
+
+    private static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) throws IOException, InterruptedException {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                image.setImageBitmap(bmp);
+                try {
+                    URL url = new URL(imageUrl);
+                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    fragment.requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            image.setImageBitmap(bmp);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
+
+        thread.start();
+        thread.join();
+
     }
 
     public static void updateProgressBarLayoutTeam1(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {

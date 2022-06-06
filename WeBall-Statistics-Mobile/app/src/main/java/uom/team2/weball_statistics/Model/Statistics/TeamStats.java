@@ -63,11 +63,33 @@ public class TeamStats extends Stats {
     }
 
     public double calculatePointsPercentage(){
-        if(totalMatches > 0 ){
-            return super.calculateTotalPoints() / totalMatches;
-        }else{
-            return 0;
-        }
+        return totalMatches > 0 ? super.calculateTotalPoints() / totalMatches : 0;
+    }
+
+    public double calculateAssistPercentage(){
+        return totalMatches > 0 ? assist / totalMatches : 0;
+    }
+
+    public double calculateReboundPercentage(){
+        return totalMatches > 0 ? rebound / totalMatches : 0;
+    }
+
+    public double calculateBlockPercentage(){
+       return totalMatches > 0 ? block / totalMatches : 0;
+    }
+
+    public double calculateSteelPercentage(){
+        return totalMatches > 0 ? steal / totalMatches : 0;
+
+    }
+
+    public double calculateFoulPercentage(){
+      return totalMatches > 0  ? foul / totalMatches : 0;
+
+    }
+
+    public double calculateTurnoverPercentage(){
+       return totalMatches > 0 ?  turnover / totalMatches : 0;
     }
 
     public int getTotalMatches(){ return totalMatches;}

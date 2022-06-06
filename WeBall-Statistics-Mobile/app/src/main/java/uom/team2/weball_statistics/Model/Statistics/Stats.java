@@ -30,6 +30,26 @@ public abstract class Stats implements editFieldsFromDB {
     protected int foul;
     protected int turnover;
 
+    public Stats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover) {
+        this.successful_effort = successful_effort;
+        this.total_effort = total_effort;
+        this.successful_freethrow = successful_freethrow;
+        this.total_freethrow = total_freethrow;
+        this.successful_twopointer = successful_twopointer;
+        this.total_twopointer = total_twopointer;
+        this.successful_threepointer = successful_threepointer;
+        this.total_threepointer = total_threepointer;
+        this.steal = steal;
+        this.rebound = rebound;
+        this.assist = assist;
+        this.block = block;
+        this.foul = foul;
+        this.turnover = turnover;
+    }
+
+    public Stats() {
+    }
+
     private void formatStats(){
         calculateFieldGoalPercentageToString();
         calculateFreeThrowPercentageToString();

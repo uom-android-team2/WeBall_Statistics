@@ -34,9 +34,11 @@ import java.io.IOException;
 
 import uom.team2.weball_statistics.MainActivity;
 import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
 /**
@@ -345,8 +347,11 @@ public class AdminsView extends Fragment {
 
     private void updateAssist(Stats playerStats,DBDataRecovery dbDataRecovery){
         playerStats.setTotalAssists();
+       // PlayerLiveStatistics p = new PlayerLiveStatistics(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+       // p.setAssist(playerStats.getTotalAssists());
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+           // DAOLivePlayerStatistics.getInstace().update(p);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

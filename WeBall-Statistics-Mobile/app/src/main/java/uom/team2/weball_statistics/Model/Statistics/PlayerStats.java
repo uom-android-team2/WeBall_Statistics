@@ -13,13 +13,21 @@ public class PlayerStats extends Stats {
 
     protected int player_id;
     protected int matches_played;
-    protected int minutes;
+    protected float minutes;
+    protected boolean hasMatchPlayed = false;
     private ArrayList<String> UniqueKeysOfPlayer = new ArrayList<String>(Arrays.asList("player_id", "matches_played","minutes")); // This arraylist holds the unique fields of the team.
 
 
     // This method is the constructor of class PlayerStats which initialize the parameters of this class.
     public PlayerStats(){
+        hasMatchPlayed = true;
+    }
 
+    public PlayerStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int player_id, int matches_played, int minutes) {
+        super( successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
+        this.player_id = player_id;
+        this.matches_played = matches_played;
+        this.minutes = minutes;
     }
 
     @Override
@@ -73,10 +81,12 @@ public class PlayerStats extends Stats {
               }
 
               player_id = Integer.parseInt(hashMapData.get("player_id"));
-              matches_played = Integer.parseInt(hashMapData.get("matches_played"));
-              minutes = Integer.parseInt(hashMapData.get("minutes").substring(17,19));
+              if(!hasMatchPlayed){
+                  matches_played = Integer.parseInt(hashMapData.get("matches_played"));
+                  hasMatchPlayed = false;
+              }
+              minutes = Float.parseFloat(hashMapData.get("minutes"));
               super.editJON(data);
-
 
 
         } catch (JSONException e) {
@@ -87,5 +97,6 @@ public class PlayerStats extends Stats {
 
     public int getMatchesPlayed(){return matches_played;}
 
-    public int getMinutes(){return minutes;}
+    public float getMinutes(){return minutes;}
+
 }

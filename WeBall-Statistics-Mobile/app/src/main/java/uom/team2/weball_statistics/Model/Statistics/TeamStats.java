@@ -17,10 +17,19 @@ public class TeamStats extends Stats {
     private int totalMatches;
     private int wins;
     private int loses;
+    protected Boolean isMatchId = false;
     private ArrayList<String> UniqueKeysOfTeam = new ArrayList<String>(Arrays.asList("team_id", "total_matches","win", "lose")); // This arraylist holds the unique fields of the team.
 
     public TeamStats()  {
+        isMatchId = true;
+    }
 
+    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int teamId, int totalMatches, int wins, int loses) {
+        super(successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
+        this.teamId = teamId;
+        this.totalMatches = totalMatches;
+        this.wins = wins;
+        this.loses = loses;
     }
 
     @Override
@@ -46,9 +55,13 @@ public class TeamStats extends Stats {
             }
 
             teamId = Integer.parseInt(hashMapData.get("team_id"));
-            totalMatches = Integer.parseInt(hashMapData.get("total_matches"));
-            wins = Integer.parseInt(hashMapData.get("win"));
-            loses = Integer.parseInt(hashMapData.get("lose"));
+            if(!isMatchId){
+                totalMatches = Integer.parseInt(hashMapData.get("total_matches"));
+                wins = Integer.parseInt(hashMapData.get("win"));
+                loses = Integer.parseInt(hashMapData.get("lose"));
+            }
+
+
             super.editJON(data);
 
        } catch (JSONException e) {

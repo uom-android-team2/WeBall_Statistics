@@ -1,7 +1,6 @@
 package uom.team2.weball_statistics.Service;
 
 import android.os.StrictMode;
-import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -11,10 +10,8 @@ import java.util.ArrayList;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import uom.team2.weball_statistics.MainActivity;
-import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.utils.JSONHandler;
@@ -22,19 +19,20 @@ import uom.team2.weball_statistics.utils.JSONHandler;
 /*
  * @author Leonard Pepa ics20033
  */
-public class TeamService{
+public class PlayerService {
 
-    private Team team;
-    private ArrayList<Team> listOfTeams;
 
-    public TeamService() {
-        listOfTeams = new ArrayList<>();
+    private ArrayList<Player> listOfplayers;
+    private Player player;
+
+    public PlayerService() {
+        listOfplayers = new ArrayList<>();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
 
 
-    public void findTeamById(int id, CallbackListener<Team> callbackListener) {
+    public void findPlayerById(int id, CallbackListener<Player> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,15 +41,15 @@ public class TeamService{
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/" + "team.php?id=" + id)
+                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/" + "player.php?id=" + id)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();
                     Response response = client.newCall(request).execute();
 
                     String data = response.body().string();
-                    team = JSONHandler.deserializeTeam(data);
-                    callbackListener.callback(team);
+                    player = JSONHandler.deserializePlayer(data);
+                    callbackListener.callback(player);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -63,7 +61,7 @@ public class TeamService{
         thread.start();
     }
 
-    public void findAllTeams(CallbackListener<ArrayList<Team>> callbackListener){
+    public void findAllPlayers(CallbackListener<ArrayList<Player>> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -72,25 +70,54 @@ public class TeamService{
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/team.php")
+                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/player.php")
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();
                     Response response = client.newCall(request).execute();
 
                     String data = response.body().string();
-
-                    listOfTeams = JSONHandler.deserializeListOfTeams(data);
-
-                    callbackListener.callback(listOfTeams);
+                    listOfplayers = JSONHandler.deserializeListOfPlayers(data);
+                    callbackListener.callback(listOfplayers);
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                } catch (JSONException e) {
+                }catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+        thread.start();
     }
+
+    public void findAllPlayersByTeamName(String teamName, CallbackListener<ArrayList<Player>> callbackListener) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("application/json");
+                    Request request = new Request.Builder()
+                            .url("http://192.168.1.6/WeBall_Statistics-Backend/API/player.php?team=" + teamName)
+                            .method("GET", null)
+                            .addHeader("Content-Type", "application/json")
+                            .build();
+                    Response response = client.newCall(request).execute();
+
+                    String data = response.body().string();
+                    listOfplayers = JSONHandler.deserializeListOfPlayers(data);
+                    callbackListener.callback(listOfplayers);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
 
 }

@@ -4,6 +4,7 @@ package uom.team2.weball_statistics.Model;
  * @author Minas - Theodoros Charakopoulos ics20072
  */
 public class Player {
+    private String teamName;
     private int id;
     private String name;
     private String surname;
@@ -26,6 +27,16 @@ public class Player {
         this.number = number;
         this.playerPosition = playerPosition;
         this.team = team;
+        this.imagePath = imagePath;
+    }
+
+    public Player(int id, String name, String surname, int number, PlayerPosition playerPosition, String  teamName, String imagePath) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.number = number;
+        this.playerPosition = playerPosition;
+        this.teamName = teamName;
         this.imagePath = imagePath;
     }
 
@@ -83,5 +94,13 @@ public class Player {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 }

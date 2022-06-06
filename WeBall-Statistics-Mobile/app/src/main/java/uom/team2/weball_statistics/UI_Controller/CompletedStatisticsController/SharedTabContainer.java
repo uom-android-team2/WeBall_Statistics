@@ -13,6 +13,7 @@ import uom.team2.weball_statistics.databinding.FragmentSharedTabContainerBinding
 
 /*
  *  @author Evmorfia Elpida Dasyra ics20006
+ *  @author Aravella Lousta ics20032
  */
 public class SharedTabContainer extends Fragment {
 

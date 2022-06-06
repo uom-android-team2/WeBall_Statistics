@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.*;
+import androidx.navigation.fragment.NavHostFragment;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentBestStarting5Binding;
@@ -32,6 +33,7 @@ public class BestStarting5 extends Fragment {
         binding = FragmentBestStarting5Binding.inflate(inflater, container, false);
        // createBestPlayerPerPositionPG(1,2,"Chicago Bulls","Lonzo Ball"
         //,23);
+        navigate();
         return binding.getRoot();
     }
 
@@ -40,6 +42,7 @@ public class BestStarting5 extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
 //    public View createBestPlayerPerPositionPG(string logoPath,
 //                                                  string playerImagePath,
@@ -69,4 +72,37 @@ public class BestStarting5 extends Fragment {
 //
 //        return bestPlayerPerPositionLayout;
 //    }
+
+//    public View createBestPlayerPerPositionLayout(int logo,
+//                                                  int playerPhoto,
+//                                                  String cityNameNumberPosition,
+//                                                  String firstnameLastname, int plusMinusValue){
+//        //Deriving View from layout fragment
+//        View bestPlayerPerPositionLayout = this.getLayoutInflater().inflate(R.layout.best_player_per_position_layout,null);
+//        //Changing View data based on input
+//            //City-Team name-Number-Position field
+//            TextView newCityNameNumberPosition = bestPlayerPerPositionLayout.findViewById(R.id.cityTeamNumberPosition);
+//            newCityNameNumberPosition.setText(cityNameNumberPosition);
+//            //Firstname Lastname field
+//            TextView newFirstnameLastname = bestPlayerPerPositionLayout.findViewById(R.id.firstnameLastname);
+//            newFirstnameLastname.setText(firstnameLastname);
+//            //Plus minus value field
+//            TextView newPlusMinusValue = bestPlayerPerPositionLayout.findViewById(R.id.plusMinusValue);
+//            String plusMinusValueString = Integer.toString(plusMinusValue);
+//            newPlusMinusValue.setText(plusMinusValueString);
+//            //Logo field
+//            ImageButton newLogo = bestPlayerPerPositionLayout.findViewById(R.id.logoImage);
+//            newLogo.setBackgroundResource(logo); //logo is of type int
+//            //Player photo field
+//            ImageButton newPlayerPhoto = bestPlayerPerPositionLayout.findViewById(R.id.playerImage);
+//            newPlayerPhoto.setBackgroundResource(playerPhoto); //playerPhoto is of type int
+//
+//        return bestPlayerPerPositionLayout;
+//    }
+     public void navigate(){
+        binding.bestStarting5Title.setOnClickListener(e ->{
+            NavHostFragment.findNavController(this).navigate(R.id.action_bestStarting5_to_sharedTabContainer);
+        });
+     }
+
 }

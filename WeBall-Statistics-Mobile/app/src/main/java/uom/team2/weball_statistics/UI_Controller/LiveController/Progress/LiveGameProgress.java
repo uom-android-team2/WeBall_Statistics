@@ -42,14 +42,13 @@ public class LiveGameProgress extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        daoAction = DAOAction.getInstace();
+        daoAction = DAOAction.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameProgressBinding.inflate(inflater, container, false);
-        //Initialize DAOAction
 
         return binding.getRoot();
     }
@@ -66,19 +65,6 @@ public class LiveGameProgress extends Fragment {
                 startQuarter(binding.actionsLayoutContainer, getLayoutInflater().inflate(R.layout.quarter_layout, null));
             }
         };
-
-        Team team1 = new Team("homeTeam");
-        Team team2 = new Team("awayTeam");
-        Match match = new Match(1, team1, team2, new Date(), Status.ONGOING );
-        Shot action = new Shot("32'", new Player("Minas", "Charakpoulos"), team1, ShotType.FREETHROW, true);
-        match.addAction(action);
-        Shot action2 = new Shot("42'", new Player("Minas", "Charakpoulos"), team1, ShotType.FREETHROW, true);
-        match.addAction(action2);
-        daoAction.insert(match);
-
-        Shot action3 = new Shot("62'", new Player("Minas", "Charakpoulos"), team1, ShotType.FREETHROW, true);
-        match.addAction(action3);
-        daoAction.update(match);
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

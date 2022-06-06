@@ -6,27 +6,30 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Match;
 
 public class DAOAction implements DAOCRUDService <Match> {
-    public static DAOAction instace;
-    private DatabaseReference databaseReference;
 
+    private DatabaseReference databaseReference;
+    public static DAOAction instance = new DAOAction();
+
+    //Implement singleton pattern
     private DAOAction() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        databaseReference = db.getReference(Match.class.getSimpleName());
+        databaseReference = db.getReference(Action.class.getSimpleName());
     }
 
-    public static DAOAction getInstace() {
-        if (instace == null) {
-            instace = new DAOAction();
+    public static DAOAction getInstance(){
+        if(instance == null){
+            instance = new DAOAction();
         }
-        return instace;
+        return instance;
     }
 
     @Override
     public Task<Void> insert(Match data) {
-        return databaseReference.child("Actions for match with id: " + data.getId()).setValue(data);
+        return null;
     }
 
     @Override
@@ -51,7 +54,6 @@ public class DAOAction implements DAOCRUDService <Match> {
 
     @Override
     public void update(Match data) {
-        HashMap<String, Object> hashMap = (HashMap<String, Object>) data.toMap();
-        databaseReference.child("Actions for match with id: " + data.getId()).updateChildren(hashMap);
+
     }
 }

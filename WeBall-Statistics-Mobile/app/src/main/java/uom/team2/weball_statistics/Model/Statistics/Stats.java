@@ -150,33 +150,33 @@ public abstract class Stats implements editFieldsFromDB {
         return turnover;
     }
 
-    protected void setTotalEffort(){total_effort++; }
+    public void setTotalEffort(){total_effort++; }
 
-    protected void setSuccessfulEffort(){successful_effort++; }
+    public void setSuccessfulEffort(){successful_effort++; }
 
-    protected void setTotalFreeThrow(){total_freethrow++; }
+    public void setTotalFreeThrow(){total_freethrow++; }
 
-    protected void setSuccessfulFreeThrow(){successful_freethrow++; }
+    public void setSuccessfulFreeThrow(){successful_freethrow++; }
 
-    protected void setTotalTwoPointer(){total_twopointer++; }
+    public void setTotalTwoPointer(){total_twopointer++; }
 
-    protected void setSuccessfulTwoPointer(){successful_twopointer++; }
+    public void setSuccessfulTwoPointer(){successful_twopointer++; }
 
-    protected void setTotalThreePointer(){total_threepointer++; }
+    public void setTotalThreePointer(){total_threepointer++; }
 
-    protected void setSuccessfulThreePointer(){successful_threepointer++; }
+    public void setSuccessfulThreePointer(){successful_threepointer++; }
 
-    protected void setTotalSteels(){steal++; }
+    public void setTotalSteels(){steal++; }
 
-    protected void setTotalRebounds(){ rebound++;}
+    public void setTotalRebounds(){ rebound++;}
 
-    protected void setTotalAssists(){ assist++;}
+    public void setTotalAssists(){ assist++;}
 
     public void setTotalBlock(){ block++; }
 
     public void setTotalFouls(){ foul++;}
 
-    protected void setTotalTurnovers(){ turnover++;}
+    public void setTotalTurnovers(){ turnover++;}
 
 
 

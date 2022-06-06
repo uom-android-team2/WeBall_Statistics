@@ -6,8 +6,8 @@ public class MatchFlow extends Action {
 
     private FlowType flowType; //Start or pause
 
-    public MatchFlow(String timeHappened, FlowType flowType) {
-        super(timeHappened);
+    public MatchFlow(String timeHappened, int id, FlowType flowType) {
+        super(timeHappened, id);
         this.flowType = flowType;
         this.actionDesc = this.formatActionDesc();
     }

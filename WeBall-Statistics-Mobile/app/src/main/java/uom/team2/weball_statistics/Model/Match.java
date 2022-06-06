@@ -4,8 +4,6 @@ import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 
@@ -28,20 +26,6 @@ public class Match {
         this.matchDate = matchDate;
         this.status = status;
         actions = new ArrayList<Action>();
-    }
-
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> match = new HashMap<>();
-
-        match.put("id", this.id);
-        match.put("teamLandlord", this.teamLandlord);
-        match.put("guest", this.guest);
-        match.put("matchDate", this.matchDate);
-        match.put("status", this.status);
-        match.put("actions", this.actions);
-
-        return match;
     }
 
     public void addAction(Action action) {

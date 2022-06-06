@@ -39,6 +39,7 @@ public class DAOAction implements DAOCRUDService <Action> {
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Action action = data.getValue(Action.class);
                             System.out.println(action.getActionDesc());
+                            System.out.println(action.getBelongsTo());
                         }
                     }
 

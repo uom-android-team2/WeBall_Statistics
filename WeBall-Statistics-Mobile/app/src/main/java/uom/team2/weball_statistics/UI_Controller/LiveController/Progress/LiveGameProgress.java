@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import java.util.Date;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
@@ -85,7 +86,7 @@ public class LiveGameProgress extends Fragment {
 
         Team team = new Team("Paok");
         Player player = new Player("Minas", "Charakopoulos");
-        Action action55 = new Shot("12", 4, player, team, ShotType.THREE_POINTER, true, null);
+        Action action55 = new Shot("12", 4, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
 
         Match match2 = new Match(6, null, null, new Date(), Status.ONGOING);
         daoAction.insert(action11, match2);

@@ -21,6 +21,7 @@ public class Player {
         this.playerPosition = playerPosition;
         this.team = team;
         this.imagePath = imagePath;
+
     }
 
     public int getId() {

@@ -1,7 +1,7 @@
 package uom.team2.weball_statistics.Model;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * @author Minas - Theodoros Charakopoulos ics20072

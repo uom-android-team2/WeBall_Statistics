@@ -71,10 +71,23 @@ public class LiveMatches extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_live_matches, container, false);
 
-        //Connection with button
         binding = FragmentLiveMatchesBinding.inflate(inflater, container, false);
-
+//Connection with 1st button
         binding.include.dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LiveMatches.this).navigate(R.id.action_sharedMatches_to_liveMatchesDroppedDown);
+            }
+        });
+//Connection with 2nd button
+        binding.include2.dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LiveMatches.this).navigate(R.id.action_sharedMatches_to_liveMatchesDroppedDown);
+            }
+        });
+//Connection with 3rd button
+        binding.include4.dropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LiveMatches.this).navigate(R.id.action_sharedMatches_to_liveMatchesDroppedDown);

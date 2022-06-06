@@ -68,15 +68,28 @@ public class UpcomingMatches extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_upcoming_matches, container, false);
 
-        //Connection with button
         binding = FragmentUpcomingMatchesBinding.inflate(inflater, container, false);
-
+//Connection with 1st button
        binding.include3.dropButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                NavHostFragment.findNavController(UpcomingMatches.this).navigate(R.id.action_sharedMatches_to_upcomingMatchesDroppedDown);
            }
        });
+//Connection with 2nd button
+        binding.include5.dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(UpcomingMatches.this).navigate(R.id.action_sharedMatches_to_upcomingMatchesDroppedDown);
+            }
+        });
+//Connection with 3rd button
+        binding.include6.dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(UpcomingMatches.this).navigate(R.id.action_sharedMatches_to_upcomingMatchesDroppedDown);
+            }
+        });
 
         return binding.getRoot();
     }

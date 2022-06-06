@@ -15,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Factory;
@@ -41,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Thread as = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                BestStarting5Factory fdfd = new BestStarting5Factory();
+                try {
+                    fdfd.getCompletedMatches();
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        as.start();
+        try {
+            as.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -52,13 +73,9 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+//
 
-        BestStarting5Factory fdfd = new BestStarting5Factory();
-        try {
-            fdfd.getCompletedMatches();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
     }
 

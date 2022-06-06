@@ -5,8 +5,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
+import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -88,5 +91,72 @@ public class JSONHandler {
         return players;
     }
 
+    public static Match deserializeMatch(String data) throws JSONException {
+        JSONObject jsonObject = new JSONObject(data);
+
+        int id = jsonObject.getInt("id");
+        int teamlandlord_id = jsonObject.getInt("teamlandlord_id");
+        int  teamguest_id = jsonObject.getInt("teamguest_id");
+        int date = jsonObject.getInt("date");
+        boolean progress =  Boolean.parseBoolean(jsonObject.getInt("progress")+"");
+        boolean completed = Boolean.parseBoolean(jsonObject.getInt("completed")+"");
+
+        Match match = new Match(id,teamlandlord_id,teamguest_id,date,progress,completed);
+
+        return match;
+    }
+
+    public static ArrayList<Match> deserializeListOfMatches(String data
+    ) throws JSONException {
+        ArrayList<Match> matches = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray(data);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            matches.add(deserializeMatch(jsonArray.getJSONObject(i).toString()));
+        }
+        return matches;
+    }
+
+    public static PlayerLiveStatistics deserializePlayerLiveStatistics(String data) throws JSONException {
+        JSONObject jsonObject = new JSONObject(data);
+
+        int playerId = jsonObject.getInt("player_id");
+        int matchId = jsonObject.getInt("match_id");
+        int  successfulEffort = jsonObject.getInt("successful_effort");
+        int totalEffort = jsonObject.getInt("total_effort");
+
+        int successfulFreethrow = jsonObject.getInt("successful_freethrow");
+        int totalFreethrow = jsonObject.getInt("total_freethrow");
+        int  succesfulTwopointer = jsonObject.getInt("successful_twopointer");
+        int totalTwopointer = jsonObject.getInt("total_twopointer");
+
+        int succesfulThreepointer = jsonObject.getInt("successful_threepointer");
+        int totalThreepointer = jsonObject.getInt("total_threepointer");
+        int  steal = jsonObject.getInt("steal");
+        int assist = jsonObject.getInt("assist");
+
+        int block = jsonObject.getInt("block");
+        int rebound = jsonObject.getInt("rebound");
+        int  foul = jsonObject.getInt("foul");
+        int turnover = jsonObject.getInt("turnover");
+        int minutes = jsonObject.getInt("minutes");
+
+        PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, successfulEffort, totalEffort,
+                successfulFreethrow, totalFreethrow, succesfulTwopointer, totalTwopointer, succesfulThreepointer, totalThreepointer,
+                steal, assist, block, rebound, foul, turnover, minutes);
+
+        return playerLiveStatistics;
+    }
+
+    public static ArrayList<PlayerLiveStatistics> deserializeListOfPlayerLiveStatistics(String data
+    ) throws JSONException {
+        ArrayList<PlayerLiveStatistics> playerLiveStatisticsList = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray(data);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            playerLiveStatisticsList.add(deserializePlayerLiveStatistics(jsonArray.getJSONObject(i).toString()));
+        }
+        return playerLiveStatisticsList;
+    }
 
 }

@@ -43,7 +43,7 @@ public class Shot extends Action {
             
             switch (this.shotType) {
                 case FREETHROW:
-                    description = "Freethrow from " + playerName;
+                    description = "+1 from " + playerName;
                     break;
                 case TWO_POINTER:
                     description = "+2 from " + playerName;

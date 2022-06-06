@@ -166,17 +166,17 @@ public abstract class Stats implements editFieldsFromDB {
 
     public void setSuccessfulThreePointer(){successful_threepointer++; }
 
-    protected void setTotalSteels(){steal++; }
+    public void setTotalSteels(){steal++; }
 
-    protected void setTotalRebounds(){ rebound++;}
+    public void setTotalRebounds(){ rebound++;}
 
-    protected void setTotalAssists(){ assist++;}
+    public void setTotalAssists(){ assist++;}
 
     public void setTotalBlock(){ block++; }
 
     public void setTotalFouls(){ foul++;}
 
-    protected void setTotalTurnovers(){ turnover++;}
+    public void setTotalTurnovers(){ turnover++;}
 
 
 

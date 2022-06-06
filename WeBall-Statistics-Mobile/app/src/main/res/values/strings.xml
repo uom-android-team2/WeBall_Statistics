@@ -1,6 +1,115 @@
 <resources>
     <string name="app_name">WeBall-Statistics</string>
+
     <!-- Strings used for fragments for navigation -->
+    <string name="live_game_tab_text">Progress</string>
+    <string name="live_comments_tab_text">Comments</string>
+    <string name="live_statistics_tab_text">Statistics</string>
+
+    <!--    String Label for TabContainer-->
+    <string name="tab_container_Label">Live Game</string>
+
+    <!--    Live Game Strings-->
+    <string name="score_text">164 - 182</string>
+    <string name="team1_name_text">Team</string>
+    <string name="team2_name_text">Team 2</string>
+    <string name="game_live_text">Game</string>
+    <string name="clock_text">32:45</string>
+    <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
+    <string name="team_logo_description">Team Logo</string>
+    <string name="match_start_date_text">10/06/2020 16:00</string>
+    <string name="time_text">8.28\'</string>
+    <string name="action_small_desc_landlord_text">+3 (G. Antetokounmpo)</string>
+    <string name="statistic_name_text">Statistic Name</string>
+    <string name="team1_progress_text">0</string>
+    <string name="team2_progress_text">0</string>
+    <string name="time_happened_guest_text">9.30\'</string>
+    <string name="action_small_desc_guest_text">(G. Antetokounmpo) +3</string>
+    <string name="quarter_text">Quarter</string>
+    <string name="time_happened_comment_text">3.45\'</string>
+    <string name="comment_text">CommentCommentCommentCommentCommentCommentCommentCommentCommentCommentComment</string>
+    <string name="head_referee_text">Referee</string>
+    <string name="stadium_text">Stadium</string>
+    <string name="head_referee_name_text">Vissel L.</string>
+    <string name="stadium_name_text">OAKA</string>
+    <string name="match_info_label_text">Match Information</string>
+
+    <string-array name="team_statistics">
+        <item>Successful_effort</item>
+        <item>Total_effort</item>
+        <item>Successful_freethrow</item>
+        <item>Total_freethrow</item>
+        <item>Succesful_twopointer</item>
+        <item>Total_twopointer</item>
+        <item>Succesful_threepointer</item>
+        <item>Total_threepointer</item>
+        <item>Steal</item>
+        <item>Assist</item>
+        <item>Block</item>
+        <item>Rebound</item>
+        <item>Foul</item>
+        <item>Turnover</item>
+    </string-array>
+
+    <string-array name="player_statistics">
+        <item>Successful effort</item>
+        <item>Total effort</item>
+        <item>Successful freethrow</item>
+        <item>Total freethrow</item>
+        <item>Succesful twopointer</item>
+        <item>Total twopointer</item>
+        <item>Succesful threepointer</item>
+        <item>Total threepointer</item>
+        <item>Steel</item>
+        <item>Assist</item>
+        <item>Block</item>
+        <item>Rebound</item>
+        <item>Foul</item>
+        <item>Turnover</item>
+        <item>Minutes</item>
+    </string-array>
+
+
+    <string-array name="teams_in_match">
+        <item name="team1">Team 1</item>
+        <item name="team2">Team 2</item>
+    </string-array>
+
+    <!-- Strings for Progress -->
+    <string name="match_start">Start of the Match</string>
+    <string name="match_pause">Match paused!</string>
+    <string name="match_completed">Match completed!</string>
+    <!-- Correction by admin ??-->
+    <string name="current_period">%1$s period</string> <!-- 1 || 2 || 3 || 4 as parameters-->
+    <string name="shot_1_in">A well-aimed shot by %1$s!</string> <!-- The name of the player who scores as parameter -->
+    <string name="shot_1_missed">Missed shot by %1$s!</string> <!-- The name of the player who miss the shot as parameter -->
+    <string name="shot_2_in">A well-aimed 2 points shot by %1$s! %2$s</string> <!-- The name of the player who scores as parameter and the name of the player who assists if exists-->
+    <string name="shot_3_in">A well-aimed 3 points shot by %1$s! %2$s</string> <!-- The name of the player who scores as parameter and the name of the player who assists if exists-->
+    <string name="foul_done">Foul by %1$s!</string> <!-- The name of the player who does the foul as parameter -->
+    <string name="rebound_done">Rebound by %1$s!</string> <!-- The name of the player who gets the rebound as parameter -->
+    <string name="block_done">Block by %1$s!</string> <!-- The name of the player who achieves the block as parameter -->
+    <string name="ball_stolen">Ball was stolen by %1$s!</string> <!-- The name of the player who achieves the steal as parameter -->
+    <string name="ball_lost">Loss of the ball by mistake</string>
+    <string name="substitution">Substitution (%1$s in %2$s)</string>
+    <string name="time_happened_general_text">0.01\'</string>
+    <string name="action_desc_general_text">Match Started!</string>
+    <string name="player_name">player name</string> <!-- The names of the two players -->
+    <string name="Continue_Guest">Continue as a Guest</string>
+    <string name="Login_Admin">Login as Admin</string>
+    <string name="Welcome_ESAKE">Welcome to ESAKE</string>
+    <string name="Username">Username</string>
+    <string name="Login">Login</string>
+
+    <string name="basket_made">Basket made?</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="statsTabContainer">Championship Statistics</string>
     <string name="home_fragment_text">Hello home fragment</string>
     <string name="home_fragment_label">Home</string>
+    <string name="playerStatsTab">Players Stats</string>
+    <string name="teamStatsTab">Team Stats</string>
+    <string name="playerStats">playerStats</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="statTitle">Statistic Title</string>
+    <string name="rank">Rank</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

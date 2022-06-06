@@ -14,6 +14,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.io.IOException;
+
+import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Factory;
 import uom.team2.weball_statistics.databinding.ActivityMainBinding;
 
 
@@ -34,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+
+        BestStarting5Factory fdfd = new BestStarting5Factory();
+        try {
+            fdfd.getCompletedMatches();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

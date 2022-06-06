@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,9 +18,17 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.TeamChampioshipStatsService;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.databinding.FragmentTeamStatsBinding;
 /*
  * @author Aravella Lousta ics20032
@@ -55,17 +64,71 @@ public class TeamStatsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initializeTitles();
 
-        try {
-            createRow(binding.assistsPerGame.tableRowContainer,
-                    "https://raw.githubusercontent.com/uom-android-team2/WeBall_Statistics-Backend/master/resources/team_images/1st_50px.png",
-                    "aravella",
-                    5,
-                    "33,5");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            createRow(binding.assistsPerGame.tableRowContainer,
+//                    "https://raw.githubusercontent.com/uom-android-team2/WeBall_Statistics-Backend/master/resources/team_images/1st_50px.png",
+//                    "aravella",
+//                    5,
+//                    "33,5");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+//
+//        TeamChampioshipStatsService teamChampioshipStatsService = new TeamChampioshipStatsService();
+//
+//        teamChampioshipStatsService.getAllTeamStatistics(new CallbackListener<ArrayList<TeamStats>>() {
+//            @Override
+//            public void callback(ArrayList<TeamStats> returnedObject) {
+//                ArrayList<TeamStats> bestByPoints = new ArrayList<>();
+//                ArrayList<TeamStats> bestByAssists = new ArrayList<>();
+//                ArrayList<TeamStats> bestByBlocks = new ArrayList<>();
+//                ArrayList<TeamStats> bestByRebounds = new ArrayList<>();
+//
+//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
+//                    @Override
+//                    public int compare(TeamStats teamStats, TeamStats t1) {
+//                        return (int) (teamStats.calculatePointsPercentage() - t1.calculatePointsPercentage());
+//                    }
+//                });
+//
+//                bestByPoints = returnedObject;
+//
+//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
+//                    @Override
+//                    public int compare(TeamStats teamStats, TeamStats t1) {
+//                        return (int) (teamStats.calculateAssistPercentage() - t1.calculateAssistPercentage());
+//                    }
+//                });
+//
+//                bestByAssists = returnedObject;
+//
+//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
+//                    @Override
+//                    public int compare(TeamStats teamStats, TeamStats t1) {
+//                        return (int) (teamStats.calculateReboundPercentage() - t1.calculateReboundPercentage());
+//                    }
+//                });
+//
+//                bestByRebounds = returnedObject;
+//
+//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
+//                    @Override
+//                    public int compare(TeamStats teamStats, TeamStats t1) {
+//                        return (int) (teamStats.calculateBlockPercentage() - t1.calculateBlockPercentage());
+//                    }
+//                });
+//
+//                bestByBlocks = returnedObject;
+//
+//            }
+//        });
+
+    }
 
     public void createRow(LinearLayout linearLayout, String url, String name, int number, String score) throws InterruptedException {
         View view = linearLayout.getChildAt(number);

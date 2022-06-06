@@ -1,13 +1,16 @@
 package uom.team2.weball_statistics.Service;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import uom.team2.weball_statistics.Model.Actions.Action;
-import uom.team2.weball_statistics.Model.Match;
+import uom.team2.weball_statistics.Model.Actions.*;
+import uom.team2.weball_statistics.Model.*;
 
 public class DAOAction implements DAOCRUDService <Action> {
 
@@ -25,6 +28,26 @@ public class DAOAction implements DAOCRUDService <Action> {
             instance = new DAOAction();
         }
         return instance;
+    }
+
+    public void getRealTimeData(Match matchData) {
+        //Get data snapshot
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Action action = data.getValue(Action.class);
+                            System.out.println(action.getActionDesc());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                        System.out.println("onCancelled: Error: " + databaseError.getMessage());
+                    }
+                });
     }
 
     @Override

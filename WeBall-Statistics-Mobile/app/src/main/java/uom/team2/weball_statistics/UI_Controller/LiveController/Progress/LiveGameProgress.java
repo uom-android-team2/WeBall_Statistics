@@ -87,6 +87,8 @@ public class LiveGameProgress extends Fragment {
         daoAction.insert(action22, match2);
         daoAction.insert(action33, match2);
         daoAction.insert(action44, match2);
+
+        daoAction.getRealTimeData(match);
     }
 
     public void addActionToFragment(LinearLayout actionLayout, View actionAsView, int action) {

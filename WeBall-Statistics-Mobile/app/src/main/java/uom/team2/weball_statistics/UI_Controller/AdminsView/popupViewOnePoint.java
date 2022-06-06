@@ -24,14 +24,16 @@ public class popupViewOnePoint extends Dialog implements
     public Dialog d;
     public Button yes, no;
 private String str;
+private int points;
 
 
 
-
-    public popupViewOnePoint(Activity a) {
+    public popupViewOnePoint(Activity a,int p) {
         super(a);
+        points=p;
         // TODO Auto-generated constructor stub
         this.c = a;
+
     }
 
     @Override

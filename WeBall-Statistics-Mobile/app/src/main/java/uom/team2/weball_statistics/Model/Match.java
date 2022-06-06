@@ -1,11 +1,16 @@
 package uom.team2.weball_statistics.Model;
 
+
 import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 
 /*
  * @author Minas - Theodoros Charakopoulos ics20072

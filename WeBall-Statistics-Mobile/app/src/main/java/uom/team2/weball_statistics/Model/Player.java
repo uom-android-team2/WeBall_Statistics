@@ -28,6 +28,7 @@ public class Player {
         this.playerPosition = playerPosition;
         this.team = team;
         this.imagePath = imagePath;
+
     }
 
     public Player(int id, String name, String surname, int number, PlayerPosition playerPosition, String  teamName, String imagePath) {

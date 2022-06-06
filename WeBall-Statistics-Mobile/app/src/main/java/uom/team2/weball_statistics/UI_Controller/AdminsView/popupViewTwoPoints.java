@@ -24,12 +24,13 @@ public class popupViewTwoPoints extends Dialog implements
     public Dialog d;
     public Button yes, no;
     private String str;
+    private int points;
 
 
 
-
-    public popupViewTwoPoints(Activity a) {
+    public popupViewTwoPoints(Activity a,int p) {
         super(a);
+        points=p;
         // TODO Auto-generated constructor stub
         this.c = a;
     }

@@ -65,10 +65,8 @@ public class AdminsView extends Fragment {
     private Match match;
     private Team landLord;
     private Team guest;
-    private ArrayList<Player> keyPlayersLandlord=new ArrayList<Player>();
-    private ArrayList<Player> subPlayersLandlord=new ArrayList<Player>();
-    private ArrayList<Player> keyPlayersGuest=new ArrayList<Player>();
-    private ArrayList<Player> subPlayersGuest=new ArrayList<Player>();
+    private Player player;
+    private Team team;
 
 
 
@@ -147,6 +145,9 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 teamSelected=false;
+                team= match.getTeamLandlord();
+
+
 
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape =  new GradientDrawable();
@@ -159,7 +160,7 @@ public class AdminsView extends Fragment {
 
 
                 //Load data for this team
-                landLord=match.getTeamLandlord();
+
 
                 //Load the data of the first team players.
 
@@ -170,9 +171,10 @@ public class AdminsView extends Fragment {
         binding.team2Banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 teamSelected=true;
+                team=match.getGuest();
+
+
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape = new GradientDrawable();
                 shape.setCornerRadius(75);
@@ -183,7 +185,7 @@ public class AdminsView extends Fragment {
                 binding.team1Banner.setBackgroundColor(0x00000000);
 
                 //Load data for this team
-                guest=match.getGuest();
+
                 //Load the data of the second team players.
 
             }
@@ -291,15 +293,15 @@ public class AdminsView extends Fragment {
         binding.player1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GradientDrawable shape =  new GradientDrawable();
-                shape.setCornerRadius( 75 );
-                shape.setColor(getResources().getColor(R.color.alt_grey));
-                view.setBackground(shape);
-
                 if(!(playerChecked==1)){
-                    deleteThePreviousBackground();
+                    GradientDrawable shape =  new GradientDrawable();
+                    shape.setCornerRadius( 75 );
+                    shape.setColor(getResources().getColor(R.color.alt_grey));
+                    view.setBackground(shape);
+
                     playerChecked=1;
+                    player=team.getKeyPlayers().get(playerChecked-1);
+                    deleteThePreviousBackground();
                 }
 
             }
@@ -307,15 +309,15 @@ public class AdminsView extends Fragment {
         binding.player2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GradientDrawable shape =  new GradientDrawable();
-                shape.setCornerRadius( 75 );
-                shape.setColor(getResources().getColor(R.color.alt_grey));
-                view.setBackground(shape);
-
                 if(!(playerChecked==2)){
-                    deleteThePreviousBackground();
+                    GradientDrawable shape =  new GradientDrawable();
+                    shape.setCornerRadius( 75 );
+                    shape.setColor(getResources().getColor(R.color.alt_grey));
+                    view.setBackground(shape);
+
                     playerChecked=2;
+                    player=team.getKeyPlayers().get(playerChecked-1);
+                    deleteThePreviousBackground();
                 }
 
             }
@@ -323,15 +325,15 @@ public class AdminsView extends Fragment {
         binding.player3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GradientDrawable shape =  new GradientDrawable();
-                shape.setCornerRadius( 75 );
-                shape.setColor(getResources().getColor(R.color.alt_grey));
-                view.setBackground(shape);
-
                 if(!(playerChecked==3)){
-                    deleteThePreviousBackground();
+                    GradientDrawable shape =  new GradientDrawable();
+                    shape.setCornerRadius( 75 );
+                    shape.setColor(getResources().getColor(R.color.alt_grey));
+                    view.setBackground(shape);
+
                     playerChecked=3;
+                    player=team.getKeyPlayers().get(playerChecked-1);
+                    deleteThePreviousBackground();
                 }
 
             }
@@ -339,15 +341,15 @@ public class AdminsView extends Fragment {
         binding.player4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GradientDrawable shape =  new GradientDrawable();
-                shape.setCornerRadius( 75 );
-                shape.setColor(getResources().getColor(R.color.alt_grey));
-                view.setBackground(shape);
-
                 if(!(playerChecked==4)){
-                    deleteThePreviousBackground();
+                    GradientDrawable shape =  new GradientDrawable();
+                    shape.setCornerRadius( 75 );
+                    shape.setColor(getResources().getColor(R.color.alt_grey));
+                    view.setBackground(shape);
+
                     playerChecked=4;
+                    player=team.getKeyPlayers().get(playerChecked-1);
+                    deleteThePreviousBackground();
                 }
 
             }
@@ -355,15 +357,15 @@ public class AdminsView extends Fragment {
         binding.player5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GradientDrawable shape =  new GradientDrawable();
-                shape.setCornerRadius( 75 );
-                shape.setColor(getResources().getColor(R.color.alt_grey));
-                view.setBackground(shape);
-
                 if(!(playerChecked==5)){
-                    deleteThePreviousBackground();
+                    GradientDrawable shape =  new GradientDrawable();
+                    shape.setCornerRadius( 75 );
+                    shape.setColor(getResources().getColor(R.color.alt_grey));
+                    view.setBackground(shape);
+
                     playerChecked=5;
+                    player=team.getKeyPlayers().get(playerChecked-1);
+                    deleteThePreviousBackground();
                 }
 
 
@@ -377,7 +379,7 @@ public class AdminsView extends Fragment {
                 //steile ton paikti
 
                 //emfanise to popup
-                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(),"panais");
+                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(),team.getKeyPlayers());
                 ppv.show();
             }
         });

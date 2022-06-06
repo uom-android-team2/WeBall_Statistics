@@ -22,6 +22,7 @@ public class Match {
     private Date matchDate;
     private Status status; // UPCOMING, ONGOING, COMPLETED
     private ArrayList<Action> actions;
+
     //Will added fields specified for comments and progress to appear them after the match completed
 
     public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status) {

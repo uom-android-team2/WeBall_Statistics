@@ -13,6 +13,9 @@ public class Team {
     private Coach teamCoach;
     private ArrayList<Player> teamPlayers;
     private Championship championshipIn; //The championship that participates
+    private ArrayList<Player> keyPlayers=new ArrayList<Player>();
+    private ArrayList<Player> subPlayers=new ArrayList<Player>();
+
 
     //only for testing
     public Team(String teamName) {
@@ -27,6 +30,7 @@ public class Team {
         this.teamCoach = teamCoach;
         this.teamPlayers = teamPlayers;
         this.championshipIn = championshipIn;
+
     }
 
     public Team(int id, String teamName, String teamCity, String badgePath) {
@@ -86,6 +90,14 @@ public class Team {
 
     public ArrayList<Player> getTeamPlayers() {
         return teamPlayers;
+    }
+
+    public ArrayList<Player> getSubPlayers(){
+        return this.subPlayers;
+    }
+
+    public ArrayList<Player> getKeyPlayers(){
+        return this.keyPlayers;
     }
 
 

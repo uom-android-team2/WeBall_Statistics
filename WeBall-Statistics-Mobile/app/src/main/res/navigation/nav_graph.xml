@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_sharedMatches_to_liveMatchesDroppedDown"
             app:destination="@id/liveMatchesDroppedDown" />
+        <action
+            android:id="@+id/action_sharedMatches_to_upcomingMatchesDroppedDown"
+            app:destination="@id/upcomingMatchesDroppedDown" />
     </fragment>
     <fragment
         android:id="@+id/userScreenSharedMatches"

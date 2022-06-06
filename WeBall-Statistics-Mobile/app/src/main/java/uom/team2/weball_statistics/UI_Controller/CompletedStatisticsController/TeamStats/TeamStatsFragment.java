@@ -78,7 +78,7 @@ public class TeamStatsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//
+
 //        TeamChampioshipStatsService teamChampioshipStatsService = new TeamChampioshipStatsService();
 //
 //        teamChampioshipStatsService.getAllTeamStatistics(new CallbackListener<ArrayList<TeamStats>>() {
@@ -92,7 +92,13 @@ public class TeamStatsFragment extends Fragment {
 //                Collections.sort(returnedObject, new Comparator<TeamStats>() {
 //                    @Override
 //                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        return (int) (teamStats.calculatePointsPercentage() - t1.calculatePointsPercentage());
+//                        if(t1.calculatePointsPercentage() - teamStats.calculatePointsPercentage() > 0){
+//                            return 1;
+//                        }else if(t1.calculatePointsPercentage() - teamStats.calculatePointsPercentage()  == 0){
+//                            return 0;
+//                        }else{
+//                            return -1;
+//                        }
 //                    }
 //                });
 //
@@ -101,7 +107,13 @@ public class TeamStatsFragment extends Fragment {
 //                Collections.sort(returnedObject, new Comparator<TeamStats>() {
 //                    @Override
 //                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        return (int) (teamStats.calculateAssistPercentage() - t1.calculateAssistPercentage());
+//                        if(t1.calculateAssistPercentage() - teamStats.calculateAssistPercentage() > 0){
+//                            return 1;
+//                        }else if(t1.calculateAssistPercentage() - teamStats.calculateAssistPercentage()  == 0){
+//                            return 0;
+//                        }else{
+//                            return -1;
+//                        }
 //                    }
 //                });
 //
@@ -110,7 +122,13 @@ public class TeamStatsFragment extends Fragment {
 //                Collections.sort(returnedObject, new Comparator<TeamStats>() {
 //                    @Override
 //                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        return (int) (teamStats.calculateReboundPercentage() - t1.calculateReboundPercentage());
+//                        if(t1.calculateReboundPercentage() - teamStats.calculateReboundPercentage() > 0){
+//                            return 1;
+//                        }else if(t1.calculateReboundPercentage() - teamStats.calculateReboundPercentage()  == 0){
+//                            return 0;
+//                        }else{
+//                            return -1;
+//                        }
 //                    }
 //                });
 //
@@ -119,7 +137,13 @@ public class TeamStatsFragment extends Fragment {
 //                Collections.sort(returnedObject, new Comparator<TeamStats>() {
 //                    @Override
 //                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        return (int) (teamStats.calculateBlockPercentage() - t1.calculateBlockPercentage());
+//                        if(t1.calculateBlockPercentage() - teamStats.calculateBlockPercentage() > 0){
+//                            return 1;
+//                        }else if(t1.calculateBlockPercentage() - teamStats.calculateBlockPercentage()  == 0){
+//                            return 0;
+//                        }else{
+//                            return -1;
+//                        }
 //                    }
 //                });
 //

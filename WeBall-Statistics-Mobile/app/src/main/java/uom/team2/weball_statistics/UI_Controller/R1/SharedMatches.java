@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.R1;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.*;
 
 import com.google.android.material.tabs.TabLayout;
 
+import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.databinding.FragmentLiveMatchesBinding;
 import uom.team2.weball_statistics.databinding.FragmentSharedMatchesBinding;
 
 public class SharedMatches extends Fragment {
@@ -42,6 +45,7 @@ public class SharedMatches extends Fragment {
         viewPager.setAdapter(sectionsPagesAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+
         return binding.getRoot();
 
     }

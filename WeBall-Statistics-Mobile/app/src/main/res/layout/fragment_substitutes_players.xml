@@ -10,23 +10,23 @@
 
     <ImageView
         android:id="@+id/substitutePlayer5_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="126dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer6_imageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer1_textView"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/substitutePlayer7_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="116dp"
         android:text="Player 7"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Player 6"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer7_textView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,34 +48,35 @@
 
     <ImageView
         android:id="@+id/substitutePlayer7_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="126dp"
-        android:layout_marginEnd="116dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/substitutePlayer6_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/substitutesTeam_textView"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer3_textView"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/substitutePlayer6_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="126dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer7_imageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/substitutePlayer5_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/substitutePlayer2_textView"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/substitutePlayer5_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:text="Player 5"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer6_textView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -83,42 +85,46 @@
 
     <ImageView
         android:id="@+id/substitutePlayer3_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer4_imageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/substitutePlayer2_imageView"
         app:layout_constraintTop_toBottomOf="@+id/substitutesTeam_textView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/substitutePlayer2_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer3_imageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/substitutePlayer1_imageView"
         app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/substitutePlayer4_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/substitutePlayer3_imageView"
         app:layout_constraintTop_toBottomOf="@+id/substitutesTeam_textView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/substitutes_textView"
-        android:layout_width="192dp"
+        android:layout_width="100dp"
         android:layout_height="25dp"
+        android:layout_marginTop="3dp"
         android:text="@string/substitutes_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="16sp"
@@ -130,8 +136,9 @@
 
     <TextView
         android:id="@+id/substitutesTeam_textView"
-        android:layout_width="192dp"
+        android:layout_width="100dp"
         android:layout_height="25dp"
+        android:layout_marginTop="3dp"
         android:text="Team A"
         android:textColor="#902D41"
         android:textSize="16sp"
@@ -143,23 +150,24 @@
 
     <ImageView
         android:id="@+id/substitutePlayer1_imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer2_imageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/substitutes_textView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/substitutePlayer1_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:text="Player 1"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer2_textView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -172,6 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Player 2"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer3_textView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -184,6 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Player 3"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/substitutePlayer4_textView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -195,8 +205,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
         android:text="Player 4 "
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

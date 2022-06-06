@@ -18,11 +18,25 @@
         android:id="@+id/sharedMatches"
         android:name="uom.team2.weball_statistics.UI_Controller.R1.SharedMatches"
         android:label="fragment_shared_matches"
-        tools:layout="@layout/fragment_shared_matches" />
+        tools:layout="@layout/fragment_shared_matches">
+        <action
+            android:id="@+id/action_sharedMatches_to_liveMatchesDroppedDown"
+            app:destination="@id/liveMatchesDroppedDown" />
+    </fragment>
     <fragment
         android:id="@+id/userScreenSharedMatches"
         android:name="uom.team2.weball_statistics.UI_Controller.R1.UserScreenSharedMatches"
         android:label="UserScreenSharedMatches"
         tools:layout="@layout/fragment_user_screen_shared_matches"
         />
+    <fragment
+        android:id="@+id/liveMatchesDroppedDown"
+        android:name="uom.team2.weball_statistics.UI_Controller.R1.LiveMatchesDroppedDown"
+        android:label="fragment_live_matches_dropped_down"
+        tools:layout="@layout/fragment_live_matches_dropped_down" />
+    <fragment
+        android:id="@+id/upcomingMatchesDroppedDown"
+        android:name="uom.team2.weball_statistics.UI_Controller.R1.UpcomingMatchesDroppedDown"
+        android:label="fragment_upcoming_matches_dropped_down"
+        tools:layout="@layout/fragment_upcoming_matches_dropped_down" />
 </navigation>

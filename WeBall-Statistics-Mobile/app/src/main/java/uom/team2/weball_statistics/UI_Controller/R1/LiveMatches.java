@@ -3,12 +3,17 @@ package uom.team2.weball_statistics.UI_Controller.R1;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.UI_Controller.Home;
+import uom.team2.weball_statistics.databinding.FragmentHomeBinding;
+import uom.team2.weball_statistics.databinding.FragmentLiveMatchesBinding;
+import uom.team2.weball_statistics.databinding.FragmentSharedMatchesBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +21,9 @@ import uom.team2.weball_statistics.R;
  * create an instance of this fragment.
  */
 public class LiveMatches extends Fragment {
+
+    private FragmentLiveMatchesBinding binding;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +69,23 @@ public class LiveMatches extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_live_matches, container, false);
+        //return inflater.inflate(R.layout.fragment_live_matches, container, false);
+
+        //Connection with button
+        binding = FragmentLiveMatchesBinding.inflate(inflater, container, false);
+
+        binding.include.dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LiveMatches.this).navigate(R.id.action_sharedMatches_to_liveMatchesDroppedDown);
+            }
+        });
+
+        return binding.getRoot();
+
+
+
+
     }
+
 }

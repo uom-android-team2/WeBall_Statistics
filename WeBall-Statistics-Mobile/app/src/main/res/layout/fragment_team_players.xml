@@ -9,19 +9,21 @@
 
     <ImageView
         android:id="@+id/player5_imageView"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player4_imageView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/player5_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:text="Player 5"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player5_imageView"
@@ -29,19 +31,21 @@
 
     <ImageView
         android:id="@+id/player4_imageView"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player3_imageView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/player4_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:text="Player 4"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player4_imageView"
@@ -49,19 +53,21 @@
 
     <ImageView
         android:id="@+id/player3_imageView"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player2_imageView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/player3_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:text="Player 3"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player3_imageView"
@@ -69,19 +75,21 @@
 
     <ImageView
         android:id="@+id/player2_imageView"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1_imageView"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/player2_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:text="Player 2"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player2_imageView"
@@ -89,19 +97,21 @@
 
     <ImageView
         android:id="@+id/player1_imageView"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/player1_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Player 1"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

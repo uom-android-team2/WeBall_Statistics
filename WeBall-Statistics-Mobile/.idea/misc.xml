@@ -30,6 +30,9 @@
         <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/team_score_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_completed_stats_tab_container.xml" value="0.24641833810888253" />
         <entry key="app/src/main/res/layout/fragment_shared_tab_container.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_team_stats.xml" value="0.3029891304347826" />
+        <entry key="app/src/main/res/layout/table_row_layout.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/teams_table_layout.xml" value="0.375" />
       </map>
     </option>
   </component>

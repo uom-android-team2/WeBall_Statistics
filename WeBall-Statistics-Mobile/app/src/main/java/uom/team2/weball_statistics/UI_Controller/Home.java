@@ -44,7 +44,7 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.imageView.setOnClickListener(e -> {
+        binding.badge.setOnClickListener(e -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
         });
 

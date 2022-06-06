@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline22" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/table_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -93,7 +93,7 @@
         app:layout_constraintGuide_percent="0.3" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/badge"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline26"
@@ -107,7 +107,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/table_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline24"
         app:srcCompat="@drawable/blank" />
@@ -117,7 +117,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline24"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23"
         app:srcCompat="@drawable/blank" />

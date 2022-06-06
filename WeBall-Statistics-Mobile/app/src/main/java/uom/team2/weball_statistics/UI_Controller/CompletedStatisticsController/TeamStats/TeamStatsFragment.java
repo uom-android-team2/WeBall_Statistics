@@ -21,7 +21,9 @@ import java.util.BitSet;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentTeamStatsBinding;
-
+/*
+ * @author Aravella Lousta ics20032
+ */
 public class TeamStatsFragment extends Fragment {
 
     private FragmentTeamStatsBinding binding;
@@ -54,11 +56,16 @@ public class TeamStatsFragment extends Fragment {
         initializeTitles();
 
         try {
-            createRow(binding.assistsPerGame.tableRowContainer, "https://raw.githubusercontent.com/uom-android-team2/WeBall_Statistics-Backend/master/resources/team_images/1st_50px.png", "aravella", 5, "33,5");
+            createRow(binding.assistsPerGame.tableRowContainer,
+                    "https://raw.githubusercontent.com/uom-android-team2/WeBall_Statistics-Backend/master/resources/team_images/1st_50px.png",
+                    "aravella",
+                    5,
+                    "33,5");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
 
     public void createRow(LinearLayout linearLayout, String url, String name, int number, String score) throws InterruptedException {
         View view = linearLayout.getChildAt(number);

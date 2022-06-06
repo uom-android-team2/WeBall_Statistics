@@ -2,13 +2,7 @@ package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +10,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.TeamChampioshipStatsService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.databinding.FragmentTeamStatsBinding;
+
 /*
  * @author Aravella Lousta ics20032
  */
@@ -89,70 +85,16 @@ public class TeamStatsFragment extends Fragment {
 //                ArrayList<TeamStats> bestByBlocks = new ArrayList<>();
 //                ArrayList<TeamStats> bestByRebounds = new ArrayList<>();
 //
-//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
-//                    @Override
-//                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        if(t1.calculatePointsPercentage() - teamStats.calculatePointsPercentage() > 0){
-//                            return 1;
-//                        }else if(t1.calculatePointsPercentage() - teamStats.calculatePointsPercentage()  == 0){
-//                            return 0;
-//                        }else{
-//                            return -1;
-//                        }
-//                    }
-//                });
-//
-//                bestByPoints = returnedObject;
-//
-//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
-//                    @Override
-//                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        if(t1.calculateAssistPercentage() - teamStats.calculateAssistPercentage() > 0){
-//                            return 1;
-//                        }else if(t1.calculateAssistPercentage() - teamStats.calculateAssistPercentage()  == 0){
-//                            return 0;
-//                        }else{
-//                            return -1;
-//                        }
-//                    }
-//                });
-//
-//                bestByAssists = returnedObject;
-//
-//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
-//                    @Override
-//                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        if(t1.calculateReboundPercentage() - teamStats.calculateReboundPercentage() > 0){
-//                            return 1;
-//                        }else if(t1.calculateReboundPercentage() - teamStats.calculateReboundPercentage()  == 0){
-//                            return 0;
-//                        }else{
-//                            return -1;
-//                        }
-//                    }
-//                });
-//
-//                bestByRebounds = returnedObject;
-//
-//                Collections.sort(returnedObject, new Comparator<TeamStats>() {
-//                    @Override
-//                    public int compare(TeamStats teamStats, TeamStats t1) {
-//                        if(t1.calculateBlockPercentage() - teamStats.calculateBlockPercentage() > 0){
-//                            return 1;
-//                        }else if(t1.calculateBlockPercentage() - teamStats.calculateBlockPercentage()  == 0){
-//                            return 0;
-//                        }else{
-//                            return -1;
-//                        }
-//                    }
-//                });
-//
-//                bestByBlocks = returnedObject;
+//                bestByPoints = sortByPoints(returnedObject);
+//                bestByAssists = sortByAssists(returnedObject);
+//                bestByBlocks = sortByBlocks(returnedObject);
+//                bestByRebounds = sortByRebounds(returnedObject);
 //
 //            }
 //        });
 
     }
+
 
     public void createRow(LinearLayout linearLayout, String url, String name, int number, String score) throws InterruptedException {
         View view = linearLayout.getChildAt(number);
@@ -188,7 +130,7 @@ public class TeamStatsFragment extends Fragment {
         thread.join();
     }
 
-    public void initializeTitles(){
+    public void initializeTitles() {
         binding.assistsPerGame.tableTitle.setText("Assists Per Game");
         binding.blocksPerGame.tableTitle.setText("Blocks Per Game");
         binding.reboundsPerGame.tableTitle.setText("Rebounds Per Game");
@@ -199,11 +141,79 @@ public class TeamStatsFragment extends Fragment {
 
     }
 
-    public void changeLabel(LinearLayout linearLayout, String value){
-        for (int i=1; i<linearLayout.getChildCount(); i++){
+    public void changeLabel(LinearLayout linearLayout, String value) {
+        for (int i = 1; i < linearLayout.getChildCount(); i++) {
             TextView textView = linearLayout.getChildAt(i).findViewById(R.id.label);
             textView.setText(value);
         }
-
     }
+
+
+    public ArrayList<TeamStats> sortByPoints(ArrayList<TeamStats> list) {
+
+        Collections.sort(list, new Comparator<TeamStats>() {
+            @Override
+            public int compare(TeamStats teamStats, TeamStats t1) {
+                if (t1.calculatePointsPercentage() - teamStats.calculatePointsPercentage() > 0) {
+                    return 1;
+                } else if (t1.calculatePointsPercentage() - teamStats.calculatePointsPercentage() == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        return new ArrayList<>(list);
+    }
+
+    public ArrayList<TeamStats> sortByAssists(ArrayList<TeamStats> list) {
+        Collections.sort(list, new Comparator<TeamStats>() {
+            @Override
+            public int compare(TeamStats teamStats, TeamStats t1) {
+                if (t1.calculateAssistPercentage() - teamStats.calculateAssistPercentage() > 0) {
+                    return 1;
+                } else if (t1.calculateAssistPercentage() - teamStats.calculateAssistPercentage() == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+
+        return new ArrayList<>(list);
+    }
+
+    public ArrayList<TeamStats> sortByBlocks(ArrayList<TeamStats> list) {
+        Collections.sort(list, new Comparator<TeamStats>() {
+            @Override
+            public int compare(TeamStats teamStats, TeamStats t1) {
+                if (t1.calculateBlockPercentage() - teamStats.calculateBlockPercentage() > 0) {
+                    return 1;
+                } else if (t1.calculateBlockPercentage() - teamStats.calculateBlockPercentage() == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+
+        return new ArrayList<>(list);
+    }
+
+    public ArrayList<TeamStats> sortByRebounds(ArrayList<TeamStats> list) {
+        Collections.sort(list, new Comparator<TeamStats>() {
+            @Override
+            public int compare(TeamStats teamStats, TeamStats t1) {
+                if (t1.calculateReboundPercentage() - teamStats.calculateReboundPercentage() > 0) {
+                    return 1;
+                } else if (t1.calculateReboundPercentage() - teamStats.calculateReboundPercentage() == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        return new ArrayList<>(list);
+    }
+
 }

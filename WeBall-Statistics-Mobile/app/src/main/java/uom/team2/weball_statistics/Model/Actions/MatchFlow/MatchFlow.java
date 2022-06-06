@@ -1,13 +1,14 @@
 package uom.team2.weball_statistics.Model.Actions.MatchFlow;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 
 public class MatchFlow extends Action {
 
     private FlowType flowType; //Start or pause
 
     public MatchFlow(String timeHappened, int id, FlowType flowType) {
-        super(timeHappened, id);
+        super(timeHappened, id, BelongsTo.GENERAL);
         this.flowType = flowType;
         this.actionDesc = this.formatActionDesc();
     }

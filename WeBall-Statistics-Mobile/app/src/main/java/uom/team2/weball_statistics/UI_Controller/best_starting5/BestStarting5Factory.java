@@ -1,8 +1,14 @@
 package uom.team2.weball_statistics.UI_Controller.best_starting5;
 import android.os.StrictMode;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import okhttp3.*;
 import uom.team2.weball_statistics.*;
@@ -46,12 +52,39 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         Request request = new Request.Builder()
-                .url("http://localhost/WeBall_Backend/API/match.php?completed=true")
+                .url("http://192.168.1.16/backend/API/match.php?completed=true")
                 .method("GET",null)
                 .addHeader("Content-Type", "application/json")
                 .build();
         Response response = client.newCall(request).execute();
         System.out.println(response.body().string());
+        // -------
+        OkHttpClient client2 = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType2 = MediaType.parse("application/json");
+        Request request2 = new Request.Builder()
+                .url("http://192.168.1.16/backend/API/playerLiveStatistics.php?matchId=123")
+                .method("GET", null)
+                .addHeader("Content-Type", "application/json")
+                .build();
+        Response response2 = client2.newCall(request2).execute();
+        System.out.println(response2.body().string());
+
+        try {
+            JSONArray json = new JSONArray(response.body().string());
+//            Iterator<String> keys = json.keys();
+            System.out.println(json);
+//
+//            while(keys.hasNext()) {
+//
+//                String key = keys.next();
+//
+//            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

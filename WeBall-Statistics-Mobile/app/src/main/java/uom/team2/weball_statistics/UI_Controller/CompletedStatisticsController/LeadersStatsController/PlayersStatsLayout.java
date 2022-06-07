@@ -13,7 +13,6 @@ public class PlayersStatsLayout extends Fragment {
     FragmentPlayersStatsLayoutBinding binding;
 
 
-
     public PlayersStatsLayout() {
         // Required empty public constructor
     }

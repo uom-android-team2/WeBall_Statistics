@@ -71,30 +71,30 @@ public class LivePlayerStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 
-        PlayerService playerService = new PlayerService();
-
-        playerService.findAllPlayersByTeamName("Dallas", new CallbackListener<ArrayList<Player>>() {
-            @Override
-            public void callback(ArrayList<Player> returnedObject) {
-                ArrayList<View> views = new ArrayList<>();
-
-                createPlayers(returnedObject, views);
-                autoSelectPlayer(returnedObject.get(0));
-
-                LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
-                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        views.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-
-                        for (View v : views) {
-                            layout.addView(v);
-                        }
-                        changePlayer(views);
-                    }
-                });
-            }
-        });
+//        PlayerService playerService = new PlayerService();
+//
+//        playerService.findAllPlayersByTeamName("Dallas", new CallbackListener<ArrayList<Player>>() {
+//            @Override
+//            public void callback(ArrayList<Player> returnedObject) {
+//                ArrayList<View> views = new ArrayList<>();
+//
+//                createPlayers(returnedObject, views);
+//                autoSelectPlayer(returnedObject.get(0));
+//
+//                LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
+//                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        views.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+//
+//                        for (View v : views) {
+//                            layout.addView(v);
+//                        }
+//                        changePlayer(views);
+//                    }
+//                });
+//            }
+//        });
     }
 
     public void createPlayers(ArrayList<Player> returnedObject, ArrayList<View> views) {

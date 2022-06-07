@@ -24,7 +24,7 @@ public class UIHandler {
 
     public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
         updateTeamImageInMatchHeader(fragment,
-                "http://192.168.1.6/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
+                "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
                 team.getTeamName(),
                 teamImageLayout);
     }
@@ -38,7 +38,7 @@ public class UIHandler {
                 nameTextView.setText(name);
                 Picasso.get()
                         .load(imageUrl)
-                        .resize(70, 70)
+                        .resize(38, 38)
                         .centerCrop()
                         .into(image);
             }
@@ -74,7 +74,7 @@ public class UIHandler {
             public void run() {
                 Picasso.get()
                         .load(imageUrl)
-                        .resize(70, 70)
+                        .resize(38, 38)
                         .centerCrop()
                         .into(image);
             }

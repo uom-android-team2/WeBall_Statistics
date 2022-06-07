@@ -79,7 +79,7 @@ public class LiveGameStatistics extends Fragment {
 
 //        TeamService teamService = new TeamService();
 //        // request team with id = 2 and when request is done get the object back
-//        teamService.findTeamById(2, new CallbackListener<Team>() {
+//        teamService.findTeamById(1, new CallbackListener<Team>() {
 //            @Override
 //            public void callback(Team returnedObject) {
 //                View imageLayout = binding.headerContainer.findViewById(R.id.team1);
@@ -106,7 +106,7 @@ public class LiveGameStatistics extends Fragment {
 //                }
 //            }
 //        });
-
+//
 
     }
 

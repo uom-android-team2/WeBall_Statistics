@@ -62,24 +62,24 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
-        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
-        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
-        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
-        liveProgressUIController.fillMatchInformation(this, matchTest);
-        Testing();
-
-        LiveGameProgress liveGameProgressFr = this;
-
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        Testing2();
-                    }
-                },
-                10000
-        );
+//        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
+//        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
+//        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
+//        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
+//        liveProgressUIController.fillMatchInformation(this, matchTest);
+//        Testing();
+//
+//        LiveGameProgress liveGameProgressFr = this;
+//
+//        new java.util.Timer().schedule(
+//                new java.util.TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        Testing2();
+//                    }
+//                },
+//                10000
+//        );
     }
 
     public void Testing() {

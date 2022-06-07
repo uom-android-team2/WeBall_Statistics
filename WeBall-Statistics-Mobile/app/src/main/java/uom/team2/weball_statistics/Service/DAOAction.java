@@ -46,9 +46,9 @@ public class DAOAction implements DAOCRUDService <Action> {
                             Action action = data.getValue(Action.class);
                             if (action.getBelongsTo() == BelongsTo.HOME) {
                                 liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
-                            } else if (action.getBelongsTo() ==BelongsTo.GUEST) {
+                            } else if (action.getBelongsTo() == BelongsTo.GUEST) {
                                 liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
-                            } else {
+                            } else if (action.getBelongsTo() == BelongsTo.GENERAL){
                                 liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
                             }
                         }

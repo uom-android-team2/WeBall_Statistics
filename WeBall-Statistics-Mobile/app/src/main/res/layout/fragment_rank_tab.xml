@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/greyRank"
-    tools:context=".UI_Controller.CompletedStatistics.LeadersStatsController.RankTab">
+    tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.RankTab">
 
     <TextView
         android:id="@+id/rankTabNum"

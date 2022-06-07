@@ -18,11 +18,12 @@ public class PlayersStatsLayout extends Fragment {
     }
 
 
-    // TODO: Rename and change types and number of parameters
-    public static PlayersStatsLayout newInstance(String param1, String param2) {
+
+    public static PlayersStatsLayout newInstance() {
         PlayersStatsLayout fragment = new PlayersStatsLayout();
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }

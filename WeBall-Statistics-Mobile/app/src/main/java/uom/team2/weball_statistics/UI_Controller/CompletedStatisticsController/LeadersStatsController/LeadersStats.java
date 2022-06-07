@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import uom.team2.weball_statistics.Model.Player;
+import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
 /*
@@ -42,8 +43,6 @@ public class LeadersStats extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        on();
-
     }
 
     @Override
@@ -52,9 +51,18 @@ public class LeadersStats extends Fragment {
 
         // Inflate the layout for this fragment
         binding = FragmentLeadersStatsBinding.inflate(inflater,container,false);
+
         //navigate();
         return binding.getRoot();
+    }
 
+    public void onStart(){
+        super.onStart();
+        on();
+    }
+
+    public void addTitles() {
+        
     }
 
 //    public void navigate() {
@@ -82,7 +90,8 @@ public class LeadersStats extends Fragment {
     public void on() {
         try {
             LeadersStatsHandler h = new LeadersStatsHandler();
-            this.players = h.findPlayers();
+            h.findPlayers();
+            h.getAllPlayersStats();
         } catch (Exception e)
         {
             e.printStackTrace();

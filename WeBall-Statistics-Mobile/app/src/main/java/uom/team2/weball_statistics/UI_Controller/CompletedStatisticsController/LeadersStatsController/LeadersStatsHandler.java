@@ -16,21 +16,26 @@ import okhttp3.Request;
 import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerPosition;
+import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
 
 public class LeadersStatsHandler {
 
     private ArrayList<Player> players;
+    private PlayerStats stats;
+    private ArrayList<PlayerStats> allPlayersStats;
     private Player player;
     private String myIP ="192.168.1.43";
-    private String url = "http://"+myIP+"/backend/API/player.php";
+    private String url1 = "http://"+myIP+"/backend/API/player.php";
+    private String url2 = "http://"+myIP+"/backend/API/playerStatisticsCompleted.php";
 
     public LeadersStatsHandler(){
         players = new ArrayList<>();
+        allPlayersStats = new ArrayList<>();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
 
-    public ArrayList<Player> findPlayers() {
+    public void findPlayers() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -38,7 +43,7 @@ public class LeadersStatsHandler {
                     OkHttpClient client = new OkHttpClient().newBuilder().build();
                     MediaType media = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url(url)
+                            .url(url1)
                             .method("GET",null)
                             .addHeader("Content-Type","application/json")
                             .build();
@@ -53,7 +58,6 @@ public class LeadersStatsHandler {
             }
         });
         thread.start();
-        return players;
     }
 
     public Player getPlayer(String data) throws JSONException {
@@ -115,6 +119,45 @@ public class LeadersStatsHandler {
     public ArrayList<Player> getPlayers() {
         return this.players;
     }
+
+    public ArrayList<PlayerStats> getPlayersStats() {
+        return this.allPlayersStats;
+    }
+
+    public void getAllPlayersStats() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder().build();
+                    MediaType media = MediaType.parse("application/json");
+                    Request request = new Request.Builder()
+                            .url(url2)
+                            .method("GET",null)
+                            .addHeader("Content-Type","application/json")
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+                    String data = response.body().string();
+                    System.out.println("FIND THEM22222" + data);
+
+                    JSONArray jsonArray = new JSONArray(data);
+                    for (int i=0; i<jsonArray.length(); i++)
+                    {
+                        stats = new PlayerStats();
+                        stats.editJON(jsonArray.getJSONObject(i).toString());
+                        allPlayersStats.add(stats);
+                    }
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+
 }
 
 

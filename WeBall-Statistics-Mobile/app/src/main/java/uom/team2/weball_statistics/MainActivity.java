@@ -30,6 +30,7 @@ import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 
+import uom.team2.weball_statistics.UI_Controller.matches_on_main_page.MatchesOnMainPage;
 import uom.team2.weball_statistics.databinding.ActivityMainBinding;
 
 
@@ -56,8 +57,13 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-//
-
+        try {
+            new MatchesOnMainPage();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

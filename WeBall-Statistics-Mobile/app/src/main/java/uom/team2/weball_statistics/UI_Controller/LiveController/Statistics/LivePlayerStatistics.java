@@ -102,6 +102,13 @@ public class LivePlayerStatistics extends Fragment {
             try {
                 View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(),
                         "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath());
+
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1.0f
+                );
+                playerView.setLayoutParams(param);
                 views.add(playerView);
             } catch (IOException e) {
                 e.printStackTrace();

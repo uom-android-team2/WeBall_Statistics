@@ -100,5 +100,12 @@ public class Team {
         return this.keyPlayers;
     }
 
+    public void setKeyPlayers(int k,Player p){
+        this.keyPlayers.remove(k);
+        this.keyPlayers.add(k,p);
+    }
+    public void setSubPlayers(int k,Player p){
+        this.subPlayers.remove(k);
+        this.subPlayers.add(k,p);    }
 
 }

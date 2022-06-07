@@ -1,21 +1,10 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.SystemClock;
 import android.util.TypedValue;
@@ -24,22 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Stack;
 
-import uom.team2.weball_statistics.MainActivity;
-import uom.team2.weball_statistics.Model.Championship;
-import uom.team2.weball_statistics.Model.Coach;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
-import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
@@ -65,8 +43,8 @@ public class AdminsView extends Fragment {
     private Match match;
     private Team landLord;
     private Team guest;
-    private Player player;
-    private Team team;
+    private Player playerObjChecked;
+    private Team teamObj;
 
 
 
@@ -145,7 +123,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 teamSelected=false;
-                team= match.getTeamLandlord();
+                teamObj = match.getTeamLandlord();
 
 
 
@@ -172,7 +150,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 teamSelected=true;
-                team=match.getGuest();
+                teamObj =match.getGuest();
 
 
                 //put background color to the banner so the admin knows which team is selected
@@ -203,6 +181,7 @@ public class AdminsView extends Fragment {
                     started=true;
                     binding.startButton.setText("End");
                     binding.pauseButton.setEnabled(true);
+                    match.setStatus(Status.ONGOING);
 
                 }
                 else{
@@ -213,6 +192,7 @@ public class AdminsView extends Fragment {
                     binding.pauseButton.setEnabled(false);
                     binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                     binding.pauseButton.setText("Pause/Continue");
+                    match.setStatus(Status.COMPLETED);
                 }
             }
 
@@ -300,7 +280,7 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked=1;
-                    player=team.getKeyPlayers().get(playerChecked-1);
+                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
                     deleteThePreviousBackground();
                 }
 
@@ -316,7 +296,7 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked=2;
-                    player=team.getKeyPlayers().get(playerChecked-1);
+                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
                     deleteThePreviousBackground();
                 }
 
@@ -332,7 +312,7 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked=3;
-                    player=team.getKeyPlayers().get(playerChecked-1);
+                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
                     deleteThePreviousBackground();
                 }
 
@@ -348,7 +328,7 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked=4;
-                    player=team.getKeyPlayers().get(playerChecked-1);
+                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
                     deleteThePreviousBackground();
                 }
 
@@ -364,7 +344,7 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked=5;
-                    player=team.getKeyPlayers().get(playerChecked-1);
+                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
                     deleteThePreviousBackground();
                 }
 
@@ -379,7 +359,7 @@ public class AdminsView extends Fragment {
                 //steile ton paikti
 
                 //emfanise to popup
-                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(),team.getKeyPlayers());
+                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj);
                 ppv.show();
             }
         });

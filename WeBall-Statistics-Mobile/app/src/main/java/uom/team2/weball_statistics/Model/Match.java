@@ -32,7 +32,7 @@ public class Match {
     //Will added fields specified for comments and progress to appear them after the match completed
 
 
-    public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status) {
+    public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status, Referee referee) {
         this.id = id;
         this.teamLandlord = teamLandlord;
         this.guest = guest;

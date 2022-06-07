@@ -35,7 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black_to_white_color"
-            android:orientation="vertical"/>
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/match_info_include"
+                layout="@layout/match_information_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Progress;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import org.w3c.dom.Text;
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.databinding.MatchInformationLayoutBinding;
 
 public class LiveProgressUIController {
 
@@ -86,16 +88,12 @@ public class LiveProgressUIController {
     }
 
     public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match) {
-        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
-        View matchInfoView = layoutInflater.inflate(R.layout.match_information_layout, null);
+        MatchInformationLayoutBinding matchInformationLayoutBinding =  liveGameProgress.getBinding().matchInfoInclude;
 
-        TextView refereeNameTextView = (TextView) matchInfoView.findViewById(R.id.head_referee_name);
+        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
         refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
 
-        TextView stadiumNameTextView = (TextView) matchInfoView.findViewById(R.id.stadium_name);
-        stadiumNameTextView.setText(match.getTeamLandlord().getTeamCity());
-
-        linearLayout.addView(matchInfoView, 0);
+        TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
+        stadiumNameTextView.setText(match.getTeamLandlord().getTeamCity());;
     }
 }

@@ -11,7 +11,7 @@ public class LeadersStatsLayouts {
 
     public static View createPlayersStatsLayout(Fragment fragment, String name){
         View playersStatslayout = fragment.getLayoutInflater().inflate(R.layout.fragment_players_stats_layout, null);
-        TextView statsName = playersStatslayout.findViewById(R.id.TITLE);
+        TextView statsName = playersStatslayout.findViewById(R.id.EXP_TITLE);
         statsName.setText(name);
         return playersStatslayout;
     }

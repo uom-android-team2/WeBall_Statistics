@@ -95,7 +95,6 @@ public class LeadersStats extends Fragment {
 
     }
 
-
     public void on() {
         try {
             LeadersStatsHandler h = new LeadersStatsHandler();

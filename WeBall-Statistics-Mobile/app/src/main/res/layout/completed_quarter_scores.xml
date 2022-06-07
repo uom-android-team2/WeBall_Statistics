@@ -9,15 +9,19 @@
         android:id="@+id/imageView3"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/team_logo_description"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintEnd_toStartOf="@+id/team1_q1"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5"
         app:srcCompat="@drawable/golden_state_warriors" />
 
     <View
         android:id="@+id/divider2"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -31,11 +35,15 @@
         android:id="@+id/imageView4"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="9dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/team2_q1"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bucks" />
 
     <TextView
@@ -45,7 +53,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="Q1"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -55,6 +66,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="Q2"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,6 +77,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="Q3"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,6 +88,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="Q4"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,6 +99,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="Final"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,7 +111,7 @@
         android:text="103"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
         android:id="@+id/team1_q4"
@@ -106,7 +121,7 @@
         android:text="28"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/team1_final_score"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
         android:id="@+id/team1_q3"
@@ -116,7 +131,7 @@
         android:text="29"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/team1_q4"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
         android:id="@+id/team1_q2"
@@ -126,7 +141,7 @@
         android:text="24"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/team1_q3"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
         android:id="@+id/team1_q1"
@@ -136,7 +151,9 @@
         android:text="22"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/team1_q2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
         android:id="@+id/team2_final_score"
@@ -186,6 +203,20 @@
         android:layout_marginEnd="32dp"
         android:text="29"
         app:layout_constraintEnd_toStartOf="@+id/team2_q2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="9dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,6 +31,12 @@ public class LayoutFactory {
         TextView playerName = playerImageLayout.findViewById(R.id.player_name);
         playerName.setText(name);
         ImageView playerImage = playerImageLayout.findViewById(R.id.player_image);
+
+        playerImage.requestLayout();
+
+        playerImage.getLayoutParams().height = 70;
+        playerImage.getLayoutParams().width = 100;
+
         URL url = new URL(imageUrl);
         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         playerImage.setImageBitmap(bmp);

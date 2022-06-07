@@ -17,7 +17,6 @@ import java.util.HashMap;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.PlayerService;
-import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -58,7 +57,6 @@ public class LivePlayerStatistics extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarContainer);
-
     }
 
     @Override
@@ -72,28 +70,75 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        PlayerService playerService = new PlayerService();
-//
-//        playerService.findPlayerById(1, new CallbackListener<Player>() {
-//            @Override
-//            public void callback(Player returnedObject) {
-//                System.out.println(returnedObject.getName());
-//                System.out.println(returnedObject.getPlayerPosition());
-//            }
-//        });
 
-//        playerService.findAllPlayers(new CallbackListener<ArrayList<Player>>() {
-//            @Override
-//            public void callback(ArrayList<Player> returnedObject) {
-//                System.out.println(returnedObject);
-//            }
-//        });
+        PlayerService playerService = new PlayerService();
 
-//        playerService.findAllPlayersByTeamName("Bulls", new CallbackListener<ArrayList<Player>>() {
-//            @Override
-//            public void callback(ArrayList<Player> returnedObject) {
-//                System.out.println(returnedObject);
-//            }
-//        });
+        playerService.findAllPlayersByTeamName("Dallas", new CallbackListener<ArrayList<Player>>() {
+            @Override
+            public void callback(ArrayList<Player> returnedObject) {
+                ArrayList<View> views = new ArrayList<>();
+
+                createPlayers(returnedObject, views);
+                autoSelectPlayer(returnedObject.get(0));
+
+                LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
+                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        views.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+
+                        for (View v : views) {
+                            layout.addView(v);
+                        }
+                        changePlayer(views);
+                    }
+                });
+            }
+        });
+    }
+
+    public void createPlayers(ArrayList<Player> returnedObject, ArrayList<View> views) {
+        for (Player player : returnedObject) {
+            try {
+                View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(),
+                        "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath());
+                views.add(playerView);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public void autoSelectPlayer(Player player) {
+        try {
+            UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
+                    "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath(),
+                    player.getName(),
+                    binding.selectedPlayerLayout.getRoot());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void changePlayer(ArrayList<View> views) {
+
+        for (View v: views){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+                    for (View other: views){
+                        if(!other.equals(v)){
+                            other.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.statistics_background));
+                        }
+                    }
+                }
+            });
+        }
+
     }
 }

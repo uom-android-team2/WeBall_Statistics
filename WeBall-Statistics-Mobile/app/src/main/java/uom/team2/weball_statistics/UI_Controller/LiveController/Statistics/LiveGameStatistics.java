@@ -84,7 +84,7 @@ public class LiveGameStatistics extends Fragment {
 //            public void callback(Team returnedObject) {
 //                View imageLayout = binding.headerContainer.findViewById(R.id.team1);
 //                try {
-//                    LiveStatisticsUIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
+//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                } catch (InterruptedException e) {
@@ -98,7 +98,7 @@ public class LiveGameStatistics extends Fragment {
 //            public void callback(Team returnedObject) {
 //                View imageLayout = binding.headerContainer.findViewById(R.id.team2);
 //                try {
-//                    LiveStatisticsUIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
+//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                } catch (InterruptedException e) {

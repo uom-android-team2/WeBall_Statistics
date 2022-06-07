@@ -20,7 +20,7 @@ import uom.team2.weball_statistics.R;
 /*
  * @author Leonard Pepa ics20033
  */
-public class LiveStatisticsUIHandler {
+public class UIHandler {
 
 
     public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
@@ -98,6 +98,10 @@ public class LiveStatisticsUIHandler {
                     fragment.requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            image.getLayoutParams().height = 100;
+                            image.getLayoutParams().width = 100;
+                            image.requestLayout();
+
                             image.setImageBitmap(bmp);
                         }
                     });

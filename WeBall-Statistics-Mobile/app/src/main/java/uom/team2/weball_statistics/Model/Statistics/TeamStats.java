@@ -109,5 +109,9 @@ public class TeamStats extends Stats {
 
     public int getWins(){return wins;}
 
-    public  int getLooses(){return loses;}
+    public  int getLoses(){return loses;}
+
+    public int getTeamId() {
+        return teamId;
+    }
 }

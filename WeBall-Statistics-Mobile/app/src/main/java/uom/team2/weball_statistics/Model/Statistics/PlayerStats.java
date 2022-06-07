@@ -31,35 +31,6 @@ public class PlayerStats extends Stats {
     }
 
     @Override
-    public double calculatePointsPercentage() {
-      return   matches_played > 0 ? super.calculateTotalPoints() / matches_played : 0;
-    }
-
-    public double calculateSteelPercentage() {
-        return   matches_played > 0 ? steal / matches_played : 0;
-    }
-
-    public double calculateReboundPercentage() {
-        return   matches_played > 0 ? rebound / matches_played : 0;
-    }
-
-    public double calculateAssistPercentage() {
-        return   matches_played > 0 ? assist / matches_played : 0;
-    }
-
-    public double calculateBlockPercentage() {
-        return   matches_played > 0 ? block / matches_played : 0;
-    }
-
-    public double calculateFoulPercentage() {
-        return   matches_played > 0 ? foul / matches_played : 0;
-    }
-
-    public double calculateTurnoverPercentage() {
-        return   matches_played > 0 ? turnover / matches_played : 0;
-    }
-
-    @Override
     public void editJON(String data) {
 
         System.out.println(data);
@@ -95,8 +66,51 @@ public class PlayerStats extends Stats {
 
     }
 
+
+    @Override
+    public double calculatePointsPercentage() {
+        return   matches_played > 0 ? super.calculateTotalPoints() / matches_played : 0;
+    }
+
+    public double calculateSteelPercentage() {
+        return   matches_played > 0 ? steal / matches_played : 0;
+    }
+
+    public double calculateReboundPercentage() {
+        return   matches_played > 0 ? rebound / matches_played : 0;
+    }
+
+    public double calculateAssistPercentage() {
+        return   matches_played > 0 ? assist / matches_played : 0;
+    }
+
+    public double calculateBlockPercentage() {
+        return   matches_played > 0 ? block / matches_played : 0;
+    }
+
+    public double calculateFoulPercentage() {
+        return   matches_played > 0 ? foul / matches_played : 0;
+    }
+
+    public double calculateTurnoverPercentage() {
+        return   matches_played > 0 ? turnover / matches_played : 0;
+    }
+
     public int getMatchesPlayed(){return matches_played;}
 
     public float getMinutes(){return minutes;}
+
+    public int getPlayer_id() {
+        return player_id;
+    }
+
+    public void setMatchesPlayed(int matches_played) {
+        this.matches_played = matches_played;
+    }
+
+    public void setMinutes(float minutes) {
+        this.minutes = minutes;
+    }
+
 
 }

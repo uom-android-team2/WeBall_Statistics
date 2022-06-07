@@ -26,20 +26,10 @@ public class PlayerStatsLive extends PlayerStats {
     @Override
     public void editJON(String data) {
 
-
         try {
             JSONArray jsonArray = new JSONArray(data);
             String jsonStr = jsonArray.getJSONObject(0).toString() ;
             JSONObject json = new JSONObject(jsonStr);
-
-
-
-
-
-
-
-
-
             Iterator<String> keys = json.keys();
             HashMap<String , String> hashMapData = new HashMap<String , String>();
 
@@ -55,20 +45,17 @@ public class PlayerStatsLive extends PlayerStats {
             }
 
             match_id = Integer.parseInt(hashMapData.get("match_id"));
-
-
-
-
             System.out.println(match_id);
-
-
             super.editJON(json.toString());
 
 
-
-     } catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public int getMatch_id() {
+        return match_id;
     }
 }

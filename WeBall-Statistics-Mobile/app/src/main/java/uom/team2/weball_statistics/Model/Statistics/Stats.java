@@ -311,4 +311,5 @@ public abstract class Stats implements editFieldsFromDB {
     public void setTurnover(int turnover) {
         this.turnover = turnover;
     }
+
 }

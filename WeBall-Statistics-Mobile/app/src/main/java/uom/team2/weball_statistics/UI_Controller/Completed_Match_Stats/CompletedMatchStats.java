@@ -31,6 +31,8 @@ public class CompletedMatchStats extends Fragment {
         // Inflate the layout for this fragment
         binding = CompletedMatchStatsBinding.inflate(inflater, container, false);
 
+        completedMatchStatsUIController.fillMatchHeaderInformation(this);
+
         return binding.getRoot();
     }
 

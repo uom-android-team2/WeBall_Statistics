@@ -28,21 +28,25 @@
             android:orientation="vertical">
 
             <include
+                android:id="@+id/include_completed_quarter"
                 layout="@layout/completed_quarter_scores"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <include
+                android:id="@+id/include_team_player_stats"
                 layout="@layout/completed_match_team_player_stats"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <include
+                android:id="@+id/include_completed_leaders"
                 layout="@layout/complete_match_leaders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
+                android:id="@+id/include_completed_team_stats"
                 layout="@layout/completed_match_team_stats"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

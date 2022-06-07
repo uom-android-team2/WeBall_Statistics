@@ -56,6 +56,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="PLAYER"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +69,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:text="BLK"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -78,6 +80,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="STL"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/block_label"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -88,6 +91,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="AST"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/steal_label"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -98,6 +102,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="REB"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/assist_label"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -108,6 +113,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="PTS"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/rebound_label"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -118,6 +124,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="MIN"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/points_label"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/player_name_label"

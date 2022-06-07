@@ -113,7 +113,7 @@
         app:srcCompat="@drawable/blank" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/Team_home_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline24"
@@ -123,7 +123,7 @@
         app:srcCompat="@drawable/blank" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/Team_away_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline23"

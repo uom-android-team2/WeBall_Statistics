@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UI_Controller.CompletedStatistics.LeadersStatsController.StatTitle">
+    tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.StatTitle">
 
     <TextView
         android:id="@+id/statTitle"
@@ -17,7 +17,6 @@
         android:textColor="@color/grey"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/TOP_PLAYER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

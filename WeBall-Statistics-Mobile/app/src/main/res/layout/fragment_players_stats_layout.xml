@@ -8,7 +8,7 @@
     tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.PlayersStatsLayout">
 
     <TextView
-        android:id="@+id/EXP_TITLE"
+        android:id="@+id/TITLE"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -17,24 +17,24 @@
         android:text="Points Per Game"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/EXP_TOP_PLAYER"
+        app:layout_constraintBottom_toTopOf="@+id/TOP_PLAYER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/EXP_TOP_PLAYER"
+        android:id="@+id/TOP_PLAYER"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/top_round_layout"
-        app:layout_constraintBottom_toTopOf="@+id/EXP_RANKTAB"
-        app:layout_constraintEnd_toEndOf="@+id/EXP_TITLE"
+        app:layout_constraintBottom_toTopOf="@+id/RANKTAB"
+        app:layout_constraintEnd_toEndOf="@+id/TITLE"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/EXP_TITLE"
-        app:layout_constraintTop_toBottomOf="@+id/EXP_TITLE">
+        app:layout_constraintStart_toStartOf="@+id/TITLE"
+        app:layout_constraintTop_toBottomOf="@+id/TITLE">
 
         <TextView
             android:id="@+id/dash2"
@@ -178,15 +178,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/EXP_RANKTAB"
+        android:id="@+id/RANKTAB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@color/greyRank"
-        app:layout_constraintEnd_toEndOf="@+id/EXP_TOP_PLAYER"
-        app:layout_constraintStart_toStartOf="@+id/EXP_TOP_PLAYER"
-        app:layout_constraintTop_toBottomOf="@+id/EXP_TOP_PLAYER">
+        app:layout_constraintEnd_toEndOf="@+id/TOP_PLAYER"
+        app:layout_constraintStart_toStartOf="@+id/TOP_PLAYER"
+        app:layout_constraintTop_toBottomOf="@+id/TOP_PLAYER">
 
         <TextView
             android:id="@+id/rankTabNum"
@@ -255,44 +255,57 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/EXP_RANKS"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bottom_round_layout"
+        app:layout_constraintBottom_toTopOf="@+id/BUTTON"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EXP_RANKTAB"
-        app:layout_constraintVertical_bias="0.003">
+        app:layout_constraintTop_toBottomOf="@+id/RANKTAB">
 
-        <include
-            android:id="@+id/include"
-            layout="@layout/fragment_player_layout"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/EXP_NestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-        <include
-            layout="@layout/fragment_player_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/RANKS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <include
-            layout="@layout/fragment_player_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/include"
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            layout="@layout/fragment_player_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+                <include
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/BUTTON"
@@ -306,8 +319,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EXP_RANKS"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/CardView">
 
         <ImageButton
             android:id="@+id/button"
@@ -322,7 +334,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

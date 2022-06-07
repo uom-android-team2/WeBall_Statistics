@@ -158,5 +158,33 @@ public class JSONHandler {
         }
         return playerLiveStatisticsList;
     }
+    public static Player deserializePlayer2(String data) throws JSONException {
+        JSONObject jsonObject = new JSONObject(data);
+
+        int id = jsonObject.getInt("id");
+        String name = jsonObject.getString("name");
+        String surname = jsonObject.getString("surname");
+        int number = jsonObject.getInt("number");
+        String position = jsonObject.getString("position");
+        String team = jsonObject.getString("team");
+        String photo = jsonObject.getString("photo");
+
+
+
+
+        return new Player(id,name,surname,number,position,team,photo);
+    }
+
+
+    public static ArrayList<Player> deserializeListOfPlayers2(String data
+    ) throws JSONException {
+        ArrayList<Player> players = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray(data);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            players.add(deserializePlayer2(jsonArray.getJSONObject(i).toString()));
+        }
+        return players;
+    }
 
 }

@@ -10,6 +10,11 @@ import android.widget.TextView;
 import androidx.fragment.app.*;
 import androidx.navigation.fragment.NavHostFragment;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
+import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentBestStarting5Binding;
 
@@ -33,6 +38,37 @@ public class BestStarting5 extends Fragment {
         binding = FragmentBestStarting5Binding.inflate(inflater, container, false);
        // createBestPlayerPerPositionPG(1,2,"Chicago Bulls","Lonzo Ball"
         //,23);
+        Thread as = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    BestStarting5Factory bs5 = new BestStarting5Factory();
+                    Player bestPG = bs5.getBestPG();
+                    Player bestSG = bs5.getBestSG();
+                    Player bestSF = bs5.getBestSF();
+                    Player bestPF = bs5.getBestPF();
+                    Player bestC = bs5.getBestC();
+                    System.out.println("----------Best per position----------");
+                    System.out.println(bestPG.getPosition()+" "+bestPG.getName());
+                    System.out.println(bestSG.getPosition()+" "+bestSG.getName());
+                    System.out.println(bestSF.getPosition()+" "+bestSF.getName());
+                    System.out.println(bestPF.getPosition()+" "+bestPF.getName());
+                    System.out.println(bestC.getPosition()+" "+bestC.getName());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        as.start();
+        try {
+            as.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         navigate();
         return binding.getRoot();
     }

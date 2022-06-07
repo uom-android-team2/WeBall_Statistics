@@ -9,7 +9,7 @@
     tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.PlayersStatsLayout">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/CardView"
+        android:id="@+id/playersStatCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/RANKS"
+            android:id="@+id/playersStatContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -35,17 +35,18 @@
                 android:textStyle="bold" />
 
             <include
+                android:id="@+id/topPlayer"
                 layout="@layout/fragment_top_player"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
+                android:id="@+id/ranktab"
                 layout="@layout/fragment_rank_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
-                android:id="@+id/include"
                 layout="@layout/fragment_player_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

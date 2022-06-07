@@ -1,16 +1,5 @@
 package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController;
 
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.fragment.app.Fragment;
-import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStats;
-
 public class LeadersStatsLayouts {
 
 

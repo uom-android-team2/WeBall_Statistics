@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController;
+package uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import uom.team2.weball_statistics.Model.Player;
-import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.LeadersStatsLayouts;
-import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.LeadersStatsHandler;
 import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
 /*
@@ -25,7 +23,6 @@ public class LeadersStats extends Fragment {
     String[] statsNames;
     private FragmentLeadersStatsBinding binding;
     private ArrayList<Player> players;
-    // private HashMap<String, View> mapOfStats;
 
     public LeadersStats() {
         // Required empty public constructor
@@ -37,16 +34,6 @@ public class LeadersStats extends Fragment {
         return fragment;
     }
 
-    public void addPlayersLayout(LinearLayout leadersContainer){
-//        for (String s : statsNames) {
-//            View playersLayout = LeadersStatsLayouts.createPlayersStatsLayout(this, s);
-//            leadersContainer.addView(playersLayout);
-//            s = s.replace("","").toLowerCase();
-//            playersLayout.setTag(s);
-//            //mapOfStats.put(s, playersLayout);
-//        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +42,8 @@ public class LeadersStats extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        on();
-//        addPlayersLayout(binding.leadersContainer);
+        on();
+
     }
 
     @Override
@@ -70,8 +57,8 @@ public class LeadersStats extends Fragment {
 
     }
 
-    public void navigate() {
-
+//    public void navigate() {
+//
 //        binding.leadersContainer.findViewById(R.id.button).setOnClickListener(e -> {
 //                NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
 //
@@ -89,8 +76,8 @@ public class LeadersStats extends Fragment {
 //
 //        binding.FGM3.BUTTON.expButton.setOnClickListener(e -> {
 //            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-
-    }
+//
+//    }
 
     public void on() {
         try {

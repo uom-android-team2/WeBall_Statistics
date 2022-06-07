@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.LeadersStats;
 import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.TeamStats.TeamStatsFragment;
 
 

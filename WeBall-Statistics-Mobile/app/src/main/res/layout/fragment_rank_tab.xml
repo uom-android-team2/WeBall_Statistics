@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/greyRank"
-    tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.RankTab">
+    android:background="@color/greyRank">
 
     <TextView
         android:id="@+id/rankTabNum"

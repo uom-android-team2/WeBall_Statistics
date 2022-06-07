@@ -8,28 +8,40 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/leadersContainer"
+            <include
+                layout="@layout/fragment_players_stats_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-        </androidx.core.widget.NestedScrollView>
+                android:layout_height="wrap_content" />
 
-    </androidx.cardview.widget.CardView>
+            <include
+                layout="@layout/fragment_players_stats_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                layout="@layout/fragment_players_stats_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                layout="@layout/fragment_players_stats_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -307,7 +307,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

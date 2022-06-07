@@ -19,6 +19,13 @@ public class Team {
         this.teamName = teamName;
     }
 
+    public Team(int id, String teamName, String teamCity, String badgePath){
+        this.id = id;
+        this.teamName = teamName;
+        this.teamCity = teamCity;
+        this.badgePath = badgePath;
+    }
+
     public Team(int id, String teamName, String teamCity, String badgePath, Coach teamCoach, ArrayList<Player> teamPlayers, Championship championshipIn) {
         this.id = id;
         this.teamName = teamName;

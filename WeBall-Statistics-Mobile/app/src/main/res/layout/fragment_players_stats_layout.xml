@@ -46,28 +46,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <include
-                layout="@layout/fragment_player_layout"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent">
 
-            <include
-                layout="@layout/fragment_player_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/ranksContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-            <include
-                layout="@layout/fragment_player_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    <include
+                        layout="@layout/fragment_player_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                layout="@layout/fragment_player_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    <include
+                        layout="@layout/fragment_player_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        layout="@layout/fragment_player_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        layout="@layout/fragment_player_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

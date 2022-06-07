@@ -35,7 +35,7 @@ public class LeadersStatsHandler {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public void findPlayers() {
+    public ArrayList<Player> findPlayers() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,6 +58,8 @@ public class LeadersStatsHandler {
             }
         });
         thread.start();
+
+        return players;
     }
 
     public Player getPlayer(String data) throws JSONException {
@@ -116,15 +118,9 @@ public class LeadersStatsHandler {
         return playerPosition;
     }
 
-    public ArrayList<Player> getPlayers() {
-        return this.players;
-    }
 
-    public ArrayList<PlayerStats> getPlayersStats() {
-        return this.allPlayersStats;
-    }
 
-    public void getAllPlayersStats() {
+    public ArrayList<PlayerStats> getAllPlayersStats() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -155,6 +151,7 @@ public class LeadersStatsHandler {
             }
         });
         thread.start();
+        return allPlayersStats;
     }
 
 

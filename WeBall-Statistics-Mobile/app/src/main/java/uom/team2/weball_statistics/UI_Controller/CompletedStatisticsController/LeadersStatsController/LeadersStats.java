@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import uom.team2.weball_statistics.Model.Player;
-import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
 import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
 /*
@@ -24,10 +24,14 @@ public class LeadersStats extends Fragment {
     String[] statsNames;
     private FragmentLeadersStatsBinding binding;
     private ArrayList<Player> players;
+    private ArrayList<PlayerStats> playersStats;
+
 
     public LeadersStats() {
         // Required empty public constructor
-        statsNames = new String[] {"Points Per Game", "Rebounds Per Game", "Assist Per Game", " Per Game"};
+        players = new ArrayList<>();
+        playersStats = new ArrayList<>();
+        statsNames = new String[] {"Points Per Game", "Rebounds Per Game", "Assist Per Game", "Blocks Per Game", "Fouls Per Game"};
     }
 
     public static LeadersStats newInstance() {
@@ -43,6 +47,7 @@ public class LeadersStats extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        addTitles(binding.leadersContainer);
     }
 
     @Override
@@ -58,12 +63,44 @@ public class LeadersStats extends Fragment {
 
     public void onStart(){
         super.onStart();
-        on();
+
+        try {
+            LeadersStatsHandler h = new LeadersStatsHandler();
+            players = h.findPlayers();
+            playersStats = h.getAllPlayersStats();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public void addTitles() {
-        
+    public void addTitles(LinearLayout leadersContainer) {
+        for (String s: statsNames) {
+            View playersStatsLayout = LeadersStatsLayouts.createPlayersStatsLayout(this,s);
+            leadersContainer.addView(playersStatsLayout);
+            s = s.replace("","");
+            playersStatsLayout.setTag(s);
+        }
     }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public void addPlayers() {
+
+        for (Player p: players){
+
+        }
+
+    }
+
+
+
 
 //    public void navigate() {
 //
@@ -86,20 +123,5 @@ public class LeadersStats extends Fragment {
 //            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
 //
 //    }
-
-    public void on() {
-        try {
-            LeadersStatsHandler h = new LeadersStatsHandler();
-            h.findPlayers();
-            h.getAllPlayersStats();
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-
-
 
 }

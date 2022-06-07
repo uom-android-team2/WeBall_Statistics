@@ -54,6 +54,9 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
                         PlayerLiveStatistics playerLiveStatistics = snapshot.child("match_id: " + matchId).child("player_id: " + playerId).getValue(PlayerLiveStatistics.class);
+                        if(teamLiveStatistics == null || playerLiveStatistics == null){
+                            return;
+                        }
                         HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                         for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {

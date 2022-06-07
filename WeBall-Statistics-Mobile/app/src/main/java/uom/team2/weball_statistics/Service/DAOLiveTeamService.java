@@ -49,7 +49,9 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 // changed in our Firebase console.
 
                 TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
-
+                if (team1 == null) {
+                    return;
+                }
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
@@ -87,6 +89,10 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
                 TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
                 TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
+
+                if (team1 == null || team2 == null) {
+                    return;
+                }
 
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
@@ -143,7 +149,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         return null;
     }
 
-    public Task<DataSnapshot> get(int matchId, int teamId){
+    public Task<DataSnapshot> get(int matchId, int teamId) {
         return databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get();
     }
 

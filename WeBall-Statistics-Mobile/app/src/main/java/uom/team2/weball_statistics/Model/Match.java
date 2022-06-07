@@ -103,4 +103,12 @@ public class Match {
     public Referee getReferee() {
         return referee;
     }
+
+    public boolean isProgress() {
+        return progress;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
 }

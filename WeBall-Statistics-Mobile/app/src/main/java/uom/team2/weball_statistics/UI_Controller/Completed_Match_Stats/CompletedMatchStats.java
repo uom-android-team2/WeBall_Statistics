@@ -11,6 +11,7 @@ import uom.team2.weball_statistics.databinding.CompletedMatchStatsBinding;
 
 public class CompletedMatchStats extends Fragment {
 
+    private CompletedMatchStatsUIController completedMatchStatsUIController = CompletedMatchStatsUIController.getInstance();
     private CompletedMatchStatsBinding binding;
 
     public CompletedMatchStats() {
@@ -37,5 +38,9 @@ public class CompletedMatchStats extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public CompletedMatchStatsBinding getBinding() {
+        return binding;
     }
 }

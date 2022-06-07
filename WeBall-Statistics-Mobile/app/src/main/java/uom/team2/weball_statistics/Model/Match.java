@@ -21,15 +21,17 @@ public class Match {
     private Team guest; //Team away
     private Date matchDate;
     private Status status; // UPCOMING, ONGOING, COMPLETED
+    private Referee referee;
     private ArrayList<Action> actions;
     //Will added fields specified for comments and progress to appear them after the match completed
 
-    public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status) {
+    public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status, Referee referee) {
         this.id = id;
         this.teamLandlord = teamLandlord;
         this.guest = guest;
         this.matchDate = matchDate;
         this.status = status;
+        this.referee = referee;
         actions = new ArrayList<Action>();
     }
 
@@ -79,5 +81,9 @@ public class Match {
 
     public ArrayList<Action> getActions() {
         return actions;
+    }
+
+    public Referee getReferee() {
+        return referee;
     }
 }

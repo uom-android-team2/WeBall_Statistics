@@ -21,6 +21,7 @@ import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
+import uom.team2.weball_statistics.Model.Referee;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
@@ -61,8 +62,12 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
+        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
+        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
+        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
+        liveProgressUIController.fillMatchInformation(this, matchTest);
         Testing();
-
     }
 
     public void Testing() {
@@ -74,13 +79,15 @@ public class LiveGameProgress extends Fragment {
         Player player = new Player("Minas", "Charakopoulos");
         Action action55 = new Shot("12", 4, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
         Action action66 = new Shot("12", 5, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING);
+        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
         daoAction.insert(action11, match2);
         daoAction.insert(action22, match2);
         daoAction.insert(action33, match2);
         daoAction.insert(action44, match2);
         daoAction.insert(action55, match2);
         daoAction.insert(action66, match2);
+
+        //That i will call from onViewCreated()
         daoAction.getRealTimeData(match2, this);
     }
 

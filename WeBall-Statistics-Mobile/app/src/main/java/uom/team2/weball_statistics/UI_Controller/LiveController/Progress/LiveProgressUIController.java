@@ -7,7 +7,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.R;
 
 public class LiveProgressUIController {
@@ -80,5 +83,19 @@ public class LiveProgressUIController {
         quarterTextView.setText("Quarter " + quarter);
 
         linearLayout.addView(quarterView, 0);
+    }
+
+    public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match) {
+        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+        View matchInfoView = layoutInflater.inflate(R.layout.match_information_layout, null);
+
+        TextView refereeNameTextView = (TextView) matchInfoView.findViewById(R.id.head_referee_name);
+        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
+
+        TextView stadiumNameTextView = (TextView) matchInfoView.findViewById(R.id.stadium_name);
+        stadiumNameTextView.setText(match.getTeamLandlord().getTeamCity());
+
+        linearLayout.addView(matchInfoView, 0);
     }
 }

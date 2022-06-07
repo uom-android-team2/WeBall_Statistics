@@ -30,7 +30,7 @@ public class LeadersStatsHandler {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public void findPlayers() {
+    public ArrayList<Player> findPlayers() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -42,20 +42,21 @@ public class LeadersStatsHandler {
                             .method("GET",null)
                             .addHeader("Content-Type","application/json")
                             .build();
-                    Response response = client.newCall(request).execute();
 
+                    Response response = client.newCall(request).execute();
                     String data = response.body().string();
                     System.out.println("FIND THEM" + data);
-                    players = deserializeAllPlayers(data);
+                    players = getAllPlayers(data);
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
+        return players;
     }
 
-    public Player deserializePlayer(String data) throws JSONException {
+    public Player getPlayer(String data) throws JSONException {
         // // // // // // // // // // DESERIALIZE // // // // // // // // // //
 
         JSONObject jsonObject = new JSONObject(data);
@@ -67,6 +68,25 @@ public class LeadersStatsHandler {
         String team = jsonObject.getString("team");
         String photo = jsonObject.getString("photo");
 
+        /// KANE TYPOY TEAM TO team
+        return new Player(id, name, surname, number, getPosition(position), team, photo);
+    }
+
+    public ArrayList<Player> getAllPlayers(String data) throws JSONException
+    {
+        ArrayList<Player> players = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray(data);
+
+        for (int i=0; i < jsonArray.length(); i++)
+        {
+            players.add(getPlayer(jsonArray.getJSONObject(i).toString()));
+        }
+
+        return players;
+    }
+
+    public PlayerPosition getPosition(String position)
+    {
         PlayerPosition playerPosition = PlayerPosition.CENTER;
         String tempPosition = position.replace(" ", "_");
 
@@ -88,21 +108,12 @@ public class LeadersStatsHandler {
         if (tempPosition.equalsIgnoreCase(PlayerPosition.SMALL_FORWARD.name())) {
             playerPosition = PlayerPosition.SMALL_FORWARD;
         }
-        /// KANE TYPOY TEAM TO team
-        return new Player(id, name, surname, number, playerPosition, team, photo);
+
+        return playerPosition;
     }
 
-    public ArrayList<Player> deserializeAllPlayers(String data) throws JSONException
-    {
-        ArrayList<Player> players = new ArrayList<>();
-        JSONArray jsonArray = new JSONArray(data);
-
-        for (int i=0; i < jsonArray.length(); i++)
-        {
-            players.add(deserializePlayer(jsonArray.getJSONObject(i).toString()));
-        }
-
-        return players;
+    public ArrayList<Player> getPlayers() {
+        return this.players;
     }
 }
 

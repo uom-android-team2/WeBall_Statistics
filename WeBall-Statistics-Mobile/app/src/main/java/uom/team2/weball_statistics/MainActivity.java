@@ -14,6 +14,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+
+import org.json.JSONException;
+
+import java.io.IOException;
+
+import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Factory;
+
 import uom.team2.weball_statistics.Model.Config;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
@@ -22,6 +29,7 @@ import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
+
 import uom.team2.weball_statistics.databinding.ActivityMainBinding;
 
 
@@ -35,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -45,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+//
+
+
+
     }
 
     @Override

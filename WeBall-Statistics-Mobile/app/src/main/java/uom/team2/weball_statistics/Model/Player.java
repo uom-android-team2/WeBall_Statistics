@@ -1,7 +1,7 @@
 package uom.team2.weball_statistics.Model;
 
 /*
- * @author Minas - Theodoros Charakopoulos ics20072
+ * @author Minas - Theodoros Charakopoulos ics20072 and Lougaris Dionisis ics20058
  */
 public class Player {
     private String teamName;
@@ -9,8 +9,10 @@ public class Player {
     private String name;
     private String surname;
     private int number; //Player's number
+    private String position; //POINT_GUARD, SHOOTING_GUARD, SMALL_FORWARD, POWER_FORWARD, CENTER
     private PlayerPosition playerPosition; //POINT_GUARD, SHOOTING_GUARD, SMALL_FORWARD, POWER_FORWARD, CENTER
     private Team team; //The team onj that the player plays in
+    private String teamString;
     private String imagePath;
     //Other fields for Statistics that made in other branch...
 
@@ -40,6 +42,15 @@ public class Player {
         this.teamName = teamName;
         this.imagePath = imagePath;
     }
+    public Player(int id, String name, String surname, int number, String position, String teamString, String imagePath) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.number = number;
+        this.position = position;
+        this.teamString = teamString;
+        this.imagePath = imagePath;
+    }
 
     public int getId() {
         return id;
@@ -67,6 +78,10 @@ public class Player {
 
     public int getNumber() {
         return number;
+    }
+
+    public String getPosition() {
+        return position;
     }
 
     public void setNumber(int number) {

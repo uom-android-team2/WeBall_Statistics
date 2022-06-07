@@ -62,33 +62,33 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
-        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
-        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
-        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
-        liveProgressUIController.fillMatchInformation(this, matchTest);
-        Testing();
-    }
-
-    public void Testing() {
-        Action action11 = new MatchFlow("0.00", 0, FlowType.START);
-        Action action22 = new MatchFlow("1.00", 1, FlowType.PAUSE);
-        Action action33 = new MatchFlow("1.20", 2, FlowType.RESUME);
-        Action action44 = new MatchFlow("11", 3, FlowType.COMPLETED);
-        Team team = new Team("Paok");
-        Player player = new Player("Minas", "Charakopoulos");
-        Action action55 = new Shot("12", 4, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
-        Action action66 = new Shot("12", 5, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
-        daoAction.insert(action11, match2);
-        daoAction.insert(action22, match2);
-        daoAction.insert(action33, match2);
-        daoAction.insert(action44, match2);
-        daoAction.insert(action55, match2);
-        daoAction.insert(action66, match2);
-
-        //That i will call from onViewCreated()
-        daoAction.getRealTimeData(match2, this);
+//        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
+//        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
+//        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
+//        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
+//        liveProgressUIController.fillMatchInformation(this, matchTest);
+//        Testing();
+//    }
+//
+//    public void Testing() {
+//        Action action11 = new MatchFlow("0.00", 0, FlowType.START);
+//        Action action22 = new MatchFlow("1.00", 1, FlowType.PAUSE);
+//        Action action33 = new MatchFlow("1.20", 2, FlowType.RESUME);
+//        Action action44 = new MatchFlow("11", 3, FlowType.COMPLETED);
+//        Team team = new Team("Paok");
+//        Player player = new Player("Minas", "Charakopoulos");
+//        Action action55 = new Shot("12", 4, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
+//        Action action66 = new Shot("12", 5, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
+//        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
+//        daoAction.insert(action11, match2);
+//        daoAction.insert(action22, match2);
+//        daoAction.insert(action33, match2);
+//        daoAction.insert(action44, match2);
+//        daoAction.insert(action55, match2);
+//        daoAction.insert(action66, match2);
+//
+//        //That i will call from onViewCreated()
+//        daoAction.getRealTimeData(match2, this);
     }
 
     @Override

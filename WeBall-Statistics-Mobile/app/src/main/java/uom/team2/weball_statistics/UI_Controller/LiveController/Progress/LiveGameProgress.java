@@ -68,6 +68,18 @@ public class LiveGameProgress extends Fragment {
         Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
         liveProgressUIController.fillMatchInformation(this, matchTest);
         Testing();
+
+        LiveGameProgress liveGameProgressFr = this;
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Testing2();
+                    }
+                },
+                10000
+        );
     }
 
     public void Testing() {
@@ -86,6 +98,27 @@ public class LiveGameProgress extends Fragment {
         daoAction.insert(action44, match2);
         daoAction.insert(action55, match2);
         daoAction.insert(action66, match2);
+
+        //That i will call from onViewCreated()
+        daoAction.getRealTimeData(match2, this);
+    }
+
+    public void Testing2() {
+        Action action111 = new MatchFlow("0.00", 6, FlowType.START);
+        Action action222 = new MatchFlow("1.00", 7, FlowType.PAUSE);
+        Action action333 = new MatchFlow("1.20", 8, FlowType.RESUME);
+        Action action444 = new MatchFlow("11", 9, FlowType.COMPLETED);
+        Team team = new Team("Paok");
+        Player player = new Player("Minas", "Charakopoulos");
+        Action action555 = new Shot("12", 10, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
+        Action action666 = new Shot("12", 11, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
+        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
+        daoAction.insert(action111, match2);
+        daoAction.insert(action222, match2);
+        daoAction.insert(action333, match2);
+        daoAction.insert(action444, match2);
+        daoAction.insert(action555, match2);
+        daoAction.insert(action666, match2);
 
         //That i will call from onViewCreated()
         daoAction.getRealTimeData(match2, this);

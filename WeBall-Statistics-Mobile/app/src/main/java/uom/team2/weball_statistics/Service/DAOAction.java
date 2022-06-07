@@ -3,6 +3,7 @@ package uom.team2.weball_statistics.Service;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,7 +60,37 @@ public class DAOAction implements DAOCRUDService <Action> {
                         System.out.println("onCancelled: Error: " + databaseError.getMessage());
                     }
                 });
+
+//        ref.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+//                Action action = dataSnapshot.getValue(Action.class);
+//                System.out.println(action.getActionDesc());
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+//                Action action = dataSnapshot.getValue(Action.class);
+//                System.out.println(action.getActionDesc());
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//                Action action = dataSnapshot.getValue(Action.class);
+//                System.out.println(action.getActionDesc());
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+//                Action action = dataSnapshot.getValue(Action.class);
+//                System.out.println(action.getActionDesc());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {}
+//        });
     }
+
 
     @Override
     public Task<Void> insert(Action data) {

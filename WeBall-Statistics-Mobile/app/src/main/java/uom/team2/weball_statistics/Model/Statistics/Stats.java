@@ -30,6 +30,26 @@ public abstract class Stats implements editFieldsFromDB {
     protected int foul;
     protected int turnover;
 
+    public Stats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover) {
+        this.successful_effort = successful_effort;
+        this.total_effort = total_effort;
+        this.successful_freethrow = successful_freethrow;
+        this.total_freethrow = total_freethrow;
+        this.successful_twopointer = successful_twopointer;
+        this.total_twopointer = total_twopointer;
+        this.successful_threepointer = successful_threepointer;
+        this.total_threepointer = total_threepointer;
+        this.steal = steal;
+        this.rebound = rebound;
+        this.assist = assist;
+        this.block = block;
+        this.foul = foul;
+        this.turnover = turnover;
+    }
+
+    public Stats() {
+    }
+
     private void formatStats(){
         calculateFieldGoalPercentageToString();
         calculateFreeThrowPercentageToString();
@@ -150,33 +170,33 @@ public abstract class Stats implements editFieldsFromDB {
         return turnover;
     }
 
-    protected void setTotalEffort(){total_effort++; }
+    public void setTotalEffort(){total_effort++; }
 
-    protected void setSuccessfulEffort(){successful_effort++; }
+    public void setSuccessfulEffort(){successful_effort++; }
 
-    protected void setTotalFreeThrow(){total_freethrow++; }
+    public void setTotalFreeThrow(){total_freethrow++; }
 
-    protected void setSuccessfulFreeThrow(){successful_freethrow++; }
+    public void setSuccessfulFreeThrow(){successful_freethrow++; }
 
-    protected void setTotalTwoPointer(){total_twopointer++; }
+    public void setTotalTwoPointer(){total_twopointer++; }
 
-    protected void setSuccessfulTwoPointer(){successful_twopointer++; }
+    public void setSuccessfulTwoPointer(){successful_twopointer++; }
 
-    protected void setTotalThreePointer(){total_threepointer++; }
+    public void setTotalThreePointer(){total_threepointer++; }
 
-    protected void setSuccessfulThreePointer(){successful_threepointer++; }
+    public void setSuccessfulThreePointer(){successful_threepointer++; }
 
-    protected void setTotalSteels(){steal++; }
+    public void setTotalSteels(){steal++; }
 
-    protected void setTotalRebounds(){ rebound++;}
+    public void setTotalRebounds(){ rebound++;}
 
-    protected void setTotalAssists(){ assist++;}
+    public void setTotalAssists(){ assist++;}
 
     public void setTotalBlock(){ block++; }
 
     public void setTotalFouls(){ foul++;}
 
-    protected void setTotalTurnovers(){ turnover++;}
+    public void setTotalTurnovers(){ turnover++;}
 
 
 
@@ -220,5 +240,76 @@ public abstract class Stats implements editFieldsFromDB {
         }
     }
 
+    public void setFieldGoalsPercentage(String fieldGoalsPercentage) {
+        this.fieldGoalsPercentage = fieldGoalsPercentage;
+    }
+
+    public void setFreeThrowsPercentage(String freeThrowsPercentage) {
+        this.freeThrowsPercentage = freeThrowsPercentage;
+    }
+
+    public void setSuccessful_effort(int successful_effort) {
+        this.successful_effort = successful_effort;
+    }
+
+    public void setTotal_effort(int total_effort) {
+        this.total_effort = total_effort;
+    }
+
+    public void setSuccessful_freethrow(int successful_freethrow) {
+        this.successful_freethrow = successful_freethrow;
+    }
+
+    public void setTotal_freethrow(int total_freethrow) {
+        this.total_freethrow = total_freethrow;
+    }
+
+    public void setTwoPointsPercentage(String twoPointsPercentage) {
+        this.twoPointsPercentage = twoPointsPercentage;
+    }
+
+    public void setSuccessful_twopointer(int successful_twopointer) {
+        this.successful_twopointer = successful_twopointer;
+    }
+
+    public void setTotal_twopointer(int total_twopointer) {
+        this.total_twopointer = total_twopointer;
+    }
+
+    public void setThreePointsPercentage(String threePointsPercentage) {
+        this.threePointsPercentage = threePointsPercentage;
+    }
+
+    public void setSuccessful_threepointer(int successful_threepointer) {
+        this.successful_threepointer = successful_threepointer;
+    }
+
+    public void setTotal_threepointer(int total_threepointer) {
+        this.total_threepointer = total_threepointer;
+    }
+
+    public void setSteal(int steal) {
+        this.steal = steal;
+    }
+
+    public void setRebound(int rebound) {
+        this.rebound = rebound;
+    }
+
+    public void setAssist(int assist) {
+        this.assist = assist;
+    }
+
+    public void setBlock(int block) {
+        this.block = block;
+    }
+
+    public void setFoul(int foul) {
+        this.foul = foul;
+    }
+
+    public void setTurnover(int turnover) {
+        this.turnover = turnover;
+    }
 
 }

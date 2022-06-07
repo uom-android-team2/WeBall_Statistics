@@ -24,7 +24,7 @@ public class DBDataRecovery {
 
     public Stats readData(String api, String id) throws Exception {
         String idName;
-        idName = api.equals(Config.API_PLAYER_STATISTICS_COMPLETED) ?  Config.PLAYER_ID : Config.TEAM_ID;
+        idName = api.equals(Config.API_PLAYER_STATISTICS_COMPLETED) || api.equals(Config.API_PLAYER_STATS_LIVE) ?  Config.PLAYER_ID : Config.TEAM_ID;
         String query = "";
         query = !id.equals("") ? "?" + idName + "=" + id : query;
 
@@ -75,10 +75,12 @@ public class DBDataRecovery {
             return new PlayerStats();
         } else if (api.equals(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED)) {
             return new TeamStats();
-        } else {
+        }else if(api.equals(Config.API_PLAYER_STATS_LIVE)){
+            return new PlayerStatsLive();
+        }else if(api.equals(Config.API_TEAM_STATS_LIVE)){
+           return new TeamStatsLive();
+        }else{
             return null;
         }
-
-
     }
 }

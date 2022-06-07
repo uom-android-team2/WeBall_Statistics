@@ -27,7 +27,9 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -42,7 +44,17 @@ import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
+
+import java.io.IOException;
+
+import uom.team2.weball_statistics.MainActivity;
+import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
+import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.Stats;
+
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
 /**
@@ -59,6 +71,7 @@ public class AdminsView extends Fragment {
     private boolean started=false;
     private boolean teamSelected =false;
     private int playerChecked=1;
+
     private Stack<Team> undoTeamStack=new Stack<Team>();
     private Stack<Player> undoPlayerStack=new Stack<Player>();
     private Stack<Integer>  undoButtonStack =new Stack<Integer>();
@@ -71,6 +84,14 @@ public class AdminsView extends Fragment {
     private ArrayList<Player> subPlayersGuest=new ArrayList<Player>();
 
 
+
+
+    private TextView reboundBtn;
+    private TextView assistBtn;
+    private TextView stealBtn;
+    private TextView blockBtn;
+    private TextView foulBtn;
+    private TextView turnoverBtn;
 
 
 
@@ -382,7 +403,86 @@ public class AdminsView extends Fragment {
             }
         });
 
+
+        reboundBtn = binding.reboundButton;
+       assistBtn = binding.assistButton;
+       stealBtn = binding.stealButton;
+       blockBtn =  binding.blockButton;
+       foulBtn = binding.foulButton;
+       turnoverBtn = binding.turnoverButton;
+
+        DBDataRecovery dataRecovery = new DBDataRecovery();
+        try {
+            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "8");
+            reboundBtn.setOnClickListener(e -> updateRebound(playerStats,dataRecovery));
+            assistBtn.setOnClickListener(e -> updateAssist(playerStats,dataRecovery));
+            stealBtn.setOnClickListener(e -> updateSteal(playerStats,dataRecovery));
+            blockBtn.setOnClickListener(e -> updateBlock(playerStats,dataRecovery));
+            foulBtn.setOnClickListener(e -> updateFoul(playerStats,dataRecovery));
+            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats,dataRecovery));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
+
+    private void updateAssist(Stats playerStats,DBDataRecovery dbDataRecovery){
+        playerStats.setTotalAssists();
+       // PlayerLiveStatistics p = new PlayerLiveStatistics(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+       // p.setAssist(playerStats.getTotalAssists());
+        try {
+            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+           // DAOLivePlayerStatistics.getInstace().update(p);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void updateRebound(Stats playerStats,DBDataRecovery dbDataRecovery){
+        playerStats.setTotalRebounds();
+        try {
+            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void updateSteal(Stats playerStats,DBDataRecovery dbDataRecovery){
+        playerStats.setTotalSteels();
+        try {
+            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void updateBlock(Stats playerStats,DBDataRecovery dataRecovery){
+        playerStats.setTotalBlock();
+        try {
+            dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void updateFoul(Stats playerStats,DBDataRecovery dbDataRecovery){
+        playerStats.setTotalFouls();
+        try {
+            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void updateTurnover(Stats playerStats,DBDataRecovery dbDataRecovery){
+        playerStats.setTotalTurnovers();
+        try {
+            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 
 //you call this function when you want to change player
     public void deleteThePreviousBackground(){
@@ -402,5 +502,7 @@ public class AdminsView extends Fragment {
             binding.player5.setBackgroundColor(0x00000000);
         }
     }
+
+
 
 }

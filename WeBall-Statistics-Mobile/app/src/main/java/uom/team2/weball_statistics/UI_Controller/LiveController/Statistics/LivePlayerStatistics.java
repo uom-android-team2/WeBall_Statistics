@@ -15,16 +15,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Player;
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.PlayerService;
+import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
 
 public class LivePlayerStatistics extends Fragment {
 
+    private final ArrayList<Player> team2Players = new ArrayList<>();
+    private final ArrayList<View> team1PlayerViews = new ArrayList<>();
+    private final ArrayList<View> team3PlayerViews = new ArrayList<>();
+    private ArrayList<Player> team1Players = new ArrayList<>();
     private FragmentLivePlayerStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
+    private Team team1;
+    private Team team2;
 
     public LivePlayerStatistics() {
         // Required empty public constructor
@@ -71,26 +81,39 @@ public class LivePlayerStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 
-//        PlayerService playerService = new PlayerService();
+//        TeamService teamService = new TeamService();
+//        teamService.findTeamById(3, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                team1 = returnedObject;
+//                try {
+//                    UIHandler.updateTeamImage(LivePlayerStatistics.this, returnedObject, binding.header.teamImage);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 //
-//        playerService.findAllPlayersByTeamName("Dallas", new CallbackListener<ArrayList<Player>>() {
+//        PlayerService playerService = new PlayerService();
+//        playerService.findAllPlayersByTeamName("Brooklyn Nets", new CallbackListener<ArrayList<Player>>() {
 //            @Override
 //            public void callback(ArrayList<Player> returnedObject) {
-//                ArrayList<View> views = new ArrayList<>();
-//
-//                createPlayers(returnedObject, views);
+//                team1Players = returnedObject;
+//                createPlayers(returnedObject, team1PlayerViews);
 //                autoSelectPlayer(returnedObject.get(0));
 //
 //                LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
 //                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
-//                        views.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+//                        team1PlayerViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
 //
-//                        for (View v : views) {
+//                        for (View v : team1PlayerViews) {
 //                            layout.addView(v);
 //                        }
-//                        changePlayer(views);
+//                        changePlayer(team1PlayerViews);
 //                    }
 //                });
 //            }
@@ -133,13 +156,21 @@ public class LivePlayerStatistics extends Fragment {
 
     public void changePlayer(ArrayList<View> views) {
 
-        for (View v: views){
+        for (View v : views) {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-                    for (View other: views){
-                        if(!other.equals(v)){
+                    int index = views.indexOf(v);
+                    try {
+                        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this, "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + team1Players.get(index).getImagePath(), team1Players.get(index).getName(), binding.selectedPlayerLayout.getRoot());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    for (View other : views) {
+                        if (!other.equals(v)) {
                             other.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.statistics_background));
                         }
                     }
@@ -147,5 +178,9 @@ public class LivePlayerStatistics extends Fragment {
             });
         }
 
+    }
+
+    public HashMap<String, View> getMapOfStatistics() {
+        return mapOfStatistics;
     }
 }

@@ -38,7 +38,7 @@ public class UIHandler {
                 nameTextView.setText(name);
                 Picasso.get()
                         .load(imageUrl)
-                        .resize(38, 38)
+                        .resize(20, 20)
                         .centerCrop()
                         .into(image);
             }
@@ -64,7 +64,7 @@ public class UIHandler {
 
     public static void updateTeamImage(Fragment fragment, Team team, ImageView image) throws IOException, InterruptedException, NullPointerException {
         updateTeamImage(fragment,
-                "http://192.168.1.6/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
+                "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
                 image);
     }
 
@@ -74,7 +74,7 @@ public class UIHandler {
             public void run() {
                 Picasso.get()
                         .load(imageUrl)
-                        .resize(38, 38)
+                        .resize(20, 20)
                         .centerCrop()
                         .into(image);
             }

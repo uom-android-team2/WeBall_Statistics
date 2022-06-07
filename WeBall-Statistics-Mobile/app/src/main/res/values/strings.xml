@@ -60,13 +60,12 @@
         <item>Total twopointer</item>
         <item>Succesful threepointer</item>
         <item>Total threepointer</item>
-        <item>Steel</item>
+        <item>Steal</item>
         <item>Assist</item>
         <item>Block</item>
         <item>Rebound</item>
         <item>Foul</item>
         <item>Turnover</item>
-        <item>Minutes</item>
     </string-array>
 
 

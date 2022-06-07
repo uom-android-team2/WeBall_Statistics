@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,30 +15,32 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
+import uom.team2.weball_statistics.Model.TeamLiveStatistics;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 
 /*
  * @author Leonard Pepa ics20033
  */
-public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatistics>{
+public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatistics> {
 
-    private DatabaseReference databaseReference;
     public static DAOLivePlayerStatistics instance;
+    private final DatabaseReference databaseReference;
 
     private DAOLivePlayerStatistics() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(PlayerLiveStatistics.class.getSimpleName());
     }
 
-    public static DAOLivePlayerStatistics getInstance(){
-        if(instance == null){
+    public static DAOLivePlayerStatistics getInstance() {
+        if (instance == null) {
             instance = new DAOLivePlayerStatistics();
         }
         return instance;
     }
 
-    public void setDataChangeListener(LiveGameStatistics fragment, int matchId, int playerId) {
+    public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int playerId) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -46,12 +49,26 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                PlayerLiveStatistics playerLiveStatistics = snapshot.child("match_id: " + matchId).child("player_id: " + playerId).getValue(PlayerLiveStatistics.class);
-                HashMap<String, View> mapof = fragment.getMapOfStatistics();
+                DAOLiveTeamService.getInstance().get(matchId, 1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
+                        PlayerLiveStatistics playerLiveStatistics = snapshot.child("match_id: " + matchId).child("player_id: " + playerId).getValue(PlayerLiveStatistics.class);
+                        HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
-                for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
+                        for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
+                            if (mapof.get(statistic.name()) != null) {
+                                UIHandler.updateProgressBarLayoutTeam1(fragment,
+                                        mapof,
+                                        statistic,
+                                        LiveStatisticsEnum.getStatisticValueByName(teamLiveStatistics, statistic),
+                                        LiveStatisticsEnum.getStatisticValueByName(playerLiveStatistics, statistic)
+                                );
+                            }
 
-                }
+                        }
+                    }
+                });
 
 
             }

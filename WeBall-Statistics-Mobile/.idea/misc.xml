@@ -3,18 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_bottom_button.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_expanded_leaders_stat.xml" value="0.1" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_leaders_stats.xml" value="0.1" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_player_layout.xml" value="0.2" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.264" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_rank_tab.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_shared_tab_container.xml" value="0.1" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_stat_title.xml" value="0.1" />
+        <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/WB/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_top_player_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/content_main.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_login.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/USER/Desktop/University/Semester-6/Android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/menu/menu_main.xml" value="0.1796875" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout_general.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout_guest.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout_landlord.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_progress.xml" value="0.3392210144927536" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/match_information_layout.xml" value="0.3392210144927536" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/quarter_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/drawable/bottom_round_layout.xml" value="0.207" />
         <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/drawable/tab_color_selector.xml" value="0.207" />
         <entry key="..\:/Users/leop/Desktop/University/Semester-6/android/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/completed_match_stats.xml" value="0.23125" />
@@ -44,5 +47,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

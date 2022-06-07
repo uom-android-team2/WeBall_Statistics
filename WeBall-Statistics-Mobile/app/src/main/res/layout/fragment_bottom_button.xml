@@ -8,7 +8,7 @@
     android:background="@drawable/bottom_round_layout">
 
     <ImageButton
-        android:id="@+id/expButton"
+        android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:background="#00FFFFFF"

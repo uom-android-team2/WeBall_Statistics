@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Match;
@@ -21,6 +24,7 @@ import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.MatchService;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
 /**
@@ -46,6 +50,11 @@ public class AdminsView extends Fragment {
     private Player playerObjChecked;
     private Team teamObj;
 
+    private Team teamLand;
+    private Team teamGuest;
+
+
+    private Match m=new Match( 1,  null,  null, new Date(), Status.UPCOMING );
 
 
 
@@ -111,8 +120,14 @@ public class AdminsView extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //put images of the two teams
+        //teamLand=match.getTeamLandlord();
+        //teamGuest=match.getGuest();
+       // String badgeLand=teamLand.getBadgePath();
+      //  String badgeGuest=teamGuest.getBadgePath();
 
-
+        //binding.team1Banner.setImageURI(Uri.parse(badgeLand));
+        //binding.team2Banner.setImageURI(Uri.parse(badgeGuest));
 
 
 
@@ -169,6 +184,7 @@ public class AdminsView extends Fragment {
             }
         });
 
+
 //Start Button
         binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,9 +197,17 @@ public class AdminsView extends Fragment {
                     started=true;
                     binding.startButton.setText("End");
                     binding.pauseButton.setEnabled(true);
-                    match.setStatus(Status.ONGOING);
+                    m.setStatus(Status.ONGOING);
+                    m.setProgress();
+                    MatchService ms=new MatchService();
+                    try {
+                        ms.statusUpdate(m);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
+                //end button
                 else{
                     binding.clock.stop();
                     binding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
@@ -192,7 +216,15 @@ public class AdminsView extends Fragment {
                     binding.pauseButton.setEnabled(false);
                     binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                     binding.pauseButton.setText("Pause/Continue");
-                    match.setStatus(Status.COMPLETED);
+                    m.setStatus(Status.COMPLETED);
+
+                    m.setCompleted();
+                    MatchService ms=new MatchService();
+                    try {
+                        ms.statusUpdate(m);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -233,13 +265,7 @@ public class AdminsView extends Fragment {
                 popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1);
                 ppv.show();
 
-                //for undo button
-                undoButtonStack.push(0);
-                if(!teamSelected){
-                    undoTeamStack.push(landLord);
-                }else{
-                    undoTeamStack.push(guest);
-                }
+
 
 
 
@@ -361,6 +387,13 @@ public class AdminsView extends Fragment {
                 //emfanise to popup
                 SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj);
                 ppv.show();
+
+                //refresh the players
+                if(teamSelected){
+                    binding.team2Banner.callOnClick();
+                }else{
+                    binding.team1Banner.callOnClick();
+                }
             }
         });
 

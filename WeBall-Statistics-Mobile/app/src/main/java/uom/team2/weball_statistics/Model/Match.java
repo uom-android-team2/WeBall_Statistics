@@ -21,6 +21,8 @@ public class Match {
     private Team guest; //Team away
     private Date matchDate;
     private Status status; // UPCOMING, ONGOING, COMPLETED
+    private boolean progress=false;
+    private boolean completed=false;
     private ArrayList<Action> actions;
 
     //Will added fields specified for comments and progress to appear them after the match completed
@@ -80,5 +82,14 @@ public class Match {
 
     public ArrayList<Action> getActions() {
         return actions;
+    }
+
+    public void setProgress(){
+        progress=true;
+    }
+
+    public void setCompleted(){
+        
+        completed=true;
     }
 }

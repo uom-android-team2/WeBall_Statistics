@@ -42,6 +42,7 @@ import uom.team2.weball_statistics.Model.Coach;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerPosition;
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -69,15 +70,16 @@ public class AdminsView extends Fragment {
     private Button start_end_button;
     private long pauseOffset;
     private boolean started=false;
-    private boolean teamSelected =false;
+    private boolean team1Selected =true;
+    private boolean team2Selected =false;
     private int playerChecked=1;
 
     private Stack<Team> undoTeamStack=new Stack<Team>();
     private Stack<Player> undoPlayerStack=new Stack<Player>();
     private Stack<Integer>  undoButtonStack =new Stack<Integer>();
     private Match match;
-    private Team landLord;
-    private Team guest;
+    private Team teamLandlord;
+    private Team teamGuest;
     private ArrayList<Player> keyPlayersLandlord=new ArrayList<Player>();
     private ArrayList<Player> subPlayersLandlord=new ArrayList<Player>();
     private ArrayList<Player> keyPlayersGuest=new ArrayList<Player>();
@@ -85,13 +87,18 @@ public class AdminsView extends Fragment {
 
 
 
-
+    private TextView freeThrowBtn;
+    private TextView twoPointBtn;
+    private TextView threePointBtn;
     private TextView reboundBtn;
     private TextView assistBtn;
     private TextView stealBtn;
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
+    private Player checkedPlayer = null;
+    private ArrayList<Player> playersTeamLandlord = new ArrayList<Player>();
+    private ArrayList<Player> playersTeamGuest = new ArrayList<Player>();
 
 
 
@@ -159,15 +166,13 @@ public class AdminsView extends Fragment {
 
 
 
-
-
-
 //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
     // Banner1
         binding.team1Banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                teamSelected=false;
+                team1Selected=true;
+                team2Selected = false;
 
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape =  new GradientDrawable();
@@ -180,7 +185,7 @@ public class AdminsView extends Fragment {
 
 
                 //Load data for this team
-                landLord=match.getTeamLandlord();
+                //teamLandlord=match.getTeamLandlord();
 
                 //Load the data of the first team players.
 
@@ -193,7 +198,8 @@ public class AdminsView extends Fragment {
             public void onClick(View view) {
 
 
-                teamSelected=true;
+                team1Selected=false;
+                team2Selected = true;
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape = new GradientDrawable();
                 shape.setCornerRadius(75);
@@ -204,7 +210,7 @@ public class AdminsView extends Fragment {
                 binding.team1Banner.setBackgroundColor(0x00000000);
 
                 //Load data for this team
-                guest=match.getGuest();
+                teamGuest=match.getGuest();
                 //Load the data of the second team players.
 
             }
@@ -264,51 +270,9 @@ public class AdminsView extends Fragment {
             }
         });
 
-//Freethrow Button
-        binding.freethrowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1);
-                ppv.show();
-
-                //for undo button
-                undoButtonStack.push(0);
-                if(!teamSelected){
-                    undoTeamStack.push(landLord);
-                }else{
-                    undoTeamStack.push(guest);
-                }
 
 
-
-            }
-
-        });
-
-//Two Points Button
-        binding.twoPointerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupViewTwoPoints ppv=new popupViewTwoPoints(getActivity(),2);
-                ppv.show();
-            }
-        });
-
-//Three Points Button
-        binding.threePointerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupViewThreePoints ppv=new popupViewThreePoints(getActivity(),3);
-                ppv.show();
-            }
-        });
-
-
-
-
-
-//Player Buttons-
+      //Player Buttons-
         binding.player1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -404,6 +368,9 @@ public class AdminsView extends Fragment {
         });
 
 
+        freeThrowBtn = binding.freethrowButton;
+        twoPointBtn = binding.twoPointerButton;
+        threePointBtn = binding.threePointerButton;
         reboundBtn = binding.reboundButton;
        assistBtn = binding.assistButton;
        stealBtn = binding.stealButton;
@@ -413,70 +380,97 @@ public class AdminsView extends Fragment {
 
         DBDataRecovery dataRecovery = new DBDataRecovery();
         try {
-            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "8");
-            reboundBtn.setOnClickListener(e -> updateRebound(playerStats,dataRecovery));
-            assistBtn.setOnClickListener(e -> updateAssist(playerStats,dataRecovery));
-            stealBtn.setOnClickListener(e -> updateSteal(playerStats,dataRecovery));
-            blockBtn.setOnClickListener(e -> updateBlock(playerStats,dataRecovery));
-            foulBtn.setOnClickListener(e -> updateFoul(playerStats,dataRecovery));
-            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats,dataRecovery));
+            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
+            Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
+            threePointBtn.setOnClickListener(e -> {
+                popupViewThreePoints ppv=new popupViewThreePoints(getActivity(),3,playerStats,teamStats,dataRecovery);
+                ppv.show();
+            });
+            freeThrowBtn.setOnClickListener(e ->{
+                popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1,playerStats,teamStats,dataRecovery);
+                ppv.show();
+
+            });
+            twoPointBtn.setOnClickListener(e -> {
+                popupViewTwoPoints ppv= new popupViewTwoPoints(getActivity(),2,playerStats,teamStats,dataRecovery);
+                ppv.show();
+            });
+            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats,dataRecovery));
+            assistBtn.setOnClickListener(e -> updateAssist(playerStats,teamStats,dataRecovery));
+            stealBtn.setOnClickListener(e -> updateSteal(playerStats,teamStats,dataRecovery));
+            blockBtn.setOnClickListener(e -> updateBlock(playerStats,teamStats,dataRecovery));
+            foulBtn.setOnClickListener(e -> updateFoul(playerStats,teamStats,dataRecovery));
+            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats,teamStats,dataRecovery));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateAssist(Stats playerStats,DBDataRecovery dbDataRecovery){
+
+    private void updateAssist(Stats playerStats,Stats teamStats,DBDataRecovery dbDataRecovery){
         playerStats.setTotalAssists();
+        teamStats.setTotalAssists();
        // PlayerLiveStatistics p = new PlayerLiveStatistics(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
        // p.setAssist(playerStats.getTotalAssists());
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
            // DAOLivePlayerStatistics.getInstace().update(p);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateRebound(Stats playerStats,DBDataRecovery dbDataRecovery){
+    private void updateRebound(Stats playerStats,Stats teamStats,DBDataRecovery dbDataRecovery){
         playerStats.setTotalRebounds();
+        teamStats.setTotalRebounds();
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateSteal(Stats playerStats,DBDataRecovery dbDataRecovery){
+    private void updateSteal(Stats playerStats,Stats teamStats,DBDataRecovery dbDataRecovery){
         playerStats.setTotalSteels();
+        teamStats.setTotalSteels();
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateBlock(Stats playerStats,DBDataRecovery dataRecovery){
+    private void updateBlock(Stats playerStats,Stats teamStats,DBDataRecovery dataRecovery){
         playerStats.setTotalBlock();
+        teamStats.setTotalBlock();
         try {
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateFoul(Stats playerStats,DBDataRecovery dbDataRecovery){
+    private void updateFoul(Stats playerStats,Stats teamStats, DBDataRecovery dbDataRecovery){
         playerStats.setTotalFouls();
+        teamStats.setTotalFouls();
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateTurnover(Stats playerStats,DBDataRecovery dbDataRecovery){
+    private void updateTurnover(Stats playerStats,Stats teamStats,DBDataRecovery dbDataRecovery){
         playerStats.setTotalTurnovers();
+        teamStats.setTotalTurnovers();
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

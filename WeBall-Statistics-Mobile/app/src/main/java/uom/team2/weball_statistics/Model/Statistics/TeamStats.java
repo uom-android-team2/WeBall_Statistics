@@ -13,7 +13,7 @@ import uom.team2.weball_statistics.Model.Config;
 
 public class TeamStats extends Stats {
 
-    protected int teamId;
+    protected int team_id;
     private int totalMatches;
     private int wins;
     private int loses;
@@ -24,9 +24,9 @@ public class TeamStats extends Stats {
         isMatchId = true;
     }
 
-    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int teamId, int totalMatches, int wins, int loses) {
+    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int team_id, int totalMatches, int wins, int loses) {
         super(successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
-        this.teamId = teamId;
+        this.team_id = team_id;
         this.totalMatches = totalMatches;
         this.wins = wins;
         this.loses = loses;
@@ -54,7 +54,7 @@ public class TeamStats extends Stats {
                 }
             }
 
-            teamId = Integer.parseInt(hashMapData.get("team_id"));
+            team_id = Integer.parseInt(hashMapData.get("team_id"));
             if(!isMatchId){
                 totalMatches = Integer.parseInt(hashMapData.get("total_matches"));
                 wins = Integer.parseInt(hashMapData.get("win"));
@@ -112,6 +112,6 @@ public class TeamStats extends Stats {
     public  int getLoses(){return loses;}
 
     public int getTeamId() {
-        return teamId;
+        return team_id;
     }
 }

@@ -333,43 +333,7 @@ public class AdminsView extends Fragment {
 
             }
         });
-
-//Freethrow Button
-        binding.freethrowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1);
-                ppv.show();
-
-
-
-
-
-            }
-
-        });
-
-//Two Points Button
-        binding.twoPointerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupViewTwoPoints ppv=new popupViewTwoPoints(getActivity(),2);
-                ppv.show();
-            }
-        });
-
-//Three Points Button
-        binding.threePointerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupViewThreePoints ppv=new popupViewThreePoints(getActivity(),3);
-                ppv.show();
-            }
-        });
-
-
-
+        
 
 
 //Player Buttons-

@@ -31,8 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -54,6 +54,7 @@ import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
 
+import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
@@ -70,10 +71,7 @@ public class AdminsView extends Fragment {
     private Button start_end_button;
     private long pauseOffset;
     private boolean started=false;
-    private boolean team1Selected =true;
-    private boolean team2Selected =false;
     private int playerChecked=1;
-
     private Stack<Team> undoTeamStack=new Stack<Team>();
     private Stack<Player> undoPlayerStack=new Stack<Player>();
     private Stack<Integer>  undoButtonStack =new Stack<Integer>();
@@ -84,9 +82,6 @@ public class AdminsView extends Fragment {
     private ArrayList<Player> subPlayersLandlord=new ArrayList<Player>();
     private ArrayList<Player> keyPlayersGuest=new ArrayList<Player>();
     private ArrayList<Player> subPlayersGuest=new ArrayList<Player>();
-
-
-
     private TextView freeThrowBtn;
     private TextView twoPointBtn;
     private TextView threePointBtn;
@@ -96,11 +91,14 @@ public class AdminsView extends Fragment {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
-    private Player checkedPlayer = null;
     private ArrayList<Player> playersTeamLandlord = new ArrayList<Player>();
     private ArrayList<Player> playersTeamGuest = new ArrayList<Player>();
-
-
+    private ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamLanLord = new ArrayList<PlayerLiveStatistics>();
+    private ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamGuest = new ArrayList<PlayerLiveStatistics>();
+    private ArrayList<TeamLiveStatistics> teamLiveStatisticsLanLord = new ArrayList<TeamLiveStatistics>();
+    private ArrayList<TeamLiveStatistics> teamLiveStatisticsGuest = new ArrayList<TeamLiveStatistics>();
+    private PlayerLiveStatistics playerCheckedLiveStatistics = null;
+    //private TeamLiveStatistics teamCheckedLiveStatistics = null;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -132,8 +130,6 @@ public class AdminsView extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
 
-
-
         return fragment;
     }
 
@@ -142,7 +138,6 @@ public class AdminsView extends Fragment {
         super.onCreate(savedInstanceState);
         
     }
-
 
 
     @Override
@@ -157,22 +152,20 @@ public class AdminsView extends Fragment {
     }
 
 
-
-
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        match = new Match(1,new Team(1,"jif", "kfsd", "euj"), new Team(2,"fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
+        teamLandlord = match.getTeamLandlord();
+        teamGuest = match.getGuest();
 
 
-
-//Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
-    // Banner1
+        //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
+        // Banner1
         binding.team1Banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                team1Selected=true;
-                team2Selected = false;
+
 
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape =  new GradientDrawable();
@@ -185,21 +178,19 @@ public class AdminsView extends Fragment {
 
 
                 //Load data for this team
-                //teamLandlord=match.getTeamLandlord();
+                teamLandlord=match.getTeamLandlord();
 
                 //Load the data of the first team players.
 
             }
         });
 
-    // Banner2
+        // Banner2
         binding.team2Banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                team1Selected=false;
-                team2Selected = true;
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape = new GradientDrawable();
                 shape.setCornerRadius(75);
@@ -216,7 +207,7 @@ public class AdminsView extends Fragment {
             }
         });
 
-//Start Button
+        //Start Button
         binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,7 +234,7 @@ public class AdminsView extends Fragment {
 
         });
 
-//Pause Button
+        //Pause Button
         binding.pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,7 +253,7 @@ public class AdminsView extends Fragment {
             }
         });
 
-//Undo Button
+       //Undo Button
         binding.undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -271,8 +262,7 @@ public class AdminsView extends Fragment {
         });
 
 
-
-      //Player Buttons-
+        //Player Buttons-
         binding.player1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,6 +279,7 @@ public class AdminsView extends Fragment {
 
             }
         });
+
         binding.player2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -301,10 +292,12 @@ public class AdminsView extends Fragment {
                 if(!(playerChecked==2)){
                     deleteThePreviousBackground();
                     playerChecked=2;
+
                 }
 
             }
         });
+
         binding.player3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -317,10 +310,12 @@ public class AdminsView extends Fragment {
                 if(!(playerChecked==3)){
                     deleteThePreviousBackground();
                     playerChecked=3;
+
                 }
 
             }
         });
+
         binding.player4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -333,10 +328,12 @@ public class AdminsView extends Fragment {
                 if(!(playerChecked==4)){
                     deleteThePreviousBackground();
                     playerChecked=4;
+
                 }
 
             }
         });
+
         binding.player5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -349,13 +346,15 @@ public class AdminsView extends Fragment {
                 if(!(playerChecked==5)){
                     deleteThePreviousBackground();
                     playerChecked=5;
+
                 }
+
 
 
             }
         });
 
-//Substitution Button
+        //Substitution Button
         binding.substitutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -366,7 +365,6 @@ public class AdminsView extends Fragment {
                 ppv.show();
             }
         });
-
 
         freeThrowBtn = binding.freethrowButton;
         twoPointBtn = binding.twoPointerButton;
@@ -379,33 +377,34 @@ public class AdminsView extends Fragment {
        turnoverBtn = binding.turnoverButton;
 
         DBDataRecovery dataRecovery = new DBDataRecovery();
-        try {
-            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
-            Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
-            threePointBtn.setOnClickListener(e -> {
-                popupViewThreePoints ppv=new popupViewThreePoints(getActivity(),3,playerStats,teamStats,dataRecovery);
-                ppv.show();
-            });
-            freeThrowBtn.setOnClickListener(e ->{
-                popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1,playerStats,teamStats,dataRecovery);
-                ppv.show();
 
-            });
-            twoPointBtn.setOnClickListener(e -> {
-                popupViewTwoPoints ppv= new popupViewTwoPoints(getActivity(),2,playerStats,teamStats,dataRecovery);
-                ppv.show();
-            });
-            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats,dataRecovery));
-            assistBtn.setOnClickListener(e -> updateAssist(playerStats,teamStats,dataRecovery));
-            stealBtn.setOnClickListener(e -> updateSteal(playerStats,teamStats,dataRecovery));
-            blockBtn.setOnClickListener(e -> updateBlock(playerStats,teamStats,dataRecovery));
-            foulBtn.setOnClickListener(e -> updateFoul(playerStats,teamStats,dataRecovery));
-            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats,teamStats,dataRecovery));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+            try {
+                Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
+                Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
+                threePointBtn.setOnClickListener(e -> {
+                    popupViewThreePoints ppv=new popupViewThreePoints(getActivity(),3,playerStats,teamStats,dataRecovery);
+                    ppv.show();
+                });
+                freeThrowBtn.setOnClickListener(e ->{
+                    popupViewOnePoint ppv=new popupViewOnePoint(getActivity(),1,playerStats,teamStats,dataRecovery);
+                    ppv.show();
+
+                });
+                twoPointBtn.setOnClickListener(e -> {
+                    popupViewTwoPoints ppv= new popupViewTwoPoints(getActivity(),2,playerStats,teamStats,dataRecovery);
+                    ppv.show();
+                });
+                reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats,dataRecovery));
+                assistBtn.setOnClickListener(e -> updateAssist(playerStats,teamStats,dataRecovery));
+                stealBtn.setOnClickListener(e -> updateSteal(playerStats,teamStats,dataRecovery));
+                blockBtn.setOnClickListener(e -> updateBlock(playerStats,teamStats,dataRecovery));
+                foulBtn.setOnClickListener(e -> updateFoul(playerStats,teamStats,dataRecovery));
+                turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats,teamStats,dataRecovery));
+
+            } catch (Exception ex) {
+                    ex.printStackTrace();
+            }
     }
-
 
     private void updateAssist(Stats playerStats,Stats teamStats,DBDataRecovery dbDataRecovery){
         playerStats.setTotalAssists();
@@ -476,9 +475,7 @@ public class AdminsView extends Fragment {
         }
     }
 
-
-
-//you call this function when you want to change player
+    //you call this function when you want to change player
     public void deleteThePreviousBackground(){
         if(playerChecked==1){
             binding.player1.setBackgroundColor(0x00000000);
@@ -496,7 +493,6 @@ public class AdminsView extends Fragment {
             binding.player5.setBackgroundColor(0x00000000);
         }
     }
-
 
 
 }

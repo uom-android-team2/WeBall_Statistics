@@ -4,6 +4,7 @@ package uom.team2.weball_statistics.Service;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,7 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveG
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
+import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 /*
  * @author Leonard Pepa ics20033
@@ -76,6 +78,37 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         });
     }
 
+    public void setListenerForPoints(Fragment fragment, MatchHeaderLayoutBinding layoutBinding, int matchId, int teamId1, int teamId2) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // this method is call to get the realtime
+                // updates in the data.
+                // this method is called when the data is
+                // changed in our Firebase console.
+
+
+                TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
+                TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
+
+                if (team1 == null || team2 == null) {
+                    return;
+                }
+
+                int scoreTeam1 = team1.getSuccesful_threepointer() * 3 + team1.getSuccesful_twopointer() * 2 + team1.getSuccessful_freethrow();
+                int scoreTeam2 = team2.getSuccesful_threepointer() * 3 + team2.getSuccesful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                UIHandler.updateScore(fragment, layoutBinding,scoreTeam1, scoreTeam2);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // calling on cancelled method when we receive
+                // any error or we are not able to get the data.
+                throw new RuntimeException(error.getMessage());
+            }
+        });
+    }
 
     public void setDataChangeListener(LiveGameStatistics fragment, int matchId, int teamId1, int teamId2) {
         databaseReference.addValueEventListener(new ValueEventListener() {

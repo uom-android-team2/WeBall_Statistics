@@ -15,12 +15,23 @@ import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 /*
  * @author Leonard Pepa ics20033
  */
 public class UIHandler {
 
+    public static void updateScore(Fragment fragment, MatchHeaderLayoutBinding layoutBinding, int team1Score, int team2Score) {
+
+        fragment.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView textView = layoutBinding.scoreText;
+                textView.setText(team1Score + " - " + team2Score);
+            }
+        });
+    }
 
     public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
         updateTeamImageInMatchHeader(fragment,

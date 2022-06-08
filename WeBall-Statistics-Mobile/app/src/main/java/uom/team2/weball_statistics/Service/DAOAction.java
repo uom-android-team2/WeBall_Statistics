@@ -42,8 +42,12 @@ public class DAOAction implements DAOCRUDService <Action> {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Action action = data.getValue(Action.class);
+                            System.out.println(action.getActionDesc());
                             if (action.getBelongsTo() == BelongsTo.HOME) {
                                 liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
                             } else if (action.getBelongsTo() == BelongsTo.GUEST) {
@@ -98,7 +102,7 @@ public class DAOAction implements DAOCRUDService <Action> {
     }
 
     public Task<Void> insert(Action actionData, Match matchData) {
-        return databaseReference.child("Actions for match with id: " + matchData.getId()).child("Action: " + actionData.getId()).setValue(actionData);
+        return databaseReference.child("Actions for match with id: " + matchData.getId()).child(actionData.getId() + "").setValue(actionData);
     }
 
     @Override

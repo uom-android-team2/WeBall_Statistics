@@ -32,7 +32,10 @@ public class CompletedMatchStats extends Fragment {
         binding = CompletedMatchStatsBinding.inflate(inflater, container, false);
 
         completedMatchStatsUIController.fillMatchHeaderInformation(this);
-        completedMatchStatsUIController.fillCompletedCuarterInformation(this);
+        completedMatchStatsUIController.fillCompletedQuarterInformation(this);
+        completedMatchStatsUIController.fillCompletedMatchTeamPlayersStats(this);
+        completedMatchStatsUIController.fillCompletedMatchLeaders(this);
+        completedMatchStatsUIController.fillCompletedMatchTeamStats(this);
 
         return binding.getRoot();
     }

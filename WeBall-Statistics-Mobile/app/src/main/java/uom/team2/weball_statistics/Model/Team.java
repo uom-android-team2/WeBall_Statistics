@@ -30,7 +30,7 @@ public class Team {
         this.teamCoach = teamCoach;
         this.teamPlayers = teamPlayers;
         this.championshipIn = championshipIn;
-
+        setPlayersInKeyAndSub();
     }
 
     public Team(int id, String teamName, String teamCity, String badgePath) {
@@ -38,6 +38,17 @@ public class Team {
         this.teamName = teamName;
         this.teamCity = teamCity;
         this.badgePath = badgePath;
+
+    }
+
+    public void setPlayersInKeyAndSub(){
+        for (int i=0;i<teamPlayers.size();i++){
+            if (i<5){
+                keyPlayers.add(teamPlayers.get(i));
+            }else{
+                subPlayers.add(teamPlayers.get(i));
+            }
+        }
     }
 
     public int getId() {
@@ -107,5 +118,13 @@ public class Team {
     public void setSubPlayers(int k,Player p){
         this.subPlayers.remove(k);
         this.subPlayers.add(k,p);    }
+
+    public void addPlayerToKey(Player p){
+        keyPlayers.add(p);
+    }
+    public void addPlayerToSub(Player p){
+        subPlayers.add(p);
+    }
+
 
 }

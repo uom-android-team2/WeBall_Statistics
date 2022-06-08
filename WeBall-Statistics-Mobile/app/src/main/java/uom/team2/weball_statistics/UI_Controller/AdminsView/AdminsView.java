@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Stack;
 
@@ -40,7 +41,7 @@ public class AdminsView extends Fragment {
     private long pauseOffset;
     private boolean started=false;
     private boolean teamSelected =false;
-    private int playerChecked=1;
+    private int playerChecked=0;
     private Stack<Team> undoTeamStack=new Stack<Team>();
     private Stack<Player> undoPlayerStack=new Stack<Player>();
     private Stack<Integer>  undoButtonStack =new Stack<Integer>();
@@ -120,6 +121,37 @@ public class AdminsView extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        //test
+        match = new Match(1,new Team(1,"jif", "kfsd", "euj"), new Team(2,"fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
+        landLord = match.getTeamLandlord();
+        teamGuest = match.getGuest();
+
+        ArrayList<Player> team1 = new ArrayList<>();
+        ArrayList<Player>  team2 = new ArrayList<>();
+        team1.add(new Player("tp11","test"));
+        team1.add(new Player("tp12","test"));
+        team1.add(new Player("tp13","test"));
+        team1.add(new Player("tp14","test"));
+        team1.add(new Player("tp15","test"));
+        team2.add(new Player("tp21","test"));
+        team2.add(new Player("tp22","test"));
+        team2.add(new Player("tp23","test"));
+        team2.add(new Player("tp68","test"));
+        team2.add(new Player("tp79","test"));
+
+        for(int i=0;i<team1.size();i++){
+            landLord.addPlayerToKey(team1.get(i));
+        }
+        for(int i=0;i<team2.size();i++){
+            teamGuest.addPlayerToKey(team2.get(i));
+        }
+        for(int i=0;i<team2.size();i++){
+            landLord.addPlayerToSub(team2.get(i));
+        }
+
+        //'
+
         //put images of the two teams
         //teamLand=match.getTeamLandlord();
         //teamGuest=match.getGuest();
@@ -131,6 +163,32 @@ public class AdminsView extends Fragment {
 
 
 
+        //
+
+        //When this page opens, we want to have the landlord team already selected
+        teamSelected=false;
+        teamObj = match.getTeamLandlord();
+        playerObjChecked=teamObj.getKeyPlayers().get(0);
+
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius( 75 );
+        shape.setColor(getResources().getColor(R.color.alt_grey));
+        binding.team1Banner.setBackground(shape);
+        GradientDrawable shape2 =  new GradientDrawable();
+        shape2.setCornerRadius( 75 );
+        shape2.setColor(getResources().getColor(R.color.alt_grey));
+        binding.player1.setBackground(shape2);
+        playerChecked=1;
+
+
+
+
+        //Load data for this team
+
+
+        //Load the data of the first team players.
+
+
 
 //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
     // Banner1
@@ -140,6 +198,14 @@ public class AdminsView extends Fragment {
                 teamSelected=false;
                 teamObj = match.getTeamLandlord();
 
+                //When the banner changes ,automatically select the first player of the list.
+                deleteThePreviousBackground();
+                GradientDrawable shape2 =  new GradientDrawable();
+                shape2.setCornerRadius( 75 );
+                shape2.setColor(getResources().getColor(R.color.alt_grey));
+                binding.player1.setBackground(shape2);
+                playerChecked=1;
+                playerObjChecked=teamObj.getKeyPlayers().get(0);
 
 
                 //put background color to the banner so the admin knows which team is selected
@@ -164,8 +230,19 @@ public class AdminsView extends Fragment {
         binding.team2Banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 teamSelected=true;
                 teamObj =match.getGuest();
+
+                //When the banner changes ,automatically select the first player of the list.
+                deleteThePreviousBackground();
+                GradientDrawable shape2 =  new GradientDrawable();
+                shape2.setCornerRadius( 75 );
+                shape2.setColor(getResources().getColor(R.color.alt_grey));
+                binding.player1.setBackground(shape2);
+                playerChecked=1;
+                playerObjChecked=teamObj.getKeyPlayers().get(0);
+
 
 
                 //put background color to the banner so the admin knows which team is selected
@@ -300,14 +377,18 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 if(!(playerChecked==1)){
+                    deleteThePreviousBackground();
                     GradientDrawable shape =  new GradientDrawable();
                     shape.setCornerRadius( 75 );
                     shape.setColor(getResources().getColor(R.color.alt_grey));
                     view.setBackground(shape);
 
                     playerChecked=1;
+
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-                    deleteThePreviousBackground();
+
+                    //
+                    binding.freethrowButton.setText(playerObjChecked.getName());
                 }
 
             }
@@ -316,6 +397,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 if(!(playerChecked==2)){
+                    deleteThePreviousBackground();
                     GradientDrawable shape =  new GradientDrawable();
                     shape.setCornerRadius( 75 );
                     shape.setColor(getResources().getColor(R.color.alt_grey));
@@ -323,7 +405,9 @@ public class AdminsView extends Fragment {
 
                     playerChecked=2;
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-                    deleteThePreviousBackground();
+
+                    //
+                    binding.freethrowButton.setText(playerObjChecked.getName());
                 }
 
             }
@@ -332,6 +416,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 if(!(playerChecked==3)){
+                    deleteThePreviousBackground();
                     GradientDrawable shape =  new GradientDrawable();
                     shape.setCornerRadius( 75 );
                     shape.setColor(getResources().getColor(R.color.alt_grey));
@@ -339,7 +424,9 @@ public class AdminsView extends Fragment {
 
                     playerChecked=3;
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-                    deleteThePreviousBackground();
+
+                    //
+                    binding.freethrowButton.setText(playerObjChecked.getName());
                 }
 
             }
@@ -348,6 +435,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 if(!(playerChecked==4)){
+                    deleteThePreviousBackground();
                     GradientDrawable shape =  new GradientDrawable();
                     shape.setCornerRadius( 75 );
                     shape.setColor(getResources().getColor(R.color.alt_grey));
@@ -355,7 +443,9 @@ public class AdminsView extends Fragment {
 
                     playerChecked=4;
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-                    deleteThePreviousBackground();
+
+                    //
+                    binding.freethrowButton.setText(playerObjChecked.getName());
                 }
 
             }
@@ -364,6 +454,7 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 if(!(playerChecked==5)){
+                    deleteThePreviousBackground();
                     GradientDrawable shape =  new GradientDrawable();
                     shape.setCornerRadius( 75 );
                     shape.setColor(getResources().getColor(R.color.alt_grey));
@@ -371,7 +462,9 @@ public class AdminsView extends Fragment {
 
                     playerChecked=5;
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-                    deleteThePreviousBackground();
+
+                    //
+                    binding.freethrowButton.setText(playerObjChecked.getName());
                 }
 
 
@@ -385,7 +478,7 @@ public class AdminsView extends Fragment {
                 //steile ton paikti
 
                 //emfanise to popup
-                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj);
+                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj,playerChecked);
                 ppv.show();
 
                 //refresh the players

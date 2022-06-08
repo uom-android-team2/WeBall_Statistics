@@ -24,12 +24,14 @@ public class SubstitutionPopupView extends Dialog implements
     private Player helperVariable;
     private Player swapPlayer;
     private Team team;
+    private int playerChecked;
 
 
-    public SubstitutionPopupView(Activity a,Player p, Team t) {
+    public SubstitutionPopupView(Activity a,Player p, Team t,int pChecked) {
         super(a);
         swapPlayer=p;
         team=t;
+        this.playerChecked=pChecked-1;
         // TODO Auto-generated constructor stub
         this.c = a;
     }
@@ -44,9 +46,9 @@ public class SubstitutionPopupView extends Dialog implements
         xbutton=(TextView) findViewById(R.id.x_button);
         sub1 = (TextView) findViewById(R.id.sub1_text);
         sub2 = (TextView) findViewById(R.id.sub2_text);
-        sub3 = (TextView) findViewById(R.id.sub2_text);
-        sub4 = (TextView) findViewById(R.id.sub2_text);
-        sub5 = (TextView) findViewById(R.id.sub2_text);
+        sub3 = (TextView) findViewById(R.id.sub3_text);
+        sub4 = (TextView) findViewById(R.id.sub4_text);
+        sub5 = (TextView) findViewById(R.id.sub5_text);
 
 
         sub1.setText(team.getSubPlayers().get(0).getName());
@@ -82,34 +84,34 @@ public class SubstitutionPopupView extends Dialog implements
 
                 helperVariable=team.getSubPlayers().get(0);
                 team.setSubPlayers(0,swapPlayer);
-                team.setKeyPlayers(0,helperVariable);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
                 dismiss();
                 break;
             case R.id.sub2_text:
                 helperVariable=team.getSubPlayers().get(1);
                 team.setSubPlayers(1,swapPlayer);
-                team.setKeyPlayers(1,helperVariable);
+                team.setKeyPlayers(playerChecked,helperVariable);
                 dismiss();
                 break;
             case R.id.sub3_text:
                 helperVariable=team.getSubPlayers().get(2);
                 team.setSubPlayers(2,swapPlayer);
-                team.setKeyPlayers(2,helperVariable);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
                 dismiss();
                 break;
             case R.id.sub4_text:
                 helperVariable=team.getSubPlayers().get(3);
                 team.setSubPlayers(3,swapPlayer);
-                team.setKeyPlayers(3,helperVariable);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
                 dismiss();
                 break;
             case R.id.sub5_text:
                 helperVariable=team.getSubPlayers().get(4);
                 team.setSubPlayers(4,swapPlayer);
-                team.setKeyPlayers(4,helperVariable);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
                 dismiss();
                 break;

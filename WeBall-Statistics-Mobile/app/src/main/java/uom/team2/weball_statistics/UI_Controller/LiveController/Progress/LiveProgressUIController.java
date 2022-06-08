@@ -88,7 +88,7 @@ public class LiveProgressUIController {
     }
 
     public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match) {
-        MatchInformationLayoutBinding matchInformationLayoutBinding =  liveGameProgress.getBinding().matchInfoInclude;
+        MatchInformationLayoutBinding matchInformationLayoutBinding = liveGameProgress.getBinding().matchInfoInclude;
 
         TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
         refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());

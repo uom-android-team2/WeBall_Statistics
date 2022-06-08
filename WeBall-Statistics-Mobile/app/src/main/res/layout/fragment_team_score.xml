@@ -32,10 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="32dp"
-            android:text="Grades"
+            android:text="Points"
             android:textColor="@color/dark_red"
             android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/totalButton"
+            app:layout_constraintBottom_toTopOf="@+id/scoreTable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,57 +53,11 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toTopOf="@+id/awayButton"
+            app:layout_constraintBottom_toTopOf="@+id/scoreTable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
-        <Button
-            android:id="@+id/totalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_gray"
-            android:paddingBottom="0dp"
-            android:text="Total"
-            android:textColor="#000000"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/homeButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.250" />
-
-        <Button
-            android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_gray"
-            android:paddingBottom="2dp"
-            android:text="Home"
-            android:textColor="#000000"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.250" />
-
-        <Button
-            android:id="@+id/awayButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_gray"
-            android:paddingBottom="2dp"
-            android:text="Away"
-            android:textColor="#000000"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/homeButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.250" />
+            app:layout_constraintTop_toBottomOf="@+id/vertical_divider" />
 
 
         <TableLayout
@@ -115,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeButton">
+            app:layout_constraintTop_toBottomOf="@+id/bestPerPositionButton">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -161,7 +115,7 @@
 
                 <TextView
                     android:padding="3dip"
-                    android:text="G"
+                    android:text="P"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -173,6 +127,7 @@
                 android:layout_height="wrap_content">
 
                 <TableLayout
+                    android:id="@+id/teams_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="0dp"
@@ -180,100 +135,6 @@
                     android:layout_marginEnd="0dp"
                     android:stretchColumns="*">
 
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <include
-                        layout="@layout/team_score_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
                 </TableLayout>
             </ScrollView>
 
@@ -286,7 +147,7 @@
             android:layout_marginEnd="231dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/logo"
-            app:layout_constraintBottom_toTopOf="@+id/homeButton"
+            app:layout_constraintBottom_toTopOf="@+id/bestPerPositionButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -296,18 +157,19 @@
             android:id="@+id/label"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="160dp"
             android:gravity="center_vertical"
             android:text="Basket League"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/teamName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/vertical_divider"
             android:layout_width="0dp"
             android:layout_height="3dp"
             android:background="@color/custom_blue"
@@ -317,12 +179,13 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <View
-            android:id="@+id/divider3"
+            android:id="@+id/horizontal_divider"
             android:layout_width="3dp"
             android:layout_height="0dp"
             android:background="@color/custom_blue"
-            app:layout_constraintBottom_toTopOf="@id/view"
-            app:layout_constraintEnd_toStartOf="@+id/label"
+            app:layout_constraintBottom_toTopOf="@id/vertical_divider"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_divider"
+            app:layout_constraintHorizontal_bias="0.018"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />

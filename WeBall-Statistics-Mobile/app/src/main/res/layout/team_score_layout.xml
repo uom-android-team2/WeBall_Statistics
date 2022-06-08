@@ -31,13 +31,15 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/teamName"
             android:layout_width="wrap_content"
             android:padding="3dip"
-            android:text="Team1"
+            android:text="TeamName"
             android:textAlignment="center"
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/games"
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="16"
@@ -45,6 +47,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/wins"
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="14"
@@ -52,6 +55,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/loses"
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="2"
@@ -59,6 +63,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/points"
             android:layout_width="wrap_content"
             android:padding="3dip"
             android:text="30"

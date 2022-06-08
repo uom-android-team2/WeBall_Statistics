@@ -24,7 +24,6 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.PlayerService;
-import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -88,19 +87,20 @@ public class LivePlayerStatistics extends Fragment {
             @Override
             public void run() {
                 if (finalTempTeam == null || finalTempPlayers.size() == 0 || finalTempViews.size() == 0) {
-                    return;
+                    //do nothing
+                } else {
+                    try {
+                        UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    autoSelectPlayer(finalTempPlayers.get(0));
+                    addPlayers(finalTempViews);
+                    finalTempViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+                    changePlayer(finalTempViews);
                 }
-                try {
-                    UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                autoSelectPlayer(finalTempPlayers.get(0));
-                addPlayers(finalTempViews);
-                finalTempViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-                changePlayer(finalTempViews);
             }
         });
     }

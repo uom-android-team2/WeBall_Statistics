@@ -14,6 +14,7 @@ import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.IP;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 /*
@@ -40,7 +41,7 @@ public class TeamService {
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://" + IP.IP + "/WeBall_Statistics-Backend/API/" + "team.php?id=" + id)
+                            .url(Config.API_URL + Config.TEAM + "?id=" + id)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();
@@ -69,7 +70,7 @@ public class TeamService {
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://" + IP.IP + "/WeBall_Statistics-Backend/API/team.php")
+                            .url(Config.API_URL + Config.TEAM)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();

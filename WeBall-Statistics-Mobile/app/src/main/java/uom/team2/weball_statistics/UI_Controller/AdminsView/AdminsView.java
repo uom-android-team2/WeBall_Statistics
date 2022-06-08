@@ -1,21 +1,10 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.SystemClock;
 import android.util.TypedValue;
@@ -24,37 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Stack;
 
-import uom.team2.weball_statistics.MainActivity;
-import uom.team2.weball_statistics.Model.Championship;
-import uom.team2.weball_statistics.Model.Coach;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
-import uom.team2.weball_statistics.Model.PlayerPosition;
-import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 
 import java.io.IOException;
 
-import uom.team2.weball_statistics.MainActivity;
-import uom.team2.weball_statistics.Model.Config;
-import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
 /**

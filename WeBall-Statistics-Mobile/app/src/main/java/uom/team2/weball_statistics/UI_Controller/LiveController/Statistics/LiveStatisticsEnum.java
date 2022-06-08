@@ -20,8 +20,7 @@ public enum LiveStatisticsEnum {
     block,
     rebound,
     foul,
-    turnover,
-    minutes;
+    turnover;
 
     public static int getStatisticValueByName(TeamLiveStatistics teamLiveStatistics, LiveStatisticsEnum statisticEnum){
         switch (statisticEnum){

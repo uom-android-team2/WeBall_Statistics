@@ -16,14 +16,15 @@ import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsUIHandler;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 
 /*
  * @author Leonard Pepa ics20033
  */
 public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
-    public static DAOLiveTeamService instace;
+    public static DAOLiveTeamService instance;
     private final DatabaseReference databaseReference;
 
     private DAOLiveTeamService() {
@@ -31,12 +32,50 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         databaseReference = db.getReference(TeamLiveStatistics.class.getSimpleName());
     }
 
-    public static DAOLiveTeamService getInstace() {
-        if (instace == null) {
-            instace = new DAOLiveTeamService();
+    public static DAOLiveTeamService getInstance() {
+        if (instance == null) {
+            instance = new DAOLiveTeamService();
         }
-        return instace;
+        return instance;
     }
+
+    public void setDataListenerForPlayer(LivePlayerStatistics fragment, int matchId, int teamId1) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // this method is call to get the realtime
+                // updates in the data.
+                // this method is called when the data is
+                // changed in our Firebase console.
+
+                TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
+                if (team1 == null) {
+                    return;
+                }
+                HashMap<String, View> mapof = fragment.getMapOfStatistics();
+
+                for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
+                    UIHandler.updateProgressBarLayoutTeam2(fragment,
+                            fragment.getMapOfStatistics(),
+                            statistic,
+                            LiveStatisticsEnum.getStatisticValueByName(team1, statistic),
+                            LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
+                    );
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // calling on cancelled method when we receive
+                // any error or we are not able to get the data.
+                throw new RuntimeException(error.getMessage());
+            }
+        });
+    }
+
 
     public void setDataChangeListener(LiveGameStatistics fragment, int matchId, int teamId1, int teamId2) {
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -51,11 +90,15 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
                 TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
 
+                if (team1 == null || team2 == null) {
+                    return;
+                }
+
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                    if(fragment.getMapOfStatistics().get(statistic.name()) != null){
-                        LiveStatisticsUIHandler.updateProgressBarLayoutTeam1(fragment,
+                    if (fragment.getMapOfStatistics().get(statistic.name()) != null) {
+                        UIHandler.updateProgressBarLayoutTeam1(fragment,
                                 fragment.getMapOfStatistics(),
                                 statistic,
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
@@ -63,7 +106,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
                         );
 
-                        LiveStatisticsUIHandler.updateProgressBarLayoutTeam2(fragment,
+                        UIHandler.updateProgressBarLayoutTeam2(fragment,
                                 fragment.getMapOfStatistics(),
                                 statistic,
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
@@ -104,6 +147,10 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
     @Override
     public TeamLiveStatistics get() {
         return null;
+    }
+
+    public Task<DataSnapshot> get(int matchId, int teamId) {
+        return databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get();
     }
 
     @Override

@@ -1,36 +1,89 @@
 package uom.team2.weball_statistics.Service;
 
+import android.view.View;
+
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 
 /*
  * @author Leonard Pepa ics20033
  */
-public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatistics>{
+public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatistics> {
 
-    private DatabaseReference databaseReference;
-    public static DAOLivePlayerStatistics instace;
+    public static DAOLivePlayerStatistics instance;
+    private final DatabaseReference databaseReference;
 
     private DAOLivePlayerStatistics() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(PlayerLiveStatistics.class.getSimpleName());
     }
 
-    public static DAOLivePlayerStatistics getInstace(){
-        if(instace == null){
-            instace = new DAOLivePlayerStatistics();
+    public static DAOLivePlayerStatistics getInstance() {
+        if (instance == null) {
+            instance = new DAOLivePlayerStatistics();
         }
-        return instace;
+        return instance;
     }
 
+    public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int playerId) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // this method is call to get the realtime
+                // updates in the data.
+                // this method is called when the data is
+                // changed in our Firebase console.
+
+                DAOLiveTeamService.getInstance().get(matchId, 1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
+                        PlayerLiveStatistics playerLiveStatistics = snapshot.child("match_id: " + matchId).child("player_id: " + playerId).getValue(PlayerLiveStatistics.class);
+                        if(teamLiveStatistics == null || playerLiveStatistics == null){
+                            return;
+                        }
+                        HashMap<String, View> mapof = fragment.getMapOfStatistics();
+
+                        for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
+                            if (mapof.get(statistic.name()) != null) {
+                                UIHandler.updateProgressBarLayoutTeam1(fragment,
+                                        mapof,
+                                        statistic,
+                                        LiveStatisticsEnum.getStatisticValueByName(teamLiveStatistics, statistic),
+                                        LiveStatisticsEnum.getStatisticValueByName(playerLiveStatistics, statistic)
+                                );
+                            }
+
+                        }
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // calling on cancelled method when we receive
+                // any error or we are not able to get the data.
+                throw new RuntimeException(error.getMessage());
+            }
+        });
+    }
 
     @Override
     public Task<Void> insert(PlayerLiveStatistics data) {

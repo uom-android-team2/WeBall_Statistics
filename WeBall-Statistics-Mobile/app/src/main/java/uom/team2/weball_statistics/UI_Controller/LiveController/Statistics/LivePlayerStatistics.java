@@ -241,8 +241,7 @@ public class LivePlayerStatistics extends Fragment {
     public void createPlayers(ArrayList<Player> returnedObject, ArrayList<View> views) {
         for (Player player : returnedObject) {
             try {
-                View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(),
-                        "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath());
+                View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(), player.getImagePath());
 
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -261,7 +260,7 @@ public class LivePlayerStatistics extends Fragment {
     public void autoSelectPlayer(Player player) {
         try {
             UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
-                    "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath(),
+                    player.getImagePath(),
                     player.getName(),
                     binding.selectedPlayerLayout.getRoot());
         } catch (IOException e) {
@@ -289,7 +288,10 @@ public class LivePlayerStatistics extends Fragment {
                     DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, 1, teamSelectedId);
 
                     try {
-                        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this, "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + team1Players.get(index).getImagePath(), team1Players.get(index).getName(), binding.selectedPlayerLayout.getRoot());
+                        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
+                                team1Players.get(index).getImagePath(),
+                                team1Players.get(index).getName(),
+                                binding.selectedPlayerLayout.getRoot());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {

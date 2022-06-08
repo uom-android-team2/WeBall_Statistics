@@ -5,15 +5,10 @@ import android.os.*;
 
 import com.google.gson.Gson;
 
-import org.json.*;
-
 import java.io.IOException;
-import java.util.*;
+
 import okhttp3.*;
-import uom.team2.weball_statistics.Model.Config;
-
-
-import java.util.ArrayList;
+import uom.team2.weball_statistics.configuration.Config;
 
 public class DBDataRecovery {
 

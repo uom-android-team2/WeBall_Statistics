@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Model.Actions.Shots;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -12,8 +13,8 @@ public class Shot extends Action {
     private boolean scored; //true if the shots was successful and false if wasn't
     private Assist assist;
 
-    public Shot(String timeHappened, int id, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored) {
-        super(timeHappened, id, belongsTo);
+    public Shot(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored, Match match) {
+        super(timeHappened, belongsTo, match);
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.shotType = shotType;
@@ -22,8 +23,8 @@ public class Shot extends Action {
     }
 
     //For Assist
-    public Shot(String timeHappened, int id, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored, Assist assist) {
-        super(timeHappened, id, belongsTo);
+    public Shot(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored, Assist assist, Match match) {
+        super(timeHappened, belongsTo, match);
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.shotType = shotType;

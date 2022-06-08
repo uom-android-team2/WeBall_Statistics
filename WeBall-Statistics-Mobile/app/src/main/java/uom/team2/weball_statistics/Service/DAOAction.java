@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Actions.*;
@@ -36,6 +37,8 @@ public class DAOAction implements DAOCRUDService <Action> {
         return instance;
     }
 
+    //Method to retrieve real time actions for a match.
+    //Call this function when you move to action progress fragment for a specific match
     public void getRealTimeData(Match matchData, LiveGameProgress liveGameProgressFragment) {
         //Get data snapshot
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId());
@@ -46,8 +49,9 @@ public class DAOAction implements DAOCRUDService <Action> {
                         liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
 
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
+
                             Action action = data.getValue(Action.class);
-                            System.out.println(action.getActionDesc());
+
                             if (action.getBelongsTo() == BelongsTo.HOME) {
                                 liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
                             } else if (action.getBelongsTo() == BelongsTo.GUEST) {
@@ -64,35 +68,6 @@ public class DAOAction implements DAOCRUDService <Action> {
                         System.out.println("onCancelled: Error: " + databaseError.getMessage());
                     }
                 });
-
-//        ref.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-//                Action action = dataSnapshot.getValue(Action.class);
-//                System.out.println(action.getActionDesc());
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-//                Action action = dataSnapshot.getValue(Action.class);
-//                System.out.println(action.getActionDesc());
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                Action action = dataSnapshot.getValue(Action.class);
-//                System.out.println(action.getActionDesc());
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-//                Action action = dataSnapshot.getValue(Action.class);
-//                System.out.println(action.getActionDesc());
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {}
-//        });
     }
 
 
@@ -101,8 +76,33 @@ public class DAOAction implements DAOCRUDService <Action> {
         return null;
     }
 
+    //Will called every time an action is added for a match (first insert and then get)
     public Task<Void> insert(Action actionData, Match matchData) {
+
         return databaseReference.child("Actions for match with id: " + matchData.getId()).child(actionData.getId() + "").setValue(actionData);
+    }
+
+    //Method that count the existing action for a Match
+    //We need this method to give dynamic id to match upcoming actions. Every id should be unique for each action of one match
+    public void countMatchActions(Match matchObj) {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchObj.getId());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int num = Math.toIntExact(dataSnapshot.getChildrenCount()); //The existing number of actions for a match
+                matchObj.setActionsCount(num);
+                System.out.println(num);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                int num = 0; //means that child not created yet, so there no actions yet
+                matchObj.setActionsCount(num);
+                System.out.println(num + " from error");
+            }
+        });
     }
 
     @Override

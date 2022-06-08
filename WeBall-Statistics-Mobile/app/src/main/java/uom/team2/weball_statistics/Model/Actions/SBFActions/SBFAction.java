@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Model.Actions.SBFActions;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -15,8 +16,8 @@ public class SBFAction extends Action {
     private Team teamObj; //The team (obj) that the player who does the action belongs to
     private SBFActionType sbfActionType; //STEAL, BLOCK OR FOUL
 
-    public SBFAction(String timeHappened, int id, BelongsTo belongsTo, Player playerObj, Team teamObj, SBFActionType sbfActionType) {
-        super(timeHappened, id, belongsTo);
+    public SBFAction(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, SBFActionType sbfActionType, Match match) {
+        super(timeHappened, belongsTo, match);
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.sbfActionType = sbfActionType;

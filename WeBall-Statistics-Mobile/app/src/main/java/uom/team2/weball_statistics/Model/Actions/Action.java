@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.Model.Actions;
 
+import uom.team2.weball_statistics.Model.Match;
+
 public class Action {
     protected int id; //Action id
     protected String actionDesc;
@@ -10,8 +12,8 @@ public class Action {
         //Empty constructor required
     }
 
-    public Action (String timeHappened, int id, BelongsTo belongsTo) {
-        this.id = id;
+    public Action (String timeHappened, BelongsTo belongsTo, Match match) {
+        this.id = match.getActionsCount();
         this.timeHappened = timeHappened;
         this.belongsTo = belongsTo;
     }

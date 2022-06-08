@@ -26,7 +26,8 @@ public class Match {
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
     private Referee referee;
-    private ArrayList<Action> actions;
+    private int actionsCount; //Need to keep the actions number, to give the correct id to each action of the match
+    private ArrayList<Action> actions; //Will fill when a match is completed so we dont need to load data from firebase
     private boolean progress;
     private boolean completed;
     //Will added fields specified for comments and progress to appear them after the match completed
@@ -39,6 +40,7 @@ public class Match {
         this.matchDate = matchDate;
         this.status = status;
         this.referee = referee;
+        this.actionsCount = 0;
         actions = new ArrayList<Action>();
     }
 
@@ -49,7 +51,16 @@ public class Match {
         this.date = date;
         this.progress = progress;
         this.completed = completed;
+        this.actionsCount = 0;
         //   actions = new ArrayList<Action>();
+    }
+
+    public void setActionsCount(int actionsCount) {
+        this.actionsCount = actionsCount;
+    }
+
+    public int getActionsCount() {
+        return this.actionsCount;
     }
 
     public void addAction(Action action) {

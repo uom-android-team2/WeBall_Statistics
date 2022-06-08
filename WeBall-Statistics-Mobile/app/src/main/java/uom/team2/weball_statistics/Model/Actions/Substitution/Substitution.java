@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Model.Actions.Substitution;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -11,8 +12,8 @@ public class Substitution extends Action {
     private Player playerObjOut; //The player who will exit the game
     private Team teamObj; //The team object that this two players belongs to
 
-    public Substitution(String timeHappened, int id, BelongsTo belongsTo, Player playerObjIn, Player playerObjOut, Team teamObj) {
-        super(timeHappened, id, belongsTo);
+    public Substitution(String timeHappened, BelongsTo belongsTo, Player playerObjIn, Player playerObjOut, Team teamObj, Match match) {
+        super(timeHappened, belongsTo, match);
         this.playerObjIn = playerObjIn;
         this.playerObjOut = playerObjOut;
         this.teamObj = teamObj;

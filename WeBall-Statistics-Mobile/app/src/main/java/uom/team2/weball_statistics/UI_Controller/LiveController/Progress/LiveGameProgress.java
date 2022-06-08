@@ -94,20 +94,33 @@ public class LiveGameProgress extends Fragment {
     }
 
     public void Testing() {
-        Action action11 = new MatchFlow("0.00", 0, FlowType.START);
-        Action action22 = new MatchFlow("1.00", 1, FlowType.PAUSE);
-        Action action33 = new MatchFlow("1.20", 2, FlowType.RESUME);
-        Action action44 = new MatchFlow("11", 3, FlowType.COMPLETED);
+        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action11 = new MatchFlow("0.00", FlowType.START, match2);
+        daoAction.insert(action11, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action22 = new MatchFlow("1.00", FlowType.PAUSE, match2);
+        daoAction.insert(action22, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action33 = new MatchFlow("1.20", FlowType.RESUME, match2);
+        daoAction.insert(action33, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action44 = new MatchFlow("11", FlowType.COMPLETED, match2);
+        daoAction.insert(action44, match2);
+
         Team team = new Team("Paok");
         Player player = new Player("Minas", "Charakopoulos");
-        Action action55 = new Shot("12", 4, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
-        Action action66 = new Shot("12", 5, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
-        daoAction.insert(action11, match2);
-        daoAction.insert(action22, match2);
-        daoAction.insert(action33, match2);
-        daoAction.insert(action44, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action55 = new Shot("12", BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null, match2);
         daoAction.insert(action55, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action66 = new Shot("12", BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null, match2);
         daoAction.insert(action66, match2);
 
         //That i will call from onViewCreated()
@@ -115,20 +128,33 @@ public class LiveGameProgress extends Fragment {
     }
 
     public void Testing2() {
-        Action action111 = new MatchFlow("0.00", 6, FlowType.START);
-        Action action222 = new MatchFlow("1.00", 7, FlowType.PAUSE);
-        Action action333 = new MatchFlow("1.20", 8, FlowType.RESUME);
-        Action action444 = new MatchFlow("11", 9, FlowType.COMPLETED);
+        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action111 = new MatchFlow("0.00", FlowType.START, match2);
+        daoAction.insert(action111, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action222 = new MatchFlow("1.00", FlowType.PAUSE, match2);
+        daoAction.insert(action222, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action333 = new MatchFlow("1.20", FlowType.RESUME, match2);
+        daoAction.insert(action333, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action444 = new MatchFlow("11", FlowType.COMPLETED, match2);
+        daoAction.insert(action444, match2);
+
         Team team = new Team("Paok");
         Player player = new Player("Minas", "Charakopoulos");
-        Action action555 = new Shot("12", 10, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
-        Action action666 = new Shot("12", 11, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
-        daoAction.insert(action111, match2);
-        daoAction.insert(action222, match2);
-        daoAction.insert(action333, match2);
-        daoAction.insert(action444, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action555 = new Shot("12", BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null, match2);
         daoAction.insert(action555, match2);
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action666 = new Shot("12", BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null, match2);
         daoAction.insert(action666, match2);
 
         //That i will call from onViewCreated()
@@ -136,11 +162,13 @@ public class LiveGameProgress extends Fragment {
     }
 
     public void Testing3() {
-        Team team = new Team("Paok");
-        Player player = new Player("Minas", "Theodoros");
-        Action action55555 = new Shot("2.33'", 12, BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null);
         Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
 
+        Team team = new Team("Paok");
+        Player player = new Player("Minas", "Theodoros");
+
+        daoAction.countMatchActions(match2); //Test code to count actions for match
+        Action action55555 = new Shot("2.33'", BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null, match2);
         daoAction.insert(action55555, match2);
 
         //That i will call from onViewCreated()

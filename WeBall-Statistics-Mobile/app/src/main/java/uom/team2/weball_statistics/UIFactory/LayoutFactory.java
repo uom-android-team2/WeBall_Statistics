@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.UIFactory;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,6 +46,22 @@ public class LayoutFactory {
         });
 
         return playerImageLayout;
+    }
+
+    public static ProgressDialog createNonCancelableProgressBar(Context context) {
+        ProgressDialog progress = new ProgressDialog(context);
+        progress.setCancelable(false);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        return progress;
+    }
+
+    public static ProgressDialog createNonCancelableProgressBar(Context context, String title, String message) {
+        ProgressDialog progress = new ProgressDialog(context);
+        progress.setCancelable(false);
+        progress.setTitle(title);
+        progress.setMessage(message);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        return progress;
     }
 
 }

@@ -24,7 +24,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.TeamChampioshipStatsService;
 import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.IP;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentTeamStatsBinding;
 
 /*
@@ -33,8 +33,6 @@ import uom.team2.weball_statistics.databinding.FragmentTeamStatsBinding;
 public class TeamStatsFragment extends Fragment {
 
     private FragmentTeamStatsBinding binding;
-
-    enum Type {POINTS, ASSISTS, BLOCKS, REBOUNDS}
 
     public TeamStatsFragment() {
         // Required empty public constructor
@@ -127,7 +125,7 @@ public class TeamStatsFragment extends Fragment {
                 public void callback(Team returnedObject) {
                     try {
                         createRow(finalLayout,
-                                "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/team_images/" + returnedObject.getBadgePath(),
+                                Config.TEAM_IMAGES_RESOURCES + returnedObject.getBadgePath(),
                                 returnedObject.getTeamName(), finalI + 1, finalValue + "");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -248,5 +246,7 @@ public class TeamStatsFragment extends Fragment {
         });
         return new ArrayList<>(list);
     }
+
+    enum Type {POINTS, ASSISTS, BLOCKS, REBOUNDS}
 
 }

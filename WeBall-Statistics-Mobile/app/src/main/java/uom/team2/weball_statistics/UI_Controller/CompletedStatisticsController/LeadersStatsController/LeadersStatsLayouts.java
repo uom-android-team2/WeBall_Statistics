@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import uom.team2.weball_statistics.Model.Player;
+import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
 import uom.team2.weball_statistics.R;
 
 public class LeadersStatsLayouts {
-
-
 
 
     public static View createPlayersStatsLayout(Fragment fragment, String name){
@@ -23,18 +22,12 @@ public class LeadersStatsLayouts {
         return playersStatslayout;
     }
 
-    public static View expandPlayersStatsLayout(Fragment fragment, ArrayList<Player> players){
-        View playersStatslayout = fragment.getLayoutInflater().inflate(R.layout.fragment_players_stats_layout, null);
-        View playerlayout = fragment.getLayoutInflater().inflate(R.layout.fragment_player_layout,null);
-        LinearLayout ranksContainer = playersStatslayout.findViewById(R.id.ranksContainer);
-        for (int i=0;i<players.size();i++)
-        {
-            ranksContainer.addView(playerlayout);
-            playerlayout.setTag("player"+ i);
-        }
-
-        return playersStatslayout;
-    }
+//    public static View createPlayers(Fragment fragment, ArrayList<Player> players, ArrayList<PlayerStats> playersStats) {
+//        View playersStatslayout = fragment.getLayoutInflater().inflate(R.layout.fragment_players_stats_layout, null);
+//
+//
+//        return playersStatslayout;
+//    }
 
 
 }

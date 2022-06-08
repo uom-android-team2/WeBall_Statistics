@@ -25,8 +25,8 @@ public class LeadersStatsHandler {
     private ArrayList<PlayerStats> allPlayersStats;
     private Player player;
     private String myIP ="192.168.1.43";
-    private String url1 = "http://"+myIP+"/backend/API/player.php";
-    private String url2 = "http://"+myIP+"/backend/API/playerStatisticsCompleted.php";
+    private String url1 = "http://"+myIP+"/WeBall_Statistics-Backend/API/player.php";
+    private String url2 = "http://"+myIP+"/WeBall_Statistics-Backend/API/playerStatisticsCompleted.php";
 
     public LeadersStatsHandler(){
         players = new ArrayList<>();
@@ -35,7 +35,7 @@ public class LeadersStatsHandler {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public ArrayList<Player> findPlayers() {
+    public void deserializePlayers() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -50,21 +50,21 @@ public class LeadersStatsHandler {
 
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
-                    System.out.println("FIND THEM" + data);
+
                     players = getAllPlayers(data);
+
+                    System.out.println("FIND THEM11111 =  " + players);
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
-
-        return players;
+        thread.join();
     }
 
     public Player getPlayer(String data) throws JSONException {
         // // // // // // // // // // DESERIALIZE // // // // // // // // // //
-
         JSONObject jsonObject = new JSONObject(data);
         int id = jsonObject.getInt("id");
         String name = jsonObject.getString("name");
@@ -74,7 +74,7 @@ public class LeadersStatsHandler {
         String team = jsonObject.getString("team");
         String photo = jsonObject.getString("photo");
 
-        /// KANE TYPOY TEAM TO team
+        /// KANE TYPOY TEAM TO ΤΕΑΜ
         return new Player(id, name, surname, number, getPosition(position), team, photo);
     }
 
@@ -89,6 +89,50 @@ public class LeadersStatsHandler {
         }
 
         return players;
+    }
+
+
+    public void deserializeAllPlayersStatistics() throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder().build();
+                    MediaType media = MediaType.parse("application/json");
+                    Request request = new Request.Builder()
+                            .url(url2)
+                            .method("GET",null)
+                            .addHeader("Content-Type","application/json")
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+                    String data = response.body().string();
+
+
+                    JSONArray jsonArray = new JSONArray(data);
+                    for (int i=0; i<jsonArray.length(); i++)
+                    {
+                        stats = new PlayerStats();
+                        stats.editJON(jsonArray.getJSONObject(i).toString());
+                        allPlayersStats.add(stats);
+                    }
+                    System.out.println("FIND THEM2222 = " + allPlayersStats);
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        thread.join();
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public ArrayList<PlayerStats> getAllPlayersStats() {
+        return allPlayersStats;
     }
 
     public PlayerPosition getPosition(String position)
@@ -116,42 +160,6 @@ public class LeadersStatsHandler {
         }
 
         return playerPosition;
-    }
-
-
-
-    public ArrayList<PlayerStats> getAllPlayersStats() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient().newBuilder().build();
-                    MediaType media = MediaType.parse("application/json");
-                    Request request = new Request.Builder()
-                            .url(url2)
-                            .method("GET",null)
-                            .addHeader("Content-Type","application/json")
-                            .build();
-
-                    Response response = client.newCall(request).execute();
-                    String data = response.body().string();
-                    System.out.println("FIND THEM22222" + data);
-
-                    JSONArray jsonArray = new JSONArray(data);
-                    for (int i=0; i<jsonArray.length(); i++)
-                    {
-                        stats = new PlayerStats();
-                        stats.editJON(jsonArray.getJSONObject(i).toString());
-                        allPlayersStats.add(stats);
-                    }
-
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-        return allPlayersStats;
     }
 
 

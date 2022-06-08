@@ -10,27 +10,27 @@
         android:layout_width="67dp"
         android:layout_height="55dp"
         android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank"
-        tools:layout_editor_absoluteX="81dp" />
+        app:srcCompat="@drawable/blank" />
 
     <ImageView
         android:id="@+id/sub2_image"
         android:layout_width="67dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sub1_image"
-        app:srcCompat="@drawable/blank"
-        tools:layout_editor_absoluteX="81dp" />
+        app:srcCompat="@drawable/blank" />
 
     <ImageView
         android:id="@+id/sub4_image"
         android:layout_width="67dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sub3_image"
-        app:srcCompat="@drawable/blank"
-        tools:layout_editor_absoluteX="81dp" />
+        app:srcCompat="@drawable/blank" />
 
     <TextView
         android:id="@+id/sub4_text"
@@ -70,9 +70,9 @@
         android:layout_width="67dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sub2_image"
-        app:srcCompat="@drawable/blank"
-        tools:layout_editor_absoluteX="81dp" />
+        app:srcCompat="@drawable/blank" />
 
     <TextView
         android:id="@+id/sub2_text"
@@ -90,9 +90,9 @@
         android:layout_width="67dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sub4_image"
-        app:srcCompat="@drawable/blank"
-        tools:layout_editor_absoluteX="81dp" />
+        app:srcCompat="@drawable/blank" />
 
     <TextView
         android:id="@+id/sub1_text"
@@ -123,5 +123,4 @@
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toEndOf="@+id/sub1_text"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.Model.Actions.Shots;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -11,8 +12,8 @@ public class Shot extends Action {
     private boolean scored; //true if the shots was successful and false if wasn't
     private Assist assist;
 
-    public Shot(String timeHappened, int id, Player playerObj, Team teamObj, ShotType shotType, boolean scored) {
-        super(timeHappened, id);
+    public Shot(String timeHappened, int id, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored) {
+        super(timeHappened, id, belongsTo);
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.shotType = shotType;
@@ -21,8 +22,8 @@ public class Shot extends Action {
     }
 
     //For Assist
-    public Shot(String timeHappened, int id, Player playerObj, Team teamObj, ShotType shotType, boolean scored, Assist assist) {
-        super(timeHappened, id);
+    public Shot(String timeHappened, int id, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored, Assist assist) {
+        super(timeHappened, id, belongsTo);
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.shotType = shotType;
@@ -42,7 +43,7 @@ public class Shot extends Action {
             
             switch (this.shotType) {
                 case FREETHROW:
-                    description = "Freethrow from " + playerName;
+                    description = "+1 from " + playerName;
                     break;
                 case TWO_POINTER:
                     description = "+2 from " + playerName;

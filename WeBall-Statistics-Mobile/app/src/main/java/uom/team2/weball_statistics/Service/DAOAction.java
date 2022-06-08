@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.Service;
 
+import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,10 +13,13 @@ import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Actions.*;
 import uom.team2.weball_statistics.Model.*;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGameProgress;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveProgressUIController;
 
 public class DAOAction implements DAOCRUDService <Action> {
 
     private DatabaseReference databaseReference;
+    private LiveProgressUIController liveProgressUIController = LiveProgressUIController.getInstance();
     public static DAOAction instance = new DAOAction();
 
     //Implement singleton pattern
@@ -30,7 +35,7 @@ public class DAOAction implements DAOCRUDService <Action> {
         return instance;
     }
 
-    public void getRealTimeData(Match matchData) {
+    public void getRealTimeData(Match matchData, LiveGameProgress liveGameProgressFragment) {
         //Get data snapshot
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -38,7 +43,13 @@ public class DAOAction implements DAOCRUDService <Action> {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Action action = data.getValue(Action.class);
-                            System.out.println(action.getActionDesc());
+                            if (action.getBelongsTo() == BelongsTo.HOME) {
+                                liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
+                            } else if (action.getBelongsTo() ==BelongsTo.GUEST) {
+                                liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
+                            } else {
+                                liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                            }
                         }
                     }
 

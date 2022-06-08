@@ -13,19 +13,27 @@ import java.util.Date;
 
 
 /*
- * @author Minas - Theodoros Charakopoulos ics20072
+ * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris - ics20058
  */
 public class Match {
     private int id; //unique id for every match
+
     private Team teamLandlord; //Home team
     private Team guest; //Team away
     private Date matchDate;
+    private int date;
+    private int teamLandlord_id;
+    private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
+
     private boolean progress=false;
     private boolean completed=false;
     private ArrayList<Action> actions;
+    private Referee referee;
+
 
     //Will added fields specified for comments and progress to appear them after the match completed
+
 
     public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status) {
         this.id = id;
@@ -33,7 +41,18 @@ public class Match {
         this.guest = guest;
         this.matchDate = matchDate;
         this.status = status;
+        this.referee = referee;
         actions = new ArrayList<Action>();
+    }
+
+    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress,boolean completed) {
+        this.id = id;
+        this.teamLandlord_id = teamLandlord_id;
+        this.Teamguest_id = Teamguest_id;
+        this.date = date;
+        this.progress = progress;
+        this.completed = completed;
+        //   actions = new ArrayList<Action>();
     }
 
     public void addAction(Action action) {
@@ -64,12 +83,12 @@ public class Match {
         this.guest = guest;
     }
 
-    public Date getMatchDate() {
-        return matchDate;
+    public int getDate() {
+        return date;
     }
 
-    public void setMatchDate(Date matchDate) {
-        this.matchDate = matchDate;
+    public void setMatchDate(int date) {
+        this.date = date;
     }
 
     public Status getStatus() {
@@ -84,12 +103,21 @@ public class Match {
         return actions;
     }
 
+
     public void setProgress(){
         progress=true;
     }
 
-    public void setCompleted(){
-        
-        completed=true;
+    public void setCompleted() {
+
+        completed = true;
     }
+
+    public Referee getReferee () {
+        return referee;
+
+    }
+
+
+
 }

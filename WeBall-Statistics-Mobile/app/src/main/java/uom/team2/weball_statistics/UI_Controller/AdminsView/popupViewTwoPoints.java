@@ -13,6 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import java.io.IOException;
+
+import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
+import uom.team2.weball_statistics.Model.Statistics.Stats;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 import uom.team2.weball_statistics.databinding.FragmentPopupViewBinding;
@@ -23,14 +29,20 @@ public class popupViewTwoPoints extends Dialog implements
     public Activity c;
     public Dialog d;
     public Button yes, no;
+    private DBDataRecovery dbdatarecovery;
     private String str;
+    Stats playerStats;
+    Stats teamStats;
     private int points;
 
 
 
-    public popupViewTwoPoints(Activity a,int p) {
+    public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd) {
         super(a);
         points=p;
+        dbdatarecovery = dbd;
+        playerStats = ps;
+        teamStats = ts;
         // TODO Auto-generated constructor stub
         this.c = a;
     }
@@ -59,8 +71,10 @@ public class popupViewTwoPoints extends Dialog implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_Yes:
-
-
+                playerStats.setSuccessfulTwoPointer();
+                playerStats.setSuccessfulEffort();
+                teamStats.setSuccessfulTwoPointer();
+                teamStats.setSuccessfulEffort();
                 //dismiss();
                 break;
             case R.id.dialog_No:
@@ -68,6 +82,16 @@ public class popupViewTwoPoints extends Dialog implements
                 break;
             default:
                 break;
+        }
+        playerStats.setTotalTwoPointer();
+        playerStats.setTotalEffort();
+        teamStats.setTotalTwoPointer();
+        teamStats.setTotalEffort();
+        try {
+            dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         dismiss();
     }

@@ -13,6 +13,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import java.io.IOException;
+
+import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.Stats;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 import uom.team2.weball_statistics.databinding.FragmentPopupViewBinding;
@@ -23,14 +28,20 @@ public class popupViewOnePoint extends Dialog implements
     public Activity c;
     public Dialog d;
     public Button yes, no;
-private String str;
+    Stats playerStats;
+    Stats teamStats;
+    private DBDataRecovery dataRecovery;
+    private String str;
 private int points;
 
 
 
-    public popupViewOnePoint(Activity a,int p) {
+    public popupViewOnePoint(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd) {
         super(a);
+        playerStats = ps;
+        teamStats = ts;
         points=p;
+        dataRecovery = dbd;
         // TODO Auto-generated constructor stub
         this.c = a;
 
@@ -60,7 +71,8 @@ private int points;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_Yes:
-
+                playerStats.setSuccessfulFreeThrow();
+                teamStats.setSuccessfulFreeThrow();
 
                 //dismiss();
                 break;
@@ -69,6 +81,14 @@ private int points;
                 break;
             default:
                 break;
+        }
+        playerStats.setTotalFreeThrow();
+        teamStats.setTotalFreeThrow();
+        try {
+            dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         dismiss();
     }

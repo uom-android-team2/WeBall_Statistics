@@ -6,14 +6,17 @@
     android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/linearLayoutId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -22,43 +25,45 @@
                 android:id="@+id/bestStarting5Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Most efficient players in each position for this week:"
+                android:layout_centerInParent="true"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Best Per Position:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
             <include
                 android:id="@+id/includePG"
                 layout="@layout/best_player_per_position_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
             <include
                 android:id="@+id/includeSG"
                 layout="@layout/best_player_per_position_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
             <include
                 android:id="@+id/includeSF"
                 layout="@layout/best_player_per_position_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
             <include
                 android:id="@+id/includePF"
                 layout="@layout/best_player_per_position_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 
             <include
                 android:id="@+id/includeC"
                 layout="@layout/best_player_per_position_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
 

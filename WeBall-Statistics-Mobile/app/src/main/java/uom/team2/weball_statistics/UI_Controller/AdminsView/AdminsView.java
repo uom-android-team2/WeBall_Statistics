@@ -15,17 +15,49 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
+
+
+import uom.team2.weball_statistics.Model.PlayerPosition;
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
+
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
+
+import java.io.IOException;
+
+import uom.team2.weball_statistics.MainActivity;
+import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
+import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.Stats;
+
+import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
+
 import uom.team2.weball_statistics.Service.MatchService;
+
+import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
+
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
 /**
@@ -41,7 +73,7 @@ public class AdminsView extends Fragment {
     private long pauseOffset;
     private boolean started=false;
     private boolean teamSelected =false;
-    private int playerChecked=0;
+    private int playerChecked=1;
     private Stack<Team> undoTeamStack=new Stack<Team>();
     private Stack<Player> undoPlayerStack=new Stack<Player>();
     private Stack<Integer>  undoButtonStack =new Stack<Integer>();
@@ -58,6 +90,28 @@ public class AdminsView extends Fragment {
     private Match m=new Match( 1,  null,  null, new Date(), Status.UPCOMING );
 
 
+    private Team teamLandlord;
+    private ArrayList<Player> keyPlayersLandlord=new ArrayList<Player>();
+    private ArrayList<Player> subPlayersLandlord=new ArrayList<Player>();
+    private ArrayList<Player> keyPlayersGuest=new ArrayList<Player>();
+    private ArrayList<Player> subPlayersGuest=new ArrayList<Player>();
+    private TextView freeThrowBtn;
+    private TextView twoPointBtn;
+    private TextView threePointBtn;
+    private TextView reboundBtn;
+    private TextView assistBtn;
+    private TextView stealBtn;
+    private TextView blockBtn;
+    private TextView foulBtn;
+    private TextView turnoverBtn;
+    private ArrayList<Player> playersTeamLandlord = new ArrayList<Player>();
+    private ArrayList<Player> playersTeamGuest = new ArrayList<Player>();
+    private ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamLanLord = new ArrayList<PlayerLiveStatistics>();
+    private ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamGuest = new ArrayList<PlayerLiveStatistics>();
+    private ArrayList<TeamLiveStatistics> teamLiveStatisticsLanLord = new ArrayList<TeamLiveStatistics>();
+    private ArrayList<TeamLiveStatistics> teamLiveStatisticsGuest = new ArrayList<TeamLiveStatistics>();
+    private PlayerLiveStatistics playerCheckedLiveStatistics = null;
+    //private TeamLiveStatistics teamCheckedLiveStatistics = null;
 
 
 
@@ -90,8 +144,6 @@ public class AdminsView extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
 
-
-
         return fragment;
     }
 
@@ -100,7 +152,6 @@ public class AdminsView extends Fragment {
         super.onCreate(savedInstanceState);
         
     }
-
 
 
     @Override
@@ -115,12 +166,12 @@ public class AdminsView extends Fragment {
     }
 
 
-
-
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        match = new Match(1,new Team(1,"jif", "kfsd", "euj"), new Team(2,"fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
+        teamLandlord = match.getTeamLandlord();
+        teamGuest = match.getGuest();
 
         //test
         match = new Match(1,new Team(1,"jif", "kfsd", "euj"), new Team(2,"fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
@@ -181,8 +232,6 @@ public class AdminsView extends Fragment {
         playerChecked=1;
 
 
-
-
         //Load data for this team
 
 
@@ -190,7 +239,7 @@ public class AdminsView extends Fragment {
 
 
 
-//Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
+     //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
     // Banner1
         binding.team1Banner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +254,7 @@ public class AdminsView extends Fragment {
                 shape2.setColor(getResources().getColor(R.color.alt_grey));
                 binding.player1.setBackground(shape2);
                 playerChecked=1;
+
                 playerObjChecked=teamObj.getKeyPlayers().get(0);
 
 
@@ -218,261 +268,379 @@ public class AdminsView extends Fragment {
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
 
-                //Load data for this team
-
-
-                //Load the data of the first team players.
 
             }
         });
 
-    // Banner2
-        binding.team2Banner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                teamSelected=true;
-                teamObj =match.getGuest();
-
-                //When the banner changes ,automatically select the first player of the list.
-                deleteThePreviousBackground();
-                GradientDrawable shape2 =  new GradientDrawable();
-                shape2.setCornerRadius( 75 );
-                shape2.setColor(getResources().getColor(R.color.alt_grey));
-                binding.player1.setBackground(shape2);
-                playerChecked=1;
-                playerObjChecked=teamObj.getKeyPlayers().get(0);
+                // Banner2
+                binding.team2Banner.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
 
+                        teamSelected=true;
+                        teamObj =match.getGuest();
 
-                //put background color to the banner so the admin knows which team is selected
-                GradientDrawable shape = new GradientDrawable();
-                shape.setCornerRadius(75);
-                shape.setColor(getResources().getColor(R.color.alt_grey));
-                view.setBackground(shape);
+                        //When the banner changes ,automatically select the first player of the list.
+                        deleteThePreviousBackground();
+                        GradientDrawable shape2 =  new GradientDrawable();
+                        shape2.setCornerRadius( 75 );
+                        shape2.setColor(getResources().getColor(R.color.alt_grey));
+                        binding.player1.setBackground(shape2);
+                        playerChecked=1;
+                        playerObjChecked=teamObj.getKeyPlayers().get(0);
 
-                //remove the background color from the other banner
-                binding.team1Banner.setBackgroundColor(0x00000000);
 
-                //Load data for this team
+                        //put background color to the banner so the admin knows which team is selected
+                        GradientDrawable shape = new GradientDrawable();
+                        shape.setCornerRadius(75);
+                        shape.setColor(getResources().getColor(R.color.alt_grey));
+                        view.setBackground(shape);
 
-                //Load the data of the second team players.
+                        //remove the background color from the other banner
+                        binding.team1Banner.setBackgroundColor(0x00000000);
 
-            }
-        });
+                        //Load data for this team
+
+                    }
+                });
 
 
 //Start Button
-        binding.startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if (!started) {
-                   binding.clock.setBase(SystemClock.elapsedRealtime());
-                   binding.clock.start();
-                    running = true;
-                    started=true;
-                    binding.startButton.setText("End");
-                    binding.pauseButton.setEnabled(true);
-                    m.setStatus(Status.ONGOING);
-                    m.setProgress();
-                    MatchService ms=new MatchService();
-                    try {
-                        ms.statusUpdate(m);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                //Start Button
+
+                binding.startButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if (!started) {
+                            binding.clock.setBase(SystemClock.elapsedRealtime());
+                            binding.clock.start();
+                            running = true;
+                            started = true;
+                            binding.startButton.setText("End");
+                            binding.pauseButton.setEnabled(true);
+                            m.setStatus(Status.ONGOING);
+                            m.setProgress();
+                            MatchService ms = new MatchService();
+                            try {
+                                ms.statusUpdate(m);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        //end button
+                        else {
+                            binding.clock.stop();
+                            binding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                            binding.startButton.setText("Start/End");
+                            binding.startButton.setEnabled(false);
+                            binding.pauseButton.setEnabled(false);
+                            binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                            binding.pauseButton.setText("Pause/Continue");
+                            m.setStatus(Status.COMPLETED);
+
+                            m.setCompleted();
+                            MatchService ms = new MatchService();
+                            try {
+                                ms.statusUpdate(m);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
 
-                }
-                //end button
-                else{
-                    binding.clock.stop();
-                    binding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                    binding.startButton.setText("Start/End");
-                    binding.startButton.setEnabled(false);
-                    binding.pauseButton.setEnabled(false);
-                    binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                    binding.pauseButton.setText("Pause/Continue");
-                    m.setStatus(Status.COMPLETED);
+                });
 
-                    m.setCompleted();
-                    MatchService ms=new MatchService();
-                    try {
-                        ms.statusUpdate(m);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                //Pause Button
+                binding.pauseButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!running) {
+                            binding.clock.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+                            binding.clock.start();
+                            binding.pauseButton.setText("Pause");
+                            running = true;
+
+                        } else {
+                            binding.pauseButton.setText("Continue");
+                            binding.clock.stop();
+                            pauseOffset = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                            running = false;
+                        }
                     }
-                }
-            }
+                });
 
-        });
+                //Undo Button
+                binding.undoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-//Pause Button
-        binding.pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!running) {
-                    binding.clock.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-                    binding.clock.start();
-                    binding.pauseButton.setText("Pause");
-                    running = true;
-
-                } else {
-                    binding.pauseButton.setText("Continue");
-                    binding.clock.stop();
-                    pauseOffset = SystemClock.elapsedRealtime() - binding.clock.getBase();
-                    running = false;
-                }
-            }
-        });
-
-//Undo Button
-        binding.undoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        
+                    }
+                });
 
 
 //Player Buttons-
-        binding.player1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!(playerChecked==1)){
-                    deleteThePreviousBackground();
-                    GradientDrawable shape =  new GradientDrawable();
-                    shape.setCornerRadius( 75 );
-                    shape.setColor(getResources().getColor(R.color.alt_grey));
-                    view.setBackground(shape);
 
-                    playerChecked=1;
 
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
+                //Player Buttons-
 
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
+                binding.player1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!(playerChecked == 1)) {
+                            deleteThePreviousBackground();
+                            GradientDrawable shape = new GradientDrawable();
+                            shape.setCornerRadius(75);
+                            shape.setColor(getResources().getColor(R.color.alt_grey));
+                            view.setBackground(shape);
+
+                            playerChecked = 1;
+
+                            playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+
+                            //
+                            binding.freethrowButton.setText(playerObjChecked.getName());
+                        }
+
+                    }
+                });
+
+                binding.player2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!(playerChecked == 2)) {
+                            deleteThePreviousBackground();
+                            GradientDrawable shape = new GradientDrawable();
+                            shape.setCornerRadius(75);
+                            shape.setColor(getResources().getColor(R.color.alt_grey));
+                            view.setBackground(shape);
+
+                            playerChecked = 2;
+
+                            playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+
+                            //
+                            binding.freethrowButton.setText(playerObjChecked.getName());
+
+
+                        }
+
+                    }
+                });
+
+                binding.player3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!(playerChecked == 3)) {
+                            deleteThePreviousBackground();
+                            GradientDrawable shape = new GradientDrawable();
+                            shape.setCornerRadius(75);
+                            shape.setColor(getResources().getColor(R.color.alt_grey));
+                            view.setBackground(shape);
+
+                            playerChecked = 3;
+
+                            playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+
+                            //
+                            binding.freethrowButton.setText(playerObjChecked.getName());
+
+                        }
+
+                    }
+                });
+
+                binding.player4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!(playerChecked == 4)) {
+                            deleteThePreviousBackground();
+                            GradientDrawable shape = new GradientDrawable();
+                            shape.setCornerRadius(75);
+                            shape.setColor(getResources().getColor(R.color.alt_grey));
+                            view.setBackground(shape);
+
+                            playerChecked = 4;
+
+                            playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+
+                            //
+                            binding.freethrowButton.setText(playerObjChecked.getName());
+
+                        }
+
+                    }
+                });
+
+                binding.player5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!(playerChecked == 5)) {
+                            deleteThePreviousBackground();
+                            GradientDrawable shape = new GradientDrawable();
+                            shape.setCornerRadius(75);
+                            shape.setColor(getResources().getColor(R.color.alt_grey));
+                            view.setBackground(shape);
+
+                            playerChecked = 5;
+
+                            playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+
+                            //
+                            binding.freethrowButton.setText(playerObjChecked.getName());
+
+                        }
+
+
+                    }
+                });
+
+                //Substitution Button
+                binding.substitutionButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //steile ton paikti
+
+                        //emfanise to popup
+                        SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked);
+                        ppv.show();
+
+                        //refresh the players
+                        if (teamSelected) {
+                            binding.team2Banner.callOnClick();
+                        } else {
+                            binding.team1Banner.callOnClick();
+                        }
+                    }
+                });
+
+                freeThrowBtn = binding.freethrowButton;
+                twoPointBtn = binding.twoPointerButton;
+                threePointBtn = binding.threePointerButton;
+                reboundBtn = binding.reboundButton;
+                assistBtn = binding.assistButton;
+                stealBtn = binding.stealButton;
+                blockBtn = binding.blockButton;
+                foulBtn = binding.foulButton;
+                turnoverBtn = binding.turnoverButton;
+
+                DBDataRecovery dataRecovery = new DBDataRecovery();
+
+                try {
+                    Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
+                    Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
+                    threePointBtn.setOnClickListener(e -> {
+                        popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery);
+                        ppv.show();
+                    });
+                    freeThrowBtn.setOnClickListener(e -> {
+                        popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery);
+                        ppv.show();
+
+                    });
+                    twoPointBtn.setOnClickListener(e -> {
+                        popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery);
+                        ppv.show();
+                    });
+                    reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
+                    assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
+                    stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
+                    blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
+                    foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
+                    turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-
             }
-        });
-        binding.player2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!(playerChecked==2)){
-                    deleteThePreviousBackground();
-                    GradientDrawable shape =  new GradientDrawable();
-                    shape.setCornerRadius( 75 );
-                    shape.setColor(getResources().getColor(R.color.alt_grey));
-                    view.setBackground(shape);
-
-                    playerChecked=2;
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-                }
-
-            }
-        });
-        binding.player3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!(playerChecked==3)){
-                    deleteThePreviousBackground();
-                    GradientDrawable shape =  new GradientDrawable();
-                    shape.setCornerRadius( 75 );
-                    shape.setColor(getResources().getColor(R.color.alt_grey));
-                    view.setBackground(shape);
-
-                    playerChecked=3;
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-                }
-
-            }
-        });
-        binding.player4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!(playerChecked==4)){
-                    deleteThePreviousBackground();
-                    GradientDrawable shape =  new GradientDrawable();
-                    shape.setCornerRadius( 75 );
-                    shape.setColor(getResources().getColor(R.color.alt_grey));
-                    view.setBackground(shape);
-
-                    playerChecked=4;
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-                }
-
-            }
-        });
-        binding.player5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!(playerChecked==5)){
-                    deleteThePreviousBackground();
-                    GradientDrawable shape =  new GradientDrawable();
-                    shape.setCornerRadius( 75 );
-                    shape.setColor(getResources().getColor(R.color.alt_grey));
-                    view.setBackground(shape);
-
-                    playerChecked=5;
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked-1);
-
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-                }
 
 
-            }
-        });
-
-//Substitution Button
-        binding.substitutionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //steile ton paikti
-
-                //emfanise to popup
-                SubstitutionPopupView ppv=new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj,playerChecked);
-                ppv.show();
-
-                //refresh the players
-                if(teamSelected){
-                    binding.team2Banner.callOnClick();
-                }else{
-                    binding.team1Banner.callOnClick();
+            private void updateAssist(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
+                playerStats.setTotalAssists();
+                teamStats.setTotalAssists();
+                // PlayerLiveStatistics p = new PlayerLiveStatistics(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+                // p.setAssist(playerStats.getTotalAssists());
+                try {
+                    dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                    dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                    // DAOLivePlayerStatistics.getInstace().update(p);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
-        });
 
-    }
+            private void updateRebound(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
+                playerStats.setTotalRebounds();
+                teamStats.setTotalRebounds();
+                try {
+                    dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                    dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
-//you call this function when you want to change player
-    public void deleteThePreviousBackground(){
-        if(playerChecked==1){
-            binding.player1.setBackgroundColor(0x00000000);
-        }
-        else if(playerChecked==2){
-            binding.player2.setBackgroundColor(0x00000000);
-        }
-        else if(playerChecked==3){
-            binding.player3.setBackgroundColor(0x00000000);
-        }
-        else if(playerChecked==4){
-            binding.player4.setBackgroundColor(0x00000000);
-        }
-        else if (playerChecked==5){
-            binding.player5.setBackgroundColor(0x00000000);
-        }
-    }
+            private void updateSteal(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
+                playerStats.setTotalSteels();
+                teamStats.setTotalSteels();
+                try {
+                    dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                    dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            private void updateBlock(Stats playerStats, Stats teamStats, DBDataRecovery dataRecovery) {
+                playerStats.setTotalBlock();
+                teamStats.setTotalBlock();
+                try {
+                    dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                    dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            private void updateFoul(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
+                playerStats.setTotalFouls();
+                teamStats.setTotalFouls();
+                try {
+                    dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                    dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            private void updateTurnover(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
+                playerStats.setTotalTurnovers();
+                teamStats.setTotalTurnovers();
+                try {
+                    dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                    dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            //you call this function when you want to change player
+            public void deleteThePreviousBackground() {
+                if (playerChecked == 1) {
+                    binding.player1.setBackgroundColor(0x00000000);
+                } else if (playerChecked == 2) {
+                    binding.player2.setBackgroundColor(0x00000000);
+                } else if (playerChecked == 3) {
+                    binding.player3.setBackgroundColor(0x00000000);
+                } else if (playerChecked == 4) {
+                    binding.player4.setBackgroundColor(0x00000000);
+                } else if (playerChecked == 5) {
+                    binding.player5.setBackgroundColor(0x00000000);
+                }
+            }
+
 
 }

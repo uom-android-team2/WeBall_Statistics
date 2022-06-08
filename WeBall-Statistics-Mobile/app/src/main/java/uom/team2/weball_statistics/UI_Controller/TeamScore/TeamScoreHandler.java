@@ -22,7 +22,8 @@ public class TeamScoreHandler {
 
     private ArrayList<Team> teams;
     private Team team;
-    private String myIP ="192.168.2.54";
+    //private String myIP ="192.168.2.54";
+    private String myIP ="";
     private String url = "http://"+myIP+"/WeBall_Statistics-Backend/API/team.php";
 
     public TeamScoreHandler(){

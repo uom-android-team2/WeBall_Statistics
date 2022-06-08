@@ -39,8 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.917" />
+            app:layout_constraintTop_toBottomOf="@+id/vertical_divider" />
 
         <Button
             android:id="@+id/bestPerPositionButton"
@@ -55,7 +54,6 @@
             android:textSize="17sp"
             app:layout_constraintBottom_toTopOf="@+id/scoreTable"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vertical_divider" />
 
@@ -149,24 +147,25 @@
             android:src="@drawable/logo"
             app:layout_constraintBottom_toTopOf="@+id/bestPerPositionButton"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.425"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.117" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/label"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="160dp"
             android:gravity="center_vertical"
             android:text="Basket League"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/teamName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.329"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.32" />
 
         <View
             android:id="@+id/vertical_divider"
@@ -175,8 +174,10 @@
             android:background="@color/custom_blue"
             app:layout_constraintBottom_toBottomOf="@+id/label"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0" />
 
         <View
             android:id="@+id/horizontal_divider"

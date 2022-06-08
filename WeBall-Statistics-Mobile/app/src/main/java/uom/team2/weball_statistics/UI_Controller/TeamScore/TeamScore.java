@@ -35,8 +35,10 @@ public class TeamScore extends Fragment {
     }
 
     public void addTeamScoreLayout(TableLayout teamsContainer, ArrayList<Team> teams){
+        int position = 0;
         for (Team team : teams) {
-            View playersLayout = TeamScoreLayout.createTeamScoreLayout(this, team.getTeamName());
+            position++;
+            View playersLayout = TeamScoreLayout.createTeamScoreLayout(this, position,team.getTeamName());
             teamsContainer.addView(playersLayout);
         }
     }

@@ -1,5 +1,7 @@
 package uom.team2.weball_statistics.UIFactory;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.configuration.Config;
 
 /*
  * @author Leonard Pepa ics20033
@@ -25,7 +28,7 @@ public class LayoutFactory {
         return progressBarLayout;
     }
 
-    public static View createPayerImageLayout(Fragment fragment, String name, String imageUrl) throws IOException {
+    public static View createPayerImageLayout(Fragment fragment, String name, String imageEndPoint) throws IOException {
         View playerImageLayout = fragment.getLayoutInflater().inflate(R.layout.player_image_layout, null);
         TextView playerName = playerImageLayout.findViewById(R.id.player_name);
         ImageView playerImage = playerImageLayout.findViewById(R.id.player_image);
@@ -35,7 +38,7 @@ public class LayoutFactory {
             public void run() {
                 playerName.setText(name);
                 Picasso.get()
-                        .load(imageUrl)
+                        .load(Config.PLAYER_IMAGES_RESOURCES + imageEndPoint)
                         .resize(70, 70)
                         .centerCrop()
                         .into(playerImage);
@@ -44,6 +47,22 @@ public class LayoutFactory {
         });
 
         return playerImageLayout;
+    }
+
+    public static ProgressDialog createNonCancelableProgressBar(Context context) {
+        ProgressDialog progress = new ProgressDialog(context);
+        progress.setCancelable(false);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        return progress;
+    }
+
+    public static ProgressDialog createNonCancelableProgressBar(Context context, String title, String message) {
+        ProgressDialog progress = new ProgressDialog(context);
+        progress.setCancelable(false);
+        progress.setTitle(title);
+        progress.setMessage(message);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        return progress;
     }
 
 }

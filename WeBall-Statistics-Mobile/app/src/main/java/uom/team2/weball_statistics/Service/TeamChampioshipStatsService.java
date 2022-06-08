@@ -14,7 +14,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.IP;
+import uom.team2.weball_statistics.configuration.Config;
 
 /*
  * @author Aravella Lousta ics20032
@@ -22,9 +22,9 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.IP;
 public class TeamChampioshipStatsService {
 
     private TeamStats teamStats;
-    private ArrayList<TeamStats> listOfTeamStats;
+    private final ArrayList<TeamStats> listOfTeamStats;
 
-    public TeamChampioshipStatsService(){
+    public TeamChampioshipStatsService() {
         listOfTeamStats = new ArrayList<>();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -39,7 +39,7 @@ public class TeamChampioshipStatsService {
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://"+ IP.IP +"/WeBall_Statistics-Backend/API/teamStatisticsCompleted.php")
+                            .url(Config.API_URL + Config.API_ΤΕΑΜ_STATISTICS_COMPLETED)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();
@@ -48,7 +48,7 @@ public class TeamChampioshipStatsService {
                     String data = response.body().string();
                     JSONArray jsonArray = new JSONArray(data);
 
-                    for (int i=0; i<jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         teamStats = new TeamStats();
                         teamStats.editJON(jsonArray.getJSONObject(i).toString());
                         listOfTeamStats.add(teamStats);

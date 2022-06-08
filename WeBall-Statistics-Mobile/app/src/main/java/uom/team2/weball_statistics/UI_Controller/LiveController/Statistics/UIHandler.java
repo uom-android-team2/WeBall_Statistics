@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 /*
@@ -35,7 +36,7 @@ public class UIHandler {
 
     public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
         updateTeamImageInMatchHeader(fragment,
-                "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
+                Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 team.getTeamName(),
                 teamImageLayout);
     }
@@ -64,7 +65,7 @@ public class UIHandler {
                 nameTextView.setText(name);
                 ImageView image = imageLayout.findViewById(R.id.player_image);
                 Picasso.get()
-                        .load(imageUrl)
+                        .load(Config.PLAYER_IMAGES_RESOURCES + imageUrl)
                         .resize(70, 70)
                         .centerCrop()
                         .into(image);
@@ -75,7 +76,7 @@ public class UIHandler {
 
     public static void updateTeamImage(Fragment fragment, Team team, ImageView image) throws IOException, InterruptedException, NullPointerException {
         updateTeamImage(fragment,
-                "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/team_images/" + team.getBadgePath(),
+                Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 image);
     }
 

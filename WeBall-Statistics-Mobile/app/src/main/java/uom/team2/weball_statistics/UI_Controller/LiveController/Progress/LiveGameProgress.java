@@ -62,24 +62,35 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-//        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
-//        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
-//        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
-//        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
-//        liveProgressUIController.fillMatchInformation(this, matchTest);
-//        Testing();
-//
-//        LiveGameProgress liveGameProgressFr = this;
-//
-//        new java.util.Timer().schedule(
-//                new java.util.TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        Testing2();
-//                    }
-//                },
-//                10000
-//        );
+        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
+        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
+        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
+        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
+        liveProgressUIController.fillMatchInformation(this, matchTest);
+
+        Testing();
+
+        LiveGameProgress liveGameProgressFr = this;
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Testing2();
+                    }
+                },
+                10000
+        );
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Testing3();
+                    }
+                },
+                13000
+        );
     }
 
     public void Testing() {
@@ -119,6 +130,18 @@ public class LiveGameProgress extends Fragment {
         daoAction.insert(action444, match2);
         daoAction.insert(action555, match2);
         daoAction.insert(action666, match2);
+
+        //That i will call from onViewCreated()
+        daoAction.getRealTimeData(match2, this);
+    }
+
+    public void Testing3() {
+        Team team = new Team("Paok");
+        Player player = new Player("Minas", "Theodoros");
+        Action action55555 = new Shot("2.33'", 12, BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null);
+        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
+
+        daoAction.insert(action55555, match2);
 
         //That i will call from onViewCreated()
         daoAction.getRealTimeData(match2, this);

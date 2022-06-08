@@ -16,7 +16,7 @@
     <!-- Customizable for light and dark mode -->
     <color name="black_to_white_color">#FFFFFFFF</color>
     <color name="black_to_light_gray_color">#EBEBEB</color>
-    <color name="statistics_background">#D3D3D3</color>
+    <color name="statistics_background">#EBEBEB</color>
     <color name="greyRank">#C4C4C4</color>
 
     <color name="gray_login">#EBEBEB</color>

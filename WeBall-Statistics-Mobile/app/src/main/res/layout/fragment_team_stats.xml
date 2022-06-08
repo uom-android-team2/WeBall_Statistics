@@ -32,14 +32,14 @@
                     android:gravity="center">
 
                     <include
-                        android:id="@+id/table1"
+                        android:id="@+id/points_per_game"
                         layout="@layout/teams_table_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp" />
+                        android:layout_marginEnd="5dp" />
 
                     <include
-                        android:id="@+id/table2"
+                        android:id="@+id/assists_per_game"
                         layout="@layout/teams_table_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -52,14 +52,14 @@
                     android:gravity="center">
 
                     <include
-                        android:id="@+id/table3"
+                        android:id="@+id/rebounds_per_game"
                         layout="@layout/teams_table_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp" />
+                        android:layout_marginEnd="5dp" />
 
                     <include
-                        android:id="@+id/table4"
+                        android:id="@+id/blocks_per_game"
                         layout="@layout/teams_table_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

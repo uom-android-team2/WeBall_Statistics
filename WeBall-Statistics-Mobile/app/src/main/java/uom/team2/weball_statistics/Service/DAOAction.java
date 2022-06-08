@@ -39,27 +39,31 @@ public class DAOAction implements DAOCRUDService <Action> {
     public void getRealTimeData(Match matchData, LiveGameProgress liveGameProgressFragment) {
         //Get data snapshot
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId());
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Action action = data.getValue(Action.class);
-                            if (action.getBelongsTo() == BelongsTo.HOME) {
-                                liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
-                            } else if (action.getBelongsTo() == BelongsTo.GUEST) {
-                                liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
-                            } else if (action.getBelongsTo() == BelongsTo.GENERAL){
-                                liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                        System.out.println("onCancelled: Error: " + databaseError.getMessage());
-                    }
-                });
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+//
+//                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+//                            Action action = data.getValue(Action.class);
+//                            System.out.println(action.getActionDesc());
+//                            if (action.getBelongsTo() == BelongsTo.HOME) {
+//                                liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
+//                            } else if (action.getBelongsTo() == BelongsTo.GUEST) {
+//                                liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
+//                            } else if (action.getBelongsTo() == BelongsTo.GENERAL){
+//                                liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        //handle databaseError
+//                        System.out.println("onCancelled: Error: " + databaseError.getMessage());
+//                    }
+//                });
 
 //        ref.addChildEventListener(new ChildEventListener() {
 //            @Override
@@ -98,7 +102,7 @@ public class DAOAction implements DAOCRUDService <Action> {
     }
 
     public Task<Void> insert(Action actionData, Match matchData) {
-        return databaseReference.child("Actions for match with id: " + matchData.getId()).child("Action: " + actionData.getId()).setValue(actionData);
+        return databaseReference.child("Actions for match with id: " + matchData.getId()).child(actionData.getId() + "").setValue(actionData);
     }
 
     @Override

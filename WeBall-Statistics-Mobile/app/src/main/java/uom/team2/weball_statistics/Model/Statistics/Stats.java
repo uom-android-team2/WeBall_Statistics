@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import uom.team2.weball_statistics.Model.Config;
+import uom.team2.weball_statistics.configuration.Config;
 
 public abstract class Stats implements editFieldsFromDB {
     

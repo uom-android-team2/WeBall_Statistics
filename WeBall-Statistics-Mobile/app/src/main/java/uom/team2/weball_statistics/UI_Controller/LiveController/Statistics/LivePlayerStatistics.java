@@ -139,7 +139,7 @@ public class LivePlayerStatistics extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarContainer);
-        addSpinnerListener();
+//        addSpinnerListener();
 
     }
 
@@ -155,43 +155,43 @@ public class LivePlayerStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 
-        TeamService teamService = new TeamService();
-        PlayerService playerService = new PlayerService();
-
-        teamService.findTeamById(3, new CallbackListener<Team>() {
-            @Override
-            public void callback(Team returnedObject) {
-                team1 = returnedObject;
-                loadInitialTeamsPlayers(playerService, returnedObject.getTeamName());
-                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        fillSpinner(team1.getTeamName());
-                    }
-                });
-                try {
-                    UIHandler.updateTeamImage(LivePlayerStatistics.this, returnedObject, binding.header.teamImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        teamService.findTeamById(7, new CallbackListener<Team>() {
-            @Override
-            public void callback(Team returnedObject) {
-                team2 = returnedObject;
-                loadTeamPlayers(playerService, returnedObject.getTeamName());
-                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        fillSpinner(team2.getTeamName());
-                    }
-                });
-            }
-        });
+//        TeamService teamService = new TeamService();
+//        PlayerService playerService = new PlayerService();
+//
+//        teamService.findTeamById(3, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                team1 = returnedObject;
+//                loadInitialTeamsPlayers(playerService, returnedObject.getTeamName());
+//                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        fillSpinner(team1.getTeamName());
+//                    }
+//                });
+//                try {
+//                    UIHandler.updateTeamImage(LivePlayerStatistics.this, returnedObject, binding.header.teamImage);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
+//        teamService.findTeamById(7, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                team2 = returnedObject;
+//                loadTeamPlayers(playerService, returnedObject.getTeamName());
+//                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        fillSpinner(team2.getTeamName());
+//                    }
+//                });
+//            }
+//        });
 
     }
 

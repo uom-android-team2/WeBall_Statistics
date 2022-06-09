@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import uom.team2.weball_statistics.Model.Player;
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 
 public class SubstitutionPopupView extends Dialog implements
@@ -17,12 +21,17 @@ public class SubstitutionPopupView extends Dialog implements
     public TextView sub1, sub2,sub3,sub4,sub5,xbutton;
     private String str;
     private String n;
+    private Player helperVariable;
+    private Player swapPlayer;
+    private Team team;
+    private int playerChecked;
 
 
-
-    public SubstitutionPopupView(Activity a,String name) {
+    public SubstitutionPopupView(Activity a,Player p, Team t,int pChecked) {
         super(a);
-        n=name;
+        swapPlayer=p;
+        team=t;
+        this.playerChecked=pChecked-1;
         // TODO Auto-generated constructor stub
         this.c = a;
     }
@@ -37,10 +46,16 @@ public class SubstitutionPopupView extends Dialog implements
         xbutton=(TextView) findViewById(R.id.x_button);
         sub1 = (TextView) findViewById(R.id.sub1_text);
         sub2 = (TextView) findViewById(R.id.sub2_text);
-        sub3 = (TextView) findViewById(R.id.sub2_text);
-        sub4 = (TextView) findViewById(R.id.sub2_text);
-        sub5 = (TextView) findViewById(R.id.sub2_text);
+        sub3 = (TextView) findViewById(R.id.sub3_text);
+        sub4 = (TextView) findViewById(R.id.sub4_text);
+        sub5 = (TextView) findViewById(R.id.sub5_text);
 
+
+        sub1.setText(team.getSubPlayers().get(0).getName());
+        sub2.setText(team.getSubPlayers().get(1).getName());
+        sub3.setText(team.getSubPlayers().get(2).getName());
+        sub4.setText(team.getSubPlayers().get(3).getName());
+        sub5.setText(team.getSubPlayers().get(4).getName());
 
 
 
@@ -59,6 +74,7 @@ public class SubstitutionPopupView extends Dialog implements
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.x_button:
                 dismiss();
@@ -66,26 +82,38 @@ public class SubstitutionPopupView extends Dialog implements
 
             case R.id.sub1_text:
 
+                helperVariable=team.getSubPlayers().get(0);
+                team.setSubPlayers(0,swapPlayer);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
                 dismiss();
                 break;
             case R.id.sub2_text:
+                helperVariable=team.getSubPlayers().get(1);
+                team.setSubPlayers(1,swapPlayer);
+                team.setKeyPlayers(playerChecked,helperVariable);
                 dismiss();
                 break;
             case R.id.sub3_text:
+                helperVariable=team.getSubPlayers().get(2);
+                team.setSubPlayers(2,swapPlayer);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
-
-                //dismiss();
+                dismiss();
                 break;
             case R.id.sub4_text:
+                helperVariable=team.getSubPlayers().get(3);
+                team.setSubPlayers(3,swapPlayer);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
-
-                //dismiss();
+                dismiss();
                 break;
             case R.id.sub5_text:
+                helperVariable=team.getSubPlayers().get(4);
+                team.setSubPlayers(4,swapPlayer);
+                team.setKeyPlayers(playerChecked,helperVariable);
 
-
-                //dismiss();
+                dismiss();
                 break;
 
             default:

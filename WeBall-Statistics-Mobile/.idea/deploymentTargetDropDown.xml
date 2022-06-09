@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <targetSelectedWithDropDown>
+      <Target>
+        <type value="QUICK_BOOT_TARGET" />
+        <deviceKey>
+          <Key>
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\leop\.android\avd\Pixel_5_API_30.avd" />
+            <value value="C:\Users\ouzTh\.android\avd\Nexus_One_API_22.avd" />
+          </Key>
+        </deviceKey>
+      </Target>
+    </targetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2022-06-08T12:23:51.667565100Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-06-06T22:04:54.589749500Z" />
+  </component>
+</project>

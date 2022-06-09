@@ -2,11 +2,10 @@ package uom.team2.weball_statistics.Model;
 
 import android.os.StrictMode;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 
 import okhttp3.*;
+import uom.team2.weball_statistics.configuration.Config;
 
 
 public class LoginAdmin {

@@ -46,6 +46,12 @@
                 layout="@layout/fragment_players_stats_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/FPG"
+                layout="@layout/fragment_players_stats_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

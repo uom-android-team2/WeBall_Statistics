@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Statistics;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class LivePlayerStatistics extends Fragment {
     private final boolean teamSelected = true;
     // you need to have a list of data that you want the spinner to display
     List<String> spinnerArray = new ArrayList<String>();
+    ProgressDialog progress;
     private ArrayList<Player> team2Players = new ArrayList<>();
     private ArrayList<Player> team1Players = new ArrayList<>();
     private FragmentLivePlayerStatisticsBinding binding;
@@ -63,6 +65,69 @@ public class LivePlayerStatistics extends Fragment {
         }
     }
 
+    public void changeTeam(int index) {
+        ArrayList<View> tempViews = new ArrayList<>();
+        ArrayList<Player> tempPlayers = new ArrayList<>();
+        Team tempTeam = null;
+
+        if (index == 0) {
+            tempViews = team1PlayerViews;
+            tempPlayers = team1Players;
+            tempTeam = team1;
+        } else {
+            tempViews = team2PlayerViews;
+            tempPlayers = team2Players;
+            tempTeam = team2;
+        }
+
+        final ArrayList<Player> finalTempPlayers = tempPlayers;
+        final ArrayList<View> finalTempViews = tempViews;
+
+        Team finalTempTeam = tempTeam;
+        LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (finalTempTeam == null || finalTempPlayers.size() == 0 || finalTempViews.size() == 0) {
+                    return;
+                }
+                try {
+                    UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                autoSelectPlayer(finalTempPlayers.get(0));
+                addPlayers(finalTempViews);
+                finalTempViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+                changePlayer(finalTempViews);
+            }
+        });
+    }
+
+    public void addSpinnerListener() {
+        binding.header.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                changeTeam(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    public void fillSpinner(String name) {
+        spinnerArray.add(name);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.header.spinner.setAdapter(adapter);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,54 +139,8 @@ public class LivePlayerStatistics extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarContainer);
-//        binding.header.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                if (i == 1) {
-//                    LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                UIHandler.updateTeamImage(LivePlayerStatistics.this, team2, binding.header.teamImage);
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                            autoSelectPlayer(team2Players.get(0));
-//                            addPlayers(team2PlayerViews);
-//                            team2PlayerViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-//                            changePlayer(team2PlayerViews);
-//                        }
-//                    });
-//                } else {
-//                    if (dataRetrieved) {
-//                        LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    UIHandler.updateTeamImage(LivePlayerStatistics.this, team1, binding.header.teamImage);
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                } catch (InterruptedException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                autoSelectPlayer(team1Players.get(0));
-//                                addPlayers(team1PlayerViews);
-//                                team1PlayerViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-//                                changePlayer(team1PlayerViews);
-//
-//                            }
-//                        });
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+//        addSpinnerListener();
+
     }
 
     @Override
@@ -135,7 +154,7 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//
+
 //        TeamService teamService = new TeamService();
 //        PlayerService playerService = new PlayerService();
 //
@@ -143,16 +162,11 @@ public class LivePlayerStatistics extends Fragment {
 //            @Override
 //            public void callback(Team returnedObject) {
 //                team1 = returnedObject;
+//                loadInitialTeamsPlayers(playerService, returnedObject.getTeamName());
 //                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
-//                        spinnerArray.add(returnedObject.getTeamName());
-//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                                LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
-//
-//                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        binding.header.spinner.setAdapter(adapter);
-//
+//                        fillSpinner(team1.getTeamName());
 //                    }
 //                });
 //                try {
@@ -165,52 +179,53 @@ public class LivePlayerStatistics extends Fragment {
 //            }
 //        });
 //
-//        playerService.findAllPlayersByTeamName("Brooklyn Nets", new CallbackListener<ArrayList<Player>>() {
-//            @Override
-//            public void callback(ArrayList<Player> returnedObject) {
-//                team1Players = returnedObject;
-//                createPlayers(returnedObject, team1PlayerViews);
-//                autoSelectPlayer(returnedObject.get(0));
-//
-//                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        addPlayers(team1PlayerViews);
-//                        changePlayer(team1PlayerViews);
-//                        team1PlayerViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-//                    }
-//                });
-//                dataRetrieved = true;
-//            }
-//        });
-//
 //        teamService.findTeamById(7, new CallbackListener<Team>() {
 //            @Override
 //            public void callback(Team returnedObject) {
 //                team2 = returnedObject;
+//                loadTeamPlayers(playerService, returnedObject.getTeamName());
 //                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
-//                        spinnerArray.add(team2.getTeamName());
-//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                                LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
-//
-//                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        binding.header.spinner.setAdapter(adapter);
-//
+//                        fillSpinner(team2.getTeamName());
 //                    }
 //                });
 //            }
 //        });
-//
-//        playerService.findAllPlayersByTeamName("Cleveland Cavaliers", new CallbackListener<ArrayList<Player>>() {
-//            @Override
-//            public void callback(ArrayList<Player> returnedObject) {
-//                team2Players = returnedObject;
-//                createPlayers(returnedObject, team2PlayerViews);
-//            }
-//        });
+
     }
+
+    public void loadInitialTeamsPlayers(PlayerService playerService, String name) {
+        playerService.findAllPlayersByTeamName(name, new CallbackListener<ArrayList<Player>>() {
+            @Override
+            public void callback(ArrayList<Player> returnedObject) {
+                team1Players = returnedObject;
+                createPlayers(returnedObject, team1PlayerViews);
+                autoSelectPlayer(returnedObject.get(0));
+
+                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addPlayers(team1PlayerViews);
+                        changePlayer(team1PlayerViews);
+                        Utils.changeBackgroundColorInView(getContext(), team1PlayerViews.get(0), R.color.alt_blue);
+                    }
+                });
+                dataRetrieved = true;
+            }
+        });
+    }
+
+    public void loadTeamPlayers(PlayerService playerService, String name) {
+        playerService.findAllPlayersByTeamName(name, new CallbackListener<ArrayList<Player>>() {
+            @Override
+            public void callback(ArrayList<Player> returnedObject) {
+                team2Players = returnedObject;
+                createPlayers(returnedObject, team2PlayerViews);
+            }
+        });
+    }
+
 
     public void addPlayers(ArrayList<View> views) {
         LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
@@ -226,8 +241,7 @@ public class LivePlayerStatistics extends Fragment {
     public void createPlayers(ArrayList<Player> returnedObject, ArrayList<View> views) {
         for (Player player : returnedObject) {
             try {
-                View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(),
-                        "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath());
+                View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(), player.getImagePath());
 
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -246,7 +260,7 @@ public class LivePlayerStatistics extends Fragment {
     public void autoSelectPlayer(Player player) {
         try {
             UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
-                    "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + player.getImagePath(),
+                    player.getImagePath(),
                     player.getName(),
                     binding.selectedPlayerLayout.getRoot());
         } catch (IOException e) {
@@ -259,14 +273,14 @@ public class LivePlayerStatistics extends Fragment {
 
     public void changePlayer(ArrayList<View> views) {
 
-        for (View v : views) {
-            v.setOnClickListener(new View.OnClickListener() {
+        for (View playerView : views) {
+            playerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+                    Utils.changeBackgroundColorInView(getContext(), playerView, R.color.alt_blue);
 
-                    int index = views.indexOf(v);
+                    int index = views.indexOf(playerView);
                     int playerSelectedId = teamSelected ? team1Players.get(index).getId() : team2Players.get(index).getId();
                     int teamSelectedId = teamSelected ? team1.getId() : team2.getId();
 
@@ -274,15 +288,18 @@ public class LivePlayerStatistics extends Fragment {
                     DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, 1, teamSelectedId);
 
                     try {
-                        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this, "http://" + IP.IP + "/WeBall_Statistics-Backend/resources/player_images/" + team1Players.get(index).getImagePath(), team1Players.get(index).getName(), binding.selectedPlayerLayout.getRoot());
+                        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
+                                team1Players.get(index).getImagePath(),
+                                team1Players.get(index).getName(),
+                                binding.selectedPlayerLayout.getRoot());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     for (View other : views) {
-                        if (!other.equals(v)) {
-                            other.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.statistics_background));
+                        if (!other.equals(playerView)) {
+                            Utils.changeBackgroundColorInView(getContext(), other, R.color.statistics_background);
                         }
                     }
                 }

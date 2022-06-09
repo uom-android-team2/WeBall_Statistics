@@ -34,11 +34,18 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <include
-                android:id="@+id/topPlayer"
-                layout="@layout/fragment_top_player"
+            <LinearLayout
+                android:id="@+id/topPlayerContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/topPlayer"
+                    layout="@layout/fragment_top_player"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <include
                 android:id="@+id/ranktab"
@@ -46,40 +53,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/ranksContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/ranksContainer"
+                <include
+                    android:id="@+id/second"
+                    layout="@layout/fragment_player_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <include
-                        layout="@layout/fragment_player_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/fourth"
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                    <include
-                        layout="@layout/fragment_player_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/third"
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                    <include
-                        layout="@layout/fragment_player_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/fifth"
+                    layout="@layout/fragment_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-                    <include
-                        layout="@layout/fragment_player_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </ScrollView>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

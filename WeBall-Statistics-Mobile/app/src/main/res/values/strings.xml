@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">WeBall-Statistics</string>
 
+    <!-- String Label for TabContainer Matches -->
+    <string name="matches_tab_container">Matches</string>
+
+    <!-- Strings used for Tab for Matches -->
+    <string name="previous_matches_tab_text">Previous Matches</string>
+    <string name="live_matches_tab_text">Live Matches</string>
+    <string name="upcoming_matches_tab_text">Upcoming Matches</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="live_game_tab_text">Progress</string>
     <string name="live_comments_tab_text">Comments</string>
@@ -111,4 +119,5 @@
     <string name="statTitle">Statistic Title</string>
     <string name="rank">Rank</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="championship_statistics_btn_text">View Championship Statistics</string>
 </resources>

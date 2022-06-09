@@ -147,7 +147,7 @@ public class LeadersStats extends Fragment {
         for (int i=0;i<ranks;i++){
             int finali=i;
             double value = -1;
-            LinearLayout layout = binding.
+//            LinearLayout layout = binding.
 
         }
     }

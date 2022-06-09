@@ -13,10 +13,20 @@ public class Team {
     private Coach teamCoach;
     private ArrayList<Player> teamPlayers;
     private Championship championshipIn; //The championship that participates
+    private final ArrayList<Player> keyPlayers = new ArrayList<Player>();
+    private final ArrayList<Player> subPlayers = new ArrayList<Player>();
+
 
     //only for testing
     public Team(String teamName) {
         this.teamName = teamName;
+    }
+
+    public Team(int id, String teamName, String teamCity, String badgePath) {
+        this.id = id;
+        this.teamName = teamName;
+        this.teamCity = teamCity;
+        this.badgePath = badgePath;
     }
 
     public Team(int id, String teamName, String teamCity, String badgePath, Coach teamCoach, ArrayList<Player> teamPlayers, Championship championshipIn) {
@@ -27,13 +37,18 @@ public class Team {
         this.teamCoach = teamCoach;
         this.teamPlayers = teamPlayers;
         this.championshipIn = championshipIn;
+        setPlayersInKeyAndSub();
     }
 
-    public Team(int id, String teamName, String teamCity, String badgePath) {
-        this.id = id;
-        this.teamName = teamName;
-        this.teamCity = teamCity;
-        this.badgePath = badgePath;
+
+    public void setPlayersInKeyAndSub() {
+        for (int i = 0; i < teamPlayers.size(); i++) {
+            if (i < 5) {
+                keyPlayers.add(teamPlayers.get(i));
+            } else {
+                subPlayers.add(teamPlayers.get(i));
+            }
+        }
     }
 
     public int getId() {
@@ -86,6 +101,32 @@ public class Team {
 
     public ArrayList<Player> getTeamPlayers() {
         return teamPlayers;
+    }
+
+    public ArrayList<Player> getSubPlayers() {
+        return this.subPlayers;
+    }
+
+    public ArrayList<Player> getKeyPlayers() {
+        return this.keyPlayers;
+    }
+
+    public void setKeyPlayers(int k, Player p) {
+        this.keyPlayers.remove(k);
+        this.keyPlayers.add(k, p);
+    }
+
+    public void setSubPlayers(int k, Player p) {
+        this.subPlayers.remove(k);
+        this.subPlayers.add(k, p);
+    }
+
+    public void addPlayerToKey(Player p) {
+        keyPlayers.add(p);
+    }
+
+    public void addPlayerToSub(Player p) {
+        subPlayers.add(p);
     }
 
 

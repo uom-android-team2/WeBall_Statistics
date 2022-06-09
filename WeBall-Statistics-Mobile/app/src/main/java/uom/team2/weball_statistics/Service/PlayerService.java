@@ -13,7 +13,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.IP;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 /*
@@ -41,7 +41,7 @@ public class PlayerService {
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://" + IP.IP + "/WeBall_Statistics-Backend/API/" + "player.php?id=" + id)
+                            .url(Config.API_URL + Config.PLAYER + "?id=" + id)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();
@@ -70,7 +70,7 @@ public class PlayerService {
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://" + IP.IP + "/WeBall_Statistics-Backend/API/player.php")
+                            .url(Config.API_URL + Config.PLAYER)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();
@@ -99,7 +99,7 @@ public class PlayerService {
                             .build();
                     MediaType mediaType = MediaType.parse("application/json");
                     Request request = new Request.Builder()
-                            .url("http://" + IP.IP + "/WeBall_Statistics-Backend/API/player.php?team=" + teamName)
+                            .url(Config.API_URL + Config.PLAYER + "?team=" + teamName)
                             .method("GET", null)
                             .addHeader("Content-Type", "application/json")
                             .build();

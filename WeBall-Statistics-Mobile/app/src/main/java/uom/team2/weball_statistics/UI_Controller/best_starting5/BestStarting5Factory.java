@@ -16,7 +16,11 @@ import uom.team2.weball_statistics.*;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
+
 import uom.team2.weball_statistics.databinding.BestPlayerPerPositionLayoutBinding;
+
+import uom.team2.weball_statistics.configuration.Config;
+
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 public class BestStarting5Factory {
@@ -72,7 +76,7 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         Request request = new Request.Builder()
-                .url("http://192.168.1.16/backend/API/match.php?completed=true")
+                .url("http://" + Config.IP + "/backend/API/match.php?completed=true")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -85,7 +89,7 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType2 = MediaType.parse("application/json");
         Request request2 = new Request.Builder()
-                .url("http://192.168.1.16/backend/API/playerLiveStatistics.php")
+                .url("http://" + Config.IP + "/backend/API/playerLiveStatistics.php")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -99,7 +103,7 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType3 = MediaType.parse("application/json");
         Request request3 = new Request.Builder()
-                .url("http://192.168.1.16/backend/API/player.php")
+                .url("http://" + Config.IP + "/backend/API/player.php")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();

@@ -97,7 +97,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
                 int scoreTeam1 = team1.getSuccesful_threepointer() * 3 + team1.getSuccesful_twopointer() * 2 + team1.getSuccessful_freethrow();
                 int scoreTeam2 = team2.getSuccesful_threepointer() * 3 + team2.getSuccesful_twopointer() * 2 + team2.getSuccessful_freethrow();
-                UIHandler.updateScore(fragment, layoutBinding,scoreTeam1, scoreTeam2);
+                UIHandler.updateScore(fragment, layoutBinding, scoreTeam1, scoreTeam2);
 
             }
 
@@ -164,7 +164,22 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
     @Override
     public Task<Void> insert(TeamLiveStatistics data) {
-        return databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).setValue(data);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.child("match_id: " + data.getMatch_id()).hasChild("team_id: " + data.getTeam_id())) {
+                    // do nothing
+                } else {
+                    databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).setValue(data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return null;
     }
 
     @Override

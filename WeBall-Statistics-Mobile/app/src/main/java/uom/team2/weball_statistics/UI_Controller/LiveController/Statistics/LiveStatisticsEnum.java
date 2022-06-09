@@ -22,6 +22,40 @@ public enum LiveStatisticsEnum {
     foul,
     turnover;
 
+    public static void updateStatistic(TeamLiveStatistics teamLiveStatistics, LiveStatisticsEnum liveStatisticsEnum){
+        switch (liveStatisticsEnum){
+            case successful_effort:
+                teamLiveStatistics.setSuccessful_effort(teamLiveStatistics.getSuccessful_effort() + 1);
+            case total_effort:
+                teamLiveStatistics.setTotal_effort(teamLiveStatistics.getTotal_effort() + 1);
+            case successful_freethrow:
+                teamLiveStatistics.setSuccessful_freethrow(teamLiveStatistics.getSuccessful_freethrow() + 1);
+            case total_freethrow:
+                teamLiveStatistics.setTotal_freethrow(teamLiveStatistics.getTotal_freethrow() + 1);
+            case succesful_twopointer:
+                teamLiveStatistics.setSuccesful_twopointer(teamLiveStatistics.getSuccesful_twopointer() + 1);
+            case total_twopointer:
+                teamLiveStatistics.setTotal_twopointer(teamLiveStatistics.getTotal_twopointer() + 1);
+            case succesful_threepointer:
+                teamLiveStatistics.setSuccesful_threepointer(teamLiveStatistics.getSuccesful_threepointer() + 1);
+            case total_threepointer:
+                teamLiveStatistics.setTotal_threepointer(teamLiveStatistics.getTotal_threepointer() + 1);
+            case steal:
+                teamLiveStatistics.setSteal(teamLiveStatistics.getSteal() + 1);
+            case assist:
+                teamLiveStatistics.setAssist(teamLiveStatistics.getAssist() + 1);
+            case block:
+                teamLiveStatistics.setBlock(teamLiveStatistics.getBlock() + 1);
+            case rebound:
+                teamLiveStatistics.setRebound(teamLiveStatistics.getRebound() + 1);
+            case foul:
+                teamLiveStatistics.setFoul(teamLiveStatistics.getFoul() + 1);
+            case turnover:
+                teamLiveStatistics.setTurnover(teamLiveStatistics.getTurnover() + 1);
+            default:
+        }
+    }
+
     public static int getStatisticValueByName(TeamLiveStatistics teamLiveStatistics, LiveStatisticsEnum statisticEnum){
         switch (statisticEnum){
             case successful_effort:

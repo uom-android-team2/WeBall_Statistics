@@ -75,9 +75,9 @@ public class LiveGameStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 //        DAOLiveTeamService.getInstance().setListenerForPoints(this, binding.header, 1,1,2);
-//        DAOLiveTeamService.getInstace().setDataChangeListener(this, 1, 1, 2);
+//        DAOLiveTeamService.getInstance().setDataChangeListener(this, 1, 1, 2);
 
-//        TeamService teamService = new TeamService();
+        //        TeamService teamService = new TeamService();
 //        // request team with id = 2 and when request is done get the object back
 //        teamService.findTeamById(1, new CallbackListener<Team>() {
 //            @Override

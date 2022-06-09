@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -211,6 +212,21 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).updateChildren(h);
     }
+
+    public void updateByMatchAndTeamId(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {
+
+        databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
+                LiveStatisticsEnum.updateStatistic(teamLiveStatistics, statisticsEnum);
+                update(teamLiveStatistics);
+            }
+        });
+
+
+    }
+
 }
 
 

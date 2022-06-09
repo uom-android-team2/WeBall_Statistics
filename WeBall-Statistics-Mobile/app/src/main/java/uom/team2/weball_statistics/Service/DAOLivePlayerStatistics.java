@@ -40,7 +40,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
         return instance;
     }
 
-    public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int playerId) {
+    public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int teamId, int playerId) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -49,18 +49,18 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                DAOLiveTeamService.getInstance().get(matchId, 1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                DAOLiveTeamService.getInstance().get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
                         PlayerLiveStatistics playerLiveStatistics = snapshot.child("match_id: " + matchId).child("player_id: " + playerId).getValue(PlayerLiveStatistics.class);
-                        if(teamLiveStatistics == null || playerLiveStatistics == null){
+                        if (teamLiveStatistics == null || playerLiveStatistics == null) {
                             return;
                         }
                         HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                         for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                            if (mapof.get(statistic.name()) != null) {
+                            if (fragment.getActivity() != null && mapof.get(statistic.name()) != null) {
                                 UIHandler.updateProgressBarLayoutTeam1(fragment,
                                         mapof,
                                         statistic,
@@ -114,5 +114,41 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
     public void update(PlayerLiveStatistics data) {
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("player_id: " + data.getPlayer_id()).updateChildren(h);
+    }
+
+    public void initializeTable(int matchId, int playerId) {
+        databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                } else {
+                    PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    insert(playerLiveStatistics);
+                }
+            }
+        });
+    }
+
+    public void updateByMatchAndTeamId(int matchId, int playerId, LiveStatisticsEnum statisticsEnum) {
+        databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    PlayerLiveStatistics playerLiveStatistics = dataSnapshot.getValue(PlayerLiveStatistics.class);
+                    LiveStatisticsEnum.updateStatistic(playerLiveStatistics, statisticsEnum);
+                    update(playerLiveStatistics);
+                } else {
+                    PlayerLiveStatistics newPlayerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    insert(newPlayerLiveStatistics).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            LiveStatisticsEnum.updateStatistic(newPlayerLiveStatistics, statisticsEnum);
+                            update(newPlayerLiveStatistics);
+                        }
+                    });
+                }
+            }
+        });
     }
 }

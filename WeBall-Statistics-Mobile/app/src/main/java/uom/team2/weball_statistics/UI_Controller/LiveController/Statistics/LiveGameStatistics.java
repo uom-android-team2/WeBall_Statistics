@@ -27,8 +27,13 @@ import uom.team2.weball_statistics.utils.Utils;
  */
 public class LiveGameStatistics extends Fragment {
 
+    private final int matchId = 1;
+    private final int teamId1 = 1;
+    private final int teamId2 = 2;
+    private final DAOLiveTeamService daoLiveTeamService = DAOLiveTeamService.getInstance();
     private FragmentLiveGameStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
+    private final TeamService teamService = new TeamService();
 
     public LiveGameStatistics() {
         // Required empty public constructor
@@ -61,6 +66,7 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
+        daoLiveTeamService.initializeTable(matchId, teamId1, teamId2);
         return binding.getRoot();
     }
 
@@ -74,17 +80,14 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().setListenerForPoints(this, binding.header, 1,1,2);
-//        DAOLiveTeamService.getInstace().setDataChangeListener(this, 1, 1, 2);
+//        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
+//        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
 
-//        TeamService teamService = new TeamService();
-//        // request team with id = 2 and when request is done get the object back
-//        teamService.findTeamById(1, new CallbackListener<Team>() {
+//        teamService.findTeamById(teamId1, new CallbackListener<Team>() {
 //            @Override
 //            public void callback(Team returnedObject) {
-//                View imageLayout = binding.headerContainer.findViewById(R.id.team1);
 //                try {
-//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
+//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team1.getRoot());
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                } catch (InterruptedException e) {
@@ -93,12 +96,11 @@ public class LiveGameStatistics extends Fragment {
 //            }
 //        });
 //
-//        teamService.findTeamById(2, new CallbackListener<Team>() {
+//        teamService.findTeamById(teamId2, new CallbackListener<Team>() {
 //            @Override
 //            public void callback(Team returnedObject) {
-//                View imageLayout = binding.headerContainer.findViewById(R.id.team2);
 //                try {
-//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
+//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team2.getRoot());
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                } catch (InterruptedException e) {
@@ -106,8 +108,6 @@ public class LiveGameStatistics extends Fragment {
 //                }
 //            }
 //        });
-//
-
     }
 
     @Override
@@ -118,7 +118,11 @@ public class LiveGameStatistics extends Fragment {
 
     public void navigateToLivePlayerStats() {
         binding.playerLiveStatsButton.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics);
+            Bundle bundle = new Bundle();
+            bundle.putInt("match_id", matchId);
+            bundle.putInt("team1_id", teamId1);
+            bundle.putInt("team2_id", teamId2);
+            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics, bundle);
         });
     }
 

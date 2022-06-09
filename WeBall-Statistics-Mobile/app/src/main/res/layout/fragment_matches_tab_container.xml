@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/app_bar_color"
+        app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/appbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +31,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cornerRadius="0dp">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/championship_statistics_btn"
@@ -43,6 +43,7 @@
                 android:text="@string/championship_statistics_btn_text"
                 android:textColor="@color/white"
                 android:textSize="12sp"
+                app:cornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +66,6 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textAlignment="center"
             app:tabBackground="@color/grey"
             app:tabIndicator="@color/red_buttons"

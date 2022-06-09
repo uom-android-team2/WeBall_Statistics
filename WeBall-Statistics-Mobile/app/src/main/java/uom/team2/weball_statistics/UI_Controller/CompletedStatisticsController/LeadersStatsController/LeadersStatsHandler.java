@@ -17,13 +17,24 @@ import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
+
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
+
 import uom.team2.weball_statistics.configuration.Config;
 
 public class LeadersStatsHandler {
 
+
     private PlayerStats playerStats;
     private ArrayList<PlayerStats> listOfPlayerStats;
+
+    private ArrayList<Player> players;
+
+
+    private Player player;
+    private String url1 = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/player.php";
+    private String url2 = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/playerStatisticsCompleted.php";
+
 
     public LeadersStatsHandler(){
         listOfPlayerStats = new ArrayList<>();

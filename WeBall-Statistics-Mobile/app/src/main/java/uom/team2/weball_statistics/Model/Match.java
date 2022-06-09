@@ -1,15 +1,10 @@
 package uom.team2.weball_statistics.Model;
 
 
-import com.google.firebase.database.Exclude;
-
 import java.util.ArrayList;
 import java.util.Date;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 
 /*
@@ -25,10 +20,13 @@ public class Match {
     private int teamLandlord_id;
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
-    private Referee referee;
+
+    private boolean progress = false;
+    private boolean completed = false;
     private ArrayList<Action> actions;
-    private boolean progress;
-    private boolean completed;
+    private Referee referee;
+
+
     //Will added fields specified for comments and progress to appear them after the match completed
 
 
@@ -42,7 +40,7 @@ public class Match {
         actions = new ArrayList<Action>();
     }
 
-    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress,boolean completed) {
+    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress, boolean completed) {
         this.id = id;
         this.teamLandlord_id = teamLandlord_id;
         this.Teamguest_id = Teamguest_id;
@@ -51,6 +49,15 @@ public class Match {
         this.completed = completed;
         //   actions = new ArrayList<Action>();
     }
+
+    public Match(int id, Team teamLandlord, Team teamGuest, Date date, Status status) {
+        this.id = id;
+        this.teamLandlord = teamLandlord;
+        this.guest = teamGuest;
+        this.matchDate = date;
+        this.status = status;
+    }
+
 
     public void addAction(Action action) {
         this.actions.add(action);
@@ -100,8 +107,9 @@ public class Match {
         return actions;
     }
 
-    public Referee getReferee() {
-        return referee;
+
+    public void setProgress() {
+        progress = true;
     }
 
     public boolean isProgress() {
@@ -110,5 +118,15 @@ public class Match {
 
     public boolean isCompleted() {
         return completed;
+    }
+
+    public void setCompleted() {
+
+        completed = true;
+    }
+
+    public Referee getReferee() {
+        return referee;
+
     }
 }

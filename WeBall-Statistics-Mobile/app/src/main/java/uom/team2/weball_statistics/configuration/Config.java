@@ -1,7 +1,7 @@
 package uom.team2.weball_statistics.configuration;
 
 public class Config {
-    public static final String IP = "172.24.128.1";
+    public static final String IP = "172.21.80.1";
     public static final String API_URL = "http://" + IP + "/WeBall_Statistics-Backend/API/";
     public static final String API_REFEREE = "referee.php";
     public static final String API_PLAYER_STATS_LIVE = "playerLiveStatistics.php";

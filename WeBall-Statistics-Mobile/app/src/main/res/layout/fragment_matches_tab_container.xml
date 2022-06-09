@@ -11,24 +11,46 @@
         android:id="@+id/imageViewLogoMatches"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/championship_statistics_btn"
+        app:layout_constraintBottom_toTopOf="@+id/btnContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <Button
-        android:id="@+id/championship_statistics_btn"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/red_buttons"
-        android:text="@string/championship_statistics_btn_text"
-        app:cornerRadius="50dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/app_bar_color"
         app:layout_constraintBottom_toTopOf="@+id/appbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/appbar"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoMatches" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoMatches">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cornerRadius="0dp">
+
+            <Button
+                android:id="@+id/championship_statistics_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/red_buttons"
+                android:text="@string/championship_statistics_btn_text"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -37,7 +59,7 @@
         app:layout_constraintBottom_toTopOf="@+id/view_pager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/championship_statistics_btn">
+        app:layout_constraintTop_toBottomOf="@+id/btnContainer">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"

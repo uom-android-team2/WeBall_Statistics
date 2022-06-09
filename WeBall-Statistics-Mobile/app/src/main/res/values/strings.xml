@@ -119,4 +119,5 @@
     <string name="statTitle">Statistic Title</string>
     <string name="rank">Rank</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="championship_statistics_btn_text">View Championship Statistics</string>
 </resources>

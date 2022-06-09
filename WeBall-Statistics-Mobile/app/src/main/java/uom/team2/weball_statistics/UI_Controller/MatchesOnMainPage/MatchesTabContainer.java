@@ -32,7 +32,7 @@ public class MatchesTabContainer extends Fragment {
 
     private void tabBackgroundColorHandler(TabLayout tabs) {
         int backgroundSelectedColor = Utils.getColor(getContext(), R.color.red_buttons);
-        int backgroundDefaultColor = Utils.getColor(getContext(), R.color.custom_blue);
+        int backgroundDefaultColor = Utils.getColor(getContext(), R.color.grey);
 
         tabs.getTabAt(tabs.getSelectedTabPosition()).view.setBackgroundColor(backgroundSelectedColor);
 

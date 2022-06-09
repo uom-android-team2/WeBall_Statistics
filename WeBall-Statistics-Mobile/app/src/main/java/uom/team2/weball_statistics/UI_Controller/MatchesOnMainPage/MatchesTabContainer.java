@@ -32,7 +32,7 @@ public class MatchesTabContainer extends Fragment {
 
     private void tabBackgroundColorHandler(TabLayout tabs) {
         int backgroundSelectedColor = Utils.getColor(getContext(), R.color.red_buttons);
-        int backgroundDefaultColor = Utils.getColor(getContext(), R.color.background_player_live_stats_button_color);
+        int backgroundDefaultColor = Utils.getColor(getContext(), R.color.custom_blue);
 
         tabs.getTabAt(tabs.getSelectedTabPosition()).view.setBackgroundColor(backgroundSelectedColor);
 
@@ -72,16 +72,13 @@ public class MatchesTabContainer extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // configure tablayout with view pager
         SectionsPagerAdapterMatches sectionsPagerAdapter = new SectionsPagerAdapterMatches(getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
 
-        // handles the background color of the selected tab
         tabBackgroundColorHandler(tabs);
-
     }
 
     @Override

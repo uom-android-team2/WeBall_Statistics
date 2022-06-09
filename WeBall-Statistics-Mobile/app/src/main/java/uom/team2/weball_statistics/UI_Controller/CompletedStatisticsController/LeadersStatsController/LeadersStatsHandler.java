@@ -29,11 +29,7 @@ public class LeadersStatsHandler {
     private ArrayList<PlayerStats> listOfPlayerStats;
 
     private ArrayList<Player> players;
-
-
-    private Player player;
-    private String url1 = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/player.php";
-    private String url2 = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/playerStatisticsCompleted.php";
+    
 
 
     public LeadersStatsHandler(){

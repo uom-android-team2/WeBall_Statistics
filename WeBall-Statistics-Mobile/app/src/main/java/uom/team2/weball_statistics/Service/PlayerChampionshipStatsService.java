@@ -55,7 +55,7 @@ public class PlayerChampionshipStatsService {
                         listOfPlayerStats.add(playerStats);
                     }
                     callbackListener.callback(listOfPlayerStats);
-                    System.out.println("FIND THEM2222 = " + listOfPlayerStats);
+                    System.out.println("PLAYERS STATS SIZE = " + listOfPlayerStats.size());
 
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

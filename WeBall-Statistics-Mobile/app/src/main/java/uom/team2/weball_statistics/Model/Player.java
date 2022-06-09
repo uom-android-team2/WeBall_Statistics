@@ -119,4 +119,8 @@ public class Player {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
+
+    public String getTeamString() {
+        return teamString;
+    }
 }

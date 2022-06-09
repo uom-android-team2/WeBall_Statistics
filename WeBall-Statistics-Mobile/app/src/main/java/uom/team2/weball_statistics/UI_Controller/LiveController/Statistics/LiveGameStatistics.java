@@ -80,34 +80,34 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
-        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
+//        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
+//        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
 
-        teamService.findTeamById(teamId1, new CallbackListener<Team>() {
-            @Override
-            public void callback(Team returnedObject) {
-                try {
-                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team1.getRoot());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        teamService.findTeamById(teamId2, new CallbackListener<Team>() {
-            @Override
-            public void callback(Team returnedObject) {
-                try {
-                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team2.getRoot());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        teamService.findTeamById(teamId1, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                try {
+//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team1.getRoot());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
+//        teamService.findTeamById(teamId2, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                try {
+//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team2.getRoot());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     @Override

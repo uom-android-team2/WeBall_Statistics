@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
@@ -33,7 +33,7 @@ public class LivePlayerStatistics extends Fragment {
     private final ArrayList<View> team1PlayerViews = new ArrayList<>();
     private final ArrayList<View> team2PlayerViews = new ArrayList<>();
     // you need to have a list of data that you want the spinner to display
-    private final List<String> spinnerArray = new ArrayList<String>();
+    private final ArrayList<String> spinnerArray = new ArrayList<String>();
     private boolean teamSelected = true;
     private ProgressDialog progress;
     private int matchId;
@@ -47,6 +47,7 @@ public class LivePlayerStatistics extends Fragment {
     private Team team2;
     private boolean dataRetrieved = false;
     private int playerSelectedId = -1;
+    private int spinnerItemSelected = 0;
 
     public LivePlayerStatistics() {
         // Required empty public constructor
@@ -69,6 +70,11 @@ public class LivePlayerStatistics extends Fragment {
     }
 
     public void changeTeam(int index) {
+        if (index == spinnerItemSelected) {
+            return;
+        }
+
+        spinnerItemSelected = index;
         ArrayList<View> tempViews = new ArrayList<>();
         ArrayList<Player> tempPlayers = new ArrayList<>();
         Team tempTeam = null;
@@ -126,8 +132,7 @@ public class LivePlayerStatistics extends Fragment {
         });
     }
 
-    public void fillSpinner(String name) {
-        spinnerArray.add(name);
+    public void fillSpinner(ArrayList<String> spinnerArray) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
 
@@ -146,7 +151,7 @@ public class LivePlayerStatistics extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarContainer);
-        addSpinnerListener();
+//        addSpinnerListener();
     }
 
     @Override
@@ -165,31 +170,31 @@ public class LivePlayerStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 
-        TeamService teamService = new TeamService();
-        PlayerService playerService = new PlayerService();
-
-        teamService.findTeamById(team1Id, new CallbackListener<Team>() {
-            @Override
-            public void callback(Team returnedObject) {
-                team1 = returnedObject;
-                loadInitialTeamsPlayers(playerService, returnedObject.getTeamName());
-                try {
-                    UIHandler.updateTeamImage(LivePlayerStatistics.this, returnedObject, binding.header.teamImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        teamService.findTeamById(team2Id, new CallbackListener<Team>() {
-            @Override
-            public void callback(Team returnedObject) {
-                team2 = returnedObject;
-                loadTeamPlayers(playerService, returnedObject.getTeamName());
-            }
-        });
+//        TeamService teamService = new TeamService();
+//        PlayerService playerService = new PlayerService();
+//
+//        teamService.findTeamById(team1Id, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                team1 = returnedObject;
+//                loadInitialTeamsPlayers(playerService, returnedObject.getTeamName());
+//                try {
+//                    UIHandler.updateTeamImage(LivePlayerStatistics.this, returnedObject, binding.header.teamImage);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
+//        teamService.findTeamById(team2Id, new CallbackListener<Team>() {
+//            @Override
+//            public void callback(Team returnedObject) {
+//                team2 = returnedObject;
+//                loadTeamPlayers(playerService, returnedObject.getTeamName());
+//            }
+//        });
 
     }
 
@@ -216,8 +221,11 @@ public class LivePlayerStatistics extends Fragment {
                     }
                 });
                 dataRetrieved = true;
-                fillSpinner(team1.getTeamName());
-                fillSpinner(team2.getTeamName());
+
+                spinnerArray.add(team1.getTeamName());
+                spinnerArray.add(team2.getTeamName());
+
+                fillSpinner(spinnerArray);
             }
         });
     }

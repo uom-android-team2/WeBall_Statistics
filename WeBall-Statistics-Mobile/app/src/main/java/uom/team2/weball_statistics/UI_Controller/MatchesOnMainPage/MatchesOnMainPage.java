@@ -1,4 +1,4 @@
-package uom.team2.weball_statistics.UI_Controller.matches_on_main_page;
+package uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage;
 
 import android.os.StrictMode;
 

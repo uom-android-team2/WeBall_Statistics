@@ -68,7 +68,11 @@
         android:name="uom.team2.weball_statistics.LoginFragment"
 
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_matchesTabContainer"
+            app:destination="@id/matchesTabContainer" />
+    </fragment>
 
         android:label="LoginFragment" >
         <action
@@ -98,4 +102,8 @@
         android:id="@+id/completedMatchStats3"
         android:name="uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats"
         android:label="CompletedMatchStats" />
+    <fragment
+        android:id="@+id/matchesTabContainer"
+        android:name="uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.MatchesTabContainer"
+        android:label="MatchesTabContainer" />
 </navigation>

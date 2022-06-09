@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,11 @@ public class LoginFragment extends Fragment {
         username = (EditText) binding.textUsername;
         password =  (EditText) binding.textPassword;
         loginButton = (Button) binding.btnLogin;
+        ImageView imageView = (ImageView) binding.badge;
+
+        imageView.setOnClickListener(e -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_matchesTabContainer);
+        });
 
 
         loginButton.setOnClickListener(e -> checkLogin());

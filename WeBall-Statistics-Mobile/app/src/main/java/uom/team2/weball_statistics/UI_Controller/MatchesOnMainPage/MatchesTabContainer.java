@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.SectionsPagerAdapter;
 import uom.team2.weball_statistics.databinding.FragmentLiveTabContainerBinding;
+import uom.team2.weball_statistics.databinding.FragmentMatchesTabContainerBinding;
 import uom.team2.weball_statistics.utils.Utils;
 
 /*
@@ -23,7 +24,7 @@ import uom.team2.weball_statistics.utils.Utils;
  */
 public class MatchesTabContainer extends Fragment {
 
-    private FragmentLiveTabContainerBinding binding;
+    private FragmentMatchesTabContainerBinding binding;
 
     public MatchesTabContainer() {
         // Required empty public constructor
@@ -62,7 +63,7 @@ public class MatchesTabContainer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentLiveTabContainerBinding.inflate(inflater, container, false);
+        binding = FragmentMatchesTabContainerBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }
@@ -72,7 +73,7 @@ public class MatchesTabContainer extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // configure tablayout with view pager
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
+        SectionsPagerAdapterMatches sectionsPagerAdapter = new SectionsPagerAdapterMatches(getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;

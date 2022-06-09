@@ -12,6 +12,9 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Comments.LiveGameComments;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGameProgress;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveGameStatistics;
+import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.LiveMatches;
+import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.PreviousMatches.PreviousMatches;
+import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.UpcomingMatches.UpcomingMatches;
 
 /*
  * @author Minas - Theodoros Charakopoulos ics20072
@@ -34,11 +37,11 @@ public class SectionsPagerAdapterMatches extends FragmentPagerAdapter {
         int index = position + 1;
         switch (index) {
             case 1:
-                return LiveGameProgress.getInstance();
+                return PreviousMatches.getInstance();
             case 3:
-                return LiveGameStatistics.getInstance();
+                return UpcomingMatches.getInstance();
             default:
-                return LiveGameComments.getInstance();
+                return LiveMatches.getInstance();
         }
     }
 

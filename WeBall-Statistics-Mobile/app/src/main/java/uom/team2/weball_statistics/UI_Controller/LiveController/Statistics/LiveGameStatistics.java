@@ -74,40 +74,6 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().setListenerForPoints(this, binding.header, 1,1,2);
-//        DAOLiveTeamService.getInstance().setDataChangeListener(this, 1, 1, 2);
-
-        //        TeamService teamService = new TeamService();
-//        // request team with id = 2 and when request is done get the object back
-//        teamService.findTeamById(1, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                View imageLayout = binding.headerContainer.findViewById(R.id.team1);
-//                try {
-//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        teamService.findTeamById(2, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                View imageLayout = binding.headerContainer.findViewById(R.id.team2);
-//                try {
-//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, imageLayout);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-
     }
 
     @Override

@@ -24,6 +24,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.PlayerService;
+import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -140,7 +141,6 @@ public class LivePlayerStatistics extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarContainer);
 //        addSpinnerListener();
-
     }
 
     @Override
@@ -283,9 +283,6 @@ public class LivePlayerStatistics extends Fragment {
                     int index = views.indexOf(playerView);
                     int playerSelectedId = teamSelected ? team1Players.get(index).getId() : team2Players.get(index).getId();
                     int teamSelectedId = teamSelected ? team1.getId() : team2.getId();
-
-                    DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, 1, playerSelectedId);
-                    DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, 1, teamSelectedId);
 
                     try {
                         UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,

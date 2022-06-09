@@ -131,7 +131,8 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                    if (fragment.getMapOfStatistics().get(statistic.name()) != null) {
+
+                    if (fragment.getActivity() != null && fragment.getMapOfStatistics().get(statistic.name()) != null) {
                         UIHandler.updateProgressBarLayoutTeam1(fragment,
                                 fragment.getMapOfStatistics(),
                                 statistic,
@@ -165,22 +166,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
     @Override
     public Task<Void> insert(TeamLiveStatistics data) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot.child("match_id: " + data.getMatch_id()).hasChild("team_id: " + data.getTeam_id())) {
-                    // do nothing
-                } else {
-                    databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).setValue(data);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return null;
+        return databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).setValue(data);
     }
 
     @Override
@@ -218,9 +204,20 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
-                LiveStatisticsEnum.updateStatistic(teamLiveStatistics, statisticsEnum);
-                update(teamLiveStatistics);
+                if (dataSnapshot.exists()) {
+                    TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
+                    LiveStatisticsEnum.updateStatistic(teamLiveStatistics, statisticsEnum);
+                    update(teamLiveStatistics);
+                } else {
+                    TeamLiveStatistics newTeamLiveStatistics = new TeamLiveStatistics(matchId, teamId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    insert(newTeamLiveStatistics).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            LiveStatisticsEnum.updateStatistic(newTeamLiveStatistics, statisticsEnum);
+                            update(newTeamLiveStatistics);
+                        }
+                    });
+                }
             }
         });
 

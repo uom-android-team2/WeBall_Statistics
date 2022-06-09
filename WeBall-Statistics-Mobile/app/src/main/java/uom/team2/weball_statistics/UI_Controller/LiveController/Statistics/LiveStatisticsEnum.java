@@ -22,36 +22,99 @@ public enum LiveStatisticsEnum {
     foul,
     turnover;
 
+
+    public static void updateStatistic(PlayerLiveStatistics playerLiveStatistics, LiveStatisticsEnum liveStatisticsEnum){
+        switch (liveStatisticsEnum){
+            case successful_effort:
+                playerLiveStatistics.setSuccessful_effort(playerLiveStatistics.getSuccessful_effort() + 1);
+                break;
+            case total_effort:
+                playerLiveStatistics.setTotal_effort(playerLiveStatistics.getTotal_effort() + 1);
+                break;
+            case successful_freethrow:
+                playerLiveStatistics.setSuccessful_freethrow(playerLiveStatistics.getSuccessful_freethrow() + 1);
+                break;
+            case total_freethrow:
+                playerLiveStatistics.setTotal_freethrow(playerLiveStatistics.getTotal_freethrow() + 1);
+                break;
+            case succesful_twopointer:
+                playerLiveStatistics.setSuccesful_twopointer(playerLiveStatistics.getSuccesful_twopointer() + 1);
+                break;
+            case total_twopointer:
+                playerLiveStatistics.setTotal_twopointer(playerLiveStatistics.getTotal_twopointer() + 1);
+                break;
+            case succesful_threepointer:
+                playerLiveStatistics.setSuccesful_threepointer(playerLiveStatistics.getSuccesful_threepointer() + 1);
+                break;
+            case total_threepointer:
+                playerLiveStatistics.setTotal_threepointer(playerLiveStatistics.getTotal_threepointer() + 1);
+                break;
+            case steal:
+                playerLiveStatistics.setSteal(playerLiveStatistics.getSteal() + 1);
+                break;
+            case assist:
+                playerLiveStatistics.setAssist(playerLiveStatistics.getAssist() + 1);
+                break;
+            case block:
+                playerLiveStatistics.setBlock(playerLiveStatistics.getBlock() + 1);
+                break;
+            case rebound:
+                playerLiveStatistics.setRebound(playerLiveStatistics.getRebound() + 1);
+                break;
+            case foul:
+                playerLiveStatistics.setFoul(playerLiveStatistics.getFoul() + 1);
+                break;
+            case turnover:
+                playerLiveStatistics.setTurnover(playerLiveStatistics.getTurnover() + 1);
+                break;
+            default:
+        }
+    }
+
     public static void updateStatistic(TeamLiveStatistics teamLiveStatistics, LiveStatisticsEnum liveStatisticsEnum){
         switch (liveStatisticsEnum){
             case successful_effort:
                 teamLiveStatistics.setSuccessful_effort(teamLiveStatistics.getSuccessful_effort() + 1);
+                break;
             case total_effort:
                 teamLiveStatistics.setTotal_effort(teamLiveStatistics.getTotal_effort() + 1);
+                break;
             case successful_freethrow:
                 teamLiveStatistics.setSuccessful_freethrow(teamLiveStatistics.getSuccessful_freethrow() + 1);
+                break;
             case total_freethrow:
                 teamLiveStatistics.setTotal_freethrow(teamLiveStatistics.getTotal_freethrow() + 1);
+                break;
             case succesful_twopointer:
                 teamLiveStatistics.setSuccesful_twopointer(teamLiveStatistics.getSuccesful_twopointer() + 1);
+                break;
             case total_twopointer:
                 teamLiveStatistics.setTotal_twopointer(teamLiveStatistics.getTotal_twopointer() + 1);
+                break;
             case succesful_threepointer:
                 teamLiveStatistics.setSuccesful_threepointer(teamLiveStatistics.getSuccesful_threepointer() + 1);
+                break;
             case total_threepointer:
                 teamLiveStatistics.setTotal_threepointer(teamLiveStatistics.getTotal_threepointer() + 1);
+                break;
             case steal:
                 teamLiveStatistics.setSteal(teamLiveStatistics.getSteal() + 1);
+                break;
             case assist:
                 teamLiveStatistics.setAssist(teamLiveStatistics.getAssist() + 1);
+                break;
             case block:
                 teamLiveStatistics.setBlock(teamLiveStatistics.getBlock() + 1);
+                break;
             case rebound:
                 teamLiveStatistics.setRebound(teamLiveStatistics.getRebound() + 1);
+                break;
             case foul:
                 teamLiveStatistics.setFoul(teamLiveStatistics.getFoul() + 1);
+                break;
             case turnover:
                 teamLiveStatistics.setTurnover(teamLiveStatistics.getTurnover() + 1);
+                break;
             default:
         }
     }

@@ -17,6 +17,7 @@ import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
+import uom.team2.weball_statistics.configuration.Config;
 
 public class LeadersStatsHandler {
 
@@ -24,9 +25,8 @@ public class LeadersStatsHandler {
     private PlayerStats stats;
     private ArrayList<PlayerStats> allPlayersStats;
     private Player player;
-    private String myIP ="192.168.1.43";
-    private String url1 = "http://"+myIP+"/WeBall_Statistics-Backend/API/player.php";
-    private String url2 = "http://"+myIP+"/WeBall_Statistics-Backend/API/playerStatisticsCompleted.php";
+    private String url1 = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/player.php";
+    private String url2 = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/playerStatisticsCompleted.php";
 
     public LeadersStatsHandler(){
         players = new ArrayList<>();

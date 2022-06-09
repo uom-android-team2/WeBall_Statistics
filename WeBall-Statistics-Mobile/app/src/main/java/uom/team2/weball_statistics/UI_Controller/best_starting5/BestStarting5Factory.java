@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.best_starting5;
 import android.os.StrictMode;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,10 +16,12 @@ import uom.team2.weball_statistics.*;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
+import uom.team2.weball_statistics.databinding.BestPlayerPerPositionLayoutBinding;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 public class BestStarting5Factory {
 
+    private BestStarting5 myGUI= new BestStarting5();
     private ArrayList<Match> allMatches = new ArrayList<Match>();
     private ArrayList<PlayerLiveStatistics> allPlayerLiveStatistics= new ArrayList<>();
     private ArrayList<PlayerLiveStatistics> usefullData = new ArrayList<>();
@@ -41,6 +44,7 @@ public class BestStarting5Factory {
         this.getPlayers();
         this.cleanData();
         this.getBestStarting5();
+        this.fillBestPlayerLayouts(myGUI,bestPG);
     }
 
     //----How to calculate Efficiency----
@@ -89,6 +93,7 @@ public class BestStarting5Factory {
         allPlayerLiveStatistics = JSONHandler.deserializeListOfPlayerLiveStatistics(response2.body().string());
     }
 
+    //Checked
     public void getPlayers()throws IOException, JSONException {
         OkHttpClient client3 = new OkHttpClient().newBuilder()
                 .build();
@@ -100,6 +105,8 @@ public class BestStarting5Factory {
                 .build();
         Response response3 = client3.newCall(request3).execute();
         allPlayers = JSONHandler.deserializeListOfPlayers2(response3.body().string());
+
+
     }
 
     public void cleanData() {
@@ -119,6 +126,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficPG) {
                     maxEfficPG = tempEffic;
                     bestPG = this.findPlayerById(usefullData.get(i).getPlayer_id());
+
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SHOOTING_GUARD")) {
@@ -126,6 +134,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficSG) {
                     maxEfficSG = tempEffic;
                     bestSG = this.findPlayerById(usefullData.get(i).getPlayer_id());
+
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SMALL_FORWARD")) {
@@ -133,6 +142,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficSF) {
                     maxEfficSF = tempEffic;
                     bestSF = this.findPlayerById(usefullData.get(i).getPlayer_id());
+
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POWER_FORWARD")) {
@@ -140,6 +150,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficPF) {
                     maxEfficPF = tempEffic;
                     bestPF = this.findPlayerById(usefullData.get(i).getPlayer_id());
+
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("CENTER")) {
@@ -147,9 +158,11 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficC) {
                     maxEfficC = tempEffic;
                     bestC = this.findPlayerById(usefullData.get(i).getPlayer_id());
+
                 }
             }
         }
+
     }
 
     public ArrayList<Match> removePreviousWeekMatches(ArrayList<Match> myMatches){
@@ -185,6 +198,16 @@ public class BestStarting5Factory {
         }
         return null;
     }
+    public void fillBestPlayerLayouts(BestStarting5 bestStarting5,Player player) {
+        //if(player.getPlayerPosition().equals("POINT_GUARD")) {
+            BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5.getBinding().includePG;
+
+            TextView teamNumberPosition = (TextView) bestPlayerPerPositionLayoutBinding.TeamNumberPosition;
+            teamNumberPosition.setText(player.getTeam()+" | "+player.getNumber()+" | "+player.getPosition());
+
+        //}
+    }
+
 
     public Player getBestPG() {
         return bestPG;

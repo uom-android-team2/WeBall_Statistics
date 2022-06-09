@@ -200,7 +200,6 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
     }
 
     public void updateByMatchAndTeamId(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {
-
         databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -220,9 +219,33 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 }
             }
         });
-
-
     }
+
+    public void initializeTable(int matchid, int teamId1, int teamId2) {
+        databaseReference.child("match_id: " + matchid).child("team_id: " + teamId1).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                } else {
+                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchid, teamId1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    insert(teamLiveStatistics);
+                }
+            }
+        });
+        databaseReference.child("match_id: " + matchid).child("team_id: " + teamId2).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                } else {
+                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchid, teamId2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    insert(teamLiveStatistics);
+                }
+            }
+        });
+    }
+
 
 }
 

@@ -40,7 +40,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
         return instance;
     }
 
-    public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int playerId) {
+    public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int teamId, int playerId) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -49,7 +49,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                DAOLiveTeamService.getInstance().get(matchId, 1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                DAOLiveTeamService.getInstance().get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
@@ -116,8 +116,21 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
         databaseReference.child("match_id: " + data.getMatch_id()).child("player_id: " + data.getPlayer_id()).updateChildren(h);
     }
 
-    public void updateByMatchAndTeamId(int matchId, int playerId, LiveStatisticsEnum statisticsEnum) {
+    public void initializeTable(int matchId, int playerId) {
+        databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
+                } else {
+                    PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    insert(playerLiveStatistics);
+                }
+            }
+        });
+    }
+
+    public void updateByMatchAndTeamId(int matchId, int playerId, LiveStatisticsEnum statisticsEnum) {
         databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -126,7 +139,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                     LiveStatisticsEnum.updateStatistic(playerLiveStatistics, statisticsEnum);
                     update(playerLiveStatistics);
                 } else {
-                    PlayerLiveStatistics newPlayerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    PlayerLiveStatistics newPlayerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                     insert(newPlayerLiveStatistics).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {

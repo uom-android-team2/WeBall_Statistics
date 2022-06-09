@@ -27,8 +27,13 @@ import uom.team2.weball_statistics.utils.Utils;
  */
 public class LiveGameStatistics extends Fragment {
 
+    private final int matchId = 1;
+    private final int teamId1 = 1;
+    private final int teamId2 = 2;
+    private final DAOLiveTeamService daoLiveTeamService = DAOLiveTeamService.getInstance();
     private FragmentLiveGameStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
+    private final TeamService teamService = new TeamService();
 
     public LiveGameStatistics() {
         // Required empty public constructor
@@ -61,6 +66,7 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
+        daoLiveTeamService.initializeTable(matchId, teamId1, teamId2);
         return binding.getRoot();
     }
 
@@ -74,6 +80,34 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
+        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
+
+        teamService.findTeamById(teamId1, new CallbackListener<Team>() {
+            @Override
+            public void callback(Team returnedObject) {
+                try {
+                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team1.getRoot());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        teamService.findTeamById(teamId2, new CallbackListener<Team>() {
+            @Override
+            public void callback(Team returnedObject) {
+                try {
+                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team2.getRoot());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -84,7 +118,11 @@ public class LiveGameStatistics extends Fragment {
 
     public void navigateToLivePlayerStats() {
         binding.playerLiveStatsButton.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics);
+            Bundle bundle = new Bundle();
+            bundle.putInt("match_id", matchId);
+            bundle.putInt("team1_id", teamId1);
+            bundle.putInt("team2_id", teamId2);
+            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics, bundle);
         });
     }
 

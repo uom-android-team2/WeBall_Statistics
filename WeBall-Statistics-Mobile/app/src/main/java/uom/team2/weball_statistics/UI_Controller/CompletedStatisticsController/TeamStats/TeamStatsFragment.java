@@ -155,7 +155,7 @@ public class TeamStatsFragment extends Fragment {
                 ImageView imageView = view.findViewById(R.id.badge);
                 Picasso.get()
                         .load(url)
-                        .resize(15, 15)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(imageView);
             }

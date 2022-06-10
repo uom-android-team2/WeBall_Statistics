@@ -87,7 +87,7 @@
     <fragment
         android:id="@+id/sharedTabContainer"
         android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.SharedTabContainer"
-        android:label="SharedTabContainer"
+        android:label="@string/statsTabContainer"
         tools:layout="@layout/fragment_shared_tab_container">
         <action
             android:id="@+id/action_sharedTabContainer_to_expandedLeadersStat"

@@ -26,6 +26,7 @@ import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
 /*
@@ -49,6 +50,12 @@ public class LiveGameProgress extends Fragment {
 
         super.onCreate(savedInstanceState);
         daoAction = DAOAction.getInstance();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
     }
 
     @Override

@@ -19,7 +19,9 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentBestStarting5Binding;
 
 public class BestStarting5 extends Fragment {
+
     private FragmentBestStarting5Binding binding;
+    private BestStarting5Controller bestStarting5Controller = BestStarting5Controller.getInstance();
 
     public BestStarting5() { }
 
@@ -36,6 +38,9 @@ public class BestStarting5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentBestStarting5Binding.inflate(inflater, container, false);
+
+        this.bestStarting5Controller.fillBestPointGuardInfo(null, this);
+
        // createBestPlayerPerPositionPG(1,2,"Chicago Bulls","Lonzo Ball"
         //,23);
         Thread as = new Thread(new Runnable() {
@@ -79,66 +84,13 @@ public class BestStarting5 extends Fragment {
         binding = null;
     }
 
-
-//    public View createBestPlayerPerPositionPG(string logoPath,
-//                                                  string playerImagePath,
-//                                                  String cityNameNumberPosition,
-//                                                  String firstnameLastname, int efficiencyValue){
-//        //Deriving View from layout fragment
-//        View bestPlayerPerPositionLayout = this.getLayoutInflater().inflate(R.layout.fragment_best_starting5,null);
-//        View mylayout = bestPlayerPerPositionLayout.findViewById(R.id.linearLayoutId);
-//        View include = mylayout.findViewById(R.id.includePG);
-//        //Changing View data based on input
-//            //City-Team name-Number-Position field
-//            TextView newCityNameNumberPosition = include.findViewById(R.id.cityTeamNumberPosition);
-//            newCityNameNumberPosition.setText(cityNameNumberPosition);
-//            //Firstname Lastname field
-//            TextView newFirstnameLastname = include.findViewById(R.id.firstnameLastname);
-//            newFirstnameLastname.setText(firstnameLastname);
-//            //Plus minus value field
-//            TextView newPlusMinusValue = include.findViewById(R.id.efficiencyValue);
-//            String plusMinusValueString = Integer.toString(efficiencyValue);
-//            newPlusMinusValue.setText(plusMinusValueString);
-//            //Logo field
-//            ImageButton newLogo = include.findViewById(R.id.logoImage);
-//            newLogo.setBackgroundResource(logo); //logo is of type int
-//            //Player photo field
-//            ImageButton newPlayerImage = include.findViewById(R.id.playerImage);
-//            newPlayerPhoto.setBackgroundResource(playerPhoto); //playerPhoto is of type int
-//
-//        return bestPlayerPerPositionLayout;
-//    }
-
-//    public View createBestPlayerPerPositionLayout(int logo,
-//                                                  int playerPhoto,
-//                                                  String cityNameNumberPosition,
-//                                                  String firstnameLastname, int plusMinusValue){
-//        //Deriving View from layout fragment
-//        View bestPlayerPerPositionLayout = this.getLayoutInflater().inflate(R.layout.best_player_per_position_layout,null);
-//        //Changing View data based on input
-//            //City-Team name-Number-Position field
-//            TextView newCityNameNumberPosition = bestPlayerPerPositionLayout.findViewById(R.id.cityTeamNumberPosition);
-//            newCityNameNumberPosition.setText(cityNameNumberPosition);
-//            //Firstname Lastname field
-//            TextView newFirstnameLastname = bestPlayerPerPositionLayout.findViewById(R.id.firstnameLastname);
-//            newFirstnameLastname.setText(firstnameLastname);
-//            //Plus minus value field
-//            TextView newPlusMinusValue = bestPlayerPerPositionLayout.findViewById(R.id.plusMinusValue);
-//            String plusMinusValueString = Integer.toString(plusMinusValue);
-//            newPlusMinusValue.setText(plusMinusValueString);
-//            //Logo field
-//            ImageButton newLogo = bestPlayerPerPositionLayout.findViewById(R.id.logoImage);
-//            newLogo.setBackgroundResource(logo); //logo is of type int
-//            //Player photo field
-//            ImageButton newPlayerPhoto = bestPlayerPerPositionLayout.findViewById(R.id.playerImage);
-//            newPlayerPhoto.setBackgroundResource(playerPhoto); //playerPhoto is of type int
-//
-//        return bestPlayerPerPositionLayout;
-//    }
      public void navigate(){
         binding.bestStarting5Title.setOnClickListener(e ->{
             NavHostFragment.findNavController(this).navigate(R.id.action_bestStarting5_to_sharedTabContainer);
         });
      }
 
+    public FragmentBestStarting5Binding getBinding() {
+        return binding;
+    }
 }

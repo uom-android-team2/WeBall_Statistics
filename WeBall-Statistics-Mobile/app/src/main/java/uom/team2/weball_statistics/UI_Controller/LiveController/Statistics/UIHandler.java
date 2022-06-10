@@ -50,7 +50,7 @@ public class UIHandler {
                 nameTextView.setText(name);
                 Picasso.get()
                         .load(imageUrl)
-                        .resize(20, 20)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(image);
             }
@@ -66,7 +66,7 @@ public class UIHandler {
                 ImageView image = imageLayout.findViewById(R.id.player_image);
                 Picasso.get()
                         .load(Config.PLAYER_IMAGES_RESOURCES + imageUrl)
-                        .resize(70, 70)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(image);
             }
@@ -86,7 +86,7 @@ public class UIHandler {
             public void run() {
                 Picasso.get()
                         .load(imageUrl)
-                        .resize(20, 20)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(image);
             }

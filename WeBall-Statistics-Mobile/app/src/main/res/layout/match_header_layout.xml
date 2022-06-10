@@ -15,7 +15,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/stadium_name"
+        app:layout_constraintBottom_toTopOf="@+id/match_start_date"
         app:layout_constraintEnd_toStartOf="@+id/team2"
         app:layout_constraintStart_toEndOf="@+id/team1"
         app:layout_constraintTop_toTopOf="parent" />

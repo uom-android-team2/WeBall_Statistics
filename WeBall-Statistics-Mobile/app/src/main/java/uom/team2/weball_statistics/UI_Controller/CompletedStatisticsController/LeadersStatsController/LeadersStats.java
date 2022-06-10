@@ -277,6 +277,7 @@ public class LeadersStats extends Fragment {
                         .load(url)
                         .resize(200,200)
                         .centerCrop()
+                        .transform(new RoundedCorners())
                         .into(imageView);
             }
         });

@@ -82,7 +82,7 @@ public class LiveGameStatistics extends Fragment {
         super.onStart();
 //        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
 //        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
-
+//
 //        teamService.findTeamById(teamId1, new CallbackListener<Team>() {
 //            @Override
 //            public void callback(Team returnedObject) {

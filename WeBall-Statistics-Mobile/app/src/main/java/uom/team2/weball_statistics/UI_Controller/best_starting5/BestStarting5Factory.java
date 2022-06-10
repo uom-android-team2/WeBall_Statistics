@@ -20,7 +20,6 @@ public class BestStarting5Factory {
     private ArrayList<PlayerLiveStatistics> usefullData = new ArrayList<>();
     private ArrayList<Match> allLatestMatches = new ArrayList<>();
     private ArrayList<Player> allPlayers = new ArrayList<Player>();
-    //Strings need to be changed to Player
     private Player bestPG;
     private Player bestSG;
     private Player bestSF;
@@ -37,6 +36,7 @@ public class BestStarting5Factory {
         this.getPlayers();
         this.cleanData();
         this.getBestStarting5();
+
     }
 
     //----How to calculate Efficiency----
@@ -108,6 +108,7 @@ public class BestStarting5Factory {
     }
 
     public void getBestStarting5() {
+        ArrayList<Player> best5 = new ArrayList<>();
         for (int i = 0; i < usefullData.size(); i++) {
 
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POINT_GUARD")) {
@@ -115,6 +116,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficPG) {
                     maxEfficPG = tempEffic;
                     bestPG = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SHOOTING_GUARD")) {
@@ -122,6 +124,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficSG) {
                     maxEfficSG = tempEffic;
                     bestSG = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SMALL_FORWARD")) {
@@ -129,6 +132,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficSF) {
                     maxEfficSF = tempEffic;
                     bestSF = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POWER_FORWARD")) {
@@ -136,6 +140,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficPF) {
                     maxEfficPF = tempEffic;
                     bestPF = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
                 }
             }
             if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("CENTER")) {
@@ -143,6 +148,7 @@ public class BestStarting5Factory {
                 if (tempEffic >= maxEfficC) {
                     maxEfficC = tempEffic;
                     bestC = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
                 }
             }
         }

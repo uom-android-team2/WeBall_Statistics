@@ -38,42 +38,22 @@ public class BestStarting5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentBestStarting5Binding.inflate(inflater, container, false);
-
-        this.bestStarting5Controller.fillBestPointGuardInfo(null, this);
-
-       // createBestPlayerPerPositionPG(1,2,"Chicago Bulls","Lonzo Ball"
-        //,23);
-        Thread as = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    BestStarting5Factory bs5 = new BestStarting5Factory();
-                    Player bestPG = bs5.getBestPG();
-                    Player bestSG = bs5.getBestSG();
-                    Player bestSF = bs5.getBestSF();
-                    Player bestPF = bs5.getBestPF();
-                    Player bestC = bs5.getBestC();
-                    System.out.println("----------Best per position----------");
-                    System.out.println(bestPG.getPosition()+" "+bestPG.getName());
-                    System.out.println(bestSG.getPosition()+" "+bestSG.getName());
-                    System.out.println(bestSF.getPosition()+" "+bestSF.getName());
-                    System.out.println(bestPF.getPosition()+" "+bestPF.getName());
-                    System.out.println(bestC.getPosition()+" "+bestC.getName());
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        as.start();
         try {
-            as.join();
-        } catch (InterruptedException e) {
+            BestStarting5Factory bs5 = new BestStarting5Factory();
+            this.bestStarting5Controller.fillBestPointGuardInfo(bs5.getBestPG(), this);
+            this.bestStarting5Controller.fillBestShootingGuardInfo(bs5.getBestSG(), this);
+            this.bestStarting5Controller.fillBestSmallForwardInfo(bs5.getBestSF(), this);
+            this.bestStarting5Controller.fillBestPowerForwardInfo(bs5.getBestPF(), this);
+            this.bestStarting5Controller.fillBestCenterInfo(bs5.getBestC(), this);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        //calling the method that adds data on GUI
+
+
         navigate();
         return binding.getRoot();
     }

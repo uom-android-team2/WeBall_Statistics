@@ -14,6 +14,7 @@ public class Player {
     private Team team; //The team onj that the player plays in
     private String teamString;
     private String imagePath;
+    private int efficiency;
     //Other fields for Statistics that made in other branch...
 
     //only for testing
@@ -118,5 +119,18 @@ public class Player {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+
+    public void setEfficiency(int efficiency) {
+        this.efficiency = efficiency;
+    }
+
+    public int getEfficiency() {
+        return efficiency;
+    }
+
+    public String getTeamString() {
+        return teamString;
     }
 }

@@ -34,4 +34,12 @@
     <color name="lightBlueTopPlayer">#BBBFD4</color>
     <color name="lightGrey">#EBEBEB</color>
     <color name="grey">#656667</color>
+
+
+    <color name="PG">#C1F8E8</color>
+    <color name="SG">#F5F8C1</color>
+    <color name="SF">#C1E8F8</color>
+    <color name="PF">#EECEFA</color>
+    <color name="C">#FACECE</color>
+
 </resources>

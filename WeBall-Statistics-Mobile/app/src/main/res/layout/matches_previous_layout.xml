@@ -33,16 +33,6 @@
                 app:layout_constraintStart_toEndOf="@+id/team1"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/header_top_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
-                android:foreground="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButtonDropdown" />
-
             <TextView
                 android:id="@+id/match_start_date"
                 android:layout_width="wrap_content"
@@ -95,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_top_divider">
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonDropdown">
 
                 <Button
                     android:id="@+id/button2"
@@ -109,6 +99,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/expandedViewLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

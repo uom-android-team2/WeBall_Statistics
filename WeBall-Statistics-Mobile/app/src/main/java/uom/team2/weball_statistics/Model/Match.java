@@ -129,4 +129,11 @@ public class Match {
         return referee;
 
     }
+    public int getTeamLandlord_id() {
+        return teamLandlord_id;
+    }
+
+    public int getTeamguest_id() {
+        return Teamguest_id;
+    }
 }

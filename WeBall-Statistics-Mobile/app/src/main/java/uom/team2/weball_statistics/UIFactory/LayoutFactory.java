@@ -39,7 +39,7 @@ public class LayoutFactory {
                 playerName.setText(name);
                 Picasso.get()
                         .load(Config.PLAYER_IMAGES_RESOURCES + imageEndPoint)
-                        .resize(70, 70)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(playerImage);
 

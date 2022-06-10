@@ -58,12 +58,14 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                    UIHandler.updateProgressBarLayoutTeam2(fragment,
-                            fragment.getMapOfStatistics(),
-                            statistic,
-                            LiveStatisticsEnum.getStatisticValueByName(team1, statistic),
-                            LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
-                    );
+                    if (fragment.getActivity() != null) {
+                        UIHandler.updateProgressBarLayoutTeam2(fragment,
+                                fragment.getMapOfStatistics(),
+                                statistic,
+                                LiveStatisticsEnum.getStatisticValueByName(team1, statistic),
+                                LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
+                        );
+                    }
 
                 }
 

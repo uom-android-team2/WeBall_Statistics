@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -133,11 +132,17 @@ public class LivePlayerStatistics extends Fragment {
     }
 
     public void fillSpinner(ArrayList<String> spinnerArray) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
+        this.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                        LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.header.spinner.setAdapter(adapter);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                binding.header.spinner.setAdapter(adapter);
+
+            }
+        });
     }
 
     @Override
@@ -245,27 +250,37 @@ public class LivePlayerStatistics extends Fragment {
 
 
     public void addPlayers(ArrayList<View> views) {
-        LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
-        for (View v : views) {
-            v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.grayback));
-        }
-        layout.removeAllViews();
-        for (View v : views) {
-            layout.addView(v);
-        }
+        this.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
+                for (View v : views) {
+                    v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.grayback));
+                }
+                layout.removeAllViews();
+                for (View v : views) {
+                    layout.addView(v);
+                }
+            }
+        });
     }
 
     public void createPlayers(ArrayList<Player> returnedObject, ArrayList<View> views) {
         for (Player player : returnedObject) {
             try {
                 View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(), player.getImagePath());
-
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
-                        1.0f
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 );
-                playerView.setLayoutParams(param);
+                this.requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        params.setMargins(5, 2, 5, 0);
+                        playerView.setLayoutParams(params);
+                    }
+                });
                 views.add(playerView);
             } catch (IOException e) {
                 e.printStackTrace();

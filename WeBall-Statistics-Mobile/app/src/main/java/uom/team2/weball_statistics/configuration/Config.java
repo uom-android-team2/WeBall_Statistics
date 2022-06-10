@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.configuration;
 
 public class Config {
+
     public static final String IP = "192.168.56.1";
     public static final String API_URL = "http://" + IP + "/WeBall_Statistics-Backend/API/";
     public static final String API_REFEREE = "referee.php";

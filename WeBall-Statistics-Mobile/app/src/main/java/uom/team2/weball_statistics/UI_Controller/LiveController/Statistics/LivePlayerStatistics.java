@@ -174,7 +174,7 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
 //        TeamService teamService = new TeamService();
 //        PlayerService playerService = new PlayerService();
 //

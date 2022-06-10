@@ -38,13 +38,13 @@ public enum LiveStatisticsEnum {
                 playerLiveStatistics.setTotal_freethrow(playerLiveStatistics.getTotal_freethrow() + 1);
                 break;
             case succesful_twopointer:
-                playerLiveStatistics.setSuccesful_twopointer(playerLiveStatistics.getSuccesful_twopointer() + 1);
+                playerLiveStatistics.setSuccessful_twopointer(playerLiveStatistics.getSuccessful_twopointer() + 1);
                 break;
             case total_twopointer:
                 playerLiveStatistics.setTotal_twopointer(playerLiveStatistics.getTotal_twopointer() + 1);
                 break;
             case succesful_threepointer:
-                playerLiveStatistics.setSuccesful_threepointer(playerLiveStatistics.getSuccesful_threepointer() + 1);
+                playerLiveStatistics.setSuccessful_threepointer(playerLiveStatistics.getSuccessful_threepointer() + 1);
                 break;
             case total_threepointer:
                 playerLiveStatistics.setTotal_threepointer(playerLiveStatistics.getTotal_threepointer() + 1);
@@ -86,13 +86,13 @@ public enum LiveStatisticsEnum {
                 teamLiveStatistics.setTotal_freethrow(teamLiveStatistics.getTotal_freethrow() + 1);
                 break;
             case succesful_twopointer:
-                teamLiveStatistics.setSuccesful_twopointer(teamLiveStatistics.getSuccesful_twopointer() + 1);
+                teamLiveStatistics.setSuccessful_twopointer(teamLiveStatistics.getSuccessful_twopointer() + 1);
                 break;
             case total_twopointer:
                 teamLiveStatistics.setTotal_twopointer(teamLiveStatistics.getTotal_twopointer() + 1);
                 break;
             case succesful_threepointer:
-                teamLiveStatistics.setSuccesful_threepointer(teamLiveStatistics.getSuccesful_threepointer() + 1);
+                teamLiveStatistics.setSuccessful_threepointer(teamLiveStatistics.getSuccessful_threepointer() + 1);
                 break;
             case total_threepointer:
                 teamLiveStatistics.setTotal_threepointer(teamLiveStatistics.getTotal_threepointer() + 1);
@@ -130,11 +130,11 @@ public enum LiveStatisticsEnum {
             case total_freethrow:
                 return teamLiveStatistics.getTotal_freethrow();
             case succesful_twopointer:
-                return teamLiveStatistics.getSuccesful_twopointer();
+                return teamLiveStatistics.getSuccessful_twopointer();
             case total_twopointer:
                 return teamLiveStatistics.getTotal_twopointer();
             case succesful_threepointer:
-                return teamLiveStatistics.getSuccesful_threepointer();
+                return teamLiveStatistics.getSuccessful_threepointer();
             case total_threepointer:
                 return teamLiveStatistics.getTotal_threepointer();
             case steal:
@@ -165,11 +165,11 @@ public enum LiveStatisticsEnum {
             case total_freethrow:
                 return playerLiveStatistics.getTotal_freethrow();
             case succesful_twopointer:
-                return playerLiveStatistics.getSuccesful_twopointer();
+                return playerLiveStatistics.getSuccessful_twopointer();
             case total_twopointer:
                 return playerLiveStatistics.getTotal_twopointer();
             case succesful_threepointer:
-                return playerLiveStatistics.getSuccesful_threepointer();
+                return playerLiveStatistics.getSuccessful_threepointer();
             case total_threepointer:
                 return playerLiveStatistics.getTotal_threepointer();
             case steal:

@@ -113,10 +113,29 @@ public class LeadersStats extends Fragment {
         binding.BPG.statisticTitle.setText(statsNames[3]);
         binding.FPG.statisticTitle.setText(statsNames[4]);
 
+        changeTopPlayerLayout(binding.PPG.topPlayerContainer,"PPG");
+        changeTopPlayerLayout(binding.APG.topPlayerContainer,"APG");
+        changeTopPlayerLayout(binding.RPG.topPlayerContainer,"RPG");
+        changeTopPlayerLayout(binding.BPG.topPlayerContainer,"BPG");
+        changeTopPlayerLayout(binding.FPG.topPlayerContainer,"FPG");
 
+        binding.PPG.ranktab.rankTabStat.setText("PPG");
+        binding.APG.ranktab.rankTabStat.setText("APG");
+        binding.RPG.ranktab.rankTabStat.setText("RPG");
+        binding.BPG.ranktab.rankTabStat.setText("BPG");
+        binding.FPG.ranktab.rankTabStat.setText("FPG");
+    }
 
+    public void changeTopPlayerLayout(LinearLayout linearLayout, String value){
+        View view = linearLayout.getChildAt(0);
+
+        TextView textView = view.findViewById(R.id.topStatistic);
+        textView.setText(value);
 
     }
+
+
+
 
     public void updatePlayers(PlayerService playerService, ArrayList<PlayerStats> playerStats, Type target){
 
@@ -128,7 +147,6 @@ public class LeadersStats extends Fragment {
         for (int i=0;i<ranks;i++) {
             int finalI = i;
             double value = -1;
-<<<<<<< HEAD
             LinearLayout topPlayerLayout = binding.PPG.topPlayerContainer;
             LinearLayout playerLayout = binding.PPG.ranksContainer;
             if (target == Type.POINTS){
@@ -160,8 +178,8 @@ public class LeadersStats extends Fragment {
                 @Override
                 public void callback(Player returnedObject) {
                     createTopPlayer(topFinalLayout, returnedObject.getName()+" " +returnedObject.getSurname(),
-                            returnedObject.getTeamString(), 0 , finalValue + "" , returnedObject.getNumber(),
-                            positionFormat(returnedObject.getPosition()),"PPG",
+                            teamFormat(returnedObject.getTeamString()), 0 , finalValue + "" , returnedObject.getNumber(),
+                            positionFormat(returnedObject.getPosition()),
                             Config.PLAYER_IMAGES_RESOURCES + returnedObject.getImagePath());
 
                 }
@@ -186,20 +204,18 @@ public class LeadersStats extends Fragment {
         return String.valueOf(name.charAt(0))+ ". " + surname.toUpperCase();
     }
 
-    // replace e.g. "POINT_GUARD" with "Point Guard"
+    // replace e.g. "POINT_GUARD" with "PG" or "CENTER" with "C"
     public String positionFormat(String position){
-//        if (position.contains("_")) {
-//            position = position.replace("_"," ").toLowerCase();
-//            //spit word in 2
-//            String pos[] = position.split(" ");
-//            //Upper case first letters of every word
-//            String a = pos[1].substring(0,1).toUpperCase() + pos[1].substring(1);
-//            String b = pos[2].substring(0,1).toUpperCase() + pos[2].substring(1);
-//            return a +" "+ b;
-//        }
-//        else {
-            position = position.replace("_"," ").toLowerCase();
-            return position.substring(0,1).toUpperCase() + position.substring(1);
+        if (position.contains("_")) {
+            position = position.replace("_", " ");
+            String[] split = position.split(" ",2);
+            split[0] = split[0].substring(0, 1);
+            split[1] = split[1].substring(0, 1);
+            String join = String.join("",split[0],split[1]);
+            return join;
+        } else {
+            return position.substring(0, 1);
+        }
     }
 
     // replace e.g. "Milwaukee" with "MIL"
@@ -233,7 +249,7 @@ public class LeadersStats extends Fragment {
     }
 
     public void createTopPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue,
-                                int playerNumber, String position, String tag, String url)
+                                int playerNumber, String position,  String url)
     {
         View view = linearLayout.getChildAt(num);
         System.out.println("TOP PLAYER CHILDREN = "+ linearLayout.getChildCount());
@@ -253,16 +269,13 @@ public class LeadersStats extends Fragment {
                 TextView numView = view.findViewById(R.id.topNumber);
                 numView.setText(String.valueOf(playerNumber));
 
-                TextView statView = view.findViewById(R.id.topStatistic);
-                statView.setText(tag);
-
                 TextView positionView = view.findViewById(R.id.topPosition);
                 positionView.setText(position);
 
                 ImageView imageView = view.findViewById(R.id.topPlayerImage);
                 Picasso.get()
                         .load(url)
-                        .resize(15,15)
+                        .resize(200,200)
                         .centerCrop()
                         .into(imageView);
             }

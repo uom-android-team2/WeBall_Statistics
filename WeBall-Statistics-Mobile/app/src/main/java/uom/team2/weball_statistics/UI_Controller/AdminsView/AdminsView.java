@@ -28,8 +28,8 @@ import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.MatchService;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
@@ -43,6 +43,22 @@ public class AdminsView extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private final Stack<Team> undoTeamStack = new Stack<Team>();
+    private final Stack<Player> undoPlayerStack = new Stack<Player>();
+    private final Stack<Integer> undoButtonStack = new Stack<Integer>();
+    private final Match m = new Match(1, null, null, new Date(), Status.UPCOMING);
+    private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
+    private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
+    private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
+    private final ArrayList<Player> subPlayersGuest = new ArrayList<Player>();
+    private final ArrayList<Player> playersTeamLandlord = new ArrayList<Player>();
+    private final ArrayList<Player> playersTeamGuest = new ArrayList<Player>();
+    private final ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamLanLord = new ArrayList<PlayerLiveStatistics>();
+    private final ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamGuest = new ArrayList<PlayerLiveStatistics>();
+    private final ArrayList<TeamLiveStatistics> teamLiveStatisticsLanLord = new ArrayList<TeamLiveStatistics>();
+    //private TeamLiveStatistics teamCheckedLiveStatistics = null;
+    private final ArrayList<TeamLiveStatistics> teamLiveStatisticsGuest = new ArrayList<TeamLiveStatistics>();
+    private final PlayerLiveStatistics playerCheckedLiveStatistics = null;
     private FragmentAdminsViewBinding binding;
     private Chronometer chronometer;
     private boolean running = false;
@@ -51,9 +67,6 @@ public class AdminsView extends Fragment {
     private boolean started = false;
     private boolean teamSelected = false;
     private int playerChecked = 1;
-    private final Stack<Team> undoTeamStack = new Stack<Team>();
-    private final Stack<Player> undoPlayerStack = new Stack<Player>();
-    private final Stack<Integer> undoButtonStack = new Stack<Integer>();
     private Match match;
     private Team landLord;
     private Team guest;
@@ -61,12 +74,7 @@ public class AdminsView extends Fragment {
     private Team teamObj;
     private Team teamLand;
     private Team teamGuest;
-    private final Match m = new Match(1, null, null, new Date(), Status.UPCOMING);
     private Team teamLandlord;
-    private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
-    private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
-    private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
-    private final ArrayList<Player> subPlayersGuest = new ArrayList<Player>();
     private TextView freeThrowBtn;
     private TextView twoPointBtn;
     private TextView threePointBtn;
@@ -76,14 +84,6 @@ public class AdminsView extends Fragment {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
-    private final ArrayList<Player> playersTeamLandlord = new ArrayList<Player>();
-    private final ArrayList<Player> playersTeamGuest = new ArrayList<Player>();
-    private final ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamLanLord = new ArrayList<PlayerLiveStatistics>();
-    private final ArrayList<PlayerLiveStatistics> playerLiveStatisticsTeamGuest = new ArrayList<PlayerLiveStatistics>();
-    private final ArrayList<TeamLiveStatistics> teamLiveStatisticsLanLord = new ArrayList<TeamLiveStatistics>();
-    //private TeamLiveStatistics teamCheckedLiveStatistics = null;
-    private final ArrayList<TeamLiveStatistics> teamLiveStatisticsGuest = new ArrayList<TeamLiveStatistics>();
-    private final PlayerLiveStatistics playerCheckedLiveStatistics = null;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -278,6 +278,14 @@ public class AdminsView extends Fragment {
                 if (!started) {
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
+                    // Prosthiki apo leo gia na pairnw ta lepta
+                    binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                        @Override
+                        public void onChronometerTick(Chronometer chronometer) {
+                            // to match id tha allazei analoga to match
+                            DAOLiveTeamService.getInstance().updateClock(1, chronometer.getText().toString());
+                        }
+                    });
                     running = true;
                     started = true;
                     binding.startButton.setText("End");
@@ -488,34 +496,34 @@ public class AdminsView extends Fragment {
         foulBtn = binding.foulButton;
         turnoverBtn = binding.turnoverButton;
 
-        DBDataRecovery dataRecovery = new DBDataRecovery();
-
-        try {
-            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
-            Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
-            threePointBtn.setOnClickListener(e -> {
-                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery);
-                ppv.show();
-            });
-            freeThrowBtn.setOnClickListener(e -> {
-                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery);
-                ppv.show();
-
-            });
-            twoPointBtn.setOnClickListener(e -> {
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery);
-                ppv.show();
-            });
-            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
-            assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
-            stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
-            blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
-            foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
-            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+//        DBDataRecovery dataRecovery = new DBDataRecovery();
+//
+//        try {
+//            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
+//            Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
+//            threePointBtn.setOnClickListener(e -> {
+//                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery);
+//                ppv.show();
+//            });
+//            freeThrowBtn.setOnClickListener(e -> {
+//                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery);
+//                ppv.show();
+//
+//            });
+//            twoPointBtn.setOnClickListener(e -> {
+//                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery);
+//                ppv.show();
+//            });
+//            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
+//            assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
+//            stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
+//            blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
+//            foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
+//            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
+//
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
     }
 
 

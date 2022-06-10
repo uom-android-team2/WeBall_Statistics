@@ -70,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/score_text" />
 
     <include
+        android:id="@+id/clock"
         layout="@layout/clock_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

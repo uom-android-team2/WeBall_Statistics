@@ -11,10 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import java.io.IOException;
 import java.util.HashMap;
 
-import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.TeamService;
@@ -31,9 +29,9 @@ public class LiveGameStatistics extends Fragment {
     private final int teamId1 = 1;
     private final int teamId2 = 2;
     private final DAOLiveTeamService daoLiveTeamService = DAOLiveTeamService.getInstance();
+    private final TeamService teamService = new TeamService();
     private FragmentLiveGameStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
-    private final TeamService teamService = new TeamService();
 
     public LiveGameStatistics() {
         // Required empty public constructor
@@ -80,6 +78,7 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
 //        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
 //        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
 //

@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Service;
 
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -40,6 +41,58 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
             instance = new DAOLiveTeamService();
         }
         return instance;
+    }
+
+    public void updateClock(int matchId, String value) {
+        databaseReference.child("match_id: " + matchId).child("clock").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("clock", value);
+                    databaseReference.child("match_id: " + matchId).child("clock").updateChildren(hashMap);
+                } else {
+                    databaseReference.child("match_id: " + matchId).child("clock").setValue(value);
+                }
+            }
+        });
+    }
+
+    public void clockDataListener(Fragment fragment, TextView clockText, int matchId) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.child("match_id: " + matchId).child("clock").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+
+                            HashMap<String, Object> hashMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                            fragment.requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    clockText.setText(hashMap.get("clock").toString());
+                                }
+                            });
+                        } else {
+                            String clock = "00:00";
+                            databaseReference.child("match_id: " + matchId).child("clock").setValue(clock);
+                            fragment.requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    clockText.setText(clock);
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void setDataListenerForPlayer(LivePlayerStatistics fragment, int matchId, int teamId1) {
@@ -250,6 +303,3 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
 
 }
-
-
-

@@ -68,21 +68,25 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                         if (dataSnapshot.exists()) {
 
                             HashMap<String, Object> hashMap = (HashMap<String, Object>) dataSnapshot.getValue();
-                            fragment.requireActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    clockText.setText(hashMap.get("clock").toString());
-                                }
-                            });
+                            if (fragment.getActivity() != null) {
+                                fragment.requireActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        clockText.setText(hashMap.get("clock").toString());
+                                    }
+                                });
+                            }
                         } else {
-                            String clock = "00:00";
-                            databaseReference.child("match_id: " + matchId).child("clock").setValue(clock);
-                            fragment.requireActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    clockText.setText(clock);
-                                }
-                            });
+                            if (fragment.getActivity() != null) {
+                                String clock = "00:00";
+                                databaseReference.child("match_id: " + matchId).child("clock").setValue(clock);
+                                fragment.requireActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        clockText.setText(clock);
+                                    }
+                                });
+                            }
                         }
                     }
                 });

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameCommentsBinding;
 
 /*
@@ -27,6 +28,12 @@ public class LiveGameComments extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
     }
 
     @Override

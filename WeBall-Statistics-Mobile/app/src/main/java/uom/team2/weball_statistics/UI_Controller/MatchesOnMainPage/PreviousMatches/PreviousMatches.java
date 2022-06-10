@@ -20,7 +20,6 @@ import uom.team2.weball_statistics.databinding.FragmentPreviousMatchesBinding;
 public class PreviousMatches extends Fragment {
 
     private FragmentPreviousMatchesBinding fragmentPreviousMatchesBinding;
-    private LinearLayout linearLayoutMatchesContainer;
 
     public PreviousMatches() { }
 

@@ -128,6 +128,7 @@ public class LeadersStats extends Fragment {
         for (int i=0;i<ranks;i++) {
             int finalI = i;
             double value = -1;
+<<<<<<< HEAD
             LinearLayout topPlayerLayout = binding.PPG.topPlayerContainer;
             LinearLayout playerLayout = binding.PPG.ranksContainer;
             if (target == Type.POINTS){
@@ -176,7 +177,6 @@ public class LeadersStats extends Fragment {
                             teamFormat(returnedObject.getTeamString()), finalI , finalValue + "");
                 }
             });
-
 
         }
     }

@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/HomeTeamLogo"
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -89,7 +89,7 @@
         app:srcCompat="@drawable/bucks" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/AwayTeamLogo"
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"

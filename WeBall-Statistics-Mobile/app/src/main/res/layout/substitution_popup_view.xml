@@ -133,7 +133,7 @@
         app:srcCompat="@drawable/blank" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/TeamHomeLogo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline22"

@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,13 +68,26 @@ public class CompletedMatchStatsUIController {
 
     public void fillCompletedMatchTeamPlayersStats(CompletedMatchStats completedMatchStats) {
         CompletedMatchTeamPlayerStatsBinding CompletedMatchTeamPlayersStatsBinding  = completedMatchStats.getBinding().includeTeamPlayerStats;
+
+        Button HomeTeamButton = CompletedMatchTeamPlayersStatsBinding.Team1Button;
+        Button AwayTeamButton = CompletedMatchTeamPlayersStatsBinding.Team2Button;
+
+        HomeTeamButton.setText("Paok");
+        AwayTeamButton.setText("Aris");
     }
 
     public void fillCompletedMatchLeaders(CompletedMatchStats completedMatchStats) {
         CompleteMatchLeadersBinding CompletedMatchTeamPlayersStatsBinding  = completedMatchStats.getBinding().includeCompletedLeaders;
+
+        ImageView HomeTeamLogo = CompletedMatchTeamPlayersStatsBinding.TeamHomeLogo;
+        ImageView AwayTeamLogo = CompletedMatchTeamPlayersStatsBinding.TeamAwayLogo;
     }
+
 
     public void fillCompletedMatchTeamStats(CompletedMatchStats completedMatchStats) {
         CompletedMatchTeamStatsBinding CompletedMatchTeamStatsBinding  = completedMatchStats.getBinding().includeCompletedTeamStats;
+
+        ImageView HomeTeamLogo = CompletedMatchTeamStatsBinding.HomeTeamLogo;
+        ImageView AwayTeamLogo = CompletedMatchTeamStatsBinding.AwayTeamLogo;
     }
 }

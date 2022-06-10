@@ -22,7 +22,6 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveG
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
-import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 /*
@@ -67,13 +66,12 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-
-                            HashMap<String, Object> hashMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                            String clock = (String) dataSnapshot.getValue();
                             if (fragment.getActivity() != null) {
                                 fragment.requireActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        clockText.setText(hashMap.get("clock").toString());
+                                        clockText.setText(clock);
                                     }
                                 });
                             }

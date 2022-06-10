@@ -1,17 +1,12 @@
 package uom.team2.weball_statistics.UI_Controller.best_starting5;
 import android.os.StrictMode;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import okhttp3.*;
-import uom.team2.weball_statistics.*;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
@@ -50,9 +45,9 @@ public class BestStarting5Factory {
     //Instead of individual stats I can have the Player as a Parameter and get those stats from the db with his id
     public int calculateEffic(PlayerLiveStatistics myStats){
 
-        int playerEffic = (myStats.getSuccesful_twopointer()*2)+(myStats.getSuccesful_threepointer()*3)+(myStats.getSuccessful_freethrow()*1)
+        int playerEffic = (myStats.getSuccessful_twopointer()*2)+(myStats.getSuccessful_threepointer()*3)+(myStats.getSuccessful_freethrow()*1)
         +myStats.getRebound()+myStats.getAssist()+myStats.getSteal()+myStats.getBlock()-(myStats.getTurnover()*4)-(myStats.getFoul()*2)
-        -(myStats.getTotal_threepointer()+myStats.getTotal_twopointer()-myStats.getSuccesful_threepointer()-myStats.getSuccesful_twopointer())
+        -(myStats.getTotal_threepointer()+myStats.getTotal_twopointer()-myStats.getSuccessful_threepointer()-myStats.getSuccessful_twopointer())
                 -(myStats.getTotal_freethrow()-myStats.getSuccessful_freethrow());
         return playerEffic;
     }

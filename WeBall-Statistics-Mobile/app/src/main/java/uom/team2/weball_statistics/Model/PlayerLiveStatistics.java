@@ -13,9 +13,9 @@ public class PlayerLiveStatistics implements firebaseModel {
     private int total_effort;
     private int successful_freethrow;
     private int total_freethrow;
-    private int succesful_twopointer;
+    private int successful_twopointer;
     private int total_twopointer;
-    private int succesful_threepointer;
+    private int successful_threepointer;
     private int total_threepointer;
     private int steal;
     private int assist;
@@ -31,16 +31,16 @@ public class PlayerLiveStatistics implements firebaseModel {
     }
 
 
-    public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int succesfulTwopointer, int totalTwopointer, int succesfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
+    public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int successfulTwopointer, int totalTwopointer, int successfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
         this.match_id = matchId;
         this.player_id = playerId;
         this.successful_effort = successfulEffort;
         this.total_effort = totalEffort;
         this.successful_freethrow = successfulFreethrow;
         this.total_freethrow = totalFreethrow;
-        this.succesful_twopointer = succesfulTwopointer;
+        this.successful_twopointer = successfulTwopointer;
         this.total_twopointer = totalTwopointer;
-        this.succesful_threepointer = succesfulThreepointer;
+        this.successful_threepointer = successfulThreepointer;
         this.total_threepointer = totalThreepointer;
         this.steal = steal;
         this.assist = assist;
@@ -60,9 +60,9 @@ public class PlayerLiveStatistics implements firebaseModel {
         result.put("total_effort", total_effort);
         result.put("successful_freethrow", successful_freethrow);
         result.put("total_freethrow", total_freethrow);
-        result.put("succesful_twopointer", succesful_twopointer);
+        result.put("successful_twopointer", successful_twopointer);
         result.put("total_twopointer", total_twopointer);
-        result.put("succesful_threepointer", succesful_threepointer);
+        result.put("successful_threepointer", successful_threepointer);
         result.put("total_threepointer", total_threepointer);
         result.put("steal", steal);
         result.put("assist", assist);
@@ -123,12 +123,12 @@ public class PlayerLiveStatistics implements firebaseModel {
         this.total_freethrow = total_freethrow;
     }
 
-    public int getSuccesful_twopointer() {
-        return succesful_twopointer;
+    public int getSuccessful_twopointer() {
+        return successful_twopointer;
     }
 
-    public void setSuccesful_twopointer(int succesful_twopointer) {
-        this.succesful_twopointer = succesful_twopointer;
+    public void setSuccessful_twopointer(int successful_twopointer) {
+        this.successful_twopointer = successful_twopointer;
     }
 
     public int getTotal_twopointer() {
@@ -139,12 +139,12 @@ public class PlayerLiveStatistics implements firebaseModel {
         this.total_twopointer = total_twopointer;
     }
 
-    public int getSuccesful_threepointer() {
-        return succesful_threepointer;
+    public int getSuccessful_threepointer() {
+        return successful_threepointer;
     }
 
-    public void setSuccesful_threepointer(int succesful_threepointer) {
-        this.succesful_threepointer = succesful_threepointer;
+    public void setSuccessful_threepointer(int successful_threepointer) {
+        this.successful_threepointer = successful_threepointer;
     }
 
     public int getTotal_threepointer() {

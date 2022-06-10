@@ -10,9 +10,15 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import uom.team2.weball_statistics.Model.Match;
+import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 
 public class popupViewTwoPoints extends Dialog implements
@@ -25,10 +31,13 @@ public class popupViewTwoPoints extends Dialog implements
     Stats teamStats;
     private final DBDataRecovery dbdatarecovery;
     private String str;
+    private Match match;
+    private Team team;
+    private Player player;
     private final int points;
 
 
-    public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd) {
+    public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team t, Player player) {
         super(a);
         points = p;
         dbdatarecovery = dbd;
@@ -66,6 +75,10 @@ public class popupViewTwoPoints extends Dialog implements
                 playerStats.setSuccessfulEffort();
                 teamStats.setSuccessfulTwoPointer();
                 teamStats.setSuccessfulEffort();
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.successful_effort);
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.succesful_twopointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.successful_effort);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.succesful_twopointer);
                 //dismiss();
                 break;
             case R.id.dialog_No:
@@ -81,6 +94,10 @@ public class popupViewTwoPoints extends Dialog implements
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_effort);
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_twopointer);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_effort);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_twopointer);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

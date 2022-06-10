@@ -46,7 +46,7 @@ public class LiveMatches extends Fragment {
         //Create dynamic matches and add event Listener to button of each match
         for (int i = 0; i < 6; i++) {
 
-            View viewMatch = (View) getLayoutInflater().inflate(R.layout.matches_previous_layout, null);
+            View viewMatch = (View) getLayoutInflater().inflate(R.layout.matches_live_layout, null);
 
             viewMatch.findViewById(R.id.imageButtonDropdown).setOnClickListener(new View.OnClickListener() {
                 @Override

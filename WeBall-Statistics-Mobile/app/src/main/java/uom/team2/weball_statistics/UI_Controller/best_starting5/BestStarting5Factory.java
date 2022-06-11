@@ -64,7 +64,7 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         Request request = new Request.Builder()
-                .url("http://" + Config.IP + "/backend/API/match.php?completed=true")
+                .url(Config.API_URL+"match.php?completed=true")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -77,7 +77,7 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType2 = MediaType.parse("application/json");
         Request request2 = new Request.Builder()
-                .url("http://" + Config.IP + "/backend/API/playerLiveStatistics.php")
+                .url(Config.API_URL+"playerLiveStatistics.php")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -90,7 +90,7 @@ public class BestStarting5Factory {
                 .build();
         MediaType mediaType3 = MediaType.parse("application/json");
         Request request3 = new Request.Builder()
-                .url("http://" + Config.IP + "/backend/API/player.php")
+                .url(Config.API_URL+"player.php")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();

@@ -61,7 +61,7 @@ public class BestStarting5Controller {
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         Request request = new Request.Builder()
-                .url("http://192.168.1.16/backend/API/team.php?name="+player.getTeamString())
+                .url(Config.API_URL+"team.php?name="+player.getTeamString())
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .build();

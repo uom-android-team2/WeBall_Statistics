@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.io.IOException;
 import java.util.HashMap;
 
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
@@ -27,20 +28,22 @@ import uom.team2.weball_statistics.utils.Utils;
  */
 public class LiveGameStatistics extends Fragment {
 
-    private final int matchId = 1;
-    private final int teamId1 = 1;
-    private final int teamId2 = 2;
     private final DAOLiveTeamService daoLiveTeamService = DAOLiveTeamService.getInstance();
     private final TeamService teamService = new TeamService();
     private FragmentLiveGameStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
+    private Match match;
+    private Team teamLandlord;
+    private Team teamGuest;
 
     public LiveGameStatistics() {
         // Required empty public constructor
     }
 
-    public static LiveGameStatistics getInstance() {
-        return new LiveGameStatistics();
+    public static LiveGameStatistics getInstance(Bundle bundle) {
+        LiveGameStatistics liveGameStatistics = new LiveGameStatistics();
+        liveGameStatistics.setArguments(bundle);
+        return liveGameStatistics;
     }
 
     public void addProgressBars(LinearLayout progressBarContainer) {
@@ -66,7 +69,6 @@ public class LiveGameStatistics extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
-        daoLiveTeamService.initializeTable(matchId, teamId1, teamId2);
         return binding.getRoot();
     }
 
@@ -75,40 +77,30 @@ public class LiveGameStatistics extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarLayoutContainer);
         navigateToLivePlayerStats();
+        Bundle bundle = getArguments();
+
+        match = (Match) bundle.getSerializable("match");
+        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+        teamGuest = (Team) bundle.getSerializable("teamGuest");
+        daoLiveTeamService.initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
-//        daoLiveTeamService.setDataChangeListener(this, matchId, teamId1, teamId2);
-//        daoLiveTeamService.setListenerForPoints(this, binding.header, matchId, teamId1, teamId2);
-//
-//        teamService.findTeamById(teamId1, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                try {
-//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team1.getRoot());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        teamService.findTeamById(teamId2, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                try {
-//                    UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, returnedObject, binding.header.team2.getRoot());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
+        daoLiveTeamService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
+        daoLiveTeamService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
+
+        try {
+            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
+            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -119,11 +111,7 @@ public class LiveGameStatistics extends Fragment {
 
     public void navigateToLivePlayerStats() {
         binding.playerLiveStatsButton.setOnClickListener(e -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("match_id", matchId);
-            bundle.putInt("team1_id", teamId1);
-            bundle.putInt("team2_id", teamId2);
-            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics, bundle);
+            NavHostFragment.findNavController(this).navigate(R.id.action_tabContainer_to_livePlayerStatistics, getArguments());
         });
     }
 

@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -24,10 +25,11 @@ public class SectionsPagerAdapterMatches extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.previous_matches_tab_text, R.string.live_matches_tab_text, R.string.upcoming_matches_tab_text};
     private final Context mContext;
-
-    public SectionsPagerAdapterMatches(Context context, FragmentManager fm) {
+    private Bundle bundle;
+    public SectionsPagerAdapterMatches(Context context, FragmentManager fm, Bundle bundle) {
         super(fm);
         mContext = context;
+        this.bundle = bundle;
     }
 
     @Override
@@ -37,11 +39,11 @@ public class SectionsPagerAdapterMatches extends FragmentPagerAdapter {
         int index = position + 1;
         switch (index) {
             case 1:
-                return PreviousMatches.getInstance();
+                return PreviousMatches.getInstance(bundle);
             case 3:
-                return UpcomingMatches.getInstance();
+                return UpcomingMatches.getInstance(bundle);
             default:
-                return LiveMatches.getInstance();
+                return LiveMatches.getInstance(bundle);
         }
     }
 

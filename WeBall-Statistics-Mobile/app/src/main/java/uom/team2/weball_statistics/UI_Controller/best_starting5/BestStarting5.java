@@ -53,8 +53,6 @@ public class BestStarting5 extends Fragment {
         }
         //calling the method that adds data on GUI
 
-
-        navigate();
         return binding.getRoot();
     }
 
@@ -63,12 +61,6 @@ public class BestStarting5 extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-     public void navigate(){
-        binding.bestStarting5Title.setOnClickListener(e ->{
-            NavHostFragment.findNavController(this).navigate(R.id.action_bestStarting5_to_sharedTabContainer);
-        });
-     }
 
     public FragmentBestStarting5Binding getBinding() {
         return binding;

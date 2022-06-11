@@ -1,9 +1,11 @@
 package uom.team2.weball_statistics.Model;
 
+import java.io.Serializable;
+
 /*
  * @author Minas - Theodoros Charakopoulos ics20072 and Lougaris Dionisis ics20058
  */
-public class Player {
+public class Player implements Serializable {
     private String teamName;
     private int id;
     private String name;

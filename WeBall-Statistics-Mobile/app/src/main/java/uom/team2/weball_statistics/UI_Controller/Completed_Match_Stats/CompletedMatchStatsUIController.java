@@ -29,7 +29,7 @@ public class CompletedMatchStatsUIController {
         return instance;
     }
 
-    public void fillMatchHeaderInformation(CompletedMatchStats completedMatchStats,Match myMatch) {
+    public void fillMatchHeaderInformation(CompletedMatchStats completedMatchStats) {
         CompletedMatchHeaderLayoutBinding completedMatchHeaderLayoutBinding  =  completedMatchStats.getBinding().includeMatchHeader;
 
         ImageView imageViewHome = completedMatchHeaderLayoutBinding.team1Logo;

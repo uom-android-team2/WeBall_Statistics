@@ -1,11 +1,12 @@
 package uom.team2.weball_statistics.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
  * @author Minas - Theodoros Charakopoulos ics20072
  */
-public class Team {
+public class Team implements Serializable {
     private int id;
     private String teamName;
     private String teamCity;
@@ -119,6 +120,10 @@ public class Team {
     public void setSubPlayers(int k, Player p) {
         this.subPlayers.remove(k);
         this.subPlayers.add(k, p);
+    }
+
+    public void setTeamPlayers(ArrayList<Player> teamPlayers) {
+        this.teamPlayers = teamPlayers;
     }
 
     public void addPlayerToKey(Player p) {

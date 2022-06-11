@@ -1,10 +1,11 @@
 package uom.team2.weball_statistics.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*
  * @author Minas - Theodoros Charakopoulos ics20072
  */
-public class Championship {
+public class Championship implements Serializable {
     private ArrayList<Team> teams; //All teams in championship
     private ArrayList<Coach> coaches; //All coaches in championship;
     private ArrayList<Referee> referees; //All referees in championship

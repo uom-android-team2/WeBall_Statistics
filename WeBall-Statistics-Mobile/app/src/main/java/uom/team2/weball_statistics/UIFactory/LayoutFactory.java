@@ -29,24 +29,26 @@ public class LayoutFactory {
     }
 
     public static View createPayerImageLayout(Fragment fragment, String name, String imageEndPoint) throws IOException {
-        View playerImageLayout = fragment.getLayoutInflater().inflate(R.layout.player_image_layout, null);
-        TextView playerName = playerImageLayout.findViewById(R.id.player_name);
-        ImageView playerImage = playerImageLayout.findViewById(R.id.player_image);
+        if (fragment.getActivity() != null) {
+            View playerImageLayout = fragment.getLayoutInflater().inflate(R.layout.player_image_layout, null);
+            TextView playerName = playerImageLayout.findViewById(R.id.player_name);
+            ImageView playerImage = playerImageLayout.findViewById(R.id.player_image);
 
-        fragment.requireActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                playerName.setText(name);
-                Picasso.get()
-                        .load(Config.PLAYER_IMAGES_RESOURCES + imageEndPoint)
-                        .resize(200, 200)
-                        .centerCrop()
-                        .into(playerImage);
+            fragment.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    playerName.setText(name);
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES + imageEndPoint)
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playerImage);
 
-            }
-        });
-
-        return playerImageLayout;
+                }
+            });
+            return playerImageLayout;
+        }
+        return null;
     }
 
     public static ProgressDialog createNonCancelableProgressBar(Context context) {

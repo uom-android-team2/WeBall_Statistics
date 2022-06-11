@@ -1,11 +1,9 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Progress;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,9 +22,7 @@ import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Referee;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
-import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
 /*
@@ -35,14 +31,16 @@ import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 public class LiveGameProgress extends Fragment {
 
     private FragmentLiveGameProgressBinding binding;
-    private LiveProgressUIController liveProgressUIController = LiveProgressUIController.getInstance();
+    private final LiveProgressUIController liveProgressUIController = LiveProgressUIController.getInstance();
     private DAOAction daoAction;
 
-    public LiveGameProgress() { }
+    public LiveGameProgress() {
+    }
 
-    public static LiveGameProgress getInstance(){
-
-        return new LiveGameProgress();
+    public static LiveGameProgress getInstance(Bundle bundle) {
+        LiveGameProgress liveGameProgress = new LiveGameProgress();
+        liveGameProgress.setArguments(bundle);
+        return liveGameProgress;
     }
 
     @Override

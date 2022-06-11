@@ -2,10 +2,10 @@ package uom.team2.weball_statistics.configuration;
 
 public class Config {
 
-    public static final String IP = "192.168.56.1";
+    public static final String IP = "172.29.192.1";
     public static final String API_URL = "http://" + IP + "/WeBall_Statistics-Backend/API/";
     //We will use the format bellow for the apis.
-    public static final String MATCHES_API = "http://" + IP + "/weBall_Statistics-Backend/API/match.php/";
+    public static final String MATCHES_API = "http://" + IP + "/weBall_Statistics-Backend/API/match.php";
     public static final String API_REFEREE = "referee.php";
     public static final String API_PLAYER_STATS_LIVE = "playerLiveStatistics.php";
     public static final String API_TEAM_STATS_LIVE = "teamLiveStatistics.php";

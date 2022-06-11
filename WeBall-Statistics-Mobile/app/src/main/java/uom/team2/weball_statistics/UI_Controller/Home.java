@@ -1,14 +1,14 @@
 package uom.team2.weball_statistics.UI_Controller;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import androidx.navigation.fragment.NavHostFragment;
-
-import android.view.*;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentHomeBinding;
@@ -44,20 +44,18 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.badge.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_teamScore);
+        binding.btnLoginAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_loginFragment);
+            }
         });
 
-        binding.btnContinueGuest.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_tabContainer);
-        });
-
-        binding.btnLoginAdmin.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_loginFragment);
-        });
-
-        binding.textView.setOnClickListener(e -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_home_to_adminsView);
+        binding.btnContinueGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_matchesTabContainer);
+            }
         });
 
     }

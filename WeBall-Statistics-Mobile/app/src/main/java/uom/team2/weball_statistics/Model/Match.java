@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import uom.team2.weball_statistics.Model.Actions.Action;
 /*
  * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris - ics20058
  */
-public class Match {
+public class Match implements Serializable {
     private int id; //unique id for every match
 
     private Team teamLandlord; //Home team

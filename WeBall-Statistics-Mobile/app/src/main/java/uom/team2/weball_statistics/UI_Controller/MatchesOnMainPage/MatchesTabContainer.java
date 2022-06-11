@@ -14,8 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.LiveController.SectionsPagerAdapter;
-import uom.team2.weball_statistics.databinding.FragmentLiveTabContainerBinding;
 import uom.team2.weball_statistics.databinding.FragmentMatchesTabContainerBinding;
 import uom.team2.weball_statistics.utils.Utils;
 

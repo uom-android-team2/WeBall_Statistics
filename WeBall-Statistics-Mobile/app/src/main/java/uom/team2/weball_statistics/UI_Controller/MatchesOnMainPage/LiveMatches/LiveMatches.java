@@ -101,59 +101,62 @@ public class LiveMatches extends Fragment {
 
 
         for (int i = 0; i < liveMatches.size(); i++) {
-            mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
-            Pair<Team> pair = new Pair<Team>();
-            View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
 
-            if (isAdmin) {
-                viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.VISIBLE);
-            } else {
-                viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.INVISIBLE);
+            if (LiveMatches.this.getActivity() != null) {
+                mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
+                Pair<Team> pair = new Pair<Team>();
+                View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
+
+                if (isAdmin) {
+                    viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.VISIBLE);
+                } else {
+                    viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.INVISIBLE);
+                }
+
+                teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
+                    @Override
+                    public void callback(Team returnedObject) {
+                        pair.teamLandlord = returnedObject;
+                        View team1 = viewMatch.findViewById(R.id.team1);
+                        try {
+                            UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team1);
+                            fillPlayers(returnedObject, viewMatch, true);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
+                    @Override
+                    public void callback(Team returnedObject) {
+                        pair.teamGuest = returnedObject;
+                        View team2 = viewMatch.findViewById(R.id.team2);
+                        try {
+                            UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team2);
+                            fillPlayers(returnedObject, viewMatch, false);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                onclickView(viewMatch, liveMatches.get(i).getId());
+                hashMap.put(liveMatches.get(i).getId(), pair);
+                LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (binding != null) {
+                            binding.matchesLayoutContainer.addView(viewMatch);
+                        }
+                    }
+                });
+                navigate(viewMatch, liveMatches.get(i).getId());
             }
-
-            teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
-                @Override
-                public void callback(Team returnedObject) {
-                    pair.teamLandlord = returnedObject;
-                    View team1 = viewMatch.findViewById(R.id.team1);
-                    try {
-                        UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team1);
-                        fillPlayers(returnedObject, viewMatch, true);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
-                @Override
-                public void callback(Team returnedObject) {
-                    pair.teamGuest = returnedObject;
-                    View team2 = viewMatch.findViewById(R.id.team2);
-                    try {
-                        UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team2);
-                        fillPlayers(returnedObject, viewMatch, false);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            onclickView(viewMatch, liveMatches.get(i).getId());
-            hashMap.put(liveMatches.get(i).getId(), pair);
-            LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (binding != null){
-                        binding.matchesLayoutContainer.addView(viewMatch);
-                    }
-                }
-            });
-            navigate(viewMatch, liveMatches.get(i).getId());
         }
     }
 
@@ -198,19 +201,22 @@ public class LiveMatches extends Fragment {
                     LinearLayout linearLayout = container.findViewById(layoutId);
 
                     int finalI = i;
-                    LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            TextView textView = playerView.findViewById(R.id.textViewPlayerName);
-                            ImageView imageView = playerView.findViewById(R.id.playerImageView);
-                            Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + players.get(finalI).getImagePath())
-                                    .centerCrop()
-                                    .resize(70, 70)
-                                    .into(imageView);
-                            textView.setText(players.get(finalI).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + players.get(finalI).getSurname());
-                            linearLayout.addView(playerView);
-                        }
-                    });
+
+                    if (LiveMatches.this.getActivity() != null) {
+                        LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView textView = playerView.findViewById(R.id.textViewPlayerName);
+                                ImageView imageView = playerView.findViewById(R.id.playerImageView);
+                                Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + players.get(finalI).getImagePath())
+                                        .centerCrop()
+                                        .resize(70, 70)
+                                        .into(imageView);
+                                textView.setText(players.get(finalI).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + players.get(finalI).getSurname());
+                                linearLayout.addView(playerView);
+                            }
+                        });
+                    }
                 }
             }
         });

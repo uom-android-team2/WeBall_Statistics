@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.UI_Controller.Home;
 import uom.team2.weball_statistics.databinding.FragmentTeamScoreBinding;
 
 
@@ -59,6 +60,7 @@ public class TeamScore extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         
         onStart();
+        navigate();
         addTeamScoreLayout(binding.scoreTable,teams);
     }
 
@@ -72,5 +74,21 @@ public class TeamScore extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void navigate() {
+        binding.bestPerPositionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(TeamScore.this).navigate(R.id.action_teamScore_to_bestStarting52);
+            }
+        });
+
+        binding.imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(TeamScore.this).navigate(R.id.action_teamScore_to_sharedTabContainer);
+            }
+        });
     }
 }

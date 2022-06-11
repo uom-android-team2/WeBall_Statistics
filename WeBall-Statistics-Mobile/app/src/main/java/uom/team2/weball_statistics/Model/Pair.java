@@ -1,6 +1,8 @@
 package uom.team2.weball_statistics.Model;
 
-public class Pair<T> {
+import java.io.Serializable;
+
+public class Pair<T> implements Serializable {
 
     public T teamLandlord;
     public T teamGuest;

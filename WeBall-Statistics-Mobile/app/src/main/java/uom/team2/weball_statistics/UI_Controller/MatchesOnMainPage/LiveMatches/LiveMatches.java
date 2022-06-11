@@ -6,6 +6,7 @@ import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.squareup.picasso.Picasso;
 
@@ -38,8 +40,8 @@ import uom.team2.weball_statistics.databinding.FragmentLiveMatchesBinding;
 
 public class LiveMatches extends Fragment {
 
-    private HashMap<Integer, Pair<Team>> hashMap = new HashMap<>();
-    private HashMap<Integer, Match> mapOfMatches = new HashMap<>();
+    private final HashMap<Integer, Pair<Team>> hashMap = new HashMap<>();
+    private final HashMap<Integer, Match> mapOfMatches = new HashMap<>();
     private FragmentLiveMatchesBinding binding;
 
     public LiveMatches() {
@@ -58,7 +60,6 @@ public class LiveMatches extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLiveMatchesBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
@@ -105,7 +106,7 @@ public class LiveMatches extends Fragment {
                     View team1 = viewMatch.findViewById(R.id.team1);
                     try {
                         UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team1);
-                        fillPlayers(returnedObject.getTeamName(), viewMatch, true);
+                        fillPlayers(returnedObject, viewMatch, true);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -121,7 +122,7 @@ public class LiveMatches extends Fragment {
                     View team2 = viewMatch.findViewById(R.id.team2);
                     try {
                         UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team2);
-                        fillPlayers(returnedObject.getTeamName(), viewMatch, false);
+                        fillPlayers(returnedObject, viewMatch, false);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -133,15 +134,32 @@ public class LiveMatches extends Fragment {
             onclickView(viewMatch, liveMatches.get(i).getId());
             hashMap.put(liveMatches.get(i).getId(), pair);
             binding.matchesLayoutContainer.addView(viewMatch);
+            navigate(viewMatch, liveMatches.get(i).getId());
         }
     }
 
-    public void fillPlayers(String teamName, View viewMatch, boolean home) {
+    public void navigate(View viewMatch, int matchid) {
+        ImageButton imageButton = viewMatch.findViewById(R.id.imageButtonEditMatch);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("match", mapOfMatches.get(matchid));
+                bundle.putSerializable("teamLandlord", hashMap.get(matchid).teamLandlord);
+                bundle.putSerializable("teamGuest", hashMap.get(matchid).teamGuest);
+                NavHostFragment.findNavController(LiveMatches.this)
+                        .navigate(R.id.action_matchesTabContainer_to_adminsView, bundle);
+            }
+        });
+    }
+
+    public void fillPlayers(Team team, View viewMatch, boolean home) {
         PlayerService playerService = new PlayerService();
 
-        playerService.findAllPlayersByTeamName(teamName, new CallbackListener<ArrayList<Player>>() {
+        playerService.findAllPlayersByTeamName(team.getTeamName(), new CallbackListener<ArrayList<Player>>() {
             @Override
             public void callback(ArrayList<Player> players) {
+                team.setTeamPlayers(players);
                 for (int i = 0; i < players.size(); i++) {
                     View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
                     View container = viewMatch.findViewById(R.id.matchPlayersInfo);

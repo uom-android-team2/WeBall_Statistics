@@ -29,7 +29,7 @@ public class LayoutFactory {
     }
 
     public static View createPayerImageLayout(Fragment fragment, String name, String imageEndPoint) throws IOException {
-        if (fragment.getActivity() != null) {
+        if (fragment.getActivity() != null && fragment.isAdded()) {
             View playerImageLayout = fragment.getLayoutInflater().inflate(R.layout.player_image_layout, null);
             TextView playerName = playerImageLayout.findViewById(R.id.player_name);
             ImageView playerImage = playerImageLayout.findViewById(R.id.player_image);

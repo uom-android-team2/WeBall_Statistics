@@ -43,12 +43,15 @@ public class LiveMatches extends Fragment {
     private final HashMap<Integer, Pair<Team>> hashMap = new HashMap<>();
     private final HashMap<Integer, Match> mapOfMatches = new HashMap<>();
     private FragmentLiveMatchesBinding binding;
+    private boolean isAdmin = false;
 
     public LiveMatches() {
     }
 
-    public static LiveMatches getInstance() {
-        return new LiveMatches();
+    public static LiveMatches getInstance(Bundle bundle) {
+        LiveMatches liveMatches = new LiveMatches();
+        liveMatches.setArguments(bundle);
+        return liveMatches;
     }
 
     @Override
@@ -66,6 +69,8 @@ public class LiveMatches extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        isAdmin = bundle.getBoolean("isAdmin");
     }
 
     @Override
@@ -99,6 +104,13 @@ public class LiveMatches extends Fragment {
             mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
             Pair<Team> pair = new Pair<Team>();
             View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
+
+            if (isAdmin) {
+                viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.VISIBLE);
+            } else {
+                viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.INVISIBLE);
+            }
+
             teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
                 @Override
                 public void callback(Team returnedObject) {
@@ -136,7 +148,9 @@ public class LiveMatches extends Fragment {
             LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    binding.matchesLayoutContainer.addView(viewMatch);
+                    if (binding != null){
+                        binding.matchesLayoutContainer.addView(viewMatch);
+                    }
                 }
             });
             navigate(viewMatch, liveMatches.get(i).getId());

@@ -43,11 +43,14 @@ public class UpcomingMatches extends Fragment {
     private final HashMap<Integer, Pair<Team>> hashMap = new HashMap<>();
     private final HashMap<Integer, Match> mapOfMatches = new HashMap<>();
     private FragmentUpcomingMatchesBinding binding;
+    private boolean isAdmin = false;
 
     public UpcomingMatches() { }
 
-    public static UpcomingMatches getInstance(){
-        return new UpcomingMatches();
+    public static UpcomingMatches getInstance(Bundle bundle){
+        UpcomingMatches upcomingMatches = new UpcomingMatches();
+        upcomingMatches.setArguments(bundle);
+        return upcomingMatches;
     }
 
     @Override
@@ -66,6 +69,8 @@ public class UpcomingMatches extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        isAdmin = bundle.getBoolean("isAdmin");
     }
 
 
@@ -100,7 +105,12 @@ public class UpcomingMatches extends Fragment {
         for (int i = 0; i < liveMatches.size(); i++) {
             mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
             Pair<Team> pair = new Pair<Team>();
-            View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
+            View viewMatch = getLayoutInflater().inflate(R.layout.matches_upcoming_layout, null);
+            if (isAdmin) {
+                viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.VISIBLE);
+            } else {
+                viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.INVISIBLE);
+            }
             teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
                 @Override
                 public void callback(Team returnedObject) {
@@ -138,7 +148,9 @@ public class UpcomingMatches extends Fragment {
             UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    binding.matchesLayoutContainer.addView(viewMatch);
+                    if (binding != null){
+                        binding.matchesLayoutContainer.addView(viewMatch);
+                    }
                 }
             });
             navigate(viewMatch, liveMatches.get(i).getId());

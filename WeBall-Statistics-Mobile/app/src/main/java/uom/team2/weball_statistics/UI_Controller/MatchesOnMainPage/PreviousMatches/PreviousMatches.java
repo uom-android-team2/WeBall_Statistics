@@ -46,8 +46,10 @@ public class PreviousMatches extends Fragment {
     public PreviousMatches() {
     }
 
-    public static PreviousMatches getInstance() {
-        return new PreviousMatches();
+    public static PreviousMatches getInstance(Bundle bundle) {
+        PreviousMatches previousMatches = new PreviousMatches();
+        previousMatches.setArguments(bundle);
+        return previousMatches;
     }
 
     @Override
@@ -96,7 +98,7 @@ public class PreviousMatches extends Fragment {
         for (int i = 0; i < liveMatches.size(); i++) {
             mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
             Pair<Team> pair = new Pair<Team>();
-            View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
+            View viewMatch = getLayoutInflater().inflate(R.layout.matches_previous_layout, null);
             teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
                 @Override
                 public void callback(Team returnedObject) {
@@ -134,7 +136,9 @@ public class PreviousMatches extends Fragment {
             PreviousMatches.this.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    binding.matchesLayoutContainer.addView(viewMatch);
+                    if (binding != null) {
+                        binding.matchesLayoutContainer.addView(viewMatch);
+                    }
                 }
             });
             navigate(viewMatch, liveMatches.get(i).getId());

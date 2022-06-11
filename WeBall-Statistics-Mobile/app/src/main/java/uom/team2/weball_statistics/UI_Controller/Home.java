@@ -54,7 +54,9 @@ public class Home extends Fragment {
         binding.btnContinueGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_matchesTabContainer);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isAdmin", false);
+                NavHostFragment.findNavController(Home.this).navigate(R.id.action_home_to_matchesTabContainer, bundle);
             }
         });
 

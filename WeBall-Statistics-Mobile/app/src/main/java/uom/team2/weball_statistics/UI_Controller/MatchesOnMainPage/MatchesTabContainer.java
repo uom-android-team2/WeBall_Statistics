@@ -62,7 +62,6 @@ public class MatchesTabContainer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentMatchesTabContainerBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
@@ -70,7 +69,9 @@ public class MatchesTabContainer extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SectionsPagerAdapterMatches sectionsPagerAdapter = new SectionsPagerAdapterMatches(getContext(), getChildFragmentManager());
+        Bundle bundle = getArguments();
+
+        SectionsPagerAdapterMatches sectionsPagerAdapter = new SectionsPagerAdapterMatches(getContext(), getChildFragmentManager(), bundle);
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;

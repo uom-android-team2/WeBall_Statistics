@@ -33,6 +33,7 @@ public class LivePlayerStatistics extends Fragment {
     // you need to have a list of data that you want the spinner to display
     private final ArrayList<String> spinnerArray = new ArrayList<String>();
     private final boolean dataRetrieved = false;
+    private final int spinnerItemSelected = 0;
     private ArrayList<Player> teamLandlordPlayers = new ArrayList<>();
     private ArrayList<Player> teamGuestPlayers = new ArrayList<>();
     private Match match;
@@ -46,7 +47,6 @@ public class LivePlayerStatistics extends Fragment {
     private FragmentLivePlayerStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
     private int playerSelectedId = -1;
-    private final int spinnerItemSelected = 0;
 
     public LivePlayerStatistics() {
         // Required empty public constructor
@@ -302,6 +302,8 @@ public class LivePlayerStatistics extends Fragment {
                         return;
                     }
 
+                    ArrayList<Player> tempPlayers = teamSelected ? teamLandlordPlayers : teamGuestPlayers;
+
                     playerSelectedId = temp;
 
                     int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
@@ -314,8 +316,8 @@ public class LivePlayerStatistics extends Fragment {
 
                     try {
                         UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
-                                teamLandlordPlayers.get(index).getImagePath(),
-                                teamLandlordPlayers.get(index).getName(),
+                                tempPlayers.get(index).getImagePath(),
+                                tempPlayers.get(index).getName(),
                                 binding.selectedPlayerLayout.getRoot());
                     } catch (IOException e) {
                         e.printStackTrace();

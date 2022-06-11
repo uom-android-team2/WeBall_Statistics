@@ -83,19 +83,18 @@
                 android:id="@+id/expandedViewLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageButtonDropdown">
 
-                <Button
-                    android:id="@+id/button2"
+                <include
+                    android:id="@+id/matchPlayersInfo"
+                    layout="@layout/players_preview_match"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:text="Button"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

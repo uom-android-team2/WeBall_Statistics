@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Match;
@@ -28,8 +30,10 @@ import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.MatchService;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
@@ -38,7 +42,7 @@ import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
  * Use the {@link AdminsView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminsView extends Fragment {
+public class AdminsView extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -133,6 +137,16 @@ public class AdminsView extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        freeThrowBtn = binding.freethrowButton;
+        twoPointBtn = binding.twoPointerButton;
+        threePointBtn = binding.threePointerButton;
+        reboundBtn = binding.reboundButton;
+        assistBtn = binding.assistButton;
+        stealBtn = binding.stealButton;
+        blockBtn = binding.blockButton;
+        foulBtn = binding.foulButton;
+        turnoverBtn = binding.turnoverButton;
+
         match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
         teamLandlord = match.getTeamLandlord();
         teamGuest = match.getGuest();
@@ -144,16 +158,16 @@ public class AdminsView extends Fragment {
 
         ArrayList<Player> team1 = new ArrayList<>();
         ArrayList<Player> team2 = new ArrayList<>();
-        team1.add(new Player("tp11", "test"));
-        team1.add(new Player("tp12", "test"));
-        team1.add(new Player("tp13", "test"));
-        team1.add(new Player("tp14", "test"));
-        team1.add(new Player("tp15", "test"));
-        team2.add(new Player("tp21", "test"));
-        team2.add(new Player("tp22", "test"));
-        team2.add(new Player("tp23", "test"));
-        team2.add(new Player("tp68", "test"));
-        team2.add(new Player("tp79", "test"));
+        team1.add(new Player(1,"tp11", "test"));
+        team1.add(new Player(2,"tp12", "test"));
+        team1.add(new Player(3,"tp13", "test"));
+        team1.add(new Player(4,"tp14", "test"));
+        team1.add(new Player(5,"tp15", "test"));
+        team2.add(new Player(6,"tp21", "test"));
+        team2.add(new Player(7,"tp22", "test"));
+        team2.add(new Player(8,"tp23", "test"));
+        team2.add(new Player(9,"tp68", "test"));
+        team2.add(new Player(10,"tp79", "test"));
 
         for (int i = 0; i < team1.size(); i++) {
             landLord.addPlayerToKey(team1.get(i));
@@ -193,6 +207,8 @@ public class AdminsView extends Fragment {
         shape2.setColor(getResources().getColor(R.color.alt_grey));
         binding.player1.setBackground(shape2);
         playerChecked = 1;
+
+        listenEvent();
 
 
         //Load data for this team
@@ -372,6 +388,8 @@ public class AdminsView extends Fragment {
 
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
+
+                    listenEvent();
                 }
 
             }
@@ -393,7 +411,7 @@ public class AdminsView extends Fragment {
 
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
-
+                    listenEvent();
 
                 }
 
@@ -416,7 +434,7 @@ public class AdminsView extends Fragment {
 
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
-
+                    listenEvent();
                 }
 
             }
@@ -439,6 +457,8 @@ public class AdminsView extends Fragment {
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
+                    listenEvent();
+
                 }
 
             }
@@ -454,12 +474,17 @@ public class AdminsView extends Fragment {
                     shape.setColor(getResources().getColor(R.color.alt_grey));
                     view.setBackground(shape);
 
+
+
                     playerChecked = 5;
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
+
+
+                    listenEvent();
 
                 }
 
@@ -486,56 +511,51 @@ public class AdminsView extends Fragment {
             }
         });
 
-        freeThrowBtn = binding.freethrowButton;
-        twoPointBtn = binding.twoPointerButton;
-        threePointBtn = binding.threePointerButton;
-        reboundBtn = binding.reboundButton;
-        assistBtn = binding.assistButton;
-        stealBtn = binding.stealButton;
-        blockBtn = binding.blockButton;
-        foulBtn = binding.foulButton;
-        turnoverBtn = binding.turnoverButton;
 
-//        DBDataRecovery dataRecovery = new DBDataRecovery();
-//
-//        try {
-//            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, "1");
-//            Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, "1");
-//            threePointBtn.setOnClickListener(e -> {
-//                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery);
-//                ppv.show();
-//            });
-//            freeThrowBtn.setOnClickListener(e -> {
-//                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery);
-//                ppv.show();
-//
-//            });
-//            twoPointBtn.setOnClickListener(e -> {
-//                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery);
-//                ppv.show();
-//            });
-//            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
-//            assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
-//            stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
-//            blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
-//            foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
-//            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+
+
     }
 
+    private void listenEvent(){
+        DBDataRecovery dataRecovery = new DBDataRecovery();
+
+        System.out.println("erifoejiks");
+
+
+        try {
+            Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
+            Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObj.getId()));
+            threePointBtn.setOnClickListener(e -> {
+                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked);
+                ppv.show();
+            });
+            freeThrowBtn.setOnClickListener(e -> {
+                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
+                ppv.show();
+            });
+            twoPointBtn.setOnClickListener(e -> {
+                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
+                ppv.show();
+            });
+            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
+            assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
+            stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
+            blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
+            foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
+            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private void updateAssist(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
         playerStats.setTotalAssists();
         teamStats.setTotalAssists();
-        // PlayerLiveStatistics p = new PlayerLiveStatistics(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
-        // p.setAssist(playerStats.getTotalAssists());
         try {
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.assist);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.assist);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            // DAOLivePlayerStatistics.getInstace().update(p);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -545,6 +565,8 @@ public class AdminsView extends Fragment {
         playerStats.setTotalRebounds();
         teamStats.setTotalRebounds();
         try {
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.rebound);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.rebound);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -556,6 +578,8 @@ public class AdminsView extends Fragment {
         playerStats.setTotalSteels();
         teamStats.setTotalSteels();
         try {
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.steal);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.steal);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -567,6 +591,8 @@ public class AdminsView extends Fragment {
         playerStats.setTotalBlock();
         teamStats.setTotalBlock();
         try {
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.block);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.block);
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -578,6 +604,8 @@ public class AdminsView extends Fragment {
         playerStats.setTotalFouls();
         teamStats.setTotalFouls();
         try {
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.foul);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.foul);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -591,6 +619,8 @@ public class AdminsView extends Fragment {
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.turnover);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -609,6 +639,8 @@ public class AdminsView extends Fragment {
         } else if (playerChecked == 5) {
             binding.player5.setBackgroundColor(0x00000000);
         }
+
+
     }
 
 

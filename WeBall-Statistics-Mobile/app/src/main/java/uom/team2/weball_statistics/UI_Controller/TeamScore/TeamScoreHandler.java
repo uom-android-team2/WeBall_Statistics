@@ -23,7 +23,7 @@ public class TeamScoreHandler {
 
     private ArrayList<Team> teams;
     private Team team;
-    private String url = "http://" + Config.IP + "/backend/API/team.php";
+    private String url = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/team.php";
 
     public TeamScoreHandler(){
         teams = new ArrayList<>();

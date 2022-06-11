@@ -5,15 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.UI_Controller.Home;
 import uom.team2.weball_statistics.databinding.FragmentMatchesTabContainerBinding;
 import uom.team2.weball_statistics.utils.Utils;
 
@@ -76,7 +79,7 @@ public class MatchesTabContainer extends Fragment {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-
+        navigate();
         tabBackgroundColorHandler(tabs);
     }
 
@@ -84,5 +87,16 @@ public class MatchesTabContainer extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void navigate() {
+        Button statisticsButton = binding.championshipStatisticsBtn;
+
+        statisticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(MatchesTabContainer.this).navigate(R.id.action_matchesTabContainer_to_teamScore);
+            }
+        });
     }
 }

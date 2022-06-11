@@ -34,7 +34,6 @@ import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
-import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.LiveMatches;
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.Service.MatchesOnMainPageService;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentUpcomingMatchesBinding;
@@ -142,14 +141,16 @@ public class UpcomingMatches extends Fragment {
 
                 onclickView(viewMatch, liveMatches.get(i).getId());
                 hashMap.put(liveMatches.get(i).getId(), pair);
-                UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (binding != null) {
-                            binding.matchesLayoutContainer.addView(viewMatch);
+                if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null ){
+                    UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (binding != null) {
+                                binding.matchesLayoutContainer.addView(viewMatch);
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 navigate(viewMatch, liveMatches.get(i).getId());
             }
         }
@@ -179,27 +180,32 @@ public class UpcomingMatches extends Fragment {
             public void callback(ArrayList<Player> players) {
                 team.setTeamPlayers(players);
                 for (int i = 0; i < players.size(); i++) {
-                    View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
-                    View container = viewMatch.findViewById(R.id.matchPlayersInfo);
-                    int layoutId = home ? R.id.homeTeamStartingPlayersVertical : R.id.awayTeamStartingPlayersVertical;
-                    LinearLayout linearLayout = container.findViewById(layoutId);
 
-                    int finalI = i;
+                    if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null ){
 
-                    if (UpcomingMatches.this.getActivity() != null) {
-                        UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TextView textView = playerView.findViewById(R.id.textViewPlayerName);
-                                ImageView imageView = playerView.findViewById(R.id.playerImageView);
-                                Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + players.get(finalI).getImagePath())
-                                        .centerCrop()
-                                        .resize(70, 70)
-                                        .into(imageView);
-                                textView.setText(players.get(finalI).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + players.get(finalI).getSurname());
-                                linearLayout.addView(playerView);
-                            }
-                        });
+                        View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
+                        View container = viewMatch.findViewById(R.id.matchPlayersInfo);
+                        int layoutId = home ? R.id.homeTeamStartingPlayersVertical : R.id.awayTeamStartingPlayersVertical;
+                        LinearLayout linearLayout = container.findViewById(layoutId);
+
+                        int finalI = i;
+
+                        if (UpcomingMatches.this.getActivity() != null) {
+                            UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    TextView textView = playerView.findViewById(R.id.textViewPlayerName);
+                                    ImageView imageView = playerView.findViewById(R.id.playerImageView);
+                                    Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + players.get(finalI).getImagePath())
+                                            .centerCrop()
+                                            .resize(70, 70)
+                                            .into(imageView);
+                                    textView.setText(players.get(finalI).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + players.get(finalI).getSurname());
+                                    linearLayout.addView(playerView);
+                                }
+                            });
+                        }
+
                     }
                 }
             }

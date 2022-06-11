@@ -102,7 +102,7 @@ public class LiveMatches extends Fragment {
 
         for (int i = 0; i < liveMatches.size(); i++) {
 
-            if (LiveMatches.this.getActivity() != null) {
+            if (LiveMatches.this.isAdded() && LiveMatches.this.getActivity() != null) {
                 mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
@@ -147,14 +147,17 @@ public class LiveMatches extends Fragment {
 
                 onclickView(viewMatch, liveMatches.get(i).getId());
                 hashMap.put(liveMatches.get(i).getId(), pair);
-                LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (binding != null) {
-                            binding.matchesLayoutContainer.addView(viewMatch);
+                if (LiveMatches.this.isAdded() && LiveMatches.this.getActivity() != null) {
+
+                    LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (binding != null) {
+                                binding.matchesLayoutContainer.addView(viewMatch);
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 navigate(viewMatch, liveMatches.get(i).getId());
             }
         }
@@ -195,27 +198,30 @@ public class LiveMatches extends Fragment {
             public void callback(ArrayList<Player> players) {
                 team.setTeamPlayers(players);
                 for (int i = 0; i < players.size(); i++) {
-                    View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
-                    View container = viewMatch.findViewById(R.id.matchPlayersInfo);
-                    int layoutId = home ? R.id.homeTeamStartingPlayersVertical : R.id.awayTeamStartingPlayersVertical;
-                    LinearLayout linearLayout = container.findViewById(layoutId);
+                    if (LiveMatches.this.isAdded() && LiveMatches.this.getActivity() != null) {
+                        View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
+                        View container = viewMatch.findViewById(R.id.matchPlayersInfo);
+                        int layoutId = home ? R.id.homeTeamStartingPlayersVertical : R.id.awayTeamStartingPlayersVertical;
+                        LinearLayout linearLayout = container.findViewById(layoutId);
 
-                    int finalI = i;
+                        int finalI = i;
 
-                    if (LiveMatches.this.getActivity() != null) {
-                        LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TextView textView = playerView.findViewById(R.id.textViewPlayerName);
-                                ImageView imageView = playerView.findViewById(R.id.playerImageView);
-                                Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + players.get(finalI).getImagePath())
-                                        .centerCrop()
-                                        .resize(70, 70)
-                                        .into(imageView);
-                                textView.setText(players.get(finalI).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + players.get(finalI).getSurname());
-                                linearLayout.addView(playerView);
-                            }
-                        });
+                        if (LiveMatches.this.getActivity() != null) {
+                            LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    TextView textView = playerView.findViewById(R.id.textViewPlayerName);
+                                    ImageView imageView = playerView.findViewById(R.id.playerImageView);
+                                    Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + players.get(finalI).getImagePath())
+                                            .centerCrop()
+                                            .resize(70, 70)
+                                            .into(imageView);
+                                    textView.setText(players.get(finalI).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + players.get(finalI).getSurname());
+                                    linearLayout.addView(playerView);
+                                }
+                            });
+                        }
+
                     }
                 }
             }

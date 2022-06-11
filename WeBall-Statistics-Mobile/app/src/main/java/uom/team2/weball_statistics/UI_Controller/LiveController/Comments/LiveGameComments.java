@@ -50,6 +50,7 @@ public class LiveGameComments extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //Create comments for Testing
+        
         for (int i = 0; i <= 12; i++) {
             View comment = getLayoutInflater().inflate(R.layout.match_comment_layout, null);
             binding.commentsLayoutContainer.addView(comment);

@@ -22,6 +22,7 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveG
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 /*
@@ -253,6 +254,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
     @Override
     public void update(TeamLiveStatistics data) {
+        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_TEAM_STATS_LIVE);
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).updateChildren(h);
     }

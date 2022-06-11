@@ -133,7 +133,12 @@ public class LiveMatches extends Fragment {
 
             onclickView(viewMatch, liveMatches.get(i).getId());
             hashMap.put(liveMatches.get(i).getId(), pair);
-            binding.matchesLayoutContainer.addView(viewMatch);
+            LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    binding.matchesLayoutContainer.addView(viewMatch);
+                }
+            });
             navigate(viewMatch, liveMatches.get(i).getId());
         }
     }
@@ -149,6 +154,18 @@ public class LiveMatches extends Fragment {
                 bundle.putSerializable("teamGuest", hashMap.get(matchid).teamGuest);
                 NavHostFragment.findNavController(LiveMatches.this)
                         .navigate(R.id.action_matchesTabContainer_to_adminsView, bundle);
+            }
+        });
+
+        viewMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("match", mapOfMatches.get(matchid));
+                bundle.putSerializable("teamLandlord", hashMap.get(matchid).teamLandlord);
+                bundle.putSerializable("teamGuest", hashMap.get(matchid).teamGuest);
+                NavHostFragment.findNavController(LiveMatches.this)
+                        .navigate(R.id.action_matchesTabContainer_to_tabContainer, bundle);
             }
         });
     }

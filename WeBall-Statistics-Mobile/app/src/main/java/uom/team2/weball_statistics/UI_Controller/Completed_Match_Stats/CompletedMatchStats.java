@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 import uom.team2.weball_statistics.Model.Match;
 
 import uom.team2.weball_statistics.Model.Team;
@@ -40,12 +44,18 @@ public class CompletedMatchStats extends Fragment {
         Bundle bundle = getArguments();
 
 
-        completedMatchStatsUIController.fillMatchHeaderInformation(this);
         Match match = (Match) bundle.getSerializable("match");
         Team teamLandlord = (Team) bundle.getSerializable("teamLandlord");
         Team teamGuest = (Team) bundle.getSerializable("teamGuest");
+
         //Change call to method
-        completedMatchStatsUIController.fillMatchHeaderInformation(this);
+        try {
+            completedMatchStatsUIController.fillMatchHeaderInformation(this,match,teamLandlord,teamGuest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         return binding.getRoot();

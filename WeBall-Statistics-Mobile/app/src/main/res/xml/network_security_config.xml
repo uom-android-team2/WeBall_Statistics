@@ -12,5 +12,6 @@
         <domain includeSubdomains="true">172.24.128.1</domain>
         <domain includeSubdomains="true">172.29.192.1</domain>
         <domain includeSubdomains="true">172.20.128.1</domain>
+        <domain includeSubdomains="true">192.168.1.8</domain>
     </domain-config>
 </network-security-config>

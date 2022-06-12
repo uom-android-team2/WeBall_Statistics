@@ -109,8 +109,8 @@ public class Match implements Serializable {
     }
 
 
-    public void setProgress() {
-        progress = true;
+    public void setProgress(boolean b) {
+        progress = b;
     }
 
     public boolean isProgress() {
@@ -121,9 +121,9 @@ public class Match implements Serializable {
         return completed;
     }
 
-    public void setCompleted() {
+    public void setCompleted(boolean b) {
 
-        completed = true;
+        completed = b;
     }
 
     public Referee getReferee() {

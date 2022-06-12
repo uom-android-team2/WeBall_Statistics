@@ -14,11 +14,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Match;
@@ -34,6 +34,7 @@ import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.MatchService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
@@ -50,7 +51,6 @@ public class AdminsView extends Fragment  {
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();
     private final Stack<Integer> undoButtonStack = new Stack<Integer>();
-    private final Match m = new Match(1, null, null, new Date(), Status.UPCOMING);
     private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
@@ -151,56 +151,55 @@ public class AdminsView extends Fragment  {
         match = (Match) bundle.getSerializable("match");
         teamLandlord = (Team) bundle.getSerializable("teamLandlord");
         teamGuest = (Team) bundle.getSerializable("teamGuest");
-        // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
-        teamLandlord.getTeamPlayers();
-        teamGuest.getTeamPlayers();
-
-
-//        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
-//        teamLandlord = match.getTeamLandlord();
-//        teamGuest = match.getGuest();
-//
-//        //test
-//        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
-//        landLord = match.getTeamLandlord();
-//        teamGuest = match.getGuest();
-//
-//        ArrayList<Player> team1 = new ArrayList<>();
-//        ArrayList<Player> team2 = new ArrayList<>();
-//        team1.add(new Player(1,"tp11", "test"));
-//        team1.add(new Player(2,"tp12", "test"));
-//        team1.add(new Player(3,"tp13", "test"));
-//        team1.add(new Player(4,"tp14", "test"));
-//        team1.add(new Player(5,"tp15", "test"));
-//        team2.add(new Player(6,"tp21", "test"));
-//        team2.add(new Player(7,"tp22", "test"));
-//        team2.add(new Player(8,"tp23", "test"));
-//        team2.add(new Player(9,"tp68", "test"));
-//        team2.add(new Player(10,"tp79", "test"));
-//
-//        for (int i = 0; i < team1.size(); i++) {
-//            landLord.addPlayerToKey(team1.get(i));
-//        }
-//        for (int i = 0; i < team2.size(); i++) {
-//            teamGuest.addPlayerToKey(team2.get(i));
-//        }
-//        for (int i = 0; i < team2.size(); i++) {
-//            landLord.addPlayerToSub(team2.get(i));
-//        }
-
-        //'
-
-        //put images of the two teams
-        //teamLand=match.getTeamLandlord();
-        //teamGuest=match.getGuest();
-        // String badgeLand=teamLand.getBadgePath();
-        //  String badgeGuest=teamGuest.getBadgePath();
-
-        //binding.team1Banner.setImageURI(Uri.parse(badgeLand));
-        //binding.team2Banner.setImageURI(Uri.parse(badgeGuest));
+        match.setTeamLandlord(teamLandlord);
+        match.setGuest(teamGuest);
 
 
         //
+        DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+        //
+        try {
+            UIHandler.updateTeamImage(this,teamLandlord,binding.team1Banner);
+            UIHandler.updateTeamImage(this,teamGuest,binding.team2Banner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getTeamPlayers().get(0).getImagePath())
+                .resize(200, 200)
+                .centerCrop()
+                .into(binding.player1);
+
+        // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
+        ArrayList<Player> tlList=teamLandlord.getTeamPlayers();
+        ArrayList<Player> tgList=teamGuest.getTeamPlayers();
+
+        for(int i=0;i<tlList.size();i++){
+            if(i<5){
+                keyPlayersLandlord.add(tlList.get(i));
+            }else{
+                subPlayersLandlord.add(tlList.get(i));
+            }
+        }
+
+        for(int i=0;i<tgList.size();i++){
+            if(i<5){
+                keyPlayersGuest.add(tgList.get(i));
+            }else{
+                subPlayersGuest.add(tgList.get(i));
+            }
+        }
+
+        match.getTeamLandlord().setKeyPlayersList(keyPlayersLandlord);
+        match.getTeamLandlord().setSubPlayersList(subPlayersLandlord);
+        match.getGuest().setKeyPlayersList(keyPlayersGuest);
+        match.getGuest().setSubPlayersList(subPlayersGuest);
+
+
+
 
         //When this page opens, we want to have the landlord team already selected
         teamSelected = false;
@@ -315,11 +314,11 @@ public class AdminsView extends Fragment  {
                     started = true;
                     binding.startButton.setText("End");
                     binding.pauseButton.setEnabled(true);
-                    m.setStatus(Status.ONGOING);
-                    m.setProgress();
+                    match.setStatus(Status.ONGOING);
+                    match.setProgress(true);
                     MatchService ms = new MatchService();
                     try {
-                        ms.statusUpdate(m);
+                        ms.statusUpdate(match);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -334,12 +333,13 @@ public class AdminsView extends Fragment  {
                     binding.pauseButton.setEnabled(false);
                     binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                     binding.pauseButton.setText("Pause/Continue");
-                    m.setStatus(Status.COMPLETED);
+                    match.setStatus(Status.COMPLETED);
 
-                    m.setCompleted();
+                    match.setCompleted(true);
+                    match.setProgress(false);
                     MatchService ms = new MatchService();
                     try {
-                        ms.statusUpdate(m);
+                        ms.statusUpdate(match);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

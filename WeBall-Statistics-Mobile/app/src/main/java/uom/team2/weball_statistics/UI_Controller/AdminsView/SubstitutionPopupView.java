@@ -43,6 +43,7 @@ public class SubstitutionPopupView extends Dialog implements
         setContentView(R.layout.substitution_popup_view);
 
 
+
         xbutton=(TextView) findViewById(R.id.x_button);
         sub1 = (TextView) findViewById(R.id.sub1_text);
         sub2 = (TextView) findViewById(R.id.sub2_text);

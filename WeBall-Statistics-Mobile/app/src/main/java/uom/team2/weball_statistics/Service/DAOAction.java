@@ -40,7 +40,7 @@ public class DAOAction implements DAOCRUDService <Action> {
     public void getRealTimeData(Match matchData, LiveGameProgress liveGameProgressFragment) {
         //Get data snapshot
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId()).child("Actions");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

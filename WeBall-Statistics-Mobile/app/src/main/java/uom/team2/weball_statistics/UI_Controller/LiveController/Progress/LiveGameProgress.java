@@ -54,9 +54,6 @@ public class LiveGameProgress extends Fragment {
     public void onStart() {
         super.onStart();
 //        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
-
-        Match match = new Match(2, null, null, new Date(), Status.ONGOING);
-        daoAction.getRealTimeData(match, this);
     }
 
     @Override
@@ -70,16 +67,8 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        binding.header.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Team teamHome = new Team("Paok");
-                Team teamAway = new Team("Aris");
-                Match match = new Match(2, teamHome, teamAway, new Date(), Status.ONGOING);
-                Action action = new MatchFlow("321", FlowType.PAUSE);
-                addActionToFirebase(match, action);
-            }
-        });
+        //Retrieve real time data
+//        daoAction.getRealTimeData(match, LiveGameProgress.this);
     }
 
     @Override

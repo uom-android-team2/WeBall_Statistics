@@ -128,7 +128,6 @@ public class AdminsView extends Fragment  {
         // Inflate the layout for this fragment
 
         binding = FragmentAdminsViewBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
 
     }
@@ -147,37 +146,47 @@ public class AdminsView extends Fragment  {
         foulBtn = binding.foulButton;
         turnoverBtn = binding.turnoverButton;
 
-        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
-        teamLandlord = match.getTeamLandlord();
-        teamGuest = match.getGuest();
+        // orismata gia kathe match
+        Bundle bundle = getArguments();
+        match = (Match) bundle.getSerializable("match");
+        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+        teamGuest = (Team) bundle.getSerializable("teamGuest");
+        // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
+        teamLandlord.getTeamPlayers();
+        teamGuest.getTeamPlayers();
 
-        //test
-        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
-        landLord = match.getTeamLandlord();
-        teamGuest = match.getGuest();
 
-        ArrayList<Player> team1 = new ArrayList<>();
-        ArrayList<Player> team2 = new ArrayList<>();
-        team1.add(new Player(1,"tp11", "test"));
-        team1.add(new Player(2,"tp12", "test"));
-        team1.add(new Player(3,"tp13", "test"));
-        team1.add(new Player(4,"tp14", "test"));
-        team1.add(new Player(5,"tp15", "test"));
-        team2.add(new Player(6,"tp21", "test"));
-        team2.add(new Player(7,"tp22", "test"));
-        team2.add(new Player(8,"tp23", "test"));
-        team2.add(new Player(9,"tp68", "test"));
-        team2.add(new Player(10,"tp79", "test"));
-
-        for (int i = 0; i < team1.size(); i++) {
-            landLord.addPlayerToKey(team1.get(i));
-        }
-        for (int i = 0; i < team2.size(); i++) {
-            teamGuest.addPlayerToKey(team2.get(i));
-        }
-        for (int i = 0; i < team2.size(); i++) {
-            landLord.addPlayerToSub(team2.get(i));
-        }
+//        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
+//        teamLandlord = match.getTeamLandlord();
+//        teamGuest = match.getGuest();
+//
+//        //test
+//        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
+//        landLord = match.getTeamLandlord();
+//        teamGuest = match.getGuest();
+//
+//        ArrayList<Player> team1 = new ArrayList<>();
+//        ArrayList<Player> team2 = new ArrayList<>();
+//        team1.add(new Player(1,"tp11", "test"));
+//        team1.add(new Player(2,"tp12", "test"));
+//        team1.add(new Player(3,"tp13", "test"));
+//        team1.add(new Player(4,"tp14", "test"));
+//        team1.add(new Player(5,"tp15", "test"));
+//        team2.add(new Player(6,"tp21", "test"));
+//        team2.add(new Player(7,"tp22", "test"));
+//        team2.add(new Player(8,"tp23", "test"));
+//        team2.add(new Player(9,"tp68", "test"));
+//        team2.add(new Player(10,"tp79", "test"));
+//
+//        for (int i = 0; i < team1.size(); i++) {
+//            landLord.addPlayerToKey(team1.get(i));
+//        }
+//        for (int i = 0; i < team2.size(); i++) {
+//            teamGuest.addPlayerToKey(team2.get(i));
+//        }
+//        for (int i = 0; i < team2.size(); i++) {
+//            landLord.addPlayerToSub(team2.get(i));
+//        }
 
         //'
 

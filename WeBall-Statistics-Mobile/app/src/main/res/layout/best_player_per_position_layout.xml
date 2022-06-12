@@ -71,7 +71,7 @@
         app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/error" />
 
     <ImageView
         android:id="@+id/logoImage"
@@ -82,6 +82,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.23000002"
-        app:srcCompat="@drawable/bucks" />
+        app:srcCompat="@drawable/error" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

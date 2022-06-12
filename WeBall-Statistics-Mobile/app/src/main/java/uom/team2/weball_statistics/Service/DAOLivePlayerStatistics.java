@@ -19,6 +19,7 @@ import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
+import uom.team2.weball_statistics.configuration.Config;
 
 /*
  * @author Leonard Pepa ics20033
@@ -112,6 +113,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
 
     @Override
     public void update(PlayerLiveStatistics data) {
+        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_PLAYER_STATS_LIVE);
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("player_id: " + data.getPlayer_id()).updateChildren(h);
     }

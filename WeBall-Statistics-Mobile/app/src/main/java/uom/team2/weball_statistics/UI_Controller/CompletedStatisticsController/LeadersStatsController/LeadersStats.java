@@ -37,12 +37,9 @@ public class LeadersStats extends Fragment {
 
     private String[] statsNames;
     private FragmentLeadersStatsBinding binding;
-    private String[] tags ;
-
 
     public LeadersStats() {
         statsNames = new String[] {"Points Per Game","Assist Per Game", "Rebounds Per Game", "Blocks Per Game", "Fouls Per Game"};
-        tags = new String[] {"PPG", "RPG", "APG", "BPG", "FPG"};
     }
 
     public static LeadersStats newInstance() {
@@ -78,10 +75,6 @@ public class LeadersStats extends Fragment {
         playerChampionshipStatsService.getAllPlayerStatistics(new CallbackListener<ArrayList<PlayerStats>>() {
             @Override
             public void callback(ArrayList<PlayerStats> returnedObject) {
-                System.out.println("RETURNED OBJECT");
-                System.out.println("TO SIZE EINAI = " + returnedObject.size());
-                System.out.println(returnedObject);
-
                 ArrayList<PlayerStats> points = new ArrayList<>();
                 ArrayList<PlayerStats> assists = new ArrayList<>();
                 ArrayList<PlayerStats> blocks = new ArrayList<>();
@@ -89,7 +82,6 @@ public class LeadersStats extends Fragment {
                 ArrayList<PlayerStats> fouls = new ArrayList<>();
 
                 points = sortByPoints(returnedObject);
-                System.out.println("POSA EINAI TA POINTS??" + points);
                 assists = sortByAssists(returnedObject);
                 blocks = sortByBlocks(returnedObject);
                 rebounds = sortByRebounds(returnedObject);
@@ -107,18 +99,21 @@ public class LeadersStats extends Fragment {
 
     public void addTitles() {
 
+        //set the name of the statistic e.g. Points Per Game
         binding.PPG.statisticTitle.setText(statsNames[0]);
         binding.APG.statisticTitle.setText(statsNames[1]);
         binding.RPG.statisticTitle.setText(statsNames[2]);
         binding.BPG.statisticTitle.setText(statsNames[3]);
         binding.FPG.statisticTitle.setText(statsNames[4]);
 
+        //change top player's statistic
         changeTopPlayerLayout(binding.PPG.topPlayerContainer,"PPG");
         changeTopPlayerLayout(binding.APG.topPlayerContainer,"APG");
         changeTopPlayerLayout(binding.RPG.topPlayerContainer,"RPG");
         changeTopPlayerLayout(binding.BPG.topPlayerContainer,"BPG");
         changeTopPlayerLayout(binding.FPG.topPlayerContainer,"FPG");
 
+        //set the statistic e.g. PPG
         binding.PPG.ranktab.rankTabStat.setText("PPG");
         binding.APG.ranktab.rankTabStat.setText("APG");
         binding.RPG.ranktab.rankTabStat.setText("RPG");
@@ -134,9 +129,7 @@ public class LeadersStats extends Fragment {
 
     }
 
-
-
-
+    //update every player in the playersLayout
     public void updatePlayers(PlayerService playerService, ArrayList<PlayerStats> playerStats, Type target){
 
         int ranks = 4;
@@ -171,7 +164,7 @@ public class LeadersStats extends Fragment {
             double finalValue = value;
 
 
-            //creates top Player
+            //creates top leader aka top player in a specific statistic e.g. top leader in PointsPerGame is Curry
             LinearLayout topFinalLayout = topPlayerLayout;
             playerService.findPlayerById2(playerStats.get(0).getPlayer_id(), new CallbackListener<Player>() {
 
@@ -185,7 +178,7 @@ public class LeadersStats extends Fragment {
                 }
             });
 
-            //creates other players
+            //creates other leaders
             LinearLayout playerFinalLayout = playerLayout;
             playerService.findPlayerById2(playerStats.get(i+1).getPlayer_id(), new CallbackListener<Player>() {
 
@@ -199,7 +192,7 @@ public class LeadersStats extends Fragment {
         }
     }
 
-    // replace "name surname" with "N. SURNAME"
+    // replace "Name Surname" with "N. SURNAME"
     public String nameFormat(String name, String surname){
         return String.valueOf(name.charAt(0))+ ". " + surname.toUpperCase();
     }
@@ -224,11 +217,10 @@ public class LeadersStats extends Fragment {
     }
 
 
-
+    //creates leaders except top leader in a statistic
     public void createPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue)
     {
        View view = linearLayout.getChildAt(num);
-       System.out.println("RANKS CHILDREN = "+ linearLayout.getChildCount());
 
        LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
            @Override
@@ -248,11 +240,11 @@ public class LeadersStats extends Fragment {
        });
     }
 
+    //creates top leader
     public void createTopPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue,
                                 int playerNumber, String position,  String url)
     {
         View view = linearLayout.getChildAt(num);
-        System.out.println("TOP PLAYER CHILDREN = "+ linearLayout.getChildCount());
 
         LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
             @Override
@@ -367,27 +359,5 @@ public class LeadersStats extends Fragment {
     }
 
     enum Type {POINTS, ASSISTS, BLOCKS, REBOUNDS, FOULS}
-
-//    public void navigate() {
-//
-//        binding.leadersContainer.findViewById(R.id.button).setOnClickListener(e -> {
-//                NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.RPG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.APG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.SPG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.BPG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.FGM3.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//    }
 
 }

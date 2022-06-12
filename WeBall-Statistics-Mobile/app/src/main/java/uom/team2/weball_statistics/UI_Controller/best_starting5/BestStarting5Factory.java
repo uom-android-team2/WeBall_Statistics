@@ -108,47 +108,55 @@ public class BestStarting5Factory {
     }
 
     public void getBestStarting5() {
-        ArrayList<Player> best5 = new ArrayList<>();
-        for (int i = 0; i < usefullData.size(); i++) {
+        if(usefullData.size()<5){
+            bestPG = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");
+            bestSG = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");
+            bestSF = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");
+            bestPF = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");
+            bestC = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");
+        }
+        else {
+            for (int i = 0; i < usefullData.size(); i++) {
 
-            if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POINT_GUARD")) {
-                int tempEffic = this.calculateEffic(usefullData.get(i));
-                if (tempEffic >= maxEfficPG) {
-                    maxEfficPG = tempEffic;
-                    bestPG = this.findPlayerById(usefullData.get(i).getPlayer_id());
-                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POINT_GUARD")) {
+                    int tempEffic = this.calculateEffic(usefullData.get(i));
+                    if (tempEffic >= maxEfficPG) {
+                        maxEfficPG = tempEffic;
+                        bestPG = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                        this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                    }
                 }
-            }
-            if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SHOOTING_GUARD")) {
-                int tempEffic = this.calculateEffic(usefullData.get(i));
-                if (tempEffic >= maxEfficSG) {
-                    maxEfficSG = tempEffic;
-                    bestSG = this.findPlayerById(usefullData.get(i).getPlayer_id());
-                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SHOOTING_GUARD")) {
+                    int tempEffic = this.calculateEffic(usefullData.get(i));
+                    if (tempEffic >= maxEfficSG) {
+                        maxEfficSG = tempEffic;
+                        bestSG = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                        this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                    }
                 }
-            }
-            if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SMALL_FORWARD")) {
-                int tempEffic = this.calculateEffic(usefullData.get(i));
-                if (tempEffic >= maxEfficSF) {
-                    maxEfficSF = tempEffic;
-                    bestSF = this.findPlayerById(usefullData.get(i).getPlayer_id());
-                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("SMALL_FORWARD")) {
+                    int tempEffic = this.calculateEffic(usefullData.get(i));
+                    if (tempEffic >= maxEfficSF) {
+                        maxEfficSF = tempEffic;
+                        bestSF = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                        this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                    }
                 }
-            }
-            if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POWER_FORWARD")) {
-                int tempEffic = this.calculateEffic(usefullData.get(i));
-                if (tempEffic >= maxEfficPF) {
-                    maxEfficPF = tempEffic;
-                    bestPF = this.findPlayerById(usefullData.get(i).getPlayer_id());
-                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("POWER_FORWARD")) {
+                    int tempEffic = this.calculateEffic(usefullData.get(i));
+                    if (tempEffic >= maxEfficPF) {
+                        maxEfficPF = tempEffic;
+                        bestPF = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                        this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                    }
                 }
-            }
-            if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("CENTER")) {
-                int tempEffic = this.calculateEffic(usefullData.get(i));
-                if (tempEffic >= maxEfficC) {
-                    maxEfficC = tempEffic;
-                    bestC = this.findPlayerById(usefullData.get(i).getPlayer_id());
-                    this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                if ((this.findPlayerById(usefullData.get(i).getPlayer_id()).getPosition()).equals("CENTER")) {
+                    int tempEffic = this.calculateEffic(usefullData.get(i));
+                    if (tempEffic >= maxEfficC) {
+                        maxEfficC = tempEffic;
+                        bestC = this.findPlayerById(usefullData.get(i).getPlayer_id());
+                        this.findPlayerById(usefullData.get(i).getPlayer_id()).setEfficiency(tempEffic);
+                    }
                 }
             }
         }

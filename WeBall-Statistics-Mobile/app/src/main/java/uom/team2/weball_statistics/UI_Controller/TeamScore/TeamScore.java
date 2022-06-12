@@ -106,12 +106,9 @@ public class TeamScore extends Fragment {
     }
 
     public void updateRows(TeamService teamService, ArrayList<TeamStats> teamStats) {
-        int n = 5;
+        int n = teamStats.size();
 
-        if (teamStats.size() < 5) {
-            n = teamStats.size();
-        }
-
+    System.out.println("teamStats:" + n);
         for (int i = 0; i < n; i++) {
             int finalI = i;
             double grades = -1;

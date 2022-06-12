@@ -36,7 +36,7 @@ public class TeamStats extends Stats {
     public void editJON(String data) {
 
 
-        System.out.println(data);
+        //System.out.println(data);
         try {
 
             JSONObject json= new JSONObject(data);

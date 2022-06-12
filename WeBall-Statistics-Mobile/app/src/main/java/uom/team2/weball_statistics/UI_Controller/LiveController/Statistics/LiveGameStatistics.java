@@ -89,17 +89,17 @@ public class LiveGameStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 //        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
-        daoLiveTeamService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
-        daoLiveTeamService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
-
-        try {
-            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
-            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        daoLiveTeamService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
+//        daoLiveTeamService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
+//
+//        try {
+//            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
+//            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
     }
 

@@ -17,26 +17,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/header_container"
+            android:id="@+id/progressbar_layout_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <include
-                android:id="@+id/header"
-                layout="@layout/match_header_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:id="@+id/progressbar_layout_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical"/>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
     </androidx.core.widget.NestedScrollView>
 
     <Button

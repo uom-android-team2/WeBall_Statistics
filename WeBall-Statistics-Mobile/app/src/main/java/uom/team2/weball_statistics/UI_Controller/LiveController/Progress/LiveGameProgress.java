@@ -81,10 +81,4 @@ public class LiveGameProgress extends Fragment {
         return binding;
     }
 
-    //param1: The match that the action will added for
-    //param2: The action for addition
-    public void addActionToFirebase(Match match, Action action) {
-        daoAction.insert(action, match);
-    }
-
 }

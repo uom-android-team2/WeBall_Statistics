@@ -45,8 +45,8 @@ public class LiveGameProgress extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         daoAction = DAOAction.getInstance();
     }
 
@@ -67,89 +67,19 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
-        Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
-        Referee refereeTest = new Referee(1, "Minas", "Theodoros");
-        Match matchTest = new Match(1, teamTest1, teamTest2, new Date(), Status.ONGOING, refereeTest);
-        liveProgressUIController.fillMatchInformation(this, matchTest);
+        binding.header.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Team teamHome = new Team("Paok");
+                Team teamAway = new Team("Aris");
+                Match match = new Match(1, teamHome, teamAway, new Date(), Status.ONGOING);
+                Action action = new MatchFlow("321", FlowType.START);
+                addActionToFirebase(match, action);
+            }
+        });
 
-        Testing();
-
-        LiveGameProgress liveGameProgressFr = this;
-
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        Testing2();
-                    }
-                },
-                10000
-        );
-
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        Testing3();
-                    }
-                },
-                13000
-        );
-    }
-
-    public void Testing() {
-        Action action11 = new MatchFlow("0.00", 0, FlowType.START);
-        Action action22 = new MatchFlow("1.00", 1, FlowType.PAUSE);
-        Action action33 = new MatchFlow("1.20", 2, FlowType.RESUME);
-        Action action44 = new MatchFlow("11", 3, FlowType.COMPLETED);
-        Team team = new Team("Paok");
-        Player player = new Player("Minas", "Charakopoulos");
-        Action action55 = new Shot("12", 4, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
-        Action action66 = new Shot("12", 5, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
-        daoAction.insert(action11, match2);
-        daoAction.insert(action22, match2);
-        daoAction.insert(action33, match2);
-        daoAction.insert(action44, match2);
-        daoAction.insert(action55, match2);
-        daoAction.insert(action66, match2);
-
-        //That i will call from onViewCreated()
-        daoAction.getRealTimeData(match2, this);
-    }
-
-    public void Testing2() {
-        Action action111 = new MatchFlow("0.00", 6, FlowType.START);
-        Action action222 = new MatchFlow("1.00", 7, FlowType.PAUSE);
-        Action action333 = new MatchFlow("1.20", 8, FlowType.RESUME);
-        Action action444 = new MatchFlow("11", 9, FlowType.COMPLETED);
-        Team team = new Team("Paok");
-        Player player = new Player("Minas", "Charakopoulos");
-        Action action555 = new Shot("12", 10, BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
-        Action action666 = new Shot("12", 11, BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
-        daoAction.insert(action111, match2);
-        daoAction.insert(action222, match2);
-        daoAction.insert(action333, match2);
-        daoAction.insert(action444, match2);
-        daoAction.insert(action555, match2);
-        daoAction.insert(action666, match2);
-
-        //That i will call from onViewCreated()
-        daoAction.getRealTimeData(match2, this);
-    }
-
-    public void Testing3() {
-        Team team = new Team("Paok");
-        Player player = new Player("Minas", "Theodoros");
-        Action action55555 = new Shot("2.33'", 12, BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null);
-        Match match2 = new Match(6, null, null, new Date(), Status.ONGOING, null);
-
-        daoAction.insert(action55555, match2);
-
-        //That i will call from onViewCreated()
-        daoAction.getRealTimeData(match2, this);
+        Match match = new Match(1, null, null, new Date(), Status.ONGOING);
+        daoAction.getRealTimeData(match, this);
     }
 
     @Override
@@ -161,4 +91,11 @@ public class LiveGameProgress extends Fragment {
     public FragmentLiveGameProgressBinding getBinding() {
         return binding;
     }
+
+    //param1: The match that the action will added for
+    //param2: The action for addition
+    public void addActionToFirebase(Match match, Action action) {
+        daoAction.insert(action, match);
+    }
+
 }

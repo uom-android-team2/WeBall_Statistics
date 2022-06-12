@@ -21,11 +21,11 @@ public class Match implements Serializable {
     private int teamLandlord_id;
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
-
     private boolean progress = false;
     private boolean completed = false;
     private ArrayList<Action> actions;
     private Referee referee;
+    private int actionsCount; //Need to keep the actions number, to give the correct id to each action of the match
 
 
     //Will added fields specified for comments and progress to appear them after the match completed
@@ -59,6 +59,13 @@ public class Match implements Serializable {
         this.status = status;
     }
 
+    public void setActionsCount(int actionsCount) {
+        this.actionsCount = actionsCount;
+    }
+
+    public int getActionsCount() {
+        return this.actionsCount;
+    }
 
     public void addAction(Action action) {
         this.actions.add(action);

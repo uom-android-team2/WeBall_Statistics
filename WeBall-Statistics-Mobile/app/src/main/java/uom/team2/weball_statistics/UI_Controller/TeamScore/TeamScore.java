@@ -10,13 +10,23 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.TeamChampioshipStatsService;
+import uom.team2.weball_statistics.Service.TeamService;
+import uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.TeamStats.TeamStatsFragment;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
+import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentTeamScoreBinding;
 
 
@@ -34,14 +44,6 @@ public class TeamScore extends Fragment {
         return fragment;
     }
 
-    public void addTeamScoreLayout(TableLayout teamsContainer, ArrayList<Team> teams){
-        int position = 0;
-        for (Team team : teams) {
-            position++;
-            View playersLayout = TeamScoreLayout.createTeamScoreLayout(this, position,team.getTeamName());
-            teamsContainer.addView(playersLayout);
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,18 +70,101 @@ public class TeamScore extends Fragment {
         });
 
         onStart();
-        addTeamScoreLayout(binding.scoreTable,teams);
+        //addTeamScoreLayout(binding.scoreTable,teams);
     }
 
+    @Override
     public void onStart() {
         super.onStart();
-        try {
-            TeamScoreHandler h = new TeamScoreHandler();
-            h.findTeams();
-            System.out.println("data:" + h.getTeams().get(0));
-            teams = h.getTeams();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        TeamService teamService = new TeamService();
+        TeamChampioshipStatsService teamChampioshipStatsService = new TeamChampioshipStatsService();
+
+        teamChampioshipStatsService.getAllTeamStatistics(new CallbackListener<ArrayList<TeamStats>>() {
+            @Override
+            public void callback(ArrayList<TeamStats> returnedObject) {
+
+                //System.out.println(returnedObject);
+
+//                ArrayList<TeamStats> bestByPoints = new ArrayList<>();
+//                ArrayList<TeamStats> bestByAssists = new ArrayList<>();
+//                ArrayList<TeamStats> bestByBlocks = new ArrayList<>();
+//                ArrayList<TeamStats> bestByRebounds = new ArrayList<>();
+//
+//                bestByPoints = sortByPoints(returnedObject);
+//                bestByAssists = sortByAssists(returnedObject);
+//                bestByBlocks = sortByBlocks(returnedObject);
+//                bestByRebounds = sortByRebounds(returnedObject);
+//
+                updateRows(teamService, returnedObject);
+//                udateRows(teamService, bestByAssists, TeamStatsFragment.Type.ASSISTS);
+//                udateRows(teamService, bestByBlocks, TeamStatsFragment.Type.BLOCKS);
+//                udateRows(teamService, bestByRebounds, TeamStatsFragment.Type.REBOUNDS);
+
+            }
+        });
+
     }
+
+    public void updateRows(TeamService teamService, ArrayList<TeamStats> teamStats) {
+        int n = 5;
+
+        if (teamStats.size() < 5) {
+            n = teamStats.size();
+        }
+
+        for (int i = 0; i < n; i++) {
+            int finalI = i;
+            double grades = -1;
+            int wins = -1;
+            int loses = -1;
+            int games = -1;
+
+            TableLayout layout = binding.teamsContainer;
+
+            grades = teamStats.get(i).getGrades();
+            wins = teamStats.get(i).getWins();
+            loses = teamStats.get(i).getLoses();
+            games = teamStats.get(i).getWins() + teamStats.get(i).getLoses();
+
+
+            //double finalValue = value;
+            TableLayout finalLayout = layout;
+            int finalGames = games;
+            int finalWins = wins;
+            int finalLoses = loses;
+            double finalGrades = grades;
+            teamService.findTeamById(teamStats.get(i).getTeamId(), new CallbackListener<Team>() {
+                @Override
+                public void callback(Team returnedObject) {
+                    try {
+                        createRow(finalLayout,
+                                returnedObject.getTeamName(), finalGames,finalWins,finalLoses,finalGrades);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+
+    }
+
+    public void createRow(TableLayout teamsContainer,String name, int games, int wins, int loses , double grades) throws InterruptedException {
+        TeamScore.this.requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                View teamScoreLayout = TeamScoreLayout.createTeamScoreLayout(TeamScore.this, name,games,wins,loses,grades);
+                teamsContainer.addView(teamScoreLayout);
+            }
+
+        });
+    }
+//    public void addTeamScoreLayout(TableLayout teamsContainer){
+//        int position = 0;
+//
+//            View playersLayout = TeamScoreLayout.createTeamScoreLayout(this, team.getTeamName());
+//            teamsContainer.addView(playersLayout);
+//
+//    }
+
 }

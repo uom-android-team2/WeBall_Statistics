@@ -69,55 +69,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bestPerPositionButton">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/greyRank"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="#"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="Team"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="GM"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="W"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="L"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:text="P"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </TableRow>
 
             <ScrollView
                 android:id="@+id/scrollView1"
@@ -131,8 +82,57 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
-                    android:stretchColumns="*">
+                    android:stretchColumns="*"
+                    android:orientation="vertical">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/greyRank"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="10dp">
 
+                        <TextView
+                            android:padding="3dip"
+                            android:text="#"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:padding="3dip"
+                            android:text="Team"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:padding="3dip"
+                            android:text="GM"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:padding="3dip"
+                            android:text="W"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:padding="3dip"
+                            android:text="L"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:padding="3dip"
+                            android:text="PTS"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </TableRow>
                 </TableLayout>
             </ScrollView>
 

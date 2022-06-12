@@ -1,21 +1,17 @@
 package uom.team2.weball_statistics.Model;
 
 
-import com.google.firebase.database.Exclude;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 
 /*
  * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris - ics20058
  */
-public class Match {
+public class Match implements Serializable {
     private int id; //unique id for every match
 
     private Team teamLandlord; //Home team
@@ -25,11 +21,12 @@ public class Match {
     private int teamLandlord_id;
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
-    private Referee referee;
     private int actionsCount; //Need to keep the actions number, to give the correct id to each action of the match
-    private ArrayList<Action> actions; //Will fill when a match is completed so we dont need to load data from firebase
-    private boolean progress;
-    private boolean completed;
+    private boolean progress = false;
+    private boolean completed = false;
+    private ArrayList<Action> actions;
+    private Referee referee;
+
     //Will added fields specified for comments and progress to appear them after the match completed
 
 
@@ -44,7 +41,7 @@ public class Match {
         actions = new ArrayList<Action>();
     }
 
-    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress,boolean completed) {
+    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress, boolean completed) {
         this.id = id;
         this.teamLandlord_id = teamLandlord_id;
         this.Teamguest_id = Teamguest_id;
@@ -61,6 +58,14 @@ public class Match {
 
     public int getActionsCount() {
         return this.actionsCount;
+    }
+
+    public Match(int id, Team teamLandlord, Team teamGuest, Date date, Status status) {
+        this.id = id;
+        this.teamLandlord = teamLandlord;
+        this.guest = teamGuest;
+        this.matchDate = date;
+        this.status = status;
     }
 
     public void addAction(Action action) {
@@ -111,8 +116,9 @@ public class Match {
         return actions;
     }
 
-    public Referee getReferee() {
-        return referee;
+
+    public void setProgress(boolean b) {
+        progress = b;
     }
 
     public boolean isProgress() {
@@ -121,5 +127,22 @@ public class Match {
 
     public boolean isCompleted() {
         return completed;
+    }
+
+    public void setCompleted(boolean b) {
+
+        completed = b;
+    }
+
+    public Referee getReferee() {
+        return referee;
+
+    }
+    public int getTeamLandlord_id() {
+        return teamLandlord_id;
+    }
+
+    public int getTeamguest_id() {
+        return Teamguest_id;
     }
 }

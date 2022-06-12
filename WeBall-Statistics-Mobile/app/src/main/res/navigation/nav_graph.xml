@@ -11,17 +11,11 @@
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home" >
         <action
-          android:id="@+id/action_home_to_tabContainer"
-            app:destination="@id/tabContainer" />
-        <action
-            android:id="@+id/action_home_to_teamScore"
-            app:destination="@id/teamScore" />
-        <action
             android:id="@+id/action_home_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_home_to_adminsView"
-            app:destination="@id/adminsView" />
+            android:id="@+id/action_home_to_matchesTabContainer"
+            app:destination="@id/matchesTabContainer" />
     </fragment>
     <fragment
         android:id="@+id/tabContainer"
@@ -30,72 +24,71 @@
         tools:layout="@layout/fragment_live_tab_container" >
         <action
             android:id="@+id/action_tabContainer_to_livePlayerStatistics"
-            app:destination="@id/livePlayerStatistics"
-            app:enterAnim="@anim/slide_in_up"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@anim/slide_out_up" />
+            app:destination="@id/livePlayerStatistics" />
     </fragment>
     <fragment
         android:id="@+id/livePlayerStatistics"
         android:name="uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LivePlayerStatistics"
-        android:label="fragment_live_player_statistics"
+        android:label="Player Stats"
         tools:layout="@layout/fragment_live_player_statistics" />
     <fragment
         android:id="@+id/teamScore"
         android:name="uom.team2.weball_statistics.UI_Controller.TeamScore.TeamScore"
-        android:label="fragment_team_score"
+        android:label="Scores"
         tools:layout="@layout/fragment_team_score" >
         <action
-            android:id="@+id/action_teamScore_to_bestStarting5"
+            android:id="@+id/action_teamScore_to_bestStarting52"
             app:destination="@id/bestStarting5" />
         <action
-            android:id="@+id/action_teamScore_to_completedMatchStats3"
-            app:destination="@id/completedMatchStats3" />
+            android:id="@+id/action_teamScore_to_sharedTabContainer"
+            app:destination="@id/sharedTabContainer" />
     </fragment>
     <fragment
         android:id="@+id/bestStarting5"
         android:name="uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5"
-        android:label="BestStarting5"
-        tools:layout="@layout/fragment_best_starting5">
-        <action
-            android:id="@+id/action_bestStarting5_to_sharedTabContainer"
-            app:destination="@id/sharedTabContainer" />
-    </fragment>
+        android:label="Top 5"
+        tools:layout="@layout/fragment_best_starting5"/>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="uom.team2.weball_statistics.LoginFragment"
 
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
-
-        android:label="LoginFragment" >
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_adminsView"
-            app:destination="@id/adminsView" />
+            android:id="@+id/action_loginFragment_to_matchesTabContainer"
+            app:destination="@id/matchesTabContainer" />
+    </fragment>
 
     <fragment
         android:id="@+id/adminsView"
         android:name="uom.team2.weball_statistics.UI_Controller.AdminsView.AdminsView"
-        android:label="fragment_admins_view"
+        android:label="Welcome Admin"
         tools:layout="@layout/fragment_admins_view" />
     <fragment
         android:id="@+id/sharedTabContainer"
         android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.SharedTabContainer"
-        android:label="SharedTabContainer"
-        tools:layout="@layout/fragment_shared_tab_container">
-        <action
-            android:id="@+id/action_sharedTabContainer_to_expandedLeadersStat"
-            app:destination="@id/expandedLeadersStat" />
-    </fragment>
-    <fragment
-        android:id="@+id/expandedLeadersStat"
-        android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.LeadersStatsController.ExpandedLeadersStat"
-        android:label="ExpandedLeadersStat"
-        tools:layout="@layout/fragment_expanded_leaders_stat" />
+        android:label="@string/statsTabContainer"
+        tools:layout="@layout/fragment_shared_tab_container"/>
     <fragment
         android:id="@+id/completedMatchStats3"
         android:name="uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats"
-        android:label="CompletedMatchStats" />
+        android:label="Match Statistics" />
+    <fragment
+        android:id="@+id/matchesTabContainer"
+        android:name="uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.MatchesTabContainer"
+        android:label="@string/matches_tab_container" >
+        <action
+            android:id="@+id/action_matchesTabContainer_to_adminsView"
+            app:destination="@id/adminsView" />
+        <action
+            android:id="@+id/action_matchesTabContainer_to_tabContainer"
+            app:destination="@id/tabContainer" />
+        <action
+            android:id="@+id/action_matchesTabContainer_to_teamScore"
+            app:destination="@id/teamScore" />
+        <action
+            android:id="@+id/action_matchesTabContainer_to_completedMatchStats3"
+            app:destination="@id/completedMatchStats3" />
+    </fragment>
 </navigation>

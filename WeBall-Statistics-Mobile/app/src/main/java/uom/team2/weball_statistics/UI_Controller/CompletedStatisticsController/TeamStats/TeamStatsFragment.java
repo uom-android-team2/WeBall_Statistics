@@ -26,6 +26,7 @@ import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentTeamStatsBinding;
+import uom.team2.weball_statistics.utils.Utils;
 
 /*
  * @author Aravella Lousta ics20032
@@ -60,6 +61,7 @@ public class TeamStatsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeTitles();
+        initializeColor();
     }
 
     @Override
@@ -71,8 +73,6 @@ public class TeamStatsFragment extends Fragment {
         teamChampioshipStatsService.getAllTeamStatistics(new CallbackListener<ArrayList<TeamStats>>() {
             @Override
             public void callback(ArrayList<TeamStats> returnedObject) {
-
-                System.out.println(returnedObject);
 
                 ArrayList<TeamStats> bestByPoints = new ArrayList<>();
                 ArrayList<TeamStats> bestByAssists = new ArrayList<>();
@@ -139,27 +139,35 @@ public class TeamStatsFragment extends Fragment {
 
     public void createRow(LinearLayout linearLayout, String url, String name, int number, String score) throws InterruptedException {
         View view = linearLayout.getChildAt(number);
+        if (TeamStatsFragment.this.getActivity() != null && TeamStatsFragment.this.isAdded()) {
+            TeamStatsFragment.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView scoreView = view.findViewById(R.id.score);
+                    scoreView.setText(score);
 
-        TeamStatsFragment.this.requireActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                TextView scoreView = view.findViewById(R.id.score);
-                scoreView.setText(score);
+                    TextView numberView = view.findViewById(R.id.number);
+                    numberView.setText(String.valueOf(number));
 
-                TextView numberView = view.findViewById(R.id.number);
-                numberView.setText(String.valueOf(number));
+                    TextView nameView = view.findViewById(R.id.teamName);
+                    nameView.setText(name);
 
-                TextView nameView = view.findViewById(R.id.teamName);
-                nameView.setText(name);
+                    ImageView imageView = view.findViewById(R.id.badge);
+                    Picasso.get()
+                            .load(url)
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(imageView);
+                }
+            });
+        }
+    }
 
-                ImageView imageView = view.findViewById(R.id.badge);
-                Picasso.get()
-                        .load(url)
-                        .resize(15, 15)
-                        .centerCrop()
-                        .into(imageView);
-            }
-        });
+    public void initializeColor() {
+        binding.reboundsPerGame.tableRowContainer.getChildAt(1).setBackgroundColor(Utils.getColor(getContext(), R.color.alt_blue));
+        binding.assistsPerGame.tableRowContainer.getChildAt(1).setBackgroundColor(Utils.getColor(getContext(), R.color.alt_blue));
+        binding.blocksPerGame.tableRowContainer.getChildAt(1).setBackgroundColor(Utils.getColor(getContext(), R.color.alt_blue));
+        binding.pointsPerGame.tableRowContainer.getChildAt(1).setBackgroundColor(Utils.getColor(getContext(), R.color.alt_blue));
     }
 
     public void initializeTitles() {

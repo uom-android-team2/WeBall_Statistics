@@ -1,11 +1,12 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Comments;
 
 import android.os.Bundle;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import uom.team2.weball_statistics.R;
@@ -18,15 +19,24 @@ public class LiveGameComments extends Fragment {
 
     private FragmentLiveGameCommentsBinding binding;
 
-    public LiveGameComments() { }
+    public LiveGameComments() {
+    }
 
-    public static LiveGameComments getInstance(){
-        return new LiveGameComments();
+    public static LiveGameComments getInstance(Bundle bundle) {
+        LiveGameComments liveGameComments = new LiveGameComments();
+        liveGameComments.setArguments(bundle);
+        return liveGameComments;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
     }
 
     @Override
@@ -40,8 +50,9 @@ public class LiveGameComments extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //Create comments for Testing
+        
         for (int i = 0; i <= 12; i++) {
-            View comment = (View)getLayoutInflater().inflate(R.layout.match_comment_layout, null);
+            View comment = getLayoutInflater().inflate(R.layout.match_comment_layout, null);
             binding.commentsLayoutContainer.addView(comment);
         }
     }

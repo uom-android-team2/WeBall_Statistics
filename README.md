@@ -1,2 +1,2 @@
 # WeBall Statistics
-# Android Development Project for Univercity of Macedonia
+# Android Development Project for University of Macedonia

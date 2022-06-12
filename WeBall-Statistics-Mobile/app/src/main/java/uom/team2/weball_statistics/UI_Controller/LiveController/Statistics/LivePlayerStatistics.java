@@ -16,34 +16,37 @@ import androidx.fragment.app.Fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
-import uom.team2.weball_statistics.Service.PlayerService;
-import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
 
 public class LivePlayerStatistics extends Fragment {
-
-    private final ArrayList<View> team1PlayerViews = new ArrayList<>();
-    private final ArrayList<View> team2PlayerViews = new ArrayList<>();
-    private final boolean teamSelected = true;
+    private final ArrayList<View> teamLandlordPlayerViews = new ArrayList<>();
+    private final ArrayList<View> teamGuestPlayerViews = new ArrayList<>();
     // you need to have a list of data that you want the spinner to display
-    List<String> spinnerArray = new ArrayList<String>();
-    ProgressDialog progress;
-    private ArrayList<Player> team2Players = new ArrayList<>();
-    private ArrayList<Player> team1Players = new ArrayList<>();
+    private final ArrayList<String> spinnerArray = new ArrayList<String>();
+    private final boolean dataRetrieved = false;
+    private final int spinnerItemSelected = 0;
+    private ArrayList<Player> teamLandlordPlayers = new ArrayList<>();
+    private ArrayList<Player> teamGuestPlayers = new ArrayList<>();
+    private Match match;
+    private Team teamLandlord;
+    private Team teamGuest;
+    private boolean teamSelected = true;
+    private ProgressDialog progress;
+    private int matchId;
+    private int teamLandlordId;
+    private int teamGuestId;
     private FragmentLivePlayerStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
-    private Team team1;
-    private Team team2;
-    private boolean dataRetrieved = false;
+    private int playerSelectedId = -1;
 
     public LivePlayerStatistics() {
         // Required empty public constructor
@@ -66,43 +69,46 @@ public class LivePlayerStatistics extends Fragment {
     }
 
     public void changeTeam(int index) {
+
         ArrayList<View> tempViews = new ArrayList<>();
         ArrayList<Player> tempPlayers = new ArrayList<>();
         Team tempTeam = null;
 
         if (index == 0) {
-            tempViews = team1PlayerViews;
-            tempPlayers = team1Players;
-            tempTeam = team1;
+            tempViews = teamLandlordPlayerViews;
+            tempPlayers = teamLandlordPlayers;
+            tempTeam = teamLandlord;
+            teamSelected = true;
         } else {
-            tempViews = team2PlayerViews;
-            tempPlayers = team2Players;
-            tempTeam = team2;
+            tempViews = teamGuestPlayerViews;
+            tempPlayers = teamGuestPlayers;
+            tempTeam = teamGuest;
+            teamSelected = false;
         }
 
-        final ArrayList<Player> finalTempPlayers = tempPlayers;
-        final ArrayList<View> finalTempViews = tempViews;
+        ArrayList<Player> finalTempPlayers = tempPlayers;
+        ArrayList<View> finalTempViews = tempViews;
 
         Team finalTempTeam = tempTeam;
-        LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (finalTempTeam == null || finalTempPlayers.size() == 0 || finalTempViews.size() == 0) {
-                    return;
+        if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
+            LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    autoSelectPlayer(finalTempPlayers.get(0));
+                    addPlayers(finalTempViews);
+                    finalTempViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
+                    changePlayer(finalTempViews);
                 }
-                try {
-                    UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                autoSelectPlayer(finalTempPlayers.get(0));
-                addPlayers(finalTempViews);
-                finalTempViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
-                changePlayer(finalTempViews);
-            }
-        });
+
+            });
+        }
     }
 
     public void addSpinnerListener() {
@@ -119,34 +125,52 @@ public class LivePlayerStatistics extends Fragment {
         });
     }
 
-    public void fillSpinner(String name) {
-        spinnerArray.add(name);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
+    public void fillSpinner(ArrayList<String> spinnerArray) {
+        if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
+            this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.header.spinner.setAdapter(adapter);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    binding.header.spinner.setAdapter(adapter);
+
+                }
+            });
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mapOfStatistics = new HashMap<>();
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarContainer);
-//        addSpinnerListener();
 
+        spinnerArray.add(teamLandlord.getTeamName());
+        spinnerArray.add(teamGuest.getTeamName());
+        fillSpinner(spinnerArray);
+
+        addSpinnerListener();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        Bundle bundle = getArguments();
+        match = (Match) bundle.getSerializable("match");
+        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+        teamGuest = (Team) bundle.getSerializable("teamGuest");
+        matchId = match.getId();
+        teamLandlordId = teamLandlord.getId();
+        teamGuestId = teamGuest.getId();
+        teamLandlordPlayers = teamLandlord.getTeamPlayers();
+        teamGuestPlayers = teamGuest.getTeamPlayers();
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -154,102 +178,87 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
 
-//        TeamService teamService = new TeamService();
-//        PlayerService playerService = new PlayerService();
-//
-//        teamService.findTeamById(3, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                team1 = returnedObject;
-//                loadInitialTeamsPlayers(playerService, returnedObject.getTeamName());
-//                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        fillSpinner(team1.getTeamName());
-//                    }
-//                });
-//                try {
-//                    UIHandler.updateTeamImage(LivePlayerStatistics.this, returnedObject, binding.header.teamImage);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        teamService.findTeamById(7, new CallbackListener<Team>() {
-//            @Override
-//            public void callback(Team returnedObject) {
-//                team2 = returnedObject;
-//                loadTeamPlayers(playerService, returnedObject.getTeamName());
-//                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        fillSpinner(team2.getTeamName());
-//                    }
-//                });
-//            }
-//        });
+        loadInitialTeamsPlayers();
+        loadTeamPlayers();
+
+        try {
+            UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void loadInitialTeamsPlayers(PlayerService playerService, String name) {
-        playerService.findAllPlayersByTeamName(name, new CallbackListener<ArrayList<Player>>() {
-            @Override
-            public void callback(ArrayList<Player> returnedObject) {
-                team1Players = returnedObject;
-                createPlayers(returnedObject, team1PlayerViews);
-                autoSelectPlayer(returnedObject.get(0));
+    public void loadInitialTeamsPlayers() {
 
-                LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        addPlayers(team1PlayerViews);
-                        changePlayer(team1PlayerViews);
-                        Utils.changeBackgroundColorInView(getContext(), team1PlayerViews.get(0), R.color.alt_blue);
-                    }
-                });
-                dataRetrieved = true;
-            }
-        });
+        for (Player player : teamLandlordPlayers) {
+            DAOLivePlayerStatistics.getInstance().initializeTable(matchId, player.getId());
+        }
+        createPlayers(teamLandlordPlayers, teamLandlordPlayerViews);
+        autoSelectPlayer(teamLandlordPlayers.get(0));
+
+        DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamLandlordId, teamLandlordPlayers.get(0).getId());
+        DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId);
+
+        if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
+            LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    addPlayers(teamLandlordPlayerViews);
+                    changePlayer(teamLandlordPlayerViews);
+                    Utils.changeBackgroundColorInView(getContext(), teamLandlordPlayerViews.get(0), R.color.alt_blue);
+                }
+            });
+        }
     }
 
-    public void loadTeamPlayers(PlayerService playerService, String name) {
-        playerService.findAllPlayersByTeamName(name, new CallbackListener<ArrayList<Player>>() {
-            @Override
-            public void callback(ArrayList<Player> returnedObject) {
-                team2Players = returnedObject;
-                createPlayers(returnedObject, team2PlayerViews);
-            }
-        });
+    public void loadTeamPlayers() {
+        for (Player player : teamGuestPlayers) {
+            DAOLivePlayerStatistics.getInstance().initializeTable(matchId, player.getId());
+        }
+        createPlayers(teamGuestPlayers, teamGuestPlayerViews);
     }
 
 
     public void addPlayers(ArrayList<View> views) {
-        LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
-        for (View v : views) {
-            v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.grayback));
-        }
-        layout.removeAllViews();
-        for (View v : views) {
-            layout.addView(v);
+        if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
+            this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LinearLayout layout = binding.horizontalPlayerContainer.cardview.findViewById(R.id.horizontal_players);
+                    layout.removeAllViews();
+                    for (View v : views) {
+                        v.setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.grayback));
+                        layout.addView(v);
+                    }
+                }
+            });
         }
     }
 
-    public void createPlayers(ArrayList<Player> returnedObject, ArrayList<View> views) {
-        for (Player player : returnedObject) {
+    public void createPlayers(ArrayList<Player> players, ArrayList<View> views) {
+        for (Player player : players) {
             try {
                 View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(), player.getImagePath());
-
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
-                        1.0f
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 );
-                playerView.setLayoutParams(param);
-                views.add(playerView);
+                if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
+                    this.requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            params.setMargins(5, 2, 5, 0);
+                            playerView.setLayoutParams(params);
+                        }
+                    });
+                    views.add(playerView);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -258,6 +267,13 @@ public class LivePlayerStatistics extends Fragment {
     }
 
     public void autoSelectPlayer(Player player) {
+        int index = 0;
+        int playerSelectedId = teamSelected ? teamLandlordPlayers.get(index).getId() : teamGuestPlayers.get(index).getId();
+        int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
+
+        DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamSelectedId, playerSelectedId);
+        DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
+
         try {
             UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
                     player.getImagePath(),
@@ -278,19 +294,30 @@ public class LivePlayerStatistics extends Fragment {
                 @Override
                 public void onClick(View view) {
 
+                    int index = views.indexOf(playerView);
+
+                    int temp = teamSelected ? teamLandlordPlayers.get(index).getId() : teamGuestPlayers.get(index).getId();
+
+                    if (temp == playerSelectedId) {
+                        return;
+                    }
+
+                    ArrayList<Player> tempPlayers = teamSelected ? teamLandlordPlayers : teamGuestPlayers;
+
+                    playerSelectedId = temp;
+
+                    int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
+
+                    DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, match.getId(), teamSelectedId, playerSelectedId);
+                    DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId);
+
                     Utils.changeBackgroundColorInView(getContext(), playerView, R.color.alt_blue);
 
-                    int index = views.indexOf(playerView);
-                    int playerSelectedId = teamSelected ? team1Players.get(index).getId() : team2Players.get(index).getId();
-                    int teamSelectedId = teamSelected ? team1.getId() : team2.getId();
-
-                    DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, 1, playerSelectedId);
-                    DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, 1, teamSelectedId);
 
                     try {
                         UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
-                                team1Players.get(index).getImagePath(),
-                                team1Players.get(index).getName(),
+                                tempPlayers.get(index).getImagePath(),
+                                tempPlayers.get(index).getName(),
                                 binding.selectedPlayerLayout.getRoot());
                     } catch (IOException e) {
                         e.printStackTrace();

@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:paddingLeft="20dp"
-                android:paddingTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="12dp"
                 android:text="Best Per Position:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -36,36 +37,31 @@
                 android:id="@+id/includePG"
                 layout="@layout/best_player_per_position_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_height="match_parent" />
 
             <include
                 android:id="@+id/includeSG"
                 layout="@layout/best_player_per_position_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_height="match_parent" />
 
             <include
                 android:id="@+id/includeSF"
                 layout="@layout/best_player_per_position_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_height="match_parent" />
 
             <include
                 android:id="@+id/includePF"
                 layout="@layout/best_player_per_position_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_height="match_parent" />
 
             <include
                 android:id="@+id/includeC"
                 layout="@layout/best_player_per_position_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>

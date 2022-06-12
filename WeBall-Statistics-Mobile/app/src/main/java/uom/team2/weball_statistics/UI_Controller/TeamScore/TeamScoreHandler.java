@@ -17,13 +17,13 @@ import uom.team2.weball_statistics.Model.Coach;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.Model.Team;
+import uom.team2.weball_statistics.configuration.Config;
 
 public class TeamScoreHandler {
 
     private ArrayList<Team> teams;
     private Team team;
-    private String myIP ="192.168.2.54";
-    private String url = "http://"+myIP+"/WeBall_Statistics-Backend/API/team.php";
+    private String url = "http://" + Config.IP + "/WeBall_Statistics-Backend/API/team.php";
 
     public TeamScoreHandler(){
         teams = new ArrayList<>();

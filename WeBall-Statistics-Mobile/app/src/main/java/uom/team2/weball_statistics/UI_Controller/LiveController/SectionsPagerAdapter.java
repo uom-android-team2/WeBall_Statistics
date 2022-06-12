@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.UI_Controller.LiveController;
 
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -23,10 +24,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.live_game_tab_text, R.string.live_comments_tab_text, R.string.live_statistics_tab_text};
     private final Context mContext;
-
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    private Bundle bundle;
+    public SectionsPagerAdapter(Context context, FragmentManager fm, Bundle bundle) {
         super(fm);
         mContext = context;
+        this.bundle = bundle;
     }
 
     @Override
@@ -36,11 +38,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         int index = position + 1;
         switch (index) {
             case 1:
-                return LiveGameProgress.getInstance();
+                return LiveGameProgress.getInstance(bundle);
             case 3:
-                return LiveGameStatistics.getInstance();
+                return LiveGameStatistics.getInstance(bundle);
             default:
-                return LiveGameComments.getInstance();
+                return LiveGameComments.getInstance(bundle);
         }
     }
 

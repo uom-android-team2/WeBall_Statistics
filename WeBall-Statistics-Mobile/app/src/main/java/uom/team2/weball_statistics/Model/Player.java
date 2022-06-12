@@ -1,9 +1,11 @@
 package uom.team2.weball_statistics.Model;
 
+import java.io.Serializable;
+
 /*
  * @author Minas - Theodoros Charakopoulos ics20072 and Lougaris Dionisis ics20058
  */
-public class Player {
+public class Player implements Serializable {
     private String teamName;
     private int id;
     private String name;
@@ -14,6 +16,7 @@ public class Player {
     private Team team; //The team onj that the player plays in
     private String teamString;
     private String imagePath;
+    private int efficiency;
     //Other fields for Statistics that made in other branch...
 
     //only for testing
@@ -50,6 +53,12 @@ public class Player {
         this.position = position;
         this.teamString = teamString;
         this.imagePath = imagePath;
+    }
+
+    public Player(int id,String name, String surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
     }
 
     public int getId() {
@@ -118,5 +127,18 @@ public class Player {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+
+    public void setEfficiency(int efficiency) {
+        this.efficiency = efficiency;
+    }
+
+    public int getEfficiency() {
+        return efficiency;
+    }
+
+    public String getTeamString() {
+        return teamString;
     }
 }

@@ -61,6 +61,35 @@ public class PlayerService {
         thread.start();
     }
 
+    public void findPlayerById2(int id, CallbackListener<Player> callbackListener) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("application/json");
+                    Request request = new Request.Builder()
+                            .url(Config.API_URL + Config.PLAYER + "?id=" + id)
+                            .method("GET", null)
+                            .addHeader("Content-Type", "application/json")
+                            .build();
+                    Response response = client.newCall(request).execute();
+
+                    String data = response.body().string();
+                    player = JSONHandler.deserializePlayer2(data);
+                    callbackListener.callback(player);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+    }
+
     public void findAllPlayers(CallbackListener<ArrayList<Player>> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -89,6 +118,8 @@ public class PlayerService {
         });
         thread.start();
     }
+
+
 
     public void findAllPlayersByTeamName(String teamName, CallbackListener<ArrayList<Player>> callbackListener) {
         Thread thread = new Thread(new Runnable() {

@@ -22,7 +22,7 @@ public class Match implements Serializable {
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
 
-    private boolean progress = false;
+    private int progress = 0;
     private boolean completed = false;
     private ArrayList<Action> actions;
     private Referee referee;
@@ -41,7 +41,7 @@ public class Match implements Serializable {
         actions = new ArrayList<Action>();
     }
 
-    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress, boolean completed) {
+    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, int progress, boolean completed) {
         this.id = id;
         this.teamLandlord_id = teamLandlord_id;
         this.Teamguest_id = Teamguest_id;
@@ -109,11 +109,11 @@ public class Match implements Serializable {
     }
 
 
-    public void setProgress(boolean b) {
-        progress = b;
+    public void setProgress(int b) {
+        this.progress = b;
     }
 
-    public boolean isProgress() {
+    public int isProgress() {
         return progress;
     }
 
@@ -137,4 +137,5 @@ public class Match implements Serializable {
     public int getTeamguest_id() {
         return Teamguest_id;
     }
+
 }

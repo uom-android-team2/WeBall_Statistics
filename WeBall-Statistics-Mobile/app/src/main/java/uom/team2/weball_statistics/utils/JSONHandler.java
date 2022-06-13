@@ -93,7 +93,7 @@ public class JSONHandler {
 
     public static Match deserializeMatch(String data) throws JSONException {
         JSONObject jsonObject = new JSONObject(data);
-        boolean progress = false;
+        int progress = 0;
         boolean completed = false;
 
         int id = jsonObject.getInt("id");
@@ -101,10 +101,10 @@ public class JSONHandler {
         int  teamguest_id = jsonObject.getInt("teamguest_id");
         int date = jsonObject.getInt("date");
         if(jsonObject.getInt("progress")==1){
-            progress = true;
+            progress = 1;
         }
         else{
-            progress = false;
+            progress = 0;
         }
         if(jsonObject.getInt("completed")==1){
             completed = true;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Match;
@@ -72,11 +72,8 @@ public class AdminsView extends Fragment  {
     private boolean teamSelected = false;
     private int playerChecked = 1;
     private Match match;
-    private Team landLord;
-    private Team guest;
     private Player playerObjChecked;
     private Team teamObj;
-    private Team teamLand;
     private Team teamGuest;
     private Team teamLandlord;
     private TextView freeThrowBtn;
@@ -88,6 +85,7 @@ public class AdminsView extends Fragment  {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
+    private ArrayList<ImageView> playersImageViewList =new ArrayList<ImageView>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -166,12 +164,9 @@ public class AdminsView extends Fragment  {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //
-        Picasso.get()
-                .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getTeamPlayers().get(0).getImagePath())
-                .resize(200, 200)
-                .centerCrop()
-                .into(binding.player1);
+
+
+
 
         // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
         ArrayList<Player> tlList=teamLandlord.getTeamPlayers();
@@ -198,8 +193,27 @@ public class AdminsView extends Fragment  {
         match.getGuest().setKeyPlayersList(keyPlayersGuest);
         match.getGuest().setSubPlayersList(subPlayersGuest);
 
+        teamLandlord.setKeyPlayersList(keyPlayersLandlord);
+        teamLandlord.setSubPlayersList(subPlayersLandlord);
+        teamGuest.setKeyPlayersList(keyPlayersGuest);
+        teamGuest.setSubPlayersList(subPlayersGuest);
 
 
+
+        //Add ImageViews for players into an ArrayList
+        playersImageViewList.add(binding.player1);
+        playersImageViewList.add(binding.player2);
+        playersImageViewList.add(binding.player3);
+        playersImageViewList.add(binding.player4);
+        playersImageViewList.add(binding.player5);
+        //Put images of the 1rst team Players
+        for(int i=0;i<playersImageViewList.size();i++){
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(playersImageViewList.get(i));
+        }
 
         //When this page opens, we want to have the landlord team already selected
         teamSelected = false;
@@ -218,11 +232,6 @@ public class AdminsView extends Fragment  {
 
         listenEvent();
 
-
-        //Load data for this team
-
-
-        //Load the data of the first team players.
 
 
         //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
@@ -253,6 +262,13 @@ public class AdminsView extends Fragment  {
                 //remove the background color from the other banner
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
+                for(int i=0;i<playersImageViewList.size();i++){
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playersImageViewList.get(i));
+                }
 
             }
         });
@@ -286,6 +302,13 @@ public class AdminsView extends Fragment  {
                 binding.team1Banner.setBackgroundColor(0x00000000);
 
                 //Load data for this team
+                for(int i=0;i<playersImageViewList.size();i++){
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamGuest.getKeyPlayers().get(i).getImagePath())
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playersImageViewList.get(i));
+                }
 
             }
         });
@@ -315,7 +338,7 @@ public class AdminsView extends Fragment  {
                     binding.startButton.setText("End");
                     binding.pauseButton.setEnabled(true);
                     match.setStatus(Status.ONGOING);
-                    match.setProgress(true);
+                    match.setProgress(1);
                     MatchService ms = new MatchService();
                     try {
                         ms.statusUpdate(match);
@@ -336,13 +359,14 @@ public class AdminsView extends Fragment  {
                     match.setStatus(Status.COMPLETED);
 
                     match.setCompleted(true);
-                    match.setProgress(false);
+                    match.setProgress(0);
                     MatchService ms = new MatchService();
                     try {
                         ms.statusUpdate(match);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
 

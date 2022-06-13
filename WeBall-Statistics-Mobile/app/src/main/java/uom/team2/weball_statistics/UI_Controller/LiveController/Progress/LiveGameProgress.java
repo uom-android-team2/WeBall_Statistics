@@ -23,6 +23,7 @@ import uom.team2.weball_statistics.Model.Referee;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Service.DAOAction;
+import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
 /*
@@ -33,6 +34,7 @@ public class LiveGameProgress extends Fragment {
     private FragmentLiveGameProgressBinding binding;
     private final LiveProgressUIController liveProgressUIController = LiveProgressUIController.getInstance();
     private DAOAction daoAction;
+    private Match match;
 
     public LiveGameProgress() {
     }
@@ -67,8 +69,10 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        //Retrieve real time data
-//        daoAction.getRealTimeData(match, LiveGameProgress.this);
+        Bundle bundle = getArguments();
+        match = (Match) bundle.getSerializable("match");
+
+        daoAction.getRealTimeData(match, LiveGameProgress.this);
     }
 
     @Override

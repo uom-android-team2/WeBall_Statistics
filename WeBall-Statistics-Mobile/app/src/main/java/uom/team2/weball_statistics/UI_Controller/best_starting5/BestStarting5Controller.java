@@ -51,13 +51,13 @@ public class BestStarting5Controller {
         textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
+        if(!"NOT FOUND".equals(player.getSurname())) {
         Picasso.get()
                 .load(Config.PLAYER_IMAGES_RESOURCES+player.getImagePath())
                 .resize(250, 400)
                 .centerCrop()
                 .into(imageViewPlayerPhoto);
         //Getting team logo if player exists
-        if(!"NOT FOUND".equals(player.getSurname())) {
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             MediaType mediaType = MediaType.parse("application/json");

@@ -29,7 +29,7 @@ public class MatchService {
         RequestBody body = RequestBody.create(gson.toJson(match), MediaType.parse("application/json"));
         Request request = new Request.Builder().url("http://" + Config.IP + "/WeBall_Statistics-Backend/API/" + api).method("PUT", body).build();
         Response response = client.newCall(request).execute();
-
+        System.out.println(response.body().string());
     }
 
 }

@@ -1,7 +1,6 @@
 package uom.team2.weball_statistics.Model.Actions;
 
 public class Action {
-    protected int id; //Action id
     protected String actionDesc;
     protected String timeHappened;
     protected BelongsTo belongsTo;
@@ -10,8 +9,7 @@ public class Action {
         //Empty constructor required
     }
 
-    public Action (String timeHappened, int id, BelongsTo belongsTo) {
-        this.id = id;
+    public Action (String timeHappened, BelongsTo belongsTo) {
         this.timeHappened = timeHappened;
         this.belongsTo = belongsTo;
     }
@@ -29,10 +27,6 @@ public class Action {
     public String getTimeHappened() {
         return this.timeHappened;
     };
-
-    public int getId() {
-        return id;
-    }
 
     public BelongsTo getBelongsTo() {
         return belongsTo;

@@ -10,8 +10,8 @@ public class Turnover extends Action {
     private Player playerObj; //The player (obj) who does the fault and the the team loses the ball
     private Team teamObj; //The team (obj) that loses the ball
 
-    public Turnover(String timeHappened, int id, BelongsTo belongsTo, Player playerObj, Team teamObj) {
-        super(timeHappened, id, belongsTo);
+    public Turnover(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj) {
+        super(timeHappened, belongsTo);
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.actionDesc = this.formatActionDesc();

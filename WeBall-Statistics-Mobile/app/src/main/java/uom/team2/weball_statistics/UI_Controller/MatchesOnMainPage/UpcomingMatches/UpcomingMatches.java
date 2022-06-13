@@ -44,9 +44,10 @@ public class UpcomingMatches extends Fragment {
     private FragmentUpcomingMatchesBinding binding;
     private boolean isAdmin = false;
 
-    public UpcomingMatches() { }
+    public UpcomingMatches() {
+    }
 
-    public static UpcomingMatches getInstance(Bundle bundle){
+    public static UpcomingMatches getInstance(Bundle bundle) {
         UpcomingMatches upcomingMatches = new UpcomingMatches();
         upcomingMatches.setArguments(bundle);
         return upcomingMatches;
@@ -94,8 +95,28 @@ public class UpcomingMatches extends Fragment {
     private void createMatchLayout(ArrayList<Match> liveMatches) {
         //Create dynamic matches and add event Listener to button of each match
 
-        TeamService teamService = new TeamService();
+        if (this.getActivity() != null && this.isAdded() && liveMatches.size() == 0) {
 
+            this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView textView = new TextView(getContext());
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText("There are no upcoming matches");
+                    textView.setTextSize(20);
+
+                    ImageView imageView = new ImageView(getContext());
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.basket));
+
+                    binding.matchesLayoutContainer.addView(imageView);
+                    binding.matchesLayoutContainer.addView(textView);
+
+                }
+            });
+
+        }
+
+        TeamService teamService = new TeamService();
 
         for (int i = 0; i < liveMatches.size(); i++) {
             if (UpcomingMatches.this.getActivity() != null) {
@@ -141,7 +162,7 @@ public class UpcomingMatches extends Fragment {
 
                 onclickView(viewMatch, liveMatches.get(i).getId());
                 hashMap.put(liveMatches.get(i).getId(), pair);
-                if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null ){
+                if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null) {
                     UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -181,7 +202,7 @@ public class UpcomingMatches extends Fragment {
                 team.setTeamPlayers(players);
                 for (int i = 0; i < players.size(); i++) {
 
-                    if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null ){
+                    if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null) {
 
                         View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
                         View container = viewMatch.findViewById(R.id.matchPlayersInfo);
@@ -232,7 +253,6 @@ public class UpcomingMatches extends Fragment {
         });
 
     }
-
 
 
 }

@@ -108,6 +108,10 @@ public class BestStarting5Factory {
     }
 
     public void getBestStarting5() {
+        System.out.println("----------------------------");
+        for(int i=0;i<usefullData.size();i++){
+            System.out.println(usefullData.get(i).getPlayer_id());
+        }
         if(usefullData.size()<5){
             bestPG = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");
             bestSG = new Player(0,"PLAYER","NOT FOUND",0,"-","-","-");

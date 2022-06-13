@@ -35,6 +35,18 @@ public class UIHandler {
         }
     }
 
+    public static void updateScore(Fragment fragment, TextView textView, int team1Score, int team2Score) {
+        if (fragment.getActivity() != null) {
+            fragment.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    textView.setText(team1Score + " - " + team2Score);
+                }
+            });
+        }
+    }
+
     public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
         updateTeamImageInMatchHeader(fragment,
                 Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),

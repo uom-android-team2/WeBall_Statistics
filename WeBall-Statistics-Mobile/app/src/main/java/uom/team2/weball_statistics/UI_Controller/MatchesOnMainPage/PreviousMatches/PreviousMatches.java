@@ -92,8 +92,29 @@ public class PreviousMatches extends Fragment {
     private void createMatchLayout(ArrayList<Match> liveMatches) {
         //Create dynamic matches and add event Listener to button of each match
 
-        TeamService teamService = new TeamService();
+        if (this.getActivity() != null && this.isAdded() && liveMatches.size() == 0) {
 
+            this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView textView = new TextView(getContext());
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText("There are no completed matches");
+                    textView.setTextSize(20);
+
+                    ImageView imageView = new ImageView(getContext());
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.basket));
+
+                    binding.matchesLayoutContainer.addView(imageView);
+                    binding.matchesLayoutContainer.addView(textView);
+
+                }
+            });
+
+        }
+
+
+        TeamService teamService = new TeamService();
 
         for (int i = 0; i < liveMatches.size(); i++) {
 

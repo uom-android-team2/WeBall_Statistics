@@ -19,18 +19,20 @@
             android:id="@+id/linearLayoutId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/bestStarting5Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:paddingLeft="20dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="12dp"
-                android:text="Best Per Position:"
+                android:text="Best per position for this week based on efficiency:"
                 android:textColor="#000000"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <include
@@ -62,6 +64,27 @@
                 layout="@layout/best_player_per_position_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/esakeLogo"
+                android:layout_width="230dp"
+                android:layout_height="match_parent"
+                android:alpha="0.9"
+                android:paddingTop="2dp"
+                app:srcCompat="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/footerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="12dp"
+                android:text="Tune in next week for next week's best players chosen by Esake"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

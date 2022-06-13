@@ -43,7 +43,7 @@ public class BestStarting5Factory {
     /* Effic – a measure of a player's efficiency, Effic = Pts + Rebs + Ast + Stl + Blk – (TO*4 + FG Misses + FT Misses)-Fouls*2 */
 
     //Instead of individual stats I can have the Player as a Parameter and get those stats from the db with his id
-    public int calculateEffic(PlayerLiveStatistics myStats){
+    public static int calculateEffic(PlayerLiveStatistics myStats){
 
         int playerEffic = (myStats.getSuccessful_twopointer()*2)+(myStats.getSuccessful_threepointer()*3)+(myStats.getSuccessful_freethrow()*1)
         +myStats.getRebound()+myStats.getAssist()+myStats.getSteal()+myStats.getBlock()-(myStats.getTurnover()*4)-(myStats.getFoul()*2)

@@ -48,7 +48,7 @@ public class BestStarting5Controller {
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | PG");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
         if(!"NOT FOUND".equals(player.getSurname())) {
@@ -86,7 +86,7 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | SG");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
         //Getting team logo if player exists
@@ -125,7 +125,7 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | SF");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
         //Getting team logo if player exists
@@ -163,7 +163,7 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | PF");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
         //Getting team logo if player exists
@@ -201,7 +201,7 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | C");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
         //Getting team logo if player exists

@@ -141,6 +141,8 @@ public class AdminsView extends Fragment  {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         freeThrowBtn = binding.freethrowButton;
         twoPointBtn = binding.twoPointerButton;
         threePointBtn = binding.threePointerButton;
@@ -159,7 +161,16 @@ public class AdminsView extends Fragment  {
         match.setTeamLandlord(teamLandlord);
         match.setGuest(teamGuest);
 
+
+        DAOLiveTeamService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
         DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+
+        for (Player player: teamLandlord.getTeamPlayers()){
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        }
+        for (Player player: teamGuest.getTeamPlayers()){
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        }
 
         try {
             UIHandler.updateTeamImage(this,teamLandlord,binding.team1Banner);

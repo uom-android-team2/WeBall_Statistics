@@ -10,8 +10,13 @@ public class Rebound extends Action {
     private Player playerObj; //The player (obj) who gets the rebound
     private Team teamObj; //The team (obj) that the player who gets the rebound belongs to
 
+<<<<<<< HEAD
     public Rebound(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, Match match) {
         super(timeHappened, belongsTo, match);
+=======
+    public Rebound(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj) {
+        super(timeHappened, belongsTo);
+>>>>>>> main
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.actionDesc = this.formatActionDesc();

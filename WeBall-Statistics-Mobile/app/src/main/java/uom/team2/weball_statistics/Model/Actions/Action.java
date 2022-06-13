@@ -3,7 +3,6 @@ package uom.team2.weball_statistics.Model.Actions;
 import uom.team2.weball_statistics.Model.Match;
 
 public class Action {
-    protected int id; //Action id
     protected String actionDesc;
     protected String timeHappened;
     protected BelongsTo belongsTo;
@@ -12,8 +11,12 @@ public class Action {
         //Empty constructor required
     }
 
+<<<<<<< HEAD
     public Action (String timeHappened, BelongsTo belongsTo, Match match) {
         this.id = match.getActionsCount();
+=======
+    public Action (String timeHappened, BelongsTo belongsTo) {
+>>>>>>> main
         this.timeHappened = timeHappened;
         this.belongsTo = belongsTo;
     }
@@ -31,10 +34,6 @@ public class Action {
     public String getTimeHappened() {
         return this.timeHappened;
     };
-
-    public int getId() {
-        return id;
-    }
 
     public BelongsTo getBelongsTo() {
         return belongsTo;

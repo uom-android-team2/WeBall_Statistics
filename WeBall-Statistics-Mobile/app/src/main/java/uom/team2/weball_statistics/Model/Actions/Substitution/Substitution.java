@@ -12,8 +12,13 @@ public class Substitution extends Action {
     private Player playerObjOut; //The player who will exit the game
     private Team teamObj; //The team object that this two players belongs to
 
+<<<<<<< HEAD
     public Substitution(String timeHappened, BelongsTo belongsTo, Player playerObjIn, Player playerObjOut, Team teamObj, Match match) {
         super(timeHappened, belongsTo, match);
+=======
+    public Substitution(String timeHappened, BelongsTo belongsTo, Player playerObjIn, Player playerObjOut, Team teamObj) {
+        super(timeHappened, belongsTo);
+>>>>>>> main
         this.playerObjIn = playerObjIn;
         this.playerObjOut = playerObjOut;
         this.teamObj = teamObj;

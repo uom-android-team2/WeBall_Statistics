@@ -45,8 +45,8 @@ public class LiveGameProgress extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         daoAction = DAOAction.getInstance();
     }
 
@@ -67,6 +67,7 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+<<<<<<< HEAD
         Team teamTest1 = new Team(1, "Paok", "Thessaloniki", "fds");
         Team teamTest2 = new Team(2, "Osfp", "Athens", "Ffd");
         Referee refereeTest = new Referee(1, "Minas", "Theodoros");
@@ -178,6 +179,10 @@ public class LiveGameProgress extends Fragment {
 
         //That i will call from onViewCreated()
         daoAction.getRealTimeData(match2, this);
+=======
+        //Retrieve real time data
+//        daoAction.getRealTimeData(match, LiveGameProgress.this);
+>>>>>>> main
     }
 
     @Override
@@ -189,4 +194,5 @@ public class LiveGameProgress extends Fragment {
     public FragmentLiveGameProgressBinding getBinding() {
         return binding;
     }
+
 }

@@ -8,8 +8,13 @@ public class MatchFlow extends Action {
 
     private FlowType flowType; //Start or pause
 
+<<<<<<< HEAD
     public MatchFlow(String timeHappened, FlowType flowType, Match match) {
         super(timeHappened, BelongsTo.GENERAL, match);
+=======
+    public MatchFlow(String timeHappened, FlowType flowType) {
+        super(timeHappened, BelongsTo.GENERAL);
+>>>>>>> main
         this.flowType = flowType;
         this.actionDesc = this.formatActionDesc();
     }

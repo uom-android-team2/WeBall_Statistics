@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Service;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,17 +42,27 @@ public class DAOAction implements DAOCRUDService <Action> {
     //Call this function when you move to action progress fragment for a specific match
     public void getRealTimeData(Match matchData, LiveGameProgress liveGameProgressFragment) {
         //Get data snapshot
+<<<<<<< HEAD
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
+=======
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId()).child("Actions");
+        ref.addValueEventListener(new ValueEventListener() {
+>>>>>>> main
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
 
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
+<<<<<<< HEAD
 
                             Action action = data.getValue(Action.class);
 
+=======
+                            Action action = data.getValue(Action.class);
+                            System.out.println(action.getActionDesc());
+>>>>>>> main
                             if (action.getBelongsTo() == BelongsTo.HOME) {
                                 liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
                             } else if (action.getBelongsTo() == BelongsTo.GUEST) {
@@ -70,7 +81,6 @@ public class DAOAction implements DAOCRUDService <Action> {
                 });
     }
 
-
     @Override
     public Task<Void> insert(Action data) {
         return null;
@@ -79,7 +89,22 @@ public class DAOAction implements DAOCRUDService <Action> {
     //Will called every time an action is added for a match (first insert and then get)
     public Task<Void> insert(Action actionData, Match matchData) {
 
+<<<<<<< HEAD
         return databaseReference.child("Actions for match with id: " + matchData.getId()).child(actionData.getId() + "").setValue(actionData);
+=======
+        FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId()).child("Actions").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                int num = Math.toIntExact(dataSnapshot.getChildrenCount()); //The existing number of actions for a match
+                matchData.setActionsCount(num);
+                System.out.println(num);
+
+                databaseReference.child("Actions for match with id: " + matchData.getId()).child("Actions").child(matchData.getActionsCount() + "").setValue(actionData);
+            }
+        });
+
+        return null;
+>>>>>>> main
     }
 
     //Method that count the existing action for a Match

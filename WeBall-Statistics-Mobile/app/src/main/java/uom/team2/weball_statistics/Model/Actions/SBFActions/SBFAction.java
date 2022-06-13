@@ -16,8 +16,13 @@ public class SBFAction extends Action {
     private Team teamObj; //The team (obj) that the player who does the action belongs to
     private SBFActionType sbfActionType; //STEAL, BLOCK OR FOUL
 
+<<<<<<< HEAD
     public SBFAction(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, SBFActionType sbfActionType, Match match) {
         super(timeHappened, belongsTo, match);
+=======
+    public SBFAction(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, SBFActionType sbfActionType) {
+        super(timeHappened, belongsTo);
+>>>>>>> main
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.sbfActionType = sbfActionType;

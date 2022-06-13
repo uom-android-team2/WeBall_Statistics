@@ -66,6 +66,8 @@
         android:id="@+id/playerImage"
         android:layout_width="54dp"
         android:layout_height="89dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.19"

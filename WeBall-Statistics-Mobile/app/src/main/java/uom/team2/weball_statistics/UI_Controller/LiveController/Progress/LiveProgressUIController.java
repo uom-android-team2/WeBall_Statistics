@@ -76,6 +76,14 @@ public class LiveProgressUIController {
         linearLayout.addView(actionAsView, 0);
     }
 
+    public void noActionsMessage(LiveGameProgress liveGameProgress) {
+        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+        View messageAsView = layoutInflater.inflate(R.layout.no_actions_message, null);
+
+        linearLayout.addView(messageAsView);
+    }
+
     public void displayQuarter(LiveGameProgress liveGameProgress, int quarter) {
         LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;

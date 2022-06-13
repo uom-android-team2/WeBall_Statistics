@@ -123,4 +123,5 @@
     <string name="textviewPlayer_text">PlayerName</string>
     <string name="substitutionsTittle_text">Substitutions</string>
     <string name="playersTittle_text">Players</string>
+    <string name="message_no_actions_text">Match will start soon!</string>
 </resources>

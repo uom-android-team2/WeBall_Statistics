@@ -48,15 +48,18 @@ public class DAOAction implements DAOCRUDService <Action> {
 
                             liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
 
-                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                Action action = data.getValue(Action.class);
-                                System.out.println(action.getActionDesc());
-                                if (action.getBelongsTo() == BelongsTo.HOME) {
-                                    liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
-                                } else if (action.getBelongsTo() == BelongsTo.GUEST) {
-                                    liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
-                                } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
-                                    liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                            if (dataSnapshot.getChildrenCount() <= 0 ) {
+                                liveProgressUIController.noActionsMessage(liveGameProgressFragment);
+                            } else {
+                                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                    Action action = data.getValue(Action.class);
+                                    if (action.getBelongsTo() == BelongsTo.HOME) {
+                                        liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
+                                    } else if (action.getBelongsTo() == BelongsTo.GUEST) {
+                                        liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
+                                    } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
+                                        liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                                    }
                                 }
                             }
                         }

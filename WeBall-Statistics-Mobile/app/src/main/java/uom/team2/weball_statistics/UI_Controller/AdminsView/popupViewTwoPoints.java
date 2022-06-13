@@ -39,11 +39,11 @@ public class popupViewTwoPoints extends Dialog implements
     private Match match;
     private Team team;
     private Player player;
-    private long time; //For the action when happened;
+    private String time; //For the action when happened;
     private final int points;
 
 
-    public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match match, Team team, Player player, long time) {
+    public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match match, Team team, Player player, String time) {
         super(a);
         points = p;
         dbdatarecovery = dbd;

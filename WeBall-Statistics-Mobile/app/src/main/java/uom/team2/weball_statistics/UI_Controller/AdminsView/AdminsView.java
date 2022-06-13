@@ -345,8 +345,7 @@ public class AdminsView extends Fragment  {
                     match.setStatus(Status.COMPLETED);
 
                     //Add completed action description to firebase
-                    long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
-                    Action startMatchAction = new MatchFlow(String.valueOf(elapsedMillis), FlowType.COMPLETED);
+                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.COMPLETED);
                     DAOAction.getInstance().insert(startMatchAction, match);
 
                     match.setCompleted(true);
@@ -373,8 +372,7 @@ public class AdminsView extends Fragment  {
                     running = true;
 
                     //Add resume's action description to firebase
-                    long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
-                    Action startMatchAction = new MatchFlow(String.valueOf(elapsedMillis), FlowType.RESUME);
+                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.RESUME);
                     DAOAction.getInstance().insert(startMatchAction, match);
                 } else {
                     binding.pauseButton.setText("Continue");
@@ -383,8 +381,7 @@ public class AdminsView extends Fragment  {
                     running = false;
 
                     //Add pause's action description to firebase
-                    long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
-                    Action startMatchAction = new MatchFlow(String.valueOf(elapsedMillis), FlowType.PAUSE);
+                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
                     DAOAction.getInstance().insert(startMatchAction, match);
                 }
             }
@@ -558,26 +555,25 @@ public class AdminsView extends Fragment  {
             Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
             Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObj.getId()));
             threePointBtn.setOnClickListener(e -> {
-                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, SystemClock.elapsedRealtime() - binding.clock.getBase());
+                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             freeThrowBtn.setOnClickListener(e -> {
-                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, SystemClock.elapsedRealtime() - binding.clock.getBase());
+                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             twoPointBtn.setOnClickListener(e -> {
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, SystemClock.elapsedRealtime() - binding.clock.getBase());
+                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             reboundBtn.setOnClickListener(e ->  {
                 updateRebound(playerStats, teamStats, dataRecovery);
                 //Insert rebound's action to firebase
-                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
                 Action reboundAction = null;
-                if (binding.team1Banner.isSelected()) {
-                    reboundAction = new Rebound(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj);
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    reboundAction = new Rebound(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
                 } else {
-                    reboundAction = new Rebound(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj);
+                    reboundAction = new Rebound(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
                 }
 
                 if (reboundAction != null) {
@@ -590,12 +586,11 @@ public class AdminsView extends Fragment  {
             stealBtn.setOnClickListener(e -> {
                 updateSteal(playerStats, teamStats, dataRecovery);
                 //Insert steal's action to firebase
-                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
                 Action stealAction = null;
-                if (binding.team1Banner.isSelected()) {
-                    stealAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.STEAL);
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    stealAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.STEAL);
                 } else {
-                    stealAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.STEAL);
+                    stealAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.STEAL);
                 }
 
                 if (stealAction != null) {
@@ -605,12 +600,11 @@ public class AdminsView extends Fragment  {
             blockBtn.setOnClickListener(e -> {
                 updateBlock(playerStats, teamStats, dataRecovery);
                 //Insert block's action to firebase
-                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
                 Action blockAction = null;
-                if (binding.team1Banner.isSelected()) {
-                    blockAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    blockAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.BLOCK);
                 } else {
-                    blockAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                    blockAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.BLOCK);
                 }
 
                 if (blockAction != null) {
@@ -620,12 +614,11 @@ public class AdminsView extends Fragment  {
             foulBtn.setOnClickListener(e -> {
                 updateFoul(playerStats, teamStats, dataRecovery);
                 //Insert block's action to firebase
-                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
                 Action foulAction = null;
-                if (binding.team1Banner.isSelected()) {
-                    foulAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.FOUL);
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    foulAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.FOUL);
                 } else {
-                    foulAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.FOUL);
+                    foulAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.FOUL);
                 }
 
                 if (foulAction != null) {
@@ -635,12 +628,11 @@ public class AdminsView extends Fragment  {
             turnoverBtn.setOnClickListener(e -> {
                 updateTurnover(playerStats, teamStats, dataRecovery);
                 //Insert block's action to firebase
-                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
                 Action turnOverAction = null;
-                if (binding.team1Banner.isSelected()) {
-                    turnOverAction = new Turnover(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj);
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    turnOverAction = new Turnover(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
                 } else {
-                    turnOverAction = new Turnover(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj);
+                    turnOverAction = new Turnover(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
                 }
 
                 if (turnOverAction != null) {

@@ -44,17 +44,20 @@ public class DAOAction implements DAOCRUDService <Action> {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+                        if (liveGameProgressFragment.isAdded() && liveGameProgressFragment.getActivity() != null) {
 
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Action action = data.getValue(Action.class);
-                            System.out.println(action.getActionDesc());
-                            if (action.getBelongsTo() == BelongsTo.HOME) {
-                                liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
-                            } else if (action.getBelongsTo() == BelongsTo.GUEST) {
-                                liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
-                            } else if (action.getBelongsTo() == BelongsTo.GENERAL){
-                                liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                            liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                Action action = data.getValue(Action.class);
+                                System.out.println(action.getActionDesc());
+                                if (action.getBelongsTo() == BelongsTo.HOME) {
+                                    liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
+                                } else if (action.getBelongsTo() == BelongsTo.GUEST) {
+                                    liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
+                                } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
+                                    liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                                }
                             }
                         }
                     }

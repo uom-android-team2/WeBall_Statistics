@@ -39,11 +39,11 @@ public class popupViewThreePoints extends Dialog implements
     private Match match;
     private Team team;
     private Player player;
-    private long time; //For the actions when happened
+    private String time; //For the actions when happened
     private final int points;
 
 
-    public popupViewThreePoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team team, Player player, long time) {
+    public popupViewThreePoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team team, Player player, String time) {
         super(a);
 
         dbdatarecovery = dbd;

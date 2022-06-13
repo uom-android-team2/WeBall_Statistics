@@ -40,11 +40,11 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
     private Match match;
     private Team team;
     private Player player;
-    private long time; //For action when happened
+    private String time; //For action when happened
     private final int points;
 
 
-    public popupViewOnePoint(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team team, Player player, long time) {
+    public popupViewOnePoint(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team team, Player player, String time) {
         super(a);
         playerStats = ps;
         teamStats = ts;

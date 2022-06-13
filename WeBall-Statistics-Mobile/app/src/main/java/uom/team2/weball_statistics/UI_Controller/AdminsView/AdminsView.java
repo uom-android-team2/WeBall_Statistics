@@ -311,7 +311,7 @@ public class AdminsView extends Fragment  {
                         @Override
                         public void onChronometerTick(Chronometer chronometer) {
                             // to match id tha allazei analoga to match
-                            DAOLiveTeamService.getInstance().updateClock(1, chronometer.getText().toString());
+                            DAOLiveTeamService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
                         }
                     });
                     running = true;

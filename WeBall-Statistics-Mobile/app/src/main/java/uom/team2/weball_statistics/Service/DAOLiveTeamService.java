@@ -68,7 +68,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             String clock = (String) dataSnapshot.getValue();
-                            if (fragment.getActivity() != null) {
+                            if (fragment.getActivity() != null && fragment.isAdded()) {
                                 fragment.requireActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -77,7 +77,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                                 });
                             }
                         } else {
-                            if (fragment.getActivity() != null) {
+                            if (fragment.getActivity() != null && fragment.isAdded()) {
                                 String clock = "00:00";
                                 databaseReference.child("match_id: " + matchId).child("clock").setValue(clock);
                                 fragment.requireActivity().runOnUiThread(new Runnable() {
@@ -115,7 +115,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                    if (fragment.getActivity() != null) {
+                    if (fragment.getActivity() != null && fragment.isAdded()) {
                         UIHandler.updateProgressBarLayoutTeam2(fragment,
                                 fragment.getMapOfStatistics(),
                                 statistic,
@@ -224,7 +224,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
 
-                    if (fragment.getActivity() != null && fragment.getMapOfStatistics().get(statistic.name()) != null) {
+                    if (fragment.getActivity() != null && fragment.isAdded() && fragment.getMapOfStatistics().get(statistic.name()) != null) {
                         UIHandler.updateProgressBarLayoutTeam1(fragment,
                                 fragment.getMapOfStatistics(),
                                 statistic,
@@ -287,9 +287,9 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
     @Override
     public void update(TeamLiveStatistics data) {
-        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_TEAM_STATS_LIVE);
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).updateChildren(h);
+        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_TEAM_STATS_LIVE);
     }
 
     public void updateByMatchAndTeamId(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {

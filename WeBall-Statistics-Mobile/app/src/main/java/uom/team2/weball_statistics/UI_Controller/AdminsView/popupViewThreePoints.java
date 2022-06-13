@@ -81,11 +81,8 @@ public class popupViewThreePoints extends Dialog implements
                 playerStats.setSuccessfulEffort();
                 teamStats.setSuccessfulThreePointer();
                 teamStats.setSuccessfulEffort();
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.successful_effort);
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.succesful_threepointer);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.successful_effort);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.succesful_threepointer);
-
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_threepointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_threepointer);
                 //Insert 3point's action to firebase
                 Action treePointThrowAction = null;
 
@@ -102,7 +99,8 @@ public class popupViewThreePoints extends Dialog implements
                 dismiss();
                 break;
             case R.id.dialog_No:
-
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_threepointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_threepointer);
                 dismiss();
                 break;
             default:
@@ -115,10 +113,6 @@ public class popupViewThreePoints extends Dialog implements
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_effort);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_threepointer);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_effort);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_threepointer);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

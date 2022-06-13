@@ -3,7 +3,6 @@ package uom.team2.weball_statistics.UI_Controller.AdminsView;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
-import uom.team2.weball_statistics.Model.Actions.Turnover.Turnover;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
@@ -85,8 +83,8 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
             case R.id.dialog_Yes:
                 playerStats.setSuccessfulFreeThrow();
                 teamStats.setSuccessfulFreeThrow();
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.succesful_threepointer);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.succesful_threepointer);
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.successful_freethrow);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.successful_freethrow);
 
                 //Insert freethrow's action to firebase
                 Action freeThrowAction = null;
@@ -104,6 +102,8 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
                 //dismiss();
                 break;
             case R.id.dialog_No:
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_freethrow);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_freethrow);
                 dismiss();
                 break;
             default:
@@ -114,8 +114,6 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
         try {
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_freethrow);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_freethrow);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

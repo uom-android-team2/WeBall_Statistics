@@ -558,15 +558,15 @@ public class AdminsView extends Fragment  {
             Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
             Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObj.getId()));
             threePointBtn.setOnClickListener(e -> {
-                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked);
+                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, SystemClock.elapsedRealtime() - binding.clock.getBase());
                 ppv.show();
             });
             freeThrowBtn.setOnClickListener(e -> {
-                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
+                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, SystemClock.elapsedRealtime() - binding.clock.getBase());
                 ppv.show();
             });
             twoPointBtn.setOnClickListener(e -> {
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
+                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, SystemClock.elapsedRealtime() - binding.clock.getBase());
                 ppv.show();
             });
             reboundBtn.setOnClickListener(e ->  {

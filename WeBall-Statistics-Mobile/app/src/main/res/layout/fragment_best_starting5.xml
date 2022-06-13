@@ -71,7 +71,7 @@
                 android:layout_height="match_parent"
                 android:alpha="0.9"
                 android:paddingTop="2dp"
-                app:srcCompat="@drawable/esake" />
+                app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:id="@+id/footerText"

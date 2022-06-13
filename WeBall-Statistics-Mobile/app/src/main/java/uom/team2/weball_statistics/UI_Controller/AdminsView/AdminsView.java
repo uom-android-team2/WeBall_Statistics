@@ -21,6 +21,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Stack;
 
+import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
+import uom.team2.weball_statistics.Model.Actions.ReboundAction.Rebound;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
+import uom.team2.weball_statistics.Model.Actions.Turnover.Turnover;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
@@ -30,6 +38,7 @@ import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.MatchService;
@@ -88,7 +97,6 @@ public class AdminsView extends Fragment  {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -121,7 +129,6 @@ public class AdminsView extends Fragment  {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -129,7 +136,6 @@ public class AdminsView extends Fragment  {
 
         binding = FragmentAdminsViewBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
 
@@ -154,10 +160,8 @@ public class AdminsView extends Fragment  {
         match.setTeamLandlord(teamLandlord);
         match.setGuest(teamGuest);
 
-
-        //
         DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
-        //
+
         try {
             UIHandler.updateTeamImage(this,teamLandlord,binding.team1Banner);
             UIHandler.updateTeamImage(this,teamGuest,binding.team2Banner);
@@ -316,6 +320,11 @@ public class AdminsView extends Fragment  {
                     binding.pauseButton.setEnabled(true);
                     match.setStatus(Status.ONGOING);
                     match.setProgress(true);
+
+                    //Add start's action description to firebase
+                    Action startMatchAction = new MatchFlow("00.00", FlowType.START);
+                    DAOAction.getInstance().insert(startMatchAction, match);
+
                     MatchService ms = new MatchService();
                     try {
                         ms.statusUpdate(match);
@@ -334,6 +343,11 @@ public class AdminsView extends Fragment  {
                     binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                     binding.pauseButton.setText("Pause/Continue");
                     match.setStatus(Status.COMPLETED);
+
+                    //Add completed action description to firebase
+                    long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                    Action startMatchAction = new MatchFlow(String.valueOf(elapsedMillis), FlowType.COMPLETED);
+                    DAOAction.getInstance().insert(startMatchAction, match);
 
                     match.setCompleted(true);
                     match.setProgress(false);
@@ -358,11 +372,20 @@ public class AdminsView extends Fragment  {
                     binding.pauseButton.setText("Pause");
                     running = true;
 
+                    //Add resume's action description to firebase
+                    long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                    Action startMatchAction = new MatchFlow(String.valueOf(elapsedMillis), FlowType.RESUME);
+                    DAOAction.getInstance().insert(startMatchAction, match);
                 } else {
                     binding.pauseButton.setText("Continue");
                     binding.clock.stop();
                     pauseOffset = SystemClock.elapsedRealtime() - binding.clock.getBase();
                     running = false;
+
+                    //Add pause's action description to firebase
+                    long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                    Action startMatchAction = new MatchFlow(String.valueOf(elapsedMillis), FlowType.PAUSE);
+                    DAOAction.getInstance().insert(startMatchAction, match);
                 }
             }
         });
@@ -546,12 +569,84 @@ public class AdminsView extends Fragment  {
                 popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
                 ppv.show();
             });
-            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
-            assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
-            stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
-            blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
-            foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
-            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
+            reboundBtn.setOnClickListener(e ->  {
+                updateRebound(playerStats, teamStats, dataRecovery);
+                //Insert rebound's action to firebase
+                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                Action reboundAction = null;
+                if (binding.team1Banner.isSelected()) {
+                    reboundAction = new Rebound(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj);
+                } else {
+                    reboundAction = new Rebound(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj);
+                }
+
+                if (reboundAction != null) {
+                    DAOAction.getInstance().insert(reboundAction, match);
+                }
+            });
+            assistBtn.setOnClickListener(e -> {
+                updateAssist(playerStats, teamStats, dataRecovery);
+            });
+            stealBtn.setOnClickListener(e -> {
+                updateSteal(playerStats, teamStats, dataRecovery);
+                //Insert steal's action to firebase
+                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                Action stealAction = null;
+                if (binding.team1Banner.isSelected()) {
+                    stealAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.STEAL);
+                } else {
+                    stealAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.STEAL);
+                }
+
+                if (stealAction != null) {
+                    DAOAction.getInstance().insert(stealAction, match);
+                }
+            });
+            blockBtn.setOnClickListener(e -> {
+                updateBlock(playerStats, teamStats, dataRecovery);
+                //Insert block's action to firebase
+                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                Action blockAction = null;
+                if (binding.team1Banner.isSelected()) {
+                    blockAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                } else {
+                    blockAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                }
+
+                if (blockAction != null) {
+                    DAOAction.getInstance().insert(blockAction, match);
+                }
+            });
+            foulBtn.setOnClickListener(e -> {
+                updateFoul(playerStats, teamStats, dataRecovery);
+                //Insert block's action to firebase
+                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                Action foulAction = null;
+                if (binding.team1Banner.isSelected()) {
+                    foulAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.FOUL);
+                } else {
+                    foulAction = new SBFAction(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.FOUL);
+                }
+
+                if (foulAction != null) {
+                    DAOAction.getInstance().insert(foulAction, match);
+                }
+            });
+            turnoverBtn.setOnClickListener(e -> {
+                updateTurnover(playerStats, teamStats, dataRecovery);
+                //Insert block's action to firebase
+                long elapsedMillis = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                Action turnOverAction = null;
+                if (binding.team1Banner.isSelected()) {
+                    turnOverAction = new Turnover(String.valueOf(elapsedMillis), BelongsTo.HOME, playerObjChecked, teamObj);
+                } else {
+                    turnOverAction = new Turnover(String.valueOf(elapsedMillis), BelongsTo.GUEST, playerObjChecked, teamObj);
+                }
+
+                if (turnOverAction != null) {
+                    DAOAction.getInstance().insert(turnOverAction, match);
+                }
+            });
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -395,6 +395,8 @@ public class AdminsView extends Fragment  {
         binding.undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Player plObjForUndo=undoPlayerStack.lastElement();
+                Team teamObjForUndo=undoTeamStack.lastElement();
 
             }
         });

@@ -67,7 +67,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            String clock = (String) dataSnapshot.getValue();
+                            String clock = ((HashMap<String, String>) dataSnapshot.getValue()).get("clock");
                             if (fragment.getActivity() != null && fragment.isAdded()) {
                                 fragment.requireActivity().runOnUiThread(new Runnable() {
                                     @Override

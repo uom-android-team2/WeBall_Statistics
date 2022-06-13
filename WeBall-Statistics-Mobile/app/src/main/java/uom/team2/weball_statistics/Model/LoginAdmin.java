@@ -21,9 +21,7 @@ public class LoginAdmin {
         StrictMode.setThreadPolicy(policy);
     }
 
-
     public boolean isAdminInDB() throws IOException {
-
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -36,12 +34,7 @@ public class LoginAdmin {
                 .build();
         Response response = client.newCall(request).execute();
 
-       System.out.println();
-
-
-            return Boolean.parseBoolean(response.body().string());
-
-
+       return Boolean.parseBoolean(response.body().string());
     }
 
 }

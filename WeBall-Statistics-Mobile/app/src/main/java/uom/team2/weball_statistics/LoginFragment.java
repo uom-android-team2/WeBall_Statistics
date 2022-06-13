@@ -30,7 +30,6 @@ public class LoginFragment extends Fragment {
 
     public LoginFragment() {
 
-
     }
 
 
@@ -51,11 +50,8 @@ public class LoginFragment extends Fragment {
         username = binding.textUsername;
         password = binding.textPassword;
         loginButton = binding.btnLogin;
-        ImageView imageView = binding.badge;
 
         loginButton.setOnClickListener(e -> checkLogin());
-
-
     }
 
     private void checkLogin() {
@@ -78,6 +74,10 @@ public class LoginFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            username.setText("");
+            password.setText("");
+            Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password format.Please try again", Toast.LENGTH_LONG).show();
         }
     }
 

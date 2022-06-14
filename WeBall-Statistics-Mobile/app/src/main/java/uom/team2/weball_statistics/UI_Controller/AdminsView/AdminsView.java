@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -59,7 +61,7 @@ public class AdminsView extends Fragment  {
     private static final String ARG_PARAM2 = "param2";
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();
-    private final Stack<Integer> undoButtonStack = new Stack<Integer>();
+    private final Stack<TextView> undoButtonStack = new Stack<TextView>();
     private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
@@ -77,6 +79,7 @@ public class AdminsView extends Fragment  {
     private boolean running = false;
     private Button start_end_button;
     private long pauseOffset;
+    private long keepClock;
     private boolean started = false;
     private boolean teamSelected = false;
     private int playerChecked = 1;
@@ -235,7 +238,43 @@ public class AdminsView extends Fragment  {
         binding.player1.setBackground(shape2);
         playerChecked = 1;
 
+        //an to paixnidi exei idi ksekinisei alla o admin exei vgei apo
+        //tin othoni toy match, tote prepei to chronometer na sunexisei apo
+        //tin live ora.
+        if (match.isProgress()==1){
+
+            //vale to xronometro apo ekei pou stamatise
+            running = true;
+            started = true;
+            binding.startButton.setText("End");
+            binding.pauseButton.setEnabled(true);
+
+            binding.clock.start();
+            binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    // to match id tha allazei analoga to match
+                    DAOLiveTeamService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
+                }
+            });
+
+        }
+
         listenEvent();
+
+
+        //Done button
+        binding.doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.clock.stop();
+                keepClock = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                running = false;
+                match.setKeepClock(keepClock)  ;
+                System.out.println(match.getKeepClock());
+
+            }
+        });
 
 
 
@@ -357,6 +396,8 @@ public class AdminsView extends Fragment  {
                         e.printStackTrace();
                     }
 
+
+
                 }
                 //end button
                 else {
@@ -419,6 +460,24 @@ public class AdminsView extends Fragment  {
             public void onClick(View view) {
                 Player plObjForUndo=undoPlayerStack.lastElement();
                 Team teamObjForUndo=undoTeamStack.lastElement();
+                TextView lastAction=undoButtonStack.lastElement();
+
+                if (binding.freethrowButton.equals(lastAction)) {
+                } else if (binding.twoPointerButton.equals(lastAction)) {// code block
+                } else if (binding.threePointerButton.equals(lastAction)) {// code block
+                } else if (binding.reboundButton.equals(lastAction)) {// code block
+                } else if (binding.assistButton.equals(lastAction)) {// code block
+                } else if (binding.stealButton.equals(lastAction)) {// code block
+                } else if (binding.blockButton.equals(lastAction)) {// code block
+                } else if (binding.foulButton.equals(lastAction)) {// code block
+                } else if (binding.turnoverButton.equals(lastAction)) {// code block
+                }else{
+                    //do nothing
+                }
+
+                undoPlayerStack.pop();
+                undoTeamStack.pop();
+                undoButtonStack.pop();
 
             }
         });
@@ -443,9 +502,6 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-
                     listenEvent();
                 }
 
@@ -466,8 +522,6 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
                     listenEvent();
 
                 }
@@ -489,8 +543,6 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
                     listenEvent();
                 }
 
@@ -511,9 +563,6 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-
                     listenEvent();
 
                 }
@@ -531,15 +580,9 @@ public class AdminsView extends Fragment  {
                     shape.setColor(getResources().getColor(R.color.alt_grey));
                     view.setBackground(shape);
 
-
-
                     playerChecked = 5;
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
-
-                    //
-                    binding.freethrowButton.setText(playerObjChecked.getName());
-
 
                     listenEvent();
 
@@ -688,6 +731,7 @@ public class AdminsView extends Fragment  {
     private void updateRebound(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
         playerStats.setTotalRebounds();
         teamStats.setTotalRebounds();
+
         try {
             DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.rebound);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.rebound);
@@ -696,6 +740,8 @@ public class AdminsView extends Fragment  {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+
     }
 
     private void updateSteal(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {

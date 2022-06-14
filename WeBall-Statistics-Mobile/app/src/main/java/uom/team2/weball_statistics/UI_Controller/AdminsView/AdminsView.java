@@ -504,43 +504,42 @@ public class AdminsView extends Fragment  {
         binding.undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Player plObjForUndo=undoPlayerStack.lastElement();
-                Team teamObjForUndo=undoTeamStack.lastElement();
-                TextView lastAction=undoButtonStack.lastElement();
+                if (!undoButtonStack.isEmpty()) {
+                    Player plObjForUndo = undoPlayerStack.pop();
+                    Team teamObjForUndo = undoTeamStack.pop();
+                    TextView lastAction = undoButtonStack.pop();
 
-                DBDataRecovery dataRecovery = new DBDataRecovery();
-                try {
-                    Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(plObjForUndo.getId()));
-                    Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObjForUndo.getId()));
+                    DBDataRecovery dataRecovery = new DBDataRecovery();
+                    try {
+                        Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(plObjForUndo.getId()));
+                        Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObjForUndo.getId()));
 
-                    if (binding.freethrowButton.equals(lastAction)) {
+                        if (binding.freethrowButton.equals(lastAction)) {
 
-                    } else if (binding.twoPointerButton.equals(lastAction)) {
-                    } else if (binding.threePointerButton.equals(lastAction)) {// code block
-                    } else if (binding.reboundButton.equals(lastAction)) {
-                        updateRebound(playerStats, teamStats, dataRecovery,true);
-                    } else if (binding.assistButton.equals(lastAction)) {
-                        updateAssist(playerStats, teamStats, dataRecovery,true);
-                    } else if (binding.stealButton.equals(lastAction)) {
-                        updateSteal(playerStats, teamStats, dataRecovery,true);
-                    } else if (binding.blockButton.equals(lastAction)) {
-                        updateBlock(playerStats, teamStats, dataRecovery,true);
-                    } else if (binding.foulButton.equals(lastAction)) {
-                        updateFoul(playerStats, teamStats, dataRecovery,true);
-                    } else if (binding.turnoverButton.equals(lastAction)) {
-                        updateTurnover(playerStats, teamStats, dataRecovery,true);
-                    }else{
-                        //do nothing
+                        } else if (binding.twoPointerButton.equals(lastAction)) {
+                        } else if (binding.threePointerButton.equals(lastAction)) {// code block
+                        } else if (binding.reboundButton.equals(lastAction)) {
+                            updateRebound(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.assistButton.equals(lastAction)) {
+                            updateAssist(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.stealButton.equals(lastAction)) {
+                            updateSteal(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.blockButton.equals(lastAction)) {
+                            updateBlock(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.foulButton.equals(lastAction)) {
+                            updateFoul(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.turnoverButton.equals(lastAction)) {
+                            updateTurnover(playerStats, teamStats, dataRecovery, true);
+                        } else {
+                            //do nothing
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-
-
-                undoPlayerStack.pop();
-                undoTeamStack.pop();
-                undoButtonStack.pop();
-
+                else{
+                    System.out.println("No more actions for undo");
+                }
             }
         });
 

@@ -121,7 +121,9 @@ public class LiveProgressUIController {
 //        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
 //        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
 
-        TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
-        stadiumNameTextView.setText(teamHome.getTeamCity());
+        if (teamHome != null) {
+            TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
+            stadiumNameTextView.setText(teamHome.getTeamCity());
+        }
     }
 }

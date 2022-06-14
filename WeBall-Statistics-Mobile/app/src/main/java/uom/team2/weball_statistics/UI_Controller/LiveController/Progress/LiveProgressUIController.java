@@ -1,6 +1,8 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Progress;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Match;
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.databinding.MatchInformationLayoutBinding;
 
 public class LiveProgressUIController {
@@ -37,6 +43,10 @@ public class LiveProgressUIController {
         time.setText(action.getTimeHappened());
 
         ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+        picture.setImageDrawable(res);
 
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());
@@ -54,6 +64,10 @@ public class LiveProgressUIController {
         time.setText(action.getTimeHappened());
 
         ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+        picture.setImageDrawable(res);
 
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());
@@ -69,6 +83,12 @@ public class LiveProgressUIController {
 
         TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
         time.setText(action.getTimeHappened());
+
+        ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+        picture.setImageDrawable(res);
 
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());
@@ -95,13 +115,15 @@ public class LiveProgressUIController {
         linearLayout.addView(quarterView, 0);
     }
 
-    public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match) {
+    public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match, Team teamHome) {
         MatchInformationLayoutBinding matchInformationLayoutBinding = liveGameProgress.getBinding().matchInfoInclude;
 
-        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
-        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
+//        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
+//        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
 
-        TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
-        stadiumNameTextView.setText(match.getTeamLandlord().getTeamCity());;
+        if (teamHome != null) {
+            TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
+            stadiumNameTextView.setText(teamHome.getTeamCity());
+        }
     }
 }

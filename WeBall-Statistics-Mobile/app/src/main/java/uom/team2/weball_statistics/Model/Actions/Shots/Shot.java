@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Model.Actions.Shots;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 
@@ -12,8 +13,21 @@ public class Shot extends Action {
     private boolean scored; //true if the shots was successful and false if wasn't
     private Assist assist;
 
+    private static String getMyImage(ShotType shotType) {
+        switch (shotType) {
+            case FREETHROW:
+                return "shot_1_30px";
+            case TWO_POINTER:
+                return "shot_2_30px";
+            case THREE_POINTER:
+                return "shot_3_30px";
+            default:
+                return "whistle_30px";
+        }
+    }
+
     public Shot(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored) {
-        super(timeHappened, belongsTo);
+        super(timeHappened, belongsTo, getMyImage(shotType));
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.shotType = shotType;
@@ -23,7 +37,7 @@ public class Shot extends Action {
 
     //For Assist
     public Shot(String timeHappened, BelongsTo belongsTo, Player playerObj, Team teamObj, ShotType shotType, boolean scored, Assist assist) {
-        super(timeHappened, belongsTo);
+        super(timeHappened, belongsTo, getMyImage(shotType));
         this.playerObj = playerObj;
         this.teamObj = teamObj;
         this.shotType = shotType;

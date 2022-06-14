@@ -4,14 +4,16 @@ public class Action {
     protected String actionDesc;
     protected String timeHappened;
     protected BelongsTo belongsTo;
+    protected String imageAction;
 
     public Action(){
         //Empty constructor required
     }
 
-    public Action (String timeHappened, BelongsTo belongsTo) {
+    public Action (String timeHappened, BelongsTo belongsTo, String imageAction) {
         this.timeHappened = timeHappened;
         this.belongsTo = belongsTo;
+        this.imageAction = imageAction;
     }
 
     //Method that will set the value that we want to appear to the action ui
@@ -30,5 +32,9 @@ public class Action {
 
     public BelongsTo getBelongsTo() {
         return belongsTo;
+    }
+
+    public String getImageAction() {
+        return imageAction;
     }
 }

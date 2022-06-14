@@ -139,14 +139,16 @@ public class TeamScore extends Fragment {
     }
 
     public void createRow(TableLayout teamsContainer,String name, int games, int wins, int loses , double grades) throws InterruptedException {
-        TeamScore.this.requireActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                View teamScoreLayout = TeamScoreLayout.createTeamScoreLayout(TeamScore.this, name,games,wins,loses,grades);
-                teamsContainer.addView(teamScoreLayout);
-            }
 
-        });
+        if (this.getActivity() != null && this.isAdded()) {
+            TeamScore.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    View teamScoreLayout = TeamScoreLayout.createTeamScoreLayout(TeamScore.this, name, games, wins, loses, grades);
+                    teamsContainer.addView(teamScoreLayout);
+                }
+            });
+        }
     }
 
 }

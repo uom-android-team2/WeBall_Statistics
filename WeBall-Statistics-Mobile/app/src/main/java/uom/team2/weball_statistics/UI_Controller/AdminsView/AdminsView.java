@@ -97,6 +97,10 @@ public class AdminsView extends Fragment  {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
+    private TextView startBtn;
+    private TextView pauseBtn;
+    private TextView undoBtn;
+    private TextView substitutionBtn;
     private ArrayList<ImageView> playersImageViewList =new ArrayList<ImageView>();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -153,6 +157,26 @@ public class AdminsView extends Fragment  {
         blockBtn = binding.blockButton;
         foulBtn = binding.foulButton;
         turnoverBtn = binding.turnoverButton;
+        startBtn = binding.startButton;
+        pauseBtn = binding.pauseButton;
+        undoBtn = binding.undoButton;
+        substitutionBtn = binding.substitutionButton;
+
+        //At start, we want to display only start button and substitutions
+        freeThrowBtn.setVisibility(View.GONE);
+        twoPointBtn.setVisibility(View.GONE);
+        threePointBtn.setVisibility(View.GONE);
+        reboundBtn.setVisibility(View.GONE);
+        assistBtn.setVisibility(View.GONE);
+        stealBtn.setVisibility(View.GONE);
+        blockBtn.setVisibility(View.GONE);
+        turnoverBtn.setVisibility(View.GONE);
+        foulBtn.setVisibility(View.GONE);
+        pauseBtn.setVisibility(View.GONE);
+        undoBtn.setVisibility(View.GONE);
+        substitutionBtn.setVisibility(View.GONE);
+        binding.score.setVisibility(View.GONE);
+        binding.shots.setVisibility(View.GONE);
 
         // orismata gia kathe match
         Bundle bundle = getArguments();
@@ -162,7 +186,16 @@ public class AdminsView extends Fragment  {
         match.setTeamLandlord(teamLandlord);
         match.setGuest(teamGuest);
 
+
+        DAOLiveTeamService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
         DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+
+        for (Player player: teamLandlord.getTeamPlayers()){
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        }
+        for (Player player: teamGuest.getTeamPlayers()){
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        }
 
         try {
             UIHandler.updateTeamImage(this,teamLandlord,binding.team1Banner);
@@ -365,6 +398,22 @@ public class AdminsView extends Fragment  {
         binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Make visible hidden parts
+                freeThrowBtn.setVisibility(View.VISIBLE);
+                twoPointBtn.setVisibility(View.VISIBLE);
+                threePointBtn.setVisibility(View.VISIBLE);
+                reboundBtn.setVisibility(View.VISIBLE);
+                assistBtn.setVisibility(View.VISIBLE);
+                stealBtn.setVisibility(View.VISIBLE);
+                blockBtn.setVisibility(View.VISIBLE);
+                turnoverBtn.setVisibility(View.VISIBLE);
+                foulBtn.setVisibility(View.VISIBLE);
+                pauseBtn.setVisibility(View.VISIBLE);
+                undoBtn.setVisibility(View.VISIBLE);
+                substitutionBtn.setVisibility(View.VISIBLE);
+                binding.score.setVisibility(View.GONE);
+                binding.shots.setVisibility(View.GONE);
 
                 if (!started) {
                     binding.clock.setBase(SystemClock.elapsedRealtime());

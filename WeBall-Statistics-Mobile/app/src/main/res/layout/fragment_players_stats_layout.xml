@@ -5,8 +5,7 @@
     android:id="@+id/playersStatLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
-    tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.PlayersStatsLayout">
+    android:padding="15dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/playersStatCardView"
@@ -29,8 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/lightBlueTopPlayer"
+                android:fontFamily="@font/roboto_medium"
                 android:padding="8dp"
-                android:text="Points Per Game"
+                android:text="Statistic Title"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

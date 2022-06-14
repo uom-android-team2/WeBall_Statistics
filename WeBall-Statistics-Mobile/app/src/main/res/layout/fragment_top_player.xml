@@ -5,8 +5,7 @@
     android:id="@+id/topPlayerLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/lightBlueTopPlayer"
-    tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.TopPlayerFragment">
+    android:background="@color/lightBlueTopPlayer">
 
     <!--    android:background="@drawable/top_round_layout"-->
 
@@ -33,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="top player name"
+        android:text="TopPlayerName"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="num "
+        android:text="Num "
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -64,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="PPG"
+        android:text="STAT"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -79,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="pos "
+        android:text="Pos "
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,7 +94,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="team "
+        android:text="Team "
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -111,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="30.6"
+        android:text="00.0"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="18sp"

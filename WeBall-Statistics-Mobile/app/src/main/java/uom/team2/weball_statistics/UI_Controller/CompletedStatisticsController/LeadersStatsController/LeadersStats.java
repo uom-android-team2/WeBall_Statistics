@@ -55,7 +55,7 @@ public class LeadersStats extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addTitles();
+
     }
 
     @Override
@@ -67,6 +67,7 @@ public class LeadersStats extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
     public void onStart(){
         super.onStart();
         PlayerService playerService = new PlayerService();
@@ -81,12 +82,17 @@ public class LeadersStats extends Fragment {
                 ArrayList<PlayerStats> rebounds = new ArrayList<>();
                 ArrayList<PlayerStats> fouls = new ArrayList<>();
 
+                //sort every arrayList
                 points = sortByPoints(returnedObject);
                 assists = sortByAssists(returnedObject);
                 blocks = sortByBlocks(returnedObject);
                 rebounds = sortByRebounds(returnedObject);
                 fouls = sortByFouls(returnedObject);
 
+                //add titles
+                addTitles();
+
+                //updatePlayers
                 updatePlayers(playerService,points,Type.POINTS);
                 updatePlayers(playerService,assists,Type.ASSISTS);
                 updatePlayers(playerService,blocks,Type.REBOUNDS);
@@ -197,7 +203,7 @@ public class LeadersStats extends Fragment {
         return String.valueOf(name.charAt(0))+ ". " + surname.toUpperCase();
     }
 
-    // replace e.g. "POINT_GUARD" with "PG" or "CENTER" with "C"
+    // replace e.g. "POINT_GUARD" with "PG" or "CENTER" with "C" etc.
     public String positionFormat(String position){
         if (position.contains("_")) {
             position = position.replace("_", " ");
@@ -215,7 +221,6 @@ public class LeadersStats extends Fragment {
     public String teamFormat(String team){
         return team.toUpperCase().substring(0,3);
     }
-
 
     //creates leaders except top leader in a statistic
     public void createPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue)
@@ -275,6 +280,7 @@ public class LeadersStats extends Fragment {
         });
     }
 
+    //sorting algorithms for leaders stats
     public ArrayList<PlayerStats> sortByPoints(ArrayList<PlayerStats> list) {
 
         Collections.sort(list, new Comparator<PlayerStats>() {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
@@ -108,7 +109,7 @@ public class TeamScore extends Fragment {
             int loses = -1;
             int games = -1;
 
-            TableLayout layout = binding.teamsContainer;
+            LinearLayout layout = binding.teamsContainer;
 
             grades = teamStats.get(i).getGrades();
             wins = teamStats.get(i).getWins();
@@ -117,7 +118,7 @@ public class TeamScore extends Fragment {
 
 
             //double finalValue = value;
-            TableLayout finalLayout = layout;
+            LinearLayout finalLayout = layout;
             int finalGames = games;
             int finalWins = wins;
             int finalLoses = loses;
@@ -138,7 +139,7 @@ public class TeamScore extends Fragment {
 
     }
 
-    public void createRow(TableLayout teamsContainer,String name, int games, int wins, int loses , double grades) throws InterruptedException {
+    public void createRow(LinearLayout teamsContainer,String name, int games, int wins, int loses , double grades) throws InterruptedException {
 
         if (this.getActivity() != null && this.isAdded()) {
             TeamScore.this.requireActivity().runOnUiThread(new Runnable() {

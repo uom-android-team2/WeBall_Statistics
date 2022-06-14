@@ -55,7 +55,7 @@ public class TeamStats extends Stats {
             }
 
             team_id = Integer.parseInt(hashMapData.get("team_id"));
-            if(!isMatchId){
+            if(isMatchId){
                 totalMatches = Integer.parseInt(hashMapData.get("total_matches"));
                 wins = Integer.parseInt(hashMapData.get("win"));
                 loses = Integer.parseInt(hashMapData.get("lose"));

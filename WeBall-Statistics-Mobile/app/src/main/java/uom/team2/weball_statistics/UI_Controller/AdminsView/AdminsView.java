@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,6 +35,7 @@ import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
@@ -152,6 +155,8 @@ public class AdminsView extends Fragment  {
         foulBtn = binding.foulButton;
         turnoverBtn = binding.turnoverButton;
 
+
+
         // orismata gia kathe match
         Bundle bundle = getArguments();
         match = (Match) bundle.getSerializable("match");
@@ -159,6 +164,11 @@ public class AdminsView extends Fragment  {
         teamGuest = (Team) bundle.getSerializable("teamGuest");
         match.setTeamLandlord(teamLandlord);
         match.setGuest(teamGuest);
+
+
+
+
+
 
         DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
 
@@ -204,7 +214,6 @@ public class AdminsView extends Fragment  {
 
 
 
-
         //When this page opens, we want to have the landlord team already selected
         teamSelected = false;
         teamObj = match.getTeamLandlord();
@@ -220,7 +229,7 @@ public class AdminsView extends Fragment  {
         binding.player1.setBackground(shape2);
         playerChecked = 1;
 
-        listenEvent();
+
 
 
         //Load data for this team
@@ -304,6 +313,7 @@ public class AdminsView extends Fragment  {
             public void onClick(View view) {
 
                 if (!started) {
+                    initStarters();
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
                     // Prosthiki apo leo gia na pairnw ta lepta
@@ -331,6 +341,8 @@ public class AdminsView extends Fragment  {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    listenEvent();
 
                 }
                 //end button
@@ -418,7 +430,10 @@ public class AdminsView extends Fragment  {
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
                 }
 
             }
@@ -440,7 +455,10 @@ public class AdminsView extends Fragment  {
 
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
 
                 }
 
@@ -463,7 +481,10 @@ public class AdminsView extends Fragment  {
 
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
                 }
 
             }
@@ -486,7 +507,10 @@ public class AdminsView extends Fragment  {
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
 
                 }
 
@@ -512,8 +536,10 @@ public class AdminsView extends Fragment  {
                     //
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
+                    if(started){
+                        listenEvent();
+                    }
 
-                    listenEvent();
 
                 }
 
@@ -548,7 +574,7 @@ public class AdminsView extends Fragment  {
     private void listenEvent(){
         DBDataRecovery dataRecovery = new DBDataRecovery();
 
-        System.out.println("erifoejiks");
+
 
 
         try {
@@ -720,6 +746,35 @@ public class AdminsView extends Fragment  {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+   public void setStartersMatchPlayed(int indexPlayer, Team team) {
+           DBDataRecovery dataRecovery = new DBDataRecovery();
+           try {
+               Stats stat = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(team.getTeamPlayers().get(indexPlayer).getId()));
+               ((PlayerStats) stat).setByOneMatches();
+               dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, stat);
+
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+    }
+
+    public void initStarters(){
+        Thread threadPlayerMatch = new Thread() {
+
+            @Override
+            public void run() {
+                super.run();
+                for (int i = 0; i < teamLandlord.getTeamPlayers().size(); i++) {
+                    setStartersMatchPlayed(i, teamLandlord);
+                }
+                for (int i = 0; i < teamGuest.getTeamPlayers().size(); i++) {
+                    setStartersMatchPlayed(i, teamGuest);
+                }
+            }
+        };
+        threadPlayerMatch.start();
     }
 
     //you call this function when you want to change player

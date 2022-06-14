@@ -52,7 +52,7 @@ public class PlayerStats extends Stats {
               }
 
               player_id = Integer.parseInt(hashMapData.get("player_id"));
-              if(!hasMatchPlayed){
+              if(hasMatchPlayed){
                   matches_played = Integer.parseInt(hashMapData.get("matches_played"));
                   hasMatchPlayed = false;
               }
@@ -103,6 +103,8 @@ public class PlayerStats extends Stats {
     public int getPlayer_id() {
         return player_id;
     }
+
+    public void setByOneMatches(){ matches_played++;}
 
     public void setMatchesPlayed(int matches_played) {
         this.matches_played = matches_played;

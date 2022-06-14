@@ -76,9 +76,9 @@ public class LiveGameProgress extends Fragment {
         teamLandlord = (Team) bundle.getSerializable("teamLandlord");
         teamGuest = (Team) bundle.getSerializable("teamGuest");
 
-        liveProgressUIController.fillMatchInformation(this, this.match, this.teamLandlord); //Fill details for the match
-
         daoAction.getRealTimeData(match, LiveGameProgress.this);
+
+        liveProgressUIController.fillMatchInformation(this, this.match, this.teamLandlord); //Fill details for the match
     }
 
     @Override

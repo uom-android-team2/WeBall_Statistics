@@ -107,7 +107,6 @@ public class PreviousMatches extends Fragment {
 
                     binding.matchesLayoutContainer.addView(imageView);
                     binding.matchesLayoutContainer.addView(textView);
-
                 }
             });
 

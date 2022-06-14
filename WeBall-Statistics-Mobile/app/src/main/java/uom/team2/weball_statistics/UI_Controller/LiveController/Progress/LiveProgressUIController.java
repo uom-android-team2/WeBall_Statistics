@@ -16,7 +16,9 @@ import org.w3c.dom.Text;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Match;
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.databinding.MatchInformationLayoutBinding;
 
 public class LiveProgressUIController {
@@ -113,13 +115,13 @@ public class LiveProgressUIController {
         linearLayout.addView(quarterView, 0);
     }
 
-    public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match) {
+    public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match, Team teamHome) {
         MatchInformationLayoutBinding matchInformationLayoutBinding = liveGameProgress.getBinding().matchInfoInclude;
 
-        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
-        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
+//        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
+//        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
 
         TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
-        stadiumNameTextView.setText(match.getTeamLandlord().getTeamCity());;
+        stadiumNameTextView.setText(teamHome.getTeamCity());
     }
 }

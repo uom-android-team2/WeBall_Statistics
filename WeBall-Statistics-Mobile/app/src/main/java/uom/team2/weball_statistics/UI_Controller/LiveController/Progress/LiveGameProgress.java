@@ -35,6 +35,8 @@ public class LiveGameProgress extends Fragment {
     private final LiveProgressUIController liveProgressUIController = LiveProgressUIController.getInstance();
     private DAOAction daoAction;
     private Match match;
+    private Team teamLandlord;
+    private Team teamGuest;
 
     public LiveGameProgress() {
     }
@@ -71,6 +73,10 @@ public class LiveGameProgress extends Fragment {
 
         Bundle bundle = getArguments();
         match = (Match) bundle.getSerializable("match");
+        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+        teamGuest = (Team) bundle.getSerializable("teamGuest");
+
+        liveProgressUIController.fillMatchInformation(this, this.match, this.teamLandlord); //Fill details for the match
 
         daoAction.getRealTimeData(match, LiveGameProgress.this);
     }

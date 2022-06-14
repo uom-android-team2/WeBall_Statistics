@@ -124,17 +124,13 @@ public class TeamScore extends Fragment {
             int finalWins = wins;
             int finalLoses = loses;
             double finalGrades = grades;
-            teamService.findTeamById(teamStats.get(i).getTeamId(), new CallbackListener<Team>() {
-                @Override
-                public void callback(Team returnedObject) {
-                    try {
-                        createRow(finalLayout,finalI,
-                                returnedObject.getTeamName(), finalGames,finalWins,finalLoses,finalGrades);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+
+            try {
+                createRow(finalLayout,finalI, teamStats.get(i).getTeam_name(), finalGames,finalWins,finalLoses,finalGrades);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
 
 

@@ -84,17 +84,17 @@ public class TeamStatsFragment extends Fragment {
                 bestByBlocks = sortByBlocks(returnedObject);
                 bestByRebounds = sortByRebounds(returnedObject);
 
-                udateRows(teamService, bestByPoints, Type.POINTS);
-                udateRows(teamService, bestByAssists, Type.ASSISTS);
-                udateRows(teamService, bestByBlocks, Type.BLOCKS);
-                udateRows(teamService, bestByRebounds, Type.REBOUNDS);
+                updateRows(teamService, bestByPoints, Type.POINTS);
+                updateRows(teamService, bestByAssists, Type.ASSISTS);
+                updateRows(teamService, bestByBlocks, Type.BLOCKS);
+                updateRows(teamService, bestByRebounds, Type.REBOUNDS);
 
             }
         });
 
     }
 
-    public void udateRows(TeamService teamService, ArrayList<TeamStats> teamStats, Type target) {
+    public void updateRows(TeamService teamService, ArrayList<TeamStats> teamStats, Type target) {
         int n = 5;
 
         if (teamStats.size() < 5) {

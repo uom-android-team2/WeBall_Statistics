@@ -1,12 +1,16 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Progress;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +41,10 @@ public class LiveProgressUIController {
         time.setText(action.getTimeHappened());
 
         ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+        picture.setImageDrawable(res);
 
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());
@@ -54,6 +62,10 @@ public class LiveProgressUIController {
         time.setText(action.getTimeHappened());
 
         ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+        picture.setImageDrawable(res);
 
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());
@@ -71,6 +83,10 @@ public class LiveProgressUIController {
         time.setText(action.getTimeHappened());
 
         ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+        picture.setImageDrawable(res);
 
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());

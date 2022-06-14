@@ -16,11 +16,11 @@ public class Shot extends Action {
     private static String getMyImage(ShotType shotType) {
         switch (shotType) {
             case FREETHROW:
-                return "shot_+1_30px";
+                return "shot_1_30px";
             case TWO_POINTER:
-                return "shot_+2_30px";
+                return "shot_2_30px";
             case THREE_POINTER:
-                return "shot_+3_30px";
+                return "shot_3_30px";
             default:
                 return "whistle_30px";
         }

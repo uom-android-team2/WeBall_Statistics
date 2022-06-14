@@ -33,4 +33,8 @@ public class Action {
     public BelongsTo getBelongsTo() {
         return belongsTo;
     }
+
+    public String getImageAction() {
+        return imageAction;
+    }
 }

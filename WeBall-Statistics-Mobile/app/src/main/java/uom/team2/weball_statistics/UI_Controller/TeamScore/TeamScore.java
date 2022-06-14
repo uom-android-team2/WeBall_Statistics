@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.Team;
@@ -70,12 +72,11 @@ public class TeamScore extends Fragment {
 
                 //System.out.println(returnedObject);
 
-//                ArrayList<TeamStats> bestByPoints = new ArrayList<>();
+                ArrayList<TeamStats> bestByPoints = new ArrayList<>();
 
-//                bestByPoints = sortByPoints(returnedObject);
+                bestByPoints = sortByPoints(returnedObject);
 
-                updateRows(teamService, returnedObject);
-
+                updateRows(teamService, bestByPoints);
 
             }
         });
@@ -127,7 +128,7 @@ public class TeamScore extends Fragment {
                 @Override
                 public void callback(Team returnedObject) {
                     try {
-                        createRow(finalLayout,
+                        createRow(finalLayout,finalI,
                                 returnedObject.getTeamName(), finalGames,finalWins,finalLoses,finalGrades);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -139,17 +140,34 @@ public class TeamScore extends Fragment {
 
     }
 
-    public void createRow(LinearLayout teamsContainer,String name, int games, int wins, int loses , double grades) throws InterruptedException {
+    public void createRow(LinearLayout teamsContainer,int pos ,String name, int games, int wins, int loses , double grades) throws InterruptedException {
 
         if (this.getActivity() != null && this.isAdded()) {
             TeamScore.this.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    View teamScoreLayout = TeamScoreLayout.createTeamScoreLayout(TeamScore.this, name, games, wins, loses, grades);
+                    View teamScoreLayout = TeamScoreLayout.createTeamScoreLayout(TeamScore.this, pos, name, games, wins, loses, grades);
                     teamsContainer.addView(teamScoreLayout);
                 }
             });
         }
+    }
+
+    public ArrayList<TeamStats> sortByPoints(ArrayList<TeamStats> list) {
+
+        Collections.sort(list, new Comparator<TeamStats>() {
+            @Override
+            public int compare(TeamStats teamStats, TeamStats t1) {
+                if (t1.getGrades() - teamStats.getGrades() > 0) {
+                    return 1;
+                } else if (t1.getGrades() - teamStats.getGrades() == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        return new ArrayList<>(list);
     }
 
 }

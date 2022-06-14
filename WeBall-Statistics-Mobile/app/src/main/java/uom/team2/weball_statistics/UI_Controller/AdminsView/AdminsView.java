@@ -37,6 +37,7 @@ import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
 import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
@@ -344,6 +345,18 @@ public class AdminsView extends Fragment  {
 
                     listenEvent();
 
+                    DBDataRecovery teamsPlayed = new DBDataRecovery();
+                    try {
+                        Stats teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                        Stats teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                        ((TeamStats)teamLandlordStats).setMatches();
+                        ((TeamStats)teamGuestStats).setMatches();
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamLandlordStats);
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 //end button
                 else {
@@ -368,6 +381,11 @@ public class AdminsView extends Fragment  {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+
+
+
+
                 }
             }
 

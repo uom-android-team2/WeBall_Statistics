@@ -14,7 +14,7 @@ import uom.team2.weball_statistics.configuration.Config;
 public class TeamStats extends Stats {
 
     protected int team_id;
-    private int totalMatches;
+    private int total_matches;
     private int wins;
     private int loses;
     protected Boolean isMatchId = false;
@@ -24,10 +24,10 @@ public class TeamStats extends Stats {
         isMatchId = true;
     }
 
-    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int team_id, int totalMatches, int wins, int loses) {
+    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int team_id, int total_matches, int wins, int loses) {
         super(successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
         this.team_id = team_id;
-        this.totalMatches = totalMatches;
+        this.total_matches = total_matches;
         this.wins = wins;
         this.loses = loses;
     }
@@ -56,7 +56,7 @@ public class TeamStats extends Stats {
 
             team_id = Integer.parseInt(hashMapData.get("team_id"));
             if(isMatchId){
-                totalMatches = Integer.parseInt(hashMapData.get("total_matches"));
+                total_matches = Integer.parseInt(hashMapData.get("total_matches"));
                 wins = Integer.parseInt(hashMapData.get("win"));
                 loses = Integer.parseInt(hashMapData.get("lose"));
             }
@@ -76,36 +76,40 @@ public class TeamStats extends Stats {
     }
 
     public double calculatePointsPercentage(){
-        return totalMatches > 0 ? super.calculateTotalPoints() / totalMatches : 0;
+        return total_matches > 0 ? super.calculateTotalPoints() / total_matches : 0;
     }
 
     public double calculateAssistPercentage(){
-        return totalMatches > 0 ? assist / totalMatches : 0;
+        return total_matches > 0 ? assist / total_matches : 0;
     }
 
     public double calculateReboundPercentage(){
-        return totalMatches > 0 ? rebound / totalMatches : 0;
+        return total_matches > 0 ? rebound / total_matches : 0;
     }
 
     public double calculateBlockPercentage(){
-       return totalMatches > 0 ? block / totalMatches : 0;
+       return total_matches > 0 ? block / total_matches : 0;
     }
 
     public double calculateSteelPercentage(){
-        return totalMatches > 0 ? steal / totalMatches : 0;
+        return total_matches > 0 ? steal / total_matches : 0;
 
     }
 
     public double calculateFoulPercentage(){
-      return totalMatches > 0  ? foul / totalMatches : 0;
+      return total_matches > 0  ? foul / total_matches : 0;
 
     }
 
     public double calculateTurnoverPercentage(){
-       return totalMatches > 0 ?  turnover / totalMatches : 0;
+       return total_matches > 0 ?  turnover / total_matches : 0;
     }
 
-    public int getTotalMatches(){ return totalMatches;}
+    public int getTotalMatches(){ return total_matches;}
+
+    public void setMatches(){
+        total_matches++;
+    }
 
     public int getWins(){return wins;}
 

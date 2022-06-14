@@ -105,8 +105,10 @@ public class PreviousMatches extends Fragment {
                     ImageView imageView = new ImageView(getContext());
                     imageView.setImageDrawable(getResources().getDrawable(R.drawable.basket));
 
-                    binding.matchesLayoutContainer.addView(imageView);
-                    binding.matchesLayoutContainer.addView(textView);
+                    if (binding != null) {
+                        binding.matchesLayoutContainer.addView(imageView);
+                        binding.matchesLayoutContainer.addView(textView);
+                    }
                 }
             });
 

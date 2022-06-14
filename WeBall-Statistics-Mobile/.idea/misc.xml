@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/newWBStats/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_leaders_stats.xml" value="0.4" />
         <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/newWBStats/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_player_layout.xml" value="0.4" />
         <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/newWBStats/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_players_stats_layout.xml" value="0.10185185185185185" />
         <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/newWBStats/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_rank_tab.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/EvitaDasy/AndroidStudioProjects/newWBStats/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_top_player.xml" value="0.4" />
+=======
+>>>>>>> main
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/card_progress_layout_general.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/clock_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_admins_view.xml" value="0.36666666666666664" />

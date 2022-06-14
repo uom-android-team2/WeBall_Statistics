@@ -37,7 +37,7 @@
     <string name="time_happened_comment_text">3.45\'</string>
     <string name="comment_text">CommentCommentCommentCommentCommentCommentCommentCommentCommentCommentComment</string>
     <string name="head_referee_text">Referee</string>
-    <string name="stadium_text">Stadium</string>
+    <string name="stadium_text">Stadium/City</string>
     <string name="head_referee_name_text">Vissel L.</string>
     <string name="stadium_name_text">OAKA</string>
     <string name="match_info_label_text">Match Information</string>
@@ -47,9 +47,9 @@
         <item>Total_effort</item>
         <item>Successful_freethrow</item>
         <item>Total_freethrow</item>
-        <item>Succesful_twopointer</item>
+        <item>Successful_twopointer</item>
         <item>Total_twopointer</item>
-        <item>Succesful_threepointer</item>
+        <item>Successful_threepointer</item>
         <item>Total_threepointer</item>
         <item>Steal</item>
         <item>Assist</item>
@@ -64,9 +64,9 @@
         <item>Total effort</item>
         <item>Successful freethrow</item>
         <item>Total freethrow</item>
-        <item>Succesful twopointer</item>
+        <item>Successful twopointer</item>
         <item>Total twopointer</item>
-        <item>Succesful threepointer</item>
+        <item>Successful threepointer</item>
         <item>Total threepointer</item>
         <item>Steal</item>
         <item>Assist</item>

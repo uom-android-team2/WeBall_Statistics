@@ -143,13 +143,13 @@ public class MatchesOnMainPageService {
 
     public void sortMatches() {
         for (int i = 0; i < allMatches.size(); i++) {
-            if (allMatches.get(i).isCompleted() == true && allMatches.get(i).isProgress() == false) {
+            if (allMatches.get(i).isCompleted() == true && allMatches.get(i).isProgress() == 0) {
                 allCompletedMatches.add(allMatches.get(i));
             }
-            if (allMatches.get(i).isCompleted() == false && allMatches.get(i).isProgress() == false) {
+            if (allMatches.get(i).isCompleted() == false && allMatches.get(i).isProgress() == 0) {
                 allUpcomingMatches.add(allMatches.get(i));
             }
-            if (allMatches.get(i).isCompleted() == false && allMatches.get(i).isProgress() == true) {
+            if (allMatches.get(i).isCompleted() == false && allMatches.get(i).isProgress() == 1) {
                 allLiveMatches.add(allMatches.get(i));
             }
         }

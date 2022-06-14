@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
@@ -81,11 +81,8 @@ public class AdminsView extends Fragment  {
     private boolean teamSelected = false;
     private int playerChecked = 1;
     private Match match;
-    private Team landLord;
-    private Team guest;
     private Player playerObjChecked;
     private Team teamObj;
-    private Team teamLand;
     private Team teamGuest;
     private Team teamLandlord;
     private TextView freeThrowBtn;
@@ -97,6 +94,12 @@ public class AdminsView extends Fragment  {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
+    private TextView startBtn;
+    private TextView pauseBtn;
+    private TextView undoBtn;
+    private TextView substitutionBtn;
+    private ArrayList<ImageView> playersImageViewList =new ArrayList<ImageView>();
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -151,6 +154,26 @@ public class AdminsView extends Fragment  {
         blockBtn = binding.blockButton;
         foulBtn = binding.foulButton;
         turnoverBtn = binding.turnoverButton;
+        startBtn = binding.startButton;
+        pauseBtn = binding.pauseButton;
+        undoBtn = binding.undoButton;
+        substitutionBtn = binding.substitutionButton;
+
+        //At start, we want to display only start button and substitutions
+        freeThrowBtn.setVisibility(View.GONE);
+        twoPointBtn.setVisibility(View.GONE);
+        threePointBtn.setVisibility(View.GONE);
+        reboundBtn.setVisibility(View.GONE);
+        assistBtn.setVisibility(View.GONE);
+        stealBtn.setVisibility(View.GONE);
+        blockBtn.setVisibility(View.GONE);
+        turnoverBtn.setVisibility(View.GONE);
+        foulBtn.setVisibility(View.GONE);
+        pauseBtn.setVisibility(View.GONE);
+        undoBtn.setVisibility(View.GONE);
+        substitutionBtn.setVisibility(View.GONE);
+        binding.score.setVisibility(View.GONE);
+        binding.shots.setVisibility(View.GONE);
 
         // orismata gia kathe match
         Bundle bundle = getArguments();
@@ -160,7 +183,16 @@ public class AdminsView extends Fragment  {
         match.setTeamLandlord(teamLandlord);
         match.setGuest(teamGuest);
 
+
+        DAOLiveTeamService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
         DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+
+        for (Player player: teamLandlord.getTeamPlayers()){
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        }
+        for (Player player: teamGuest.getTeamPlayers()){
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        }
 
         try {
             UIHandler.updateTeamImage(this,teamLandlord,binding.team1Banner);
@@ -170,12 +202,9 @@ public class AdminsView extends Fragment  {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //
-        Picasso.get()
-                .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getTeamPlayers().get(0).getImagePath())
-                .resize(200, 200)
-                .centerCrop()
-                .into(binding.player1);
+
+
+
 
         // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
         ArrayList<Player> tlList=teamLandlord.getTeamPlayers();
@@ -202,8 +231,27 @@ public class AdminsView extends Fragment  {
         match.getGuest().setKeyPlayersList(keyPlayersGuest);
         match.getGuest().setSubPlayersList(subPlayersGuest);
 
+        teamLandlord.setKeyPlayersList(keyPlayersLandlord);
+        teamLandlord.setSubPlayersList(subPlayersLandlord);
+        teamGuest.setKeyPlayersList(keyPlayersGuest);
+        teamGuest.setSubPlayersList(subPlayersGuest);
 
 
+
+        //Add ImageViews for players into an ArrayList
+        playersImageViewList.add(binding.player1);
+        playersImageViewList.add(binding.player2);
+        playersImageViewList.add(binding.player3);
+        playersImageViewList.add(binding.player4);
+        playersImageViewList.add(binding.player5);
+        //Put images of the 1rst team Players
+        for(int i=0;i<playersImageViewList.size();i++){
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(playersImageViewList.get(i));
+        }
 
         //When this page opens, we want to have the landlord team already selected
         teamSelected = false;
@@ -222,11 +270,6 @@ public class AdminsView extends Fragment  {
 
         listenEvent();
 
-
-        //Load data for this team
-
-
-        //Load the data of the first team players.
 
 
         //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
@@ -257,6 +300,13 @@ public class AdminsView extends Fragment  {
                 //remove the background color from the other banner
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
+                for(int i=0;i<playersImageViewList.size();i++){
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playersImageViewList.get(i));
+                }
 
             }
         });
@@ -290,6 +340,13 @@ public class AdminsView extends Fragment  {
                 binding.team1Banner.setBackgroundColor(0x00000000);
 
                 //Load data for this team
+                for(int i=0;i<playersImageViewList.size();i++){
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamGuest.getKeyPlayers().get(i).getImagePath())
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playersImageViewList.get(i));
+                }
 
             }
         });
@@ -303,6 +360,22 @@ public class AdminsView extends Fragment  {
             @Override
             public void onClick(View view) {
 
+                //Make visible hidden parts
+                freeThrowBtn.setVisibility(View.VISIBLE);
+                twoPointBtn.setVisibility(View.VISIBLE);
+                threePointBtn.setVisibility(View.VISIBLE);
+                reboundBtn.setVisibility(View.VISIBLE);
+                assistBtn.setVisibility(View.VISIBLE);
+                stealBtn.setVisibility(View.VISIBLE);
+                blockBtn.setVisibility(View.VISIBLE);
+                turnoverBtn.setVisibility(View.VISIBLE);
+                foulBtn.setVisibility(View.VISIBLE);
+                pauseBtn.setVisibility(View.VISIBLE);
+                undoBtn.setVisibility(View.VISIBLE);
+                substitutionBtn.setVisibility(View.VISIBLE);
+                binding.score.setVisibility(View.GONE);
+                binding.shots.setVisibility(View.GONE);
+
                 if (!started) {
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
@@ -311,7 +384,7 @@ public class AdminsView extends Fragment  {
                         @Override
                         public void onChronometerTick(Chronometer chronometer) {
                             // to match id tha allazei analoga to match
-                            DAOLiveTeamService.getInstance().updateClock(1, chronometer.getText().toString());
+                            DAOLiveTeamService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
                         }
                     });
                     running = true;
@@ -319,11 +392,12 @@ public class AdminsView extends Fragment  {
                     binding.startButton.setText("End");
                     binding.pauseButton.setEnabled(true);
                     match.setStatus(Status.ONGOING);
-                    match.setProgress(true);
 
                     //Add start's action description to firebase
                     Action startMatchAction = new MatchFlow("00.00", FlowType.START);
                     DAOAction.getInstance().insert(startMatchAction, match);
+
+                    match.setProgress(1);
 
                     MatchService ms = new MatchService();
                     try {
@@ -349,13 +423,14 @@ public class AdminsView extends Fragment  {
                     DAOAction.getInstance().insert(startMatchAction, match);
 
                     match.setCompleted(true);
-                    match.setProgress(false);
+                    match.setProgress(0);
                     MatchService ms = new MatchService();
                     try {
                         ms.statusUpdate(match);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
 
@@ -391,6 +466,8 @@ public class AdminsView extends Fragment  {
         binding.undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Player plObjForUndo=undoPlayerStack.lastElement();
+                Team teamObjForUndo=undoTeamStack.lastElement();
 
             }
         });

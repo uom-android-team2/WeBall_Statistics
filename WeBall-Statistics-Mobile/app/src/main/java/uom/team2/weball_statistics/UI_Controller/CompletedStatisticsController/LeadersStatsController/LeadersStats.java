@@ -26,6 +26,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.PlayerChampionshipStatsService;
 import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
+import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.LiveMatches;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
@@ -226,58 +227,61 @@ public class LeadersStats extends Fragment {
     public void createPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue)
     {
        View view = linearLayout.getChildAt(num);
+       
+       if (LeadersStats.this.isAdded() && LeadersStats.this.getActivity() != null) {
+           LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
+               @Override
+               public void run() {
+                   TextView playerView = view.findViewById(R.id.player);
+                   playerView.setText(player);
 
-       LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               TextView playerView = view.findViewById(R.id.player);
-               playerView.setText(player);
+                   TextView rankView = view.findViewById(R.id.rank);
+                   rankView.setText(String.valueOf(num + 2));
 
-               TextView rankView = view.findViewById(R.id.rank);
-               rankView.setText(String.valueOf(num+2));
+                   TextView teamView = view.findViewById(R.id.team);
+                   teamView.setText(team);
 
-               TextView teamView = view.findViewById(R.id.team);
-               teamView.setText(team);
-
-               TextView statView = view.findViewById(R.id.statValue);
-               statView.setText(statValue);
-           }
-       });
+                   TextView statView = view.findViewById(R.id.statValue);
+                   statView.setText(statValue);
+               }
+           });
+       }
     }
 
     //creates top leader
     public void createTopPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue,
-                                int playerNumber, String position,  String url)
-    {
+                                int playerNumber, String position,  String url) {
         View view = linearLayout.getChildAt(num);
 
-        LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                TextView playerView = view.findViewById(R.id.topPlayerName);
-                playerView.setText(player);
+        if (LeadersStats.this.isAdded() && LeadersStats.this.getActivity() != null) {
+            LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView playerView = view.findViewById(R.id.topPlayerName);
+                    playerView.setText(player);
 
-                TextView teamView = view.findViewById(R.id.topTeamName);
-                teamView.setText(team);
+                    TextView teamView = view.findViewById(R.id.topTeamName);
+                    teamView.setText(team);
 
-                TextView valueView = view.findViewById(R.id.topStatValue);
-                valueView.setText(statValue);
+                    TextView valueView = view.findViewById(R.id.topStatValue);
+                    valueView.setText(statValue);
 
-                TextView numView = view.findViewById(R.id.topNumber);
-                numView.setText(String.valueOf(playerNumber));
+                    TextView numView = view.findViewById(R.id.topNumber);
+                    numView.setText(String.valueOf(playerNumber));
 
-                TextView positionView = view.findViewById(R.id.topPosition);
-                positionView.setText(position);
+                    TextView positionView = view.findViewById(R.id.topPosition);
+                    positionView.setText(position);
 
-                ImageView imageView = view.findViewById(R.id.topPlayerImage);
-                Picasso.get()
-                        .load(url)
-                        .resize(200,200)
-                        .centerCrop()
-                        .transform(new RoundedCorners())
-                        .into(imageView);
-            }
-        });
+                    ImageView imageView = view.findViewById(R.id.topPlayerImage);
+                    Picasso.get()
+                            .load(url)
+                            .resize(200, 200)
+                            .centerCrop()
+                            .transform(new RoundedCorners())
+                            .into(imageView);
+                }
+            });
+        }
     }
 
     //sorting algorithms for leaders stats

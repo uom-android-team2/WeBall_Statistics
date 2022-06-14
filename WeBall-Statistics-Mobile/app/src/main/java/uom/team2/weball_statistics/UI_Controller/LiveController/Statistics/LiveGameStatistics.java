@@ -88,7 +88,7 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
+        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
         daoLiveTeamService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
         daoLiveTeamService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
 

@@ -12,7 +12,7 @@ public class Substitution extends Action {
     private Team teamObj; //The team object that this two players belongs to
 
     public Substitution(String timeHappened, BelongsTo belongsTo, Player playerObjIn, Player playerObjOut, Team teamObj) {
-        super(timeHappened, belongsTo);
+        super(timeHappened, belongsTo, "player_change_30px");
         this.playerObjIn = playerObjIn;
         this.playerObjOut = playerObjOut;
         this.teamObj = teamObj;

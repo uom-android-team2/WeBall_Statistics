@@ -85,11 +85,8 @@ public class popupViewTwoPoints extends Dialog implements
                 playerStats.setSuccessfulEffort();
                 teamStats.setSuccessfulTwoPointer();
                 teamStats.setSuccessfulEffort();
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.successful_effort);
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.succesful_twopointer);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.successful_effort);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.succesful_twopointer);
-
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_twopointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_twopointer);
                 //Insert 2point's action to firebase
                 Action twoPointThrowAction = null;
 
@@ -106,6 +103,8 @@ public class popupViewTwoPoints extends Dialog implements
                 //dismiss();
                 break;
             case R.id.dialog_No:
+                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
                 dismiss();
                 break;
             default:
@@ -118,10 +117,6 @@ public class popupViewTwoPoints extends Dialog implements
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_effort);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.total_twopointer);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_effort);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.total_twopointer);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

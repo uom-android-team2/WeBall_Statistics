@@ -70,6 +70,8 @@ public class LiveProgressUIController {
         TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
         time.setText(action.getTimeHappened());
 
+        ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+
         TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
         smallDescription.setText(action.getActionDesc());
 

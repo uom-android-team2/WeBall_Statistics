@@ -3,7 +3,6 @@ package uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -138,14 +136,9 @@ public class LiveMatches extends Fragment {
                     public void callback(Team returnedObject) {
                         pair.teamLandlord = returnedObject;
                         View team1 = viewMatch.findViewById(R.id.team1);
-                        try {
-                            UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team1);
-                            fillPlayers(returnedObject, viewMatch, true);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team1);
+                        fillPlayers(returnedObject, viewMatch, true);
+
                     }
                 });
 
@@ -154,14 +147,9 @@ public class LiveMatches extends Fragment {
                     public void callback(Team returnedObject) {
                         pair.teamGuest = returnedObject;
                         View team2 = viewMatch.findViewById(R.id.team2);
-                        try {
-                            UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team2);
-                            fillPlayers(returnedObject, viewMatch, false);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team2);
+                        fillPlayers(returnedObject, viewMatch, false);
+
                     }
                 });
 

@@ -36,7 +36,7 @@ public class LiveGameComments extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
+//        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
     }
 
     @Override

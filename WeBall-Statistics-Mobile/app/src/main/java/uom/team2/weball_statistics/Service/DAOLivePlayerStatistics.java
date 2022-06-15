@@ -50,7 +50,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                DAOLiveTeamService.getInstance().get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                DAOLiveMatchService.getInstance().get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
@@ -61,7 +61,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                         HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                         for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                            if (fragment.getActivity() != null &&  fragment.isAdded() && mapof.get(statistic.name()) != null) {
+                            if (fragment.getActivity() != null && fragment.isAdded() && mapof.get(statistic.name()) != null) {
                                 UIHandler.updateProgressBarLayoutTeam1(fragment,
                                         mapof,
                                         statistic,
@@ -111,29 +111,33 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
         return null;
     }
 
+    public Task<DataSnapshot> get(int matchId, int playerId) {
+        return databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get();
+    }
+
     @Override
     public void update(PlayerLiveStatistics data) {
-        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_PLAYER_STATS_LIVE);
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("player_id: " + data.getPlayer_id()).updateChildren(h);
+        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_PLAYER_STATS_LIVE);
     }
 
     public void initializeTable(int matchId, int playerId) {
-        databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchId, playerId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-
-                } else {
-                    PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                    insert(playerLiveStatistics);
+                    return;
                 }
+                PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId);
+                insert(playerLiveStatistics);
+
             }
         });
     }
 
     public void updateByMatchAndTeamId(int matchId, int playerId, LiveStatisticsEnum statisticsEnum) {
-        databaseReference.child("match_id: " + matchId).child("player_id: " + playerId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchId, playerId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -141,7 +145,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                     LiveStatisticsEnum.updateStatistic(playerLiveStatistics, statisticsEnum);
                     update(playerLiveStatistics);
                 } else {
-                    PlayerLiveStatistics newPlayerLiveStatistics = new PlayerLiveStatistics(matchId, playerId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    PlayerLiveStatistics newPlayerLiveStatistics = new PlayerLiveStatistics(matchId, playerId);
                     insert(newPlayerLiveStatistics).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {

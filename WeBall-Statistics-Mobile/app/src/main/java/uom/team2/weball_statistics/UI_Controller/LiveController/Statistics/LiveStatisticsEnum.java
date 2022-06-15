@@ -94,24 +94,20 @@ public enum LiveStatisticsEnum {
                 teamLiveStatistics.setSuccessful_effort(teamLiveStatistics.getSuccessful_effort() + 1);
                 teamLiveStatistics.setTotal_effort(teamLiveStatistics.getTotal_effort() + 1);
                 teamLiveStatistics.setTotal_twopointer(teamLiveStatistics.getTotal_twopointer() + 1);
-
                 break;
             case total_twopointer:
                 teamLiveStatistics.setTotal_twopointer(teamLiveStatistics.getTotal_twopointer() + 1);
                 teamLiveStatistics.setTotal_effort(teamLiveStatistics.getTotal_effort() + 1);
-
                 break;
             case successful_threepointer:
                 teamLiveStatistics.setSuccessful_threepointer(teamLiveStatistics.getSuccessful_threepointer() + 1);
                 teamLiveStatistics.setSuccessful_effort(teamLiveStatistics.getSuccessful_effort() + 1);
                 teamLiveStatistics.setTotal_effort(teamLiveStatistics.getTotal_effort() + 1);
                 teamLiveStatistics.setTotal_threepointer(teamLiveStatistics.getTotal_threepointer() + 1);
-
                 break;
             case total_threepointer:
                 teamLiveStatistics.setTotal_threepointer(teamLiveStatistics.getTotal_threepointer() + 1);
                 teamLiveStatistics.setTotal_effort(teamLiveStatistics.getTotal_effort() + 1);
-
                 break;
             case steal:
                 teamLiveStatistics.setSteal(teamLiveStatistics.getSteal() + 1);

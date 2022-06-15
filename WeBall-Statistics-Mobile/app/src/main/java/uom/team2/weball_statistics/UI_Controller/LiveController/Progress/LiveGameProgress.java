@@ -9,21 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.Date;
-
-import uom.team2.weball_statistics.Model.Actions.Action;
-import uom.team2.weball_statistics.Model.Actions.BelongsTo;
-import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
-import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
-import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
-import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Match;
-import uom.team2.weball_statistics.Model.Player;
-import uom.team2.weball_statistics.Model.Referee;
-import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Service.DAOAction;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
 /*
@@ -57,7 +45,7 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
+//        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
     }
 
     @Override

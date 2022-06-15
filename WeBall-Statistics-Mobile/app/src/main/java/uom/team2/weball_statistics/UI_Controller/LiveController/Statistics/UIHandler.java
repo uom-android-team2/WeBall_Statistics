@@ -24,7 +24,7 @@ import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 public class UIHandler {
 
     public static void updateScore(Fragment fragment, MatchHeaderLayoutBinding layoutBinding, int team1Score, int team2Score) {
-        if (fragment.getActivity() != null) {
+        if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -36,25 +36,24 @@ public class UIHandler {
     }
 
     public static void updateScore(Fragment fragment, TextView textView, int team1Score, int team2Score) {
-        if (fragment.getActivity() != null) {
+        if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
                     textView.setText(team1Score + " - " + team2Score);
                 }
             });
         }
     }
 
-    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
+    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout){
         updateTeamImageInMatchHeader(fragment,
                 Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 team.getTeamName(),
                 teamImageLayout);
     }
 
-    private static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) throws IOException, InterruptedException {
+    private static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -72,7 +71,7 @@ public class UIHandler {
         }
     }
 
-    public static void updateSelectedPlayerImageLayout(Fragment fragment, String imageUrl, String name, View imageLayout) throws IOException, InterruptedException {
+    public static void updateSelectedPlayerImageLayout(Fragment fragment, String imageUrl, String name, View imageLayout) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -91,13 +90,13 @@ public class UIHandler {
 
     }
 
-    public static void updateTeamImage(Fragment fragment, Team team, ImageView image) throws IOException, InterruptedException, NullPointerException {
+    public static void updateTeamImage(Fragment fragment, Team team, ImageView image) {
         updateTeamImage(fragment,
                 Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 image);
     }
 
-    private static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) throws IOException, InterruptedException {
+    private static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override

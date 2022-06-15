@@ -119,7 +119,7 @@
     <string name="statTitle">Statistic Title</string>
     <string name="rank">Rank</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="championship_statistics_btn_text">Leaderboard</string>
+    <string name="championship_statistics_btn_text">Championship Leaderboard</string>
     <string name="textviewPlayer_text">PlayerName</string>
     <string name="substitutionsTittle_text">Substitutions</string>
     <string name="playersTittle_text">Players</string>

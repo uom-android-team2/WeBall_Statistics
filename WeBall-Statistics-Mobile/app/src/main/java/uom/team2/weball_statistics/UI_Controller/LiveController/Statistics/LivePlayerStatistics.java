@@ -174,12 +174,12 @@ public class LivePlayerStatistics extends Fragment {
             return;
         }
 
+        UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
         DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
 
         loadInitialTeamsPlayers();
         loadSecondTeamPlayers();
 
-        UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
 
 
     }

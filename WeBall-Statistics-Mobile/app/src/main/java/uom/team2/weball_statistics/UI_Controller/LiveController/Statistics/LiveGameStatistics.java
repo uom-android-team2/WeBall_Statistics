@@ -92,7 +92,7 @@ public class LiveGameStatistics extends Fragment {
 
         DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
         daoLiveMatchService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
-        daoLiveMatchService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
+        daoLiveMatchService.setListenerForPoints(this, binding.header.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
 
         UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
         UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());

@@ -142,42 +142,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
         });
     }
 
-    public void setListenerForPoints(Fragment fragment, MatchHeaderLayoutBinding layoutBinding, int matchId, int teamId1, int teamId2) {
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // this method is call to get the realtime
-                // updates in the data.
-                // this method is called when the data is
-                // changed in our Firebase console.
-
-
-                TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
-                TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
-
-                int scoreTeam1 = 0;
-                int scoreTeam2 = 0;
-
-                if (team1 != null) {
-                    scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
-                }
-
-                if (team2 != null) {
-                    scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
-                }
-
-                UIHandler.updateScore(fragment, layoutBinding, scoreTeam1, scoreTeam2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // calling on cancelled method when we receive
-                // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
-            }
-        });
-    }
-
     //
     public void setListenerForPoints(Fragment fragment, TextView textView, int matchId, int teamId1, int teamId2) {
         databaseReference.addValueEventListener(new ValueEventListener() {

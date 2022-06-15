@@ -52,7 +52,7 @@ import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
  * Use the {@link AdminsView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminsView extends Fragment  {
+public class AdminsView extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -98,7 +98,7 @@ public class AdminsView extends Fragment  {
     private TextView pauseBtn;
     private TextView undoBtn;
     private TextView substitutionBtn;
-    private ArrayList<ImageView> playersImageViewList =new ArrayList<ImageView>();
+    private final ArrayList<ImageView> playersImageViewList = new ArrayList<ImageView>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -185,43 +185,35 @@ public class AdminsView extends Fragment  {
 
 
         DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
-        DAOLiveMatchService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+        DAOLiveMatchService.getInstance().setListenerForPoints(this, binding.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
 
-        for (Player player: teamLandlord.getTeamPlayers()){
+        for (Player player : teamLandlord.getTeamPlayers()) {
             DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
         }
-        for (Player player: teamGuest.getTeamPlayers()){
+        for (Player player : teamGuest.getTeamPlayers()) {
             DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
         }
 
-        try {
-            UIHandler.updateTeamImage(this,teamLandlord,binding.team1Banner);
-            UIHandler.updateTeamImage(this,teamGuest,binding.team2Banner);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
+        UIHandler.updateTeamImage(this, teamLandlord, binding.team1Banner);
+        UIHandler.updateTeamImage(this, teamGuest, binding.team2Banner);
 
 
         // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
-        ArrayList<Player> tlList=teamLandlord.getTeamPlayers();
-        ArrayList<Player> tgList=teamGuest.getTeamPlayers();
+        ArrayList<Player> tlList = teamLandlord.getTeamPlayers();
+        ArrayList<Player> tgList = teamGuest.getTeamPlayers();
 
-        for(int i=0;i<tlList.size();i++){
-            if(i<5){
+        for (int i = 0; i < tlList.size(); i++) {
+            if (i < 5) {
                 keyPlayersLandlord.add(tlList.get(i));
-            }else{
+            } else {
                 subPlayersLandlord.add(tlList.get(i));
             }
         }
 
-        for(int i=0;i<tgList.size();i++){
-            if(i<5){
+        for (int i = 0; i < tgList.size(); i++) {
+            if (i < 5) {
                 keyPlayersGuest.add(tgList.get(i));
-            }else{
+            } else {
                 subPlayersGuest.add(tgList.get(i));
             }
         }
@@ -237,7 +229,6 @@ public class AdminsView extends Fragment  {
         teamGuest.setSubPlayersList(subPlayersGuest);
 
 
-
         //Add ImageViews for players into an ArrayList
         playersImageViewList.add(binding.player1);
         playersImageViewList.add(binding.player2);
@@ -245,9 +236,9 @@ public class AdminsView extends Fragment  {
         playersImageViewList.add(binding.player4);
         playersImageViewList.add(binding.player5);
         //Put images of the 1rst team Players
-        for(int i=0;i<playersImageViewList.size();i++){
+        for (int i = 0; i < playersImageViewList.size(); i++) {
             Picasso.get()
-                    .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                    .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
                     .resize(200, 200)
                     .centerCrop()
                     .into(playersImageViewList.get(i));
@@ -269,7 +260,6 @@ public class AdminsView extends Fragment  {
         playerChecked = 1;
 
         listenEvent();
-
 
 
         //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
@@ -300,9 +290,9 @@ public class AdminsView extends Fragment  {
                 //remove the background color from the other banner
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
-                for(int i=0;i<playersImageViewList.size();i++){
+                for (int i = 0; i < playersImageViewList.size(); i++) {
                     Picasso.get()
-                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                            .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
                             .resize(200, 200)
                             .centerCrop()
                             .into(playersImageViewList.get(i));
@@ -340,9 +330,9 @@ public class AdminsView extends Fragment  {
                 binding.team1Banner.setBackgroundColor(0x00000000);
 
                 //Load data for this team
-                for(int i=0;i<playersImageViewList.size();i++){
+                for (int i = 0; i < playersImageViewList.size(); i++) {
                     Picasso.get()
-                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamGuest.getKeyPlayers().get(i).getImagePath())
+                            .load(Config.PLAYER_IMAGES_RESOURCES + teamGuest.getKeyPlayers().get(i).getImagePath())
                             .resize(200, 200)
                             .centerCrop()
                             .into(playersImageViewList.get(i));
@@ -466,8 +456,8 @@ public class AdminsView extends Fragment  {
         binding.undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Player plObjForUndo=undoPlayerStack.lastElement();
-                Team teamObjForUndo=undoTeamStack.lastElement();
+                Player plObjForUndo = undoPlayerStack.lastElement();
+                Team teamObjForUndo = undoTeamStack.lastElement();
 
             }
         });
@@ -581,7 +571,6 @@ public class AdminsView extends Fragment  {
                     view.setBackground(shape);
 
 
-
                     playerChecked = 5;
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
@@ -618,11 +607,9 @@ public class AdminsView extends Fragment  {
         });
 
 
-
-
     }
 
-    private void listenEvent(){
+    private void listenEvent() {
         DBDataRecovery dataRecovery = new DBDataRecovery();
 
         System.out.println("erifoejiks");
@@ -636,14 +623,14 @@ public class AdminsView extends Fragment  {
                 ppv.show();
             });
             freeThrowBtn.setOnClickListener(e -> {
-                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             twoPointBtn.setOnClickListener(e -> {
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
-            reboundBtn.setOnClickListener(e ->  {
+            reboundBtn.setOnClickListener(e -> {
                 updateRebound(playerStats, teamStats, dataRecovery);
                 //Insert rebound's action to firebase
                 Action reboundAction = null;
@@ -725,8 +712,8 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalAssists();
         teamStats.setTotalAssists();
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.assist);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.assist);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.assist);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.assist);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -738,8 +725,8 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalRebounds();
         teamStats.setTotalRebounds();
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.rebound);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.rebound);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.rebound);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.rebound);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -751,8 +738,8 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalSteels();
         teamStats.setTotalSteels();
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.steal);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.steal);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.steal);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.steal);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -764,8 +751,8 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalBlock();
         teamStats.setTotalBlock();
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.block);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.block);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.block);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.block);
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -777,8 +764,8 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalFouls();
         teamStats.setTotalFouls();
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.foul);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.foul);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.foul);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.foul);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -792,8 +779,8 @@ public class AdminsView extends Fragment  {
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.turnover);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.turnover);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.turnover);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -11,14 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
-import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -29,7 +27,6 @@ import uom.team2.weball_statistics.utils.Utils;
 public class LiveGameStatistics extends Fragment {
 
     private final DAOLiveMatchService daoLiveMatchService = DAOLiveMatchService.getInstance();
-    private final TeamService teamService = new TeamService();
     private FragmentLiveGameStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
     private Match match;
@@ -88,18 +85,14 @@ public class LiveGameStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
         DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
         daoLiveMatchService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
         daoLiveMatchService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
 
-        try {
-            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
-            UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
+        UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());
+
 
     }
 

@@ -28,7 +28,7 @@ public class LayoutFactory {
         return progressBarLayout;
     }
 
-    public static View createPayerImageLayout(Fragment fragment, String name, String imageEndPoint) throws IOException {
+    public static View createPayerImageLayout(Fragment fragment, String name, String imageEndPoint){
         if (fragment.getActivity() != null && fragment.isAdded()) {
             View playerImageLayout = fragment.getLayoutInflater().inflate(R.layout.player_image_layout, null);
             TextView playerName = playerImageLayout.findViewById(R.id.player_name);

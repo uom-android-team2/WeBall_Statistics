@@ -20,7 +20,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -133,14 +132,9 @@ public class UpcomingMatches extends Fragment {
                     public void callback(Team returnedObject) {
                         pair.teamLandlord = returnedObject;
                         View team1 = viewMatch.findViewById(R.id.team1);
-                        try {
-                            UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team1);
-                            fillPlayers(returnedObject, viewMatch, true);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team1);
+                        fillPlayers(returnedObject, viewMatch, true);
+
                     }
                 });
 
@@ -149,14 +143,9 @@ public class UpcomingMatches extends Fragment {
                     public void callback(Team returnedObject) {
                         pair.teamGuest = returnedObject;
                         View team2 = viewMatch.findViewById(R.id.team2);
-                        try {
-                            UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team2);
-                            fillPlayers(returnedObject, viewMatch, false);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team2);
+                        fillPlayers(returnedObject, viewMatch, false);
+
                     }
                 });
 

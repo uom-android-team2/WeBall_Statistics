@@ -203,9 +203,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
                     scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
                 }
 
-
-                scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
-                scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
                 UIHandler.updateScore(fragment, textView, scoreTeam1, scoreTeam2);
 
             }

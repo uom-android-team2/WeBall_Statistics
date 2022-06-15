@@ -13,10 +13,13 @@ import androidx.fragment.app.Fragment;
 import java.util.Date;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlowComment;
+import uom.team2.weball_statistics.Model.Actions.ReboundAction.ReboundComment;
 import uom.team2.weball_statistics.Model.Match;
+import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Referee;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
@@ -62,10 +65,15 @@ public class LiveGameComments extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        Player player = new Player("Minas", "Charakopoulos");
+        Team team = new Team("Paok");
+        Action actionRebound = new ReboundComment("30.21", BelongsTo.HOME, player, team);
         Action action = new MatchFlowComment("0.01", FlowType.START, this.getContext());
         System.out.println(action.getActionDesc());
+        System.out.println(actionRebound.getActionDesc());
         Match match = new Match(1, null, null, new Date(), Status.ONGOING);
         DAOAction.getInstance().insertCommentDesc(action, match);
+        DAOAction.getInstance().insertCommentDesc(actionRebound, match);
     }
 
     @Override

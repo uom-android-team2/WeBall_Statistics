@@ -30,6 +30,25 @@ public class PlayerLiveStatistics implements firebaseModel {
 
     }
 
+    public PlayerLiveStatistics(int matchId, int playerId) {
+        this.match_id = matchId;
+        this.player_id = playerId;
+        this.successful_effort = 0;
+        this.total_effort = 0;
+        this.successful_freethrow = 0;
+        this.total_freethrow = 0;
+        this.successful_twopointer = 0;
+        this.total_twopointer = 0;
+        this.successful_threepointer = 0;
+        this.total_threepointer = 0;
+        this.steal = 0;
+        this.assist = 0;
+        this.block = 0;
+        this.rebound = 0;
+        this.foul = 0;
+        this.turnover = 0;
+        this.minutes = 0;
+    }
 
     public PlayerLiveStatistics(int matchId, int playerId, int successfulEffort, int totalEffort, int successfulFreethrow, int totalFreethrow, int successfulTwopointer, int totalTwopointer, int successfulThreepointer, int totalThreepointer, int steal, int assist, int block, int rebound, int foul, int turnover, double minutes) {
         this.match_id = matchId;

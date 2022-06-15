@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController.Comments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlowComment;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameCommentsBinding;
 
@@ -49,12 +54,9 @@ public class LiveGameComments extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //Create comments for Testing
-        
-        for (int i = 0; i <= 12; i++) {
-            View comment = getLayoutInflater().inflate(R.layout.match_comment_layout, null);
-            binding.commentsLayoutContainer.addView(comment);
-        }
+
+        Action action = new MatchFlowComment("0.01", FlowType.START, this.getContext());
+        System.out.println(action.getActionDesc());
     }
 
     @Override

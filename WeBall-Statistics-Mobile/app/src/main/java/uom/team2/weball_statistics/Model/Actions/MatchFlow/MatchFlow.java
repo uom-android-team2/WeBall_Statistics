@@ -5,7 +5,7 @@ import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 
 public class MatchFlow extends Action {
 
-    private FlowType flowType; //Start or pause
+    private FlowType flowType; //Start or pause or resume or completed
 
     private static String getMyImage(FlowType flowType) {
         switch (flowType) {

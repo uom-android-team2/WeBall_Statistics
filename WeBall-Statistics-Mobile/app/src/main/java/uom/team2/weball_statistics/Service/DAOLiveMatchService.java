@@ -77,8 +77,8 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
                                         }
                                     });
                                 }
-                            } catch (NumberFormatException e) {
-                                e.printStackTrace();
+                            } catch (Exception e) {
+                                System.out.println(e);
                             }
                         } else {
                             if (fragment.getActivity() != null && fragment.isAdded()) {

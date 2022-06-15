@@ -124,4 +124,37 @@
     <string name="substitutionsTittle_text">Substitutions</string>
     <string name="playersTittle_text">Players</string>
     <string name="message_no_actions_text">Match will start soon!</string>
+
+    <!-- Strings for Comments -->
+    <!-- display something more times because i want to be the most common description  -->
+    <string-array name="matchStart">
+        <item>Finally, the curtain opens on the field!</item>
+        <item>It\'s time to start the game, with the referee whistling</item>
+        <item>It\'s time to start the game, with the referee whistling</item>
+        <item>It\'s time to start the game, with the referee whistling</item>
+    </string-array>
+    <string-array name="matchPause">
+        <item>The coach asks for time out, to organize his players</item>
+        <item>There is a pause in the flow of the match!</item>
+        <item>The referee decided that the match should be paused.</item>
+        <item>The referee decided that the match should be paused.</item>
+        <item>The match was paused</item>
+        <item>The match was paused</item>
+    </string-array>
+    <string-array name="matchResume">
+        <item>The match continues again</item>
+        <item>The referee whistles for the resume of the match</item>
+        <item>The referee whistles for the resume of the match</item>
+        <item>The referee whistles for the resume of the match</item>
+        <item>After this short timeout, the match resumes</item>
+        <item>After this sort pause, the match resumes</item>
+    </string-array>
+    <string-array name="matchCompleted">
+        <item>The referee whistles the end of the match!</item>
+        <item>The referee whistles the end of the match!</item>
+        <item>We have reached the end of the match. What can be the continuation of the championship?</item>
+        <item>The match is over!</item>
+        <item>It\'s time for the referee to whistle at the end of the match!</item>
+        <item>It\'s time for the referee to whistle at the end of the match!</item>
+    </string-array>
 </resources>

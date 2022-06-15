@@ -34,7 +34,5 @@ public class Action {
         return belongsTo;
     }
 
-    public String getImageAction() {
-        return imageAction;
-    }
+    public String getImageAction() { return imageAction; }
 }

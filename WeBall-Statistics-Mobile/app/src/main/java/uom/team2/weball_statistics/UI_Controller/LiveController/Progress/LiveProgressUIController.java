@@ -35,95 +35,116 @@ public class LiveProgressUIController {
 
     public void addActionForHomeTeam(LiveGameProgress liveGameProgress, Action action) {
 
-        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
-        View actionAsView = layoutInflater.inflate(R.layout.card_progress_layout_landlord, null);
+        if (liveGameProgress.isAdded() && liveGameProgress.getActivity() != null) {
 
-        TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
-        time.setText(action.getTimeHappened());
+            LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+            View actionAsView = layoutInflater.inflate(R.layout.card_progress_layout_landlord, null);
 
-        ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
-        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
-        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
-        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
-        picture.setImageDrawable(res);
+            TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
+            time.setText(action.getTimeHappened());
 
-        TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
-        smallDescription.setText(action.getActionDesc());
+            ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+            String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+            int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+            Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+            picture.setImageDrawable(res);
 
-        linearLayout.addView(actionAsView, 0);
+            TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
+            smallDescription.setText(action.getActionDesc());
+
+            linearLayout.addView(actionAsView, 0);
+        }
     }
 
     public void addActionForGuestTeam(LiveGameProgress liveGameProgress, Action action) {
 
-        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
-        View actionAsView = layoutInflater.inflate(R.layout.card_progress_layout_guest, null);
+        if (liveGameProgress.isAdded() && liveGameProgress.getActivity() != null) {
 
-        TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
-        time.setText(action.getTimeHappened());
+            LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+            View actionAsView = layoutInflater.inflate(R.layout.card_progress_layout_guest, null);
 
-        ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
-        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
-        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
-        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
-        picture.setImageDrawable(res);
+            TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
+            time.setText(action.getTimeHappened());
 
-        TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
-        smallDescription.setText(action.getActionDesc());
+            ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+            String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+            int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+            Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+            picture.setImageDrawable(res);
 
-        linearLayout.addView(actionAsView, 0);
+            TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
+            smallDescription.setText(action.getActionDesc());
+
+            linearLayout.addView(actionAsView, 0);
+        }
     }
 
     public void addActionForGeneral(LiveGameProgress liveGameProgress, Action action) {
 
-        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
-        View actionAsView = layoutInflater.inflate(R.layout.card_progress_layout_general, null);
+        if (liveGameProgress.isAdded() && liveGameProgress.getActivity() != null) {
 
-        TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
-        time.setText(action.getTimeHappened());
+            LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+            View actionAsView = layoutInflater.inflate(R.layout.card_progress_layout_general, null);
 
-        ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
-        String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
-        int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
-        Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
-        picture.setImageDrawable(res);
+            TextView time = (TextView) actionAsView.findViewById(R.id.time_happened);
+            time.setText(action.getTimeHappened());
 
-        TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
-        smallDescription.setText(action.getActionDesc());
+            ImageView picture = (ImageView) actionAsView.findViewById(R.id.action_happened_photo);
+            String uri = "@drawable/" + action.getImageAction();  // where myresource (without the extension) is the file
+            int imageResource = liveGameProgress.getActivity().getResources().getIdentifier(uri, null, liveGameProgress.getActivity().getPackageName());
+            Drawable res = liveGameProgress.getResources().getDrawable(imageResource);
+            picture.setImageDrawable(res);
 
-        linearLayout.addView(actionAsView, 0);
+            TextView smallDescription = (TextView) actionAsView.findViewById(R.id.action_small_desc);
+            smallDescription.setText(action.getActionDesc());
+
+            linearLayout.addView(actionAsView, 0);
+        }
     }
 
     public void noActionsMessage(LiveGameProgress liveGameProgress) {
-        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
-        View messageAsView = layoutInflater.inflate(R.layout.no_actions_message, null);
 
-        linearLayout.addView(messageAsView);
+        if (liveGameProgress.isAdded() && liveGameProgress.getActivity() != null) {
+
+            LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+            View messageAsView = layoutInflater.inflate(R.layout.no_actions_message, null);
+
+            linearLayout.addView(messageAsView);
+        }
     }
 
     public void displayQuarter(LiveGameProgress liveGameProgress, int quarter) {
-        LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
-        View quarterView = layoutInflater.inflate(R.layout.quarter_layout, null);
 
-        TextView quarterTextView = (TextView) quarterView.findViewById(R.id.quarter);
-        quarterTextView.setText("Quarter " + quarter);
+        if (liveGameProgress.isAdded() && liveGameProgress.getActivity() != null) {
 
-        linearLayout.addView(quarterView, 0);
+            LayoutInflater layoutInflater = (LayoutInflater) liveGameProgress.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout linearLayout = liveGameProgress.getBinding().actionsLayoutContainer;
+            View quarterView = layoutInflater.inflate(R.layout.quarter_layout, null);
+
+            TextView quarterTextView = (TextView) quarterView.findViewById(R.id.quarter);
+            quarterTextView.setText("Quarter " + quarter);
+
+            linearLayout.addView(quarterView, 0);
+        }
     }
 
     public void fillMatchInformation(LiveGameProgress liveGameProgress, Match match, Team teamHome) {
-        MatchInformationLayoutBinding matchInformationLayoutBinding = liveGameProgress.getBinding().matchInfoInclude;
+
+        if (liveGameProgress.isAdded() && liveGameProgress.getActivity() != null) {
+
+            MatchInformationLayoutBinding matchInformationLayoutBinding = liveGameProgress.getBinding().matchInfoInclude;
 
 //        TextView refereeNameTextView = (TextView) matchInformationLayoutBinding.headRefereeName;
 //        refereeNameTextView.setText(match.getReferee().getFirstname().charAt(0) + "." + match.getReferee().getSurname());
 
-        if (teamHome != null) {
-            TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
-            stadiumNameTextView.setText(teamHome.getTeamCity());
+            if (teamHome != null) {
+                TextView stadiumNameTextView = (TextView) matchInformationLayoutBinding.stadiumName;
+                stadiumNameTextView.setText(teamHome.getTeamCity());
+            }
         }
     }
 }

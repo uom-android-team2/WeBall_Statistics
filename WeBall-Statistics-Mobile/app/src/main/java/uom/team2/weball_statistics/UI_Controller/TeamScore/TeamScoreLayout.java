@@ -18,7 +18,7 @@ public class TeamScoreLayout {
         TextView wins = teamScoreLayout.findViewById(R.id.wins);
         wins.setText(String.valueOf(w));
         TextView loses = teamScoreLayout.findViewById(R.id.loses);
-        loses.setText(String.valueOf(g));
+        loses.setText(String.valueOf(l));
         TextView points = teamScoreLayout.findViewById(R.id.points);
         points.setText(String.valueOf(p));
         return teamScoreLayout;

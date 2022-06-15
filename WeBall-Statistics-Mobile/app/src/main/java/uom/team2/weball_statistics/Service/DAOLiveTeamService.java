@@ -165,7 +165,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 if (team2 != null) {
                     scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
                 }
-                
+
                 UIHandler.updateScore(fragment, layoutBinding, scoreTeam1, scoreTeam2);
             }
 
@@ -192,12 +192,20 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
                 TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
 
-                if (team1 == null || team2 == null) {
-                    return;
+                int scoreTeam1 = 0;
+                int scoreTeam2 = 0;
+
+                if (team1 != null) {
+                    scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
                 }
 
-                int scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
-                int scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                if (team2 != null) {
+                    scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                }
+
+
+                scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
+                scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
                 UIHandler.updateScore(fragment, textView, scoreTeam1, scoreTeam2);
 
             }
@@ -234,7 +242,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
                     if (fragment.getActivity() != null && fragment.isAdded() && fragment.getMapOfStatistics().get(statistic.name()) != null) {
                         UIHandler.updateProgressBarLayoutTeam1(fragment,
-                                fragment.getMapOfStatistics(),
+                                mapof,
                                 statistic,
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
                                         + LiveStatisticsEnum.getStatisticValueByName(team2, statistic),
@@ -242,7 +250,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                         );
 
                         UIHandler.updateProgressBarLayoutTeam2(fragment,
-                                fragment.getMapOfStatistics(),
+                                mapof,
                                 statistic,
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
                                         + LiveStatisticsEnum.getStatisticValueByName(team2, statistic),
@@ -301,7 +309,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
     }
 
     public void updateByMatchAndTeamId(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {
-        databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -323,7 +331,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
     }
 
     public void initializeTable(int matchid, int teamId1, int teamId2) {
-        databaseReference.child("match_id: " + matchid).child("team_id: " + teamId1).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchid, teamId1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -334,7 +342,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 }
             }
         });
-        databaseReference.child("match_id: " + matchid).child("team_id: " + teamId2).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchid, teamId2).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

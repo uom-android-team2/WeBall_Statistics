@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Model;
 
 
 import java.io.Serializable;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,9 +22,8 @@ public class Match implements Serializable {
     private int teamLandlord_id;
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
-
-
     private int progress = 0;
+    private long keepClock;
 
     private boolean completed = false;
     private ArrayList<Action> actions;
@@ -148,4 +148,11 @@ public class Match implements Serializable {
         return Teamguest_id;
     }
 
+    public void setKeepClock(long cl){
+        keepClock= cl;
+    }
+
+    public long getKeepClock() {
+        return keepClock;
+    }
 }

@@ -845,6 +845,7 @@ public class AdminsView extends Fragment  {
         if (!isUndo){
             playerStats.setTotalAssists();
             teamStats.setTotalAssists();
+            Toast.makeText(getActivity().getApplicationContext(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);
@@ -867,6 +868,7 @@ public class AdminsView extends Fragment  {
         if (!isUndo){
             playerStats.setTotalRebounds();
             teamStats.setTotalRebounds();
+            Toast.makeText(getActivity().getApplicationContext(),"Rebound for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.reboundButton);
@@ -892,6 +894,7 @@ public class AdminsView extends Fragment  {
         if (!isUndo){
             playerStats.setTotalSteels();
             teamStats.setTotalSteels();
+            Toast.makeText(getActivity().getApplicationContext(),"Steal for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.stealButton);
@@ -914,6 +917,7 @@ public class AdminsView extends Fragment  {
         if (!isUndo){
             playerStats.setTotalBlock();
             teamStats.setTotalBlock();
+            Toast.makeText(getActivity().getApplicationContext(),"Block for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.blockButton);
@@ -936,6 +940,7 @@ public class AdminsView extends Fragment  {
         if (!isUndo){
             playerStats.setTotalFouls();
             teamStats.setTotalFouls();
+            Toast.makeText(getActivity().getApplicationContext(),"Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.foulButton);
@@ -958,6 +963,7 @@ public class AdminsView extends Fragment  {
         if (!isUndo){
             playerStats.setTotalTurnovers();
             teamStats.setTotalTurnovers();
+            Toast.makeText(getActivity().getApplicationContext(),"Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.turnoverButton);

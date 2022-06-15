@@ -73,6 +73,10 @@ public class PreviousMatches extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if (binding == null){
+            return;
+        }
+
         MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
         matchesOnMainPageService.fetchCompletedMatches(new CallbackListener<ArrayList<Match>>() {
             @Override
@@ -133,6 +137,7 @@ public class PreviousMatches extends Fragment {
                     }
                 });
 
+                int finalI = i;
                 teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
                     @Override
                     public void callback(Team returnedObject) {
@@ -140,6 +145,7 @@ public class PreviousMatches extends Fragment {
                         View team2 = viewMatch.findViewById(R.id.team2);
                         UIHandler.updateTeamImageInMatch(PreviousMatches.this, returnedObject, team2);
                         fillPlayers(returnedObject, viewMatch, false);
+                        navigate(viewMatch, liveMatches.get(finalI).getId());
 
                     }
                 });
@@ -154,23 +160,29 @@ public class PreviousMatches extends Fragment {
                         }
                     }
                 });
-                navigate(viewMatch, liveMatches.get(i).getId());
             }
         }
     }
 
-    public void navigate(View viewMatch, int matchid) {
-        viewMatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("match", mapOfMatches.get(matchid));
-                bundle.putSerializable("teamLandlord", hashMap.get(matchid).teamLandlord);
-                bundle.putSerializable("teamGuest", hashMap.get(matchid).teamGuest);
-                NavHostFragment.findNavController(PreviousMatches.this)
-                        .navigate(R.id.action_matchesTabContainer_to_completedMatchStats3, bundle);
-            }
-        });
+    public void navigate(View viewMatch, int matchId) {
+        if (PreviousMatches.this.getActivity() != null && PreviousMatches.this.isAdded()){
+            PreviousMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    viewMatch.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("match", mapOfMatches.get(matchId));
+                            bundle.putSerializable("teamLandlord", hashMap.get(matchId).teamLandlord);
+                            bundle.putSerializable("teamGuest", hashMap.get(matchId).teamGuest);
+                            NavHostFragment.findNavController(PreviousMatches.this)
+                                    .navigate(R.id.action_matchesTabContainer_to_completedMatchStats3, bundle);
+                        }
+                    });
+                }
+            });
+        }
     }
 
     public void fillPlayers(Team team, View viewMatch, boolean home) {

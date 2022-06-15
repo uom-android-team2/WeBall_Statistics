@@ -76,6 +76,10 @@ public class UpcomingMatches extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if (binding == null){
+            return;
+        }
+
         MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
         matchesOnMainPageService.fetchUpcomingMatches(new CallbackListener<ArrayList<Match>>() {
             @Override
@@ -138,6 +142,7 @@ public class UpcomingMatches extends Fragment {
                     }
                 });
 
+                int finalI = i;
                 teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
                     @Override
                     public void callback(Team returnedObject) {
@@ -145,7 +150,7 @@ public class UpcomingMatches extends Fragment {
                         View team2 = viewMatch.findViewById(R.id.team2);
                         UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team2);
                         fillPlayers(returnedObject, viewMatch, false);
-
+                        navigate(viewMatch, liveMatches.get(finalI).getId());
                     }
                 });
 
@@ -161,24 +166,31 @@ public class UpcomingMatches extends Fragment {
                         }
                     });
                 }
-                navigate(viewMatch, liveMatches.get(i).getId());
             }
         }
     }
 
-    public void navigate(View viewMatch, int matchid) {
-        ImageButton imageButton = viewMatch.findViewById(R.id.imageButtonEditMatch);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("match", mapOfMatches.get(matchid));
-                bundle.putSerializable("teamLandlord", hashMap.get(matchid).teamLandlord);
-                bundle.putSerializable("teamGuest", hashMap.get(matchid).teamGuest);
-                NavHostFragment.findNavController(UpcomingMatches.this)
-                        .navigate(R.id.action_matchesTabContainer_to_adminsView, bundle);
-            }
-        });
+    public void navigate(View viewMatch, int matchId) {
+        if (UpcomingMatches.this.getActivity() != null && UpcomingMatches.this.isAdded()) {
+
+            UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ImageButton imageButton = viewMatch.findViewById(R.id.imageButtonEditMatch);
+                    imageButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("match", mapOfMatches.get(matchId));
+                            bundle.putSerializable("teamLandlord", hashMap.get(matchId).teamLandlord);
+                            bundle.putSerializable("teamGuest", hashMap.get(matchId).teamGuest);
+                            NavHostFragment.findNavController(UpcomingMatches.this)
+                                    .navigate(R.id.action_matchesTabContainer_to_adminsView, bundle);
+                        }
+                    });
+                }
+            });
+        }
     }
 
 

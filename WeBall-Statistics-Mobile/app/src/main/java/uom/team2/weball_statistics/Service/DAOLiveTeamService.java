@@ -112,8 +112,8 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
-                if (team1 == null) {
+                TeamLiveStatistics team = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
+                if (team == null) {
                     return;
                 }
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
@@ -121,10 +121,10 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
                     if (fragment.getActivity() != null && fragment.isAdded()) {
                         UIHandler.updateProgressBarLayoutTeam2(fragment,
-                                fragment.getMapOfStatistics(),
+                                mapof,
                                 statistic,
-                                LiveStatisticsEnum.getStatisticValueByName(team1, statistic),
-                                LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
+                                LiveStatisticsEnum.getStatisticValueByName(team, statistic),
+                                LiveStatisticsEnum.getStatisticValueByName(team, statistic)
                         );
                     }
 
@@ -155,14 +155,18 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
                 TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
 
-                if (team1 == null || team2 == null) {
-                    return;
+                int scoreTeam1 = 0;
+                int scoreTeam2 = 0;
+
+                if (team1 != null) {
+                    scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
                 }
 
-                int scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
-                int scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                if (team2 != null) {
+                    scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                }
+                
                 UIHandler.updateScore(fragment, layoutBinding, scoreTeam1, scoreTeam2);
-
             }
 
             @Override

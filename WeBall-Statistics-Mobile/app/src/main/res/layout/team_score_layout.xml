@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:paddingTop="10dp"
@@ -16,7 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:textAlignment="center">
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/teamName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/position"
@@ -31,42 +36,67 @@
 
         <TextView
             android:id="@+id/teamName"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="TeamName"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/games"
+            app:layout_constraintStart_toEndOf="@+id/position_frame"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/games"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="16"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/wins"
+            app:layout_constraintStart_toEndOf="@+id/teamName"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/wins"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="14"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/loses"
+            app:layout_constraintStart_toEndOf="@+id/games"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/loses"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="2"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/points"
+            app:layout_constraintStart_toEndOf="@+id/wins"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/points"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="30"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/loses"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</TableRow>
+</androidx.constraintlayout.widget.ConstraintLayout>

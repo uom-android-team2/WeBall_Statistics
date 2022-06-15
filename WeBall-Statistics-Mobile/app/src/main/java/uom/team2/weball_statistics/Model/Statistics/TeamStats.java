@@ -19,7 +19,7 @@ public class TeamStats extends Stats {
     private int loses;
     protected Boolean isMatchId = false;
     private ArrayList<String> UniqueKeysOfTeam = new ArrayList<String>(Arrays.asList("team_id", "total_matches","win", "lose")); // This arraylist holds the unique fields of the team.
-
+    private String team_name;
     public TeamStats()  {
         isMatchId = true;
     }
@@ -70,6 +70,13 @@ public class TeamStats extends Stats {
 
     }
 
+    public String getTeam_name() {
+        return team_name;
+    }
+
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
+    }
 
     public int getGrades(){
         return wins * Config.COEFFICIENT_WIN + loses * Config.COEFFICIENT_LOOSE;

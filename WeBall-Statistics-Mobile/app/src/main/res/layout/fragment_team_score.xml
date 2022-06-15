@@ -62,85 +62,127 @@
 
 
 
-        <TableLayout
+        <LinearLayout
             android:id="@+id/scoreTable"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:stretchColumns="*"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top5">
+            app:layout_constraintTop_toBottomOf="@+id/top5"
+            android:orientation="vertical">
 
-            <TableRow
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/greyRank"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp">
+                android:layout_height="wrap_content"
+                android:background="@color/greyRank">
 
                 <TextView
+                    android:id="@+id/position"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:padding="3dip"
                     android:text="#"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/team"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/team"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
                     android:padding="3dip"
                     android:text="Team"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/games"
+                    app:layout_constraintStart_toEndOf="@+id/position"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/games"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
                     android:padding="3dip"
                     android:text="GM"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/wins"
+                    app:layout_constraintStart_toEndOf="@+id/team"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/wins"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
                     android:padding="3dip"
                     android:text="W"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/loses"
+                    app:layout_constraintStart_toEndOf="@+id/games"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/loses"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
                     android:padding="3dip"
                     android:text="L"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/points"
+                    app:layout_constraintStart_toEndOf="@+id/wins"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/points"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
                     android:padding="3dip"
-                    android:text="P"
+                    android:text="PTS"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
-            </TableRow>
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/loses"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ScrollView
                 android:id="@+id/scrollView1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TableLayout
+                <LinearLayout
                     android:id="@+id/teams_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
-                    android:stretchColumns="*">
+                    android:orientation="vertical">
 
-                </TableLayout>
+                </LinearLayout>
             </ScrollView>
 
-        </TableLayout>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView2"

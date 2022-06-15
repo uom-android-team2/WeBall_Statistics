@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Team;
@@ -46,7 +45,7 @@ public class UIHandler {
         }
     }
 
-    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout){
+    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) {
         updateTeamImageInMatchHeader(fragment,
                 Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 team.getTeamName(),
@@ -113,40 +112,54 @@ public class UIHandler {
 
     public static void updateProgressBarLayoutTeam1(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
-            View view = mapOfProgressBarLayout.get(key.name());
-            TextView statisticProgress = view.findViewById(R.id.team1_progress_text);
-            ProgressBar progressBar = view.findViewById(R.id.team1_progressbar);
-
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setMax(max);
-                    statisticProgress.setText(String.valueOf(value));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar.setProgress(value, true);
-                    } else {
-                        progressBar.setProgress(value);
+                    View view = mapOfProgressBarLayout.get(key.name());
+                    TextView statisticProgress = view.findViewById(R.id.team1_progress_text);
+                    ProgressBar progressBar = view.findViewById(R.id.team1_progressbar);
+                    if (max != progressBar.getMax()) {
+                        progressBar.setMax(max);
                     }
+                    if (value != progressBar.getProgress()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            progressBar.setProgress(value, true);
+                        } else {
+                            progressBar.setProgress(value);
+                        }
+                    }
+                    String stringgValue = String.valueOf(value);
 
+                    if (!stringgValue.equalsIgnoreCase(statisticProgress.getText().toString())) {
+                        statisticProgress.setText(stringgValue);
+                    }
                 }
             });
         }
     }
 
     public static void updateProgressBarLayoutTeam2(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {
-        View view = mapOfProgressBarLayout.get(key.name());
-        TextView statisticProgress = view.findViewById(R.id.team2_progress_text);
-        ProgressBar progressBar = view.findViewById(R.id.team2_progressbar);
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setMax(max);
-                    statisticProgress.setText(String.valueOf(value));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar.setProgress(value, true);
-                    } else {
-                        progressBar.setProgress(value);
+                    View view = mapOfProgressBarLayout.get(key.name());
+                    TextView statisticProgress = view.findViewById(R.id.team2_progress_text);
+                    ProgressBar progressBar = view.findViewById(R.id.team2_progressbar);
+                    if (max != progressBar.getMax()) {
+                        progressBar.setMax(max);
+                    }
+                    if (value != progressBar.getProgress()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            progressBar.setProgress(value, true);
+                        } else {
+                            progressBar.setProgress(value);
+                        }
+                    }
+                    String stringgValue = String.valueOf(value);
+
+                    if (!stringgValue.equalsIgnoreCase(statisticProgress.getText().toString())) {
+                        statisticProgress.setText(stringgValue);
                     }
                 }
             });

@@ -97,7 +97,7 @@ public class popupViewTwoPoints extends Dialog implements
                 }
 
                 if (twoPointThrowAction != null) {
-                    DAOAction.getInstance().insert(twoPointThrowAction, match);
+                    DAOAction.getInstance().insertAction(twoPointThrowAction, match);
                 }
 
                 //dismiss();

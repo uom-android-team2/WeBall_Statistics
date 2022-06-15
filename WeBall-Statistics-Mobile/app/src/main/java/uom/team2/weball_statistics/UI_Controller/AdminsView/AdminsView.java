@@ -385,7 +385,7 @@ public class AdminsView extends Fragment {
 
                     //Add start's action description to firebase
                     Action startMatchAction = new MatchFlow("00.00", FlowType.START);
-                    DAOAction.getInstance().insert(startMatchAction, match);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
 
                     match.setProgress(1);
 
@@ -410,7 +410,7 @@ public class AdminsView extends Fragment {
 
                     //Add completed action description to firebase
                     Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.COMPLETED);
-                    DAOAction.getInstance().insert(startMatchAction, match);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
 
                     match.setCompleted(true);
                     match.setProgress(0);
@@ -438,7 +438,7 @@ public class AdminsView extends Fragment {
 
                     //Add resume's action description to firebase
                     Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.RESUME);
-                    DAOAction.getInstance().insert(startMatchAction, match);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
                 } else {
                     binding.pauseButton.setText("Continue");
                     binding.clock.stop();
@@ -447,7 +447,7 @@ public class AdminsView extends Fragment {
 
                     //Add pause's action description to firebase
                     Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
-                    DAOAction.getInstance().insert(startMatchAction, match);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
                 }
             }
         });
@@ -641,7 +641,7 @@ public class AdminsView extends Fragment {
                 }
 
                 if (reboundAction != null) {
-                    DAOAction.getInstance().insert(reboundAction, match);
+                    DAOAction.getInstance().insertAction(reboundAction, match);
                 }
             });
             assistBtn.setOnClickListener(e -> {
@@ -658,7 +658,7 @@ public class AdminsView extends Fragment {
                 }
 
                 if (stealAction != null) {
-                    DAOAction.getInstance().insert(stealAction, match);
+                    DAOAction.getInstance().insertAction(stealAction, match);
                 }
             });
             blockBtn.setOnClickListener(e -> {
@@ -672,7 +672,7 @@ public class AdminsView extends Fragment {
                 }
 
                 if (blockAction != null) {
-                    DAOAction.getInstance().insert(blockAction, match);
+                    DAOAction.getInstance().insertAction(blockAction, match);
                 }
             });
             foulBtn.setOnClickListener(e -> {
@@ -686,7 +686,7 @@ public class AdminsView extends Fragment {
                 }
 
                 if (foulAction != null) {
-                    DAOAction.getInstance().insert(foulAction, match);
+                    DAOAction.getInstance().insertAction(foulAction, match);
                 }
             });
             turnoverBtn.setOnClickListener(e -> {
@@ -700,7 +700,7 @@ public class AdminsView extends Fragment {
                 }
 
                 if (turnOverAction != null) {
-                    DAOAction.getInstance().insert(turnOverAction, match);
+                    DAOAction.getInstance().insertAction(turnOverAction, match);
                 }
             });
         } catch (Exception ex) {

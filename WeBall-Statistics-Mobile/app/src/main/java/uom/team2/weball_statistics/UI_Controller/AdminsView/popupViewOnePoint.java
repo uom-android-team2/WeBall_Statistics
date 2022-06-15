@@ -96,7 +96,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
                 }
 
                 if (freeThrowAction != null) {
-                    DAOAction.getInstance().insert(freeThrowAction, match);
+                    DAOAction.getInstance().insertAction(freeThrowAction, match);
                 }
 
                 //dismiss();

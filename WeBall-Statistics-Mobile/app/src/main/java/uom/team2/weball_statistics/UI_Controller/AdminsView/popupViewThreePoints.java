@@ -93,7 +93,7 @@ public class popupViewThreePoints extends Dialog implements
                 }
 
                 if (treePointThrowAction != null) {
-                    DAOAction.getInstance().insert(treePointThrowAction, match);
+                    DAOAction.getInstance().insertAction(treePointThrowAction, match);
                 }
 
                 dismiss();

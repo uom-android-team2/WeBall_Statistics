@@ -61,7 +61,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                         HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                         for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                            if (fragment.getActivity() != null && mapof.get(statistic.name()) != null) {
+                            if (fragment.getActivity() != null &&  fragment.isAdded() && mapof.get(statistic.name()) != null) {
                                 UIHandler.updateProgressBarLayoutTeam1(fragment,
                                         mapof,
                                         statistic,

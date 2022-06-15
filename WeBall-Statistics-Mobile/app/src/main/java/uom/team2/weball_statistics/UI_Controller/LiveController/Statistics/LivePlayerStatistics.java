@@ -125,6 +125,7 @@ public class LivePlayerStatistics extends Fragment {
                 public void run() {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.header.spinner.setAdapter(adapter);
                 }
             });
@@ -168,6 +169,10 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        if (binding == null){
+            return;
+        }
 
         DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
 

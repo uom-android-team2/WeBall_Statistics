@@ -50,7 +50,7 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                DAOLiveTeamService.getInstance().get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                DAOLiveMatchService.getInstance().get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);

@@ -17,7 +17,7 @@ import java.util.HashMap;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameStatisticsBinding;
@@ -28,7 +28,7 @@ import uom.team2.weball_statistics.utils.Utils;
  */
 public class LiveGameStatistics extends Fragment {
 
-    private final DAOLiveTeamService daoLiveTeamService = DAOLiveTeamService.getInstance();
+    private final DAOLiveMatchService daoLiveMatchService = DAOLiveMatchService.getInstance();
     private final TeamService teamService = new TeamService();
     private FragmentLiveGameStatisticsBinding binding;
     private HashMap<String, View> mapOfStatistics;
@@ -82,15 +82,15 @@ public class LiveGameStatistics extends Fragment {
         match = (Match) bundle.getSerializable("match");
         teamLandlord = (Team) bundle.getSerializable("teamLandlord");
         teamGuest = (Team) bundle.getSerializable("teamGuest");
-        daoLiveTeamService.initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
+        daoLiveMatchService.initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
-        daoLiveTeamService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
-        daoLiveTeamService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
+        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
+        daoLiveMatchService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
+        daoLiveMatchService.setListenerForPoints(this, binding.header, match.getId(), teamLandlord.getId(), teamGuest.getId());
 
         try {
             UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());

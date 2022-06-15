@@ -21,8 +21,8 @@ import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -178,7 +178,7 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
+        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
 
         loadInitialTeamsPlayers();
         loadTeamPlayers();
@@ -202,7 +202,7 @@ public class LivePlayerStatistics extends Fragment {
         autoSelectPlayer(teamLandlordPlayers.get(0));
 
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamLandlordId, teamLandlordPlayers.get(0).getId());
-        DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId);
+        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId);
 
         if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
             LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
@@ -272,7 +272,7 @@ public class LivePlayerStatistics extends Fragment {
         int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
 
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamSelectedId, playerSelectedId);
-        DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
+        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
 
         try {
             UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
@@ -309,7 +309,7 @@ public class LivePlayerStatistics extends Fragment {
                     int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
 
                     DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, match.getId(), teamSelectedId, playerSelectedId);
-                    DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId);
+                    DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId);
 
                     Utils.changeBackgroundColorInView(getContext(), playerView, R.color.alt_blue);
 

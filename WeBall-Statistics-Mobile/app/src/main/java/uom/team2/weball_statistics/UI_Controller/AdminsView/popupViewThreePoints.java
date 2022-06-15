@@ -21,8 +21,8 @@ import uom.team2.weball_statistics.Model.Statistics.Stats;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 
@@ -81,7 +81,7 @@ public class popupViewThreePoints extends Dialog implements
                 playerStats.setSuccessfulEffort();
                 teamStats.setSuccessfulThreePointer();
                 teamStats.setSuccessfulEffort();
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_threepointer);
+                DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_threepointer);
                 //Insert 3point's action to firebase
                 Action treePointThrowAction = null;
@@ -99,7 +99,7 @@ public class popupViewThreePoints extends Dialog implements
                 dismiss();
                 break;
             case R.id.dialog_No:
-                DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_threepointer);
+                DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_threepointer);
                 dismiss();
                 break;

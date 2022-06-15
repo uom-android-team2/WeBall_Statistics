@@ -39,8 +39,8 @@ import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.MatchService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
@@ -184,8 +184,8 @@ public class AdminsView extends Fragment  {
         match.setGuest(teamGuest);
 
 
-        DAOLiveTeamService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
-        DAOLiveTeamService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+        DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
+        DAOLiveMatchService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
 
         for (Player player: teamLandlord.getTeamPlayers()){
             DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
@@ -384,7 +384,7 @@ public class AdminsView extends Fragment  {
                         @Override
                         public void onChronometerTick(Chronometer chronometer) {
                             // to match id tha allazei analoga to match
-                            DAOLiveTeamService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
+                            DAOLiveMatchService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
                         }
                     });
                     running = true;
@@ -725,7 +725,7 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalAssists();
         teamStats.setTotalAssists();
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.assist);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.assist);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.assist);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -738,7 +738,7 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalRebounds();
         teamStats.setTotalRebounds();
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.rebound);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.rebound);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.rebound);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -751,7 +751,7 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalSteels();
         teamStats.setTotalSteels();
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.steal);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.steal);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.steal);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -764,7 +764,7 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalBlock();
         teamStats.setTotalBlock();
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.block);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.block);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.block);
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -777,7 +777,7 @@ public class AdminsView extends Fragment  {
         playerStats.setTotalFouls();
         teamStats.setTotalFouls();
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.foul);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.foul);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.foul);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -792,7 +792,7 @@ public class AdminsView extends Fragment  {
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.turnover);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.turnover);
             DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         } catch (IOException ex) {
             ex.printStackTrace();

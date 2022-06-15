@@ -28,18 +28,18 @@ import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 /*
  * @author Leonard Pepa ics20033
  */
-public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
-    public static DAOLiveTeamService instance;
+public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
+    public static DAOLiveMatchService instance;
     private final DatabaseReference databaseReference;
 
-    private DAOLiveTeamService() {
+    private DAOLiveMatchService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(TeamLiveStatistics.class.getSimpleName());
     }
 
-    public static DAOLiveTeamService getInstance() {
+    public static DAOLiveMatchService getInstance() {
         if (instance == null) {
-            instance = new DAOLiveTeamService();
+            instance = new DAOLiveMatchService();
         }
         return instance;
     }
@@ -330,25 +330,25 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         });
     }
 
-    public void initializeTable(int matchid, int teamId1, int teamId2) {
-        get(matchid, teamId1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+    public void initializeTable(int matchId, int teamId1, int teamId2) {
+        get(matchId, teamId1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
                 } else {
-                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchid, teamId1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchId, teamId1);
                     insert(teamLiveStatistics);
                 }
             }
         });
-        get(matchid, teamId2).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchId, teamId2).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
                 } else {
-                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchid, teamId2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchId, teamId2);
                     insert(teamLiveStatistics);
                 }
             }

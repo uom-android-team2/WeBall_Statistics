@@ -65,6 +65,12 @@ public class LiveGameStatistics extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        Bundle bundle = getArguments();
+        match = (Match) bundle.getSerializable("match");
+        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+        teamGuest = (Team) bundle.getSerializable("teamGuest");
+
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -74,19 +80,18 @@ public class LiveGameStatistics extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         addProgressBars(binding.progressbarLayoutContainer);
         navigateToLivePlayerStats();
-        Bundle bundle = getArguments();
 
-        match = (Match) bundle.getSerializable("match");
-        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
-        teamGuest = (Team) bundle.getSerializable("teamGuest");
-        daoLiveMatchService.initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
+        if (match != null && teamLandlord != null && teamGuest != null) {
+            daoLiveMatchService.initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
+        }
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        if (binding == null){
+        if (binding == null) {
             return;
         }
 

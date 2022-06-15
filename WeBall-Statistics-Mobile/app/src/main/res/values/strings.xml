@@ -124,6 +124,8 @@
     <string name="substitutionsTittle_text">Substitutions</string>
     <string name="playersTittle_text">Players</string>
     <string name="message_no_actions_text">Match will start soon!</string>
+    <string name="time_comment_text">0.15\'</string>
+    <string name="comment_text_home">TextViewTextViewTextViewTextViewTextView TtViewTextView</string>
 
     <!-- Strings for Comments -->
     <!-- display something more times because i want to be the most common description  -->

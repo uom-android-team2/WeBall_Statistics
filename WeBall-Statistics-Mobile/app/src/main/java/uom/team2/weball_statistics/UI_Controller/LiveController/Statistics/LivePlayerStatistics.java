@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
@@ -170,7 +171,7 @@ public class LivePlayerStatistics extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (binding == null){
+        if (binding == null) {
             return;
         }
 
@@ -179,7 +180,6 @@ public class LivePlayerStatistics extends Fragment {
 
         loadInitialTeamsPlayers();
         loadSecondTeamPlayers();
-
 
 
     }
@@ -233,8 +233,8 @@ public class LivePlayerStatistics extends Fragment {
 
     public void createPlayers(ArrayList<Player> players, ArrayList<View> views) {
         for (Player player : players) {
-
-            View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(), player.getImagePath());
+            String fullName = player.getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + player.getSurname();
+            View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, fullName, player.getImagePath());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -261,9 +261,11 @@ public class LivePlayerStatistics extends Fragment {
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamSelectedId, playerSelectedId);
         DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
 
+        String fullName = player.getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + player.getSurname();
+
         UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
                 player.getImagePath(),
-                player.getName(),
+                fullName,
                 binding.selectedPlayerLayout.getRoot());
 
 
@@ -295,10 +297,12 @@ public class LivePlayerStatistics extends Fragment {
 
                     Utils.changeBackgroundColorInView(getContext(), playerView, R.color.alt_blue);
 
+                    String fullName = tempPlayers.get(index).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + tempPlayers.get(index).getSurname();
+
 
                     UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
                             tempPlayers.get(index).getImagePath(),
-                            tempPlayers.get(index).getName(),
+                            fullName,
                             binding.selectedPlayerLayout.getRoot());
 
                     for (View other : views) {

@@ -10,11 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Date;
+
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlowComment;
+import uom.team2.weball_statistics.Model.Match;
+import uom.team2.weball_statistics.Model.Referee;
+import uom.team2.weball_statistics.Model.Status;
+import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameCommentsBinding;
 
 /*
@@ -57,6 +64,8 @@ public class LiveGameComments extends Fragment {
 
         Action action = new MatchFlowComment("0.01", FlowType.START, this.getContext());
         System.out.println(action.getActionDesc());
+        Match match = new Match(1, null, null, new Date(), Status.ONGOING);
+        DAOAction.getInstance().insertCommentDesc(action, match);
     }
 
     @Override

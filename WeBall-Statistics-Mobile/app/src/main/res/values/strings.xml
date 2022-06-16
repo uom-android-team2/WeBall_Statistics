@@ -221,4 +221,9 @@
         <item>Missed three points shot by</item>
         <item>The score remains the same from the missed three points shot of</item>
     </string-array>
+    <string-array name="substitution">
+        <item>The coach changes the squad of his team</item>
+        <item>The coach changes his strategy</item>
+        <item>The coach asked for a substitution</item>
+    </string-array>
 </resources>

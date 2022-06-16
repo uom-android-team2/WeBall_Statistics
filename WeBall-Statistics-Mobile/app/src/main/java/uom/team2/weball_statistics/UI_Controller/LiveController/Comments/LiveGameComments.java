@@ -25,6 +25,7 @@ import uom.team2.weball_statistics.Model.Actions.Shots.Assist;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
+import uom.team2.weball_statistics.Model.Actions.Substitution.SubstitutionComment;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Referee;
@@ -77,24 +78,6 @@ public class LiveGameComments extends Fragment {
         Team team = new Team("Paok");
         Match match = new Match(1, null, null, new Date(), Status.ONGOING);
         Assist assist = new Assist(playerAssist);
-        Action actionShot1Done = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.FREETHROW, true, assist, this.getContext());
-        Action actionShot2Done = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.TWO_POINTER, true, assist, this.getContext());
-        Action actionShot3Done = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.THREE_POINTER, true, assist, this.getContext());
-        Action actionShot1Missed = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.FREETHROW, false, assist, this.getContext());
-        Action actionShot2Missed = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.TWO_POINTER, false, assist, this.getContext());
-        Action actionShot3Missed = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.THREE_POINTER, false, assist, this.getContext());
-        System.out.println(actionShot1Done.getActionDesc());
-        System.out.println(actionShot2Done.getActionDesc());
-        System.out.println(actionShot3Done.getActionDesc());
-        System.out.println(actionShot1Missed.getActionDesc());
-        System.out.println(actionShot2Missed.getActionDesc());
-        System.out.println(actionShot3Missed.getActionDesc());
-        DAOAction.getInstance().insertCommentDesc(actionShot1Done, match);
-        DAOAction.getInstance().insertCommentDesc(actionShot2Done, match);
-        DAOAction.getInstance().insertCommentDesc(actionShot3Done, match);
-        DAOAction.getInstance().insertCommentDesc(actionShot1Missed, match);
-        DAOAction.getInstance().insertCommentDesc(actionShot2Missed, match);
-        DAOAction.getInstance().insertCommentDesc(actionShot3Missed, match);
     }
 
     @Override

@@ -120,8 +120,7 @@ public class PlayerService {
     }
 
 
-
-    public void findAllPlayersByTeamName(String teamName, CallbackListener<ArrayList<Player>> callbackListener) {
+    public Thread findAllPlayersByTeamName(String teamName, CallbackListener<ArrayList<Player>> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -148,6 +147,7 @@ public class PlayerService {
             }
         });
         thread.start();
+        return thread;
     }
 
 

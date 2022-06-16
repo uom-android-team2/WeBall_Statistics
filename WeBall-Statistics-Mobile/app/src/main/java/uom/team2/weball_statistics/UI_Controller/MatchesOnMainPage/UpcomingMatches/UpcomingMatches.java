@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.UpcomingMatches;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -31,6 +32,7 @@ import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.Service.TeamService;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.Service.MatchesOnMainPageService;
@@ -42,6 +44,7 @@ public class UpcomingMatches extends Fragment {
     private final HashMap<Integer, Match> mapOfMatches = new HashMap<>();
     private FragmentUpcomingMatchesBinding binding;
     private boolean isAdmin = false;
+    private ProgressDialog progressDialog;
 
     public UpcomingMatches() {
     }
@@ -61,7 +64,6 @@ public class UpcomingMatches extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentUpcomingMatchesBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
@@ -70,23 +72,51 @@ public class UpcomingMatches extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         isAdmin = bundle.getBoolean("isAdmin");
+        progressDialog = LayoutFactory.createNonCancelableProgressBar(getContext());
+        if (binding != null) {
+            binding.getRoot().setVisibility(View.INVISIBLE);
+            progressDialog.show();
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        if (binding == null){
+        if (binding == null) {
             return;
         }
 
         MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
-        matchesOnMainPageService.fetchUpcomingMatches(new CallbackListener<ArrayList<Match>>() {
+        Thread thread = matchesOnMainPageService.fetchUpcomingMatches(new CallbackListener<ArrayList<Match>>() {
             @Override
             public void callback(ArrayList<Match> returnedObject) {
                 createMatchLayout(returnedObject);
             }
         });
+
+        Thread waitingThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (UpcomingMatches.this.getActivity() != null && UpcomingMatches.this.isAdded()) {
+                        UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.getRoot().setVisibility(View.VISIBLE);
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        waitingThread.start();
     }
 
     @Override
@@ -138,7 +168,6 @@ public class UpcomingMatches extends Fragment {
                         View team1 = viewMatch.findViewById(R.id.team1);
                         UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team1);
                         fillPlayers(returnedObject, viewMatch, true);
-
                     }
                 });
 
@@ -197,7 +226,7 @@ public class UpcomingMatches extends Fragment {
     public void fillPlayers(Team team, View viewMatch, boolean home) {
         PlayerService playerService = new PlayerService();
 
-        playerService.findAllPlayersByTeamName(team.getTeamName(), new CallbackListener<ArrayList<Player>>() {
+        Thread thread = playerService.findAllPlayersByTeamName(team.getTeamName(), new CallbackListener<ArrayList<Player>>() {
             @Override
             public void callback(ArrayList<Player> players) {
                 team.setTeamPlayers(players);
@@ -232,6 +261,13 @@ public class UpcomingMatches extends Fragment {
                 }
             }
         });
+        if (isAdmin) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onclickView(View viewMatch, int matchId) {

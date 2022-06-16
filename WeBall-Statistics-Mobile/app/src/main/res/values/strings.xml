@@ -180,4 +180,45 @@
         <item>Fast foul on the counterattack was occurred by</item>
         <item>This is a clever foul by</item>
     </string-array>
+    <string-array name="freethrow_in">
+        <item>A well-aimed shot by</item>
+        <item>+1 point for his team, by the accurate shot of</item>
+    </string-array>
+    <string-array name="freethrow_out">
+        <item>Missed shot-freethrow by</item>
+        <item>Bad shot by</item>
+        <item>The score remains the same from the missed free throw of</item>
+        <item>The score remains the same from the missed free throw of</item>
+    </string-array>
+    <string-array name="twopointer_in">
+        <item>Necessary aimed two points shot by</item>
+        <item>Important aimed two points shot by</item>
+        <item>Two points more scored by</item>
+        <item>Two points more scored by</item>
+        <item>Aimed two points shot scored by</item>
+        <item>Aimed two points shot scored by</item>
+    </string-array>
+    <string-array name="twopointer_out">
+        <item>Missed two points shot by</item>
+        <item>Missed two points shot by</item>
+        <item>Missed two points shot by</item>
+        <item>The score remains the same from the missed two points shot of</item>
+    </string-array>
+    <string-array name="threepointer_in">
+        <item>Necessary three points scored by</item>
+        <item>Important three points scored by</item>
+        <item>Three points more scored by</item>
+        <item>Aimed three points shot scored by</item>
+        <item>Excellent three-point basket by</item>
+        <item>Amazing three-point basket by</item>
+        <item>Great three-point basket by</item>
+        <item>Unstoppable three-point basket by</item>
+        <item>Unrepeatable three-point basket by</item>
+    </string-array>
+    <string-array name="threepointer_out">
+        <item>Missed three points shot by</item>
+        <item>Missed three points shot by</item>
+        <item>Missed three points shot by</item>
+        <item>The score remains the same from the missed three points shot of</item>
+    </string-array>
 </resources>

@@ -7,6 +7,7 @@ import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 
 public class Shot extends Action {
+
     private Player playerObj; //The player (obj) who shots
     private Team teamObj; //The team (obj) that the player who shots belongs to
     private ShotType shotType;

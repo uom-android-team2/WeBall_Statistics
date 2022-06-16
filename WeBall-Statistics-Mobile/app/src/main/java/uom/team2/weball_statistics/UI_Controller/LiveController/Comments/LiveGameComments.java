@@ -21,6 +21,10 @@ import uom.team2.weball_statistics.Model.Actions.ReboundAction.ReboundComment;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionComment;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
+import uom.team2.weball_statistics.Model.Actions.Shots.Assist;
+import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Referee;
@@ -69,23 +73,28 @@ public class LiveGameComments extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         Player player = new Player("Minas", "Charakopoulos");
+        Player playerAssist = new Player("Leo", "Pepa");
         Team team = new Team("Paok");
-        Action actionRebound = new ReboundComment("30.21", BelongsTo.HOME, player, team);
-        Action action = new MatchFlowComment("0.01", FlowType.START, this.getContext());
-        Action actionSteal = new SBFActionComment("32.32", BelongsTo.HOME, player, team, SBFActionType.STEAL, this.getContext());
-        Action actionFoul = new SBFActionComment("32.32", BelongsTo.HOME, player, team, SBFActionType.FOUL, this.getContext());
-        Action actionBlock = new SBFActionComment("32.32", BelongsTo.HOME, player, team, SBFActionType.BLOCK, this.getContext());
-        System.out.println(action.getActionDesc());
-        System.out.println(actionRebound.getActionDesc());
-        System.out.println(actionSteal.getActionDesc());
-        System.out.println(actionFoul.getActionDesc());
-        System.out.println(actionBlock.getActionDesc());
         Match match = new Match(1, null, null, new Date(), Status.ONGOING);
-        DAOAction.getInstance().insertCommentDesc(action, match);
-        DAOAction.getInstance().insertCommentDesc(actionRebound, match);
-        DAOAction.getInstance().insertCommentDesc(actionSteal, match);
-        DAOAction.getInstance().insertCommentDesc(actionFoul, match);
-        DAOAction.getInstance().insertCommentDesc(actionBlock, match);
+        Assist assist = new Assist(playerAssist);
+        Action actionShot1Done = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.FREETHROW, true, assist, this.getContext());
+        Action actionShot2Done = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.TWO_POINTER, true, assist, this.getContext());
+        Action actionShot3Done = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.THREE_POINTER, true, assist, this.getContext());
+        Action actionShot1Missed = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.FREETHROW, false, assist, this.getContext());
+        Action actionShot2Missed = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.TWO_POINTER, false, assist, this.getContext());
+        Action actionShot3Missed = new ShotComment("32.31",BelongsTo.HOME, player, team, ShotType.THREE_POINTER, false, assist, this.getContext());
+        System.out.println(actionShot1Done.getActionDesc());
+        System.out.println(actionShot2Done.getActionDesc());
+        System.out.println(actionShot3Done.getActionDesc());
+        System.out.println(actionShot1Missed.getActionDesc());
+        System.out.println(actionShot2Missed.getActionDesc());
+        System.out.println(actionShot3Missed.getActionDesc());
+        DAOAction.getInstance().insertCommentDesc(actionShot1Done, match);
+        DAOAction.getInstance().insertCommentDesc(actionShot2Done, match);
+        DAOAction.getInstance().insertCommentDesc(actionShot3Done, match);
+        DAOAction.getInstance().insertCommentDesc(actionShot1Missed, match);
+        DAOAction.getInstance().insertCommentDesc(actionShot2Missed, match);
+        DAOAction.getInstance().insertCommentDesc(actionShot3Missed, match);
     }
 
     @Override

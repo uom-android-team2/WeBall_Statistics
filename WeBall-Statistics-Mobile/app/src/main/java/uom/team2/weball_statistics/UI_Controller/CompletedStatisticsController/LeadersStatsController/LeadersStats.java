@@ -129,11 +129,18 @@ public class LeadersStats extends Fragment {
     }
 
     public void changeTopPlayerLayout(LinearLayout linearLayout, String value){
-        View view = linearLayout.getChildAt(0);
 
-        TextView textView = view.findViewById(R.id.topStatistic);
-        textView.setText(value);
+        if (this.getActivity() != null && this.isAdded()) {
+            this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    View view = linearLayout.getChildAt(0);
 
+                    TextView textView = view.findViewById(R.id.topStatistic);
+                    textView.setText(value);
+                }
+            });
+        }
     }
 
     //update every player in the playersLayout

@@ -13,6 +13,7 @@ import java.io.IOException;
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
@@ -83,17 +84,24 @@ public class popupViewThreePoints extends Dialog implements
                 teamStats.setSuccessfulEffort();
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_threepointer);
+
                 //Insert 3point's action to firebase
                 Action treePointThrowAction = null;
-
+                Action treePointThrowComment = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
                     treePointThrowAction = new Shot(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.THREE_POINTER, true, null);
+                    treePointThrowComment = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.THREE_POINTER, true, null, getContext());
                 } else if (this.match.getTeamguest_id() == this.team.getId()) {
                     treePointThrowAction = new Shot(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null);
+                    treePointThrowComment = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null, getContext());
                 }
 
                 if (treePointThrowAction != null) {
                     DAOAction.getInstance().insertAction(treePointThrowAction, match);
+                }
+
+                if (treePointThrowComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(treePointThrowComment, match);
                 }
 
                 dismiss();
@@ -101,6 +109,17 @@ public class popupViewThreePoints extends Dialog implements
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_threepointer);
+                //Insert 3point's action to firebase
+                Action treePointThrowCommentMissed = null;
+                if (this.match.getTeamLandlord_id() == this.team.getId()) {
+                    treePointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.THREE_POINTER, true, null, getContext());
+                } else if (this.match.getTeamguest_id() == this.team.getId()) {
+                    treePointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null, getContext());
+                }
+
+                if (treePointThrowCommentMissed != null) {
+                    DAOAction.getInstance().insertCommentDesc(treePointThrowCommentMissed, match);
+                }
                 dismiss();
                 break;
             default:

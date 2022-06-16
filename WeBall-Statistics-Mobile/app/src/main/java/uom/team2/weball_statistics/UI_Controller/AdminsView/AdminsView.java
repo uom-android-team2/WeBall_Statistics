@@ -32,9 +32,12 @@ import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlowComment;
 import uom.team2.weball_statistics.Model.Actions.ReboundAction.Rebound;
+import uom.team2.weball_statistics.Model.Actions.ReboundAction.ReboundComment;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionComment;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
 import uom.team2.weball_statistics.Model.Actions.Turnover.Turnover;
+import uom.team2.weball_statistics.Model.Actions.Turnover.TurnoverComment;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
@@ -490,8 +493,11 @@ public class AdminsView extends Fragment {
                     match.setStatus(Status.COMPLETED);
 
                     //Add completed action description to firebase
-                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.COMPLETED);
-                    DAOAction.getInstance().insertAction(startMatchAction, match);
+                    Action completedMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.COMPLETED);
+                    DAOAction.getInstance().insertAction(completedMatchAction, match);
+                    //Add completed comment description to firebase
+                    Action completedMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.COMPLETED, getContext());
+                    DAOAction.getInstance().insertCommentDesc(completedMatchComment, match);
 
                     match.setCompleted(true);
                     match.setProgress(0);
@@ -519,8 +525,11 @@ public class AdminsView extends Fragment {
                     running = true;
 
                     //Add resume's action description to firebase
-                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.RESUME);
-                    DAOAction.getInstance().insertAction(startMatchAction, match);
+                    Action resumeMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.RESUME);
+                    DAOAction.getInstance().insertAction(resumeMatchAction, match);
+                    //Add resume's comment description to firebase
+                    Action resumeMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.RESUME, getContext());
+                    DAOAction.getInstance().insertCommentDesc(resumeMatchComment, match);
                 } else {
                     binding.pauseButton.setText("Continue");
                     binding.clock.stop();
@@ -528,8 +537,11 @@ public class AdminsView extends Fragment {
                     running = false;
 
                     //Add pause's action description to firebase
-                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
-                    DAOAction.getInstance().insertAction(startMatchAction, match);
+                    Action pauseMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
+                    DAOAction.getInstance().insertAction(pauseMatchAction, match);
+                    //Add pause's comment description to firebase
+                    Action pauseMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.PAUSE, getContext());
+                    DAOAction.getInstance().insertCommentDesc(pauseMatchComment, match);
                 }
             }
         });
@@ -777,14 +789,21 @@ public class AdminsView extends Fragment {
 
                 //Insert rebound's action to firebase
                 Action reboundAction = null;
+                Action reboundComment = null;
                 if (match.getTeamLandlord_id() == teamObj.getId()) {
                     reboundAction = new Rebound(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
+                    reboundComment = new ReboundComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
                 } else {
                     reboundAction = new Rebound(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
+                    reboundComment = new ReboundComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
                 }
 
                 if (reboundAction != null) {
                     DAOAction.getInstance().insertAction(reboundAction, match);
+                }
+
+                if (reboundComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(reboundComment, match);
                 }
             });
             assistBtn.setOnClickListener(e -> {
@@ -794,56 +813,84 @@ public class AdminsView extends Fragment {
                 updateSteal(playerStats, teamStats, dataRecovery,false);
                 //Insert steal's action to firebase
                 Action stealAction = null;
+                Action stealComment = null;
                 if (match.getTeamLandlord_id() == teamObj.getId()) {
                     stealAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.STEAL);
+                    stealComment = new SBFActionComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.STEAL, getContext());
                 } else {
                     stealAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.STEAL);
+                    stealComment = new SBFActionComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.STEAL, getContext());
                 }
 
                 if (stealAction != null) {
                     DAOAction.getInstance().insertAction(stealAction, match);
+                }
+
+                if (stealComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(stealComment, match);
                 }
             });
             blockBtn.setOnClickListener(e -> {
                 updateBlock(playerStats, teamStats, dataRecovery,false);
                 //Insert block's action to firebase
                 Action blockAction = null;
+                Action blockComment = null;
                 if (match.getTeamLandlord_id() == teamObj.getId()) {
                     blockAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                    blockComment = new SBFActionComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.BLOCK, getContext());
                 } else {
                     blockAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                    blockComment = new SBFActionComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.BLOCK, getContext());
                 }
 
                 if (blockAction != null) {
                     DAOAction.getInstance().insertAction(blockAction, match);
+                }
+
+                if (blockComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(blockComment, match);
                 }
             });
             foulBtn.setOnClickListener(e -> {
                 updateFoul(playerStats, teamStats, dataRecovery,false);
                 //Insert block's action to firebase
                 Action foulAction = null;
+                Action foulComment = null;
                 if (match.getTeamLandlord_id() == teamObj.getId()) {
                     foulAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.FOUL);
+                    foulComment = new SBFActionComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.FOUL, getContext());
                 } else {
                     foulAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.FOUL);
+                    foulComment = new SBFActionComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.FOUL, getContext());
                 }
 
                 if (foulAction != null) {
                     DAOAction.getInstance().insertAction(foulAction, match);
+                }
+
+                if (foulComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(foulComment, match);
                 }
             });
             turnoverBtn.setOnClickListener(e -> {
                 updateTurnover(playerStats, teamStats, dataRecovery,false);
                 //Insert block's action to firebase
                 Action turnOverAction = null;
+                Action turnOverComment = null;
                 if (match.getTeamLandlord_id() == teamObj.getId()) {
                     turnOverAction = new Turnover(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
+                    turnOverComment = new TurnoverComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, getContext());
                 } else {
                     turnOverAction = new Turnover(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
+                    turnOverComment = new TurnoverComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, getContext());
                 }
 
                 if (turnOverAction != null) {
                     DAOAction.getInstance().insertAction(turnOverAction, match);
+                }
+
+                if (turnOverComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(turnOverComment, match);
                 }
             });
         } catch (Exception ex) {

@@ -15,11 +15,12 @@ import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
-
+/*
+ * @author Leonard Pepa ics20033
+ */
 public class MatchHeaderFragment extends Fragment {
 
     private MatchHeaderLayoutBinding binding;
-    private Bundle bundle;
     private Match match;
     private Team teamLandlord;
     private Team teamGuest;

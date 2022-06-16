@@ -155,14 +155,16 @@ public class LivePlayerStatistics extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle bundle = getArguments();
-        match = (Match) bundle.getSerializable("match");
-        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
-        teamGuest = (Team) bundle.getSerializable("teamGuest");
-        matchId = match.getId();
-        teamLandlordId = teamLandlord.getId();
-        teamGuestId = teamGuest.getId();
-        teamLandlordPlayers = teamLandlord.getTeamPlayers();
-        teamGuestPlayers = teamGuest.getTeamPlayers();
+        if (bundle != null) {
+            match = (Match) bundle.getSerializable("match");
+            teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+            teamGuest = (Team) bundle.getSerializable("teamGuest");
+            matchId = match.getId();
+            teamLandlordId = teamLandlord.getId();
+            teamGuestId = teamGuest.getId();
+            teamLandlordPlayers = teamLandlord.getTeamPlayers();
+            teamGuestPlayers = teamGuest.getTeamPlayers();
+        }
         binding = FragmentLivePlayerStatisticsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -175,11 +177,12 @@ public class LivePlayerStatistics extends Fragment {
             return;
         }
 
-        UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
-        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
-
-        loadInitialTeamsPlayers();
-        loadSecondTeamPlayers();
+        if (match != null && teamLandlord != null && teamGuest != null && teamLandlordPlayers.size() != 0 && teamGuestPlayers.size() != 0) {
+            UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
+            DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
+            loadInitialTeamsPlayers();
+            loadSecondTeamPlayers();
+        }
 
 
     }

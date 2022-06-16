@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/badge"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
         app:layout_constraintStart_toEndOf="@+id/number"
@@ -33,7 +33,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:text="Team1"
-        android:textSize="10dp"
+        android:textSize="11dp"
         app:layout_constraintStart_toEndOf="@+id/badge"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +44,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="115.6"
-        android:textSize="10dp"
+        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teamName"
         app:layout_constraintTop_toTopOf="parent" />

@@ -86,17 +86,17 @@ public class PreviousMatches extends Fragment {
             return;
         }
 
-        MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
-        Thread thread = matchesOnMainPageService.fetchCompletedMatches(new CallbackListener<ArrayList<Match>>() {
-            @Override
-            public void callback(ArrayList<Match> returnedObject) {
-                createMatchLayout(returnedObject);
-            }
-        });
-
         Thread waitingThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
+                Thread thread = matchesOnMainPageService.fetchCompletedMatches(new CallbackListener<ArrayList<Match>>() {
+                    @Override
+                    public void callback(ArrayList<Match> returnedObject) {
+                        createMatchLayout(returnedObject);
+                    }
+                });
+
                 try {
                     thread.join();
                 } catch (InterruptedException e) {

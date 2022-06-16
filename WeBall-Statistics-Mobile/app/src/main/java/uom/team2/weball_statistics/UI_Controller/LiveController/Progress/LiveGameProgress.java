@@ -45,7 +45,7 @@ public class LiveGameProgress extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, 1);
+
     }
 
     @Override

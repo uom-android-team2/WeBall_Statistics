@@ -44,7 +44,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="115.6"
-        android:textSize="12dp"
+        android:textSize="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teamName"
         app:layout_constraintTop_toTopOf="parent" />

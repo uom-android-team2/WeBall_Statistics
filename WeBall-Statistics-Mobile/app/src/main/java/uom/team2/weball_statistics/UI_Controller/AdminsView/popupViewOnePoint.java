@@ -13,6 +13,7 @@ import java.io.IOException;
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
@@ -88,15 +89,21 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
 
                 //Insert freethrow's action to firebase
                 Action freeThrowAction = null;
-
+                Action freeThrowComment = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
                     freeThrowAction = new Shot(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null);
+                    freeThrowComment = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.FREETHROW, true, null, getContext());
                 } else if (this.match.getTeamguest_id() == this.team.getId()) {
                     freeThrowAction = new Shot(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.FREETHROW, true, null);
+                    freeThrowComment = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.FREETHROW, true, null, getContext());
                 }
 
                 if (freeThrowAction != null) {
                     DAOAction.getInstance().insertAction(freeThrowAction, match);
+                }
+
+                if (freeThrowComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(freeThrowComment, match);
                 }
 
                 //dismiss();
@@ -104,6 +111,19 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_freethrow);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_freethrow);
+
+                //Insert missed freethrow's action to firebase
+                Action freeThrowCommentMissed = null;
+                if (this.match.getTeamLandlord_id() == this.team.getId()) {
+                    freeThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.FREETHROW, false, null, getContext());
+                } else if (this.match.getTeamguest_id() == this.team.getId()) {
+                    freeThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.FREETHROW, false, null, getContext());
+                }
+
+                if (freeThrowCommentMissed != null) {
+                    DAOAction.getInstance().insertCommentDesc(freeThrowCommentMissed, match);
+                }
+
                 dismiss();
                 break;
             default:

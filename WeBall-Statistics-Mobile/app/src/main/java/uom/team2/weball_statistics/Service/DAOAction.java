@@ -15,6 +15,8 @@ import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Actions.*;
 import uom.team2.weball_statistics.Model.*;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Comments.LiveCommentsUIController;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Comments.LiveGameComments;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGameProgress;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveProgressUIController;
 
@@ -22,6 +24,7 @@ public class DAOAction implements DAOCRUDService <Action> {
 
     private DatabaseReference databaseReference;
     private LiveProgressUIController liveProgressUIController = LiveProgressUIController.getInstance();
+    private LiveCommentsUIController liveCommentsUIController = LiveCommentsUIController.getInstance();
     public static DAOAction instance = new DAOAction();
 
     //Implement singleton pattern
@@ -73,28 +76,28 @@ public class DAOAction implements DAOCRUDService <Action> {
                 });
     }
 
-    public void getRealTimeCommentsData(Match matchData, LiveGameProgress liveGameProgressFragment) {
+    public void getRealTimeCommentsData(Match matchData, LiveGameComments liveGameCommentsFragment) {
         //Get data snapshot
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Action").child("Actions for match with id: " + matchData.getId()).child("Comments");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (liveGameProgressFragment.isAdded() && liveGameProgressFragment.getActivity() != null) {
+                if (liveGameCommentsFragment.isAdded() && liveGameCommentsFragment.getActivity() != null) {
 
-                    liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+                    liveGameCommentsFragment.getBinding().commentsLayoutContainer.removeAllViews();
 
                     if (dataSnapshot.getChildrenCount() <= 0 ) {
-                        liveProgressUIController.noActionsMessage(liveGameProgressFragment);
+                        liveCommentsUIController.noActionsMessage(liveGameCommentsFragment);
                     } else {
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Action action = data.getValue(Action.class);
                             if (action.getBelongsTo() == BelongsTo.HOME) {
-                                liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
+                                liveCommentsUIController.addCommentForHomeTeam(liveGameCommentsFragment, action);
                             } else if (action.getBelongsTo() == BelongsTo.GUEST) {
-                                liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
+                                liveCommentsUIController.addCommentForGuestTeam(liveGameCommentsFragment, action);
                             } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
-                                liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                                liveCommentsUIController.addCommentForGeneral(liveGameCommentsFragment, action);
                             }
                         }
                     }

@@ -13,6 +13,7 @@ import java.io.IOException;
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
@@ -89,15 +90,21 @@ public class popupViewTwoPoints extends Dialog implements
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_twopointer);
                 //Insert 2point's action to firebase
                 Action twoPointThrowAction = null;
-
+                Action twoPointThrowComment = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
                     twoPointThrowAction = new Shot(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, true, null);
+                    twoPointThrowComment = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, true, null, getContext());
                 } else if (this.match.getTeamguest_id() == this.team.getId()) {
                     twoPointThrowAction = new Shot(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null);
+                    twoPointThrowComment = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null, getContext());
                 }
 
                 if (twoPointThrowAction != null) {
                     DAOAction.getInstance().insertAction(twoPointThrowAction, match);
+                }
+
+                if (twoPointThrowComment != null) {
+                    DAOAction.getInstance().insertCommentDesc(twoPointThrowComment, match);
                 }
 
                 //dismiss();
@@ -105,6 +112,18 @@ public class popupViewTwoPoints extends Dialog implements
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_twopointer);
+
+                Action twoPointThrowCommentMissed = null;
+                if (this.match.getTeamLandlord_id() == this.team.getId()) {
+                    twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, true, null, getContext());
+                } else if (this.match.getTeamguest_id() == this.team.getId()) {
+                    twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null, getContext());
+                }
+
+                if (twoPointThrowCommentMissed != null) {
+                    DAOAction.getInstance().insertCommentDesc(twoPointThrowCommentMissed, match);
+                }
+
                 dismiss();
                 break;
             default:

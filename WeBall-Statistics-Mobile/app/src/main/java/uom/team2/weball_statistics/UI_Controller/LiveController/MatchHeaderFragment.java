@@ -9,13 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.io.IOException;
-import uom.team2.weball_statistics.R;
-
-import uom.team2.weball_statistics.Model.Match;
-import uom.team2.weball_statistics.Model.Team;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 
@@ -65,22 +58,6 @@ public class MatchHeaderFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (this.bundle != null) {
-            Match match = (Match) bundle.getSerializable("match");
-            Team teamLandlord = (Team) bundle.getSerializable("teamLandlord");
-            Team teamGuest = (Team) bundle.getSerializable("teamGuest");
-
-            try {
-                DAOLiveTeamService.getInstance().setListenerForPoints(this, binding, match.getId(), teamLandlord.getId(), teamGuest.getId());
-                UIHandler.updateTeamImageInMatch(this, teamLandlord, binding.getRoot().findViewById(R.id.team1));
-                UIHandler.updateTeamImageInMatch(this, teamGuest, binding.getRoot().findViewById(R.id.team2));
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
 
     }
 }

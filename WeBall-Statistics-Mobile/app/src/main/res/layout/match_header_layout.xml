@@ -52,6 +52,7 @@
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         android:foreground="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_text" />

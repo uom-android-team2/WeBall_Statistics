@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import uom.team2.weball_statistics.Model.Team;
@@ -24,7 +23,7 @@ import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 public class UIHandler {
 
     public static void updateScore(Fragment fragment, MatchHeaderLayoutBinding layoutBinding, int team1Score, int team2Score) {
-        if (fragment.getActivity() != null) {
+        if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -35,14 +34,25 @@ public class UIHandler {
         }
     }
 
-    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) throws IOException, InterruptedException, NullPointerException {
+    public static void updateScore(Fragment fragment, TextView textView, int team1Score, int team2Score) {
+        if (fragment.getActivity() != null && fragment.isAdded()) {
+            fragment.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    textView.setText(team1Score + " - " + team2Score);
+                }
+            });
+        }
+    }
+
+    public static void updateTeamImageInMatch(Fragment fragment, Team team, View teamImageLayout) {
         updateTeamImageInMatchHeader(fragment,
                 Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 team.getTeamName(),
                 teamImageLayout);
     }
 
-    private static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) throws IOException, InterruptedException {
+    private static void updateTeamImageInMatchHeader(Fragment fragment, String imageUrl, String name, View teamImageLayout) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -60,7 +70,7 @@ public class UIHandler {
         }
     }
 
-    public static void updateSelectedPlayerImageLayout(Fragment fragment, String imageUrl, String name, View imageLayout) throws IOException, InterruptedException {
+    public static void updateSelectedPlayerImageLayout(Fragment fragment, String imageUrl, String name, View imageLayout) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -79,13 +89,13 @@ public class UIHandler {
 
     }
 
-    public static void updateTeamImage(Fragment fragment, Team team, ImageView image) throws IOException, InterruptedException, NullPointerException {
+    public static void updateTeamImage(Fragment fragment, Team team, ImageView image) {
         updateTeamImage(fragment,
                 Config.TEAM_IMAGES_RESOURCES + team.getBadgePath(),
                 image);
     }
 
-    private static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) throws IOException, InterruptedException {
+    private static void updateTeamImage(Fragment fragment, String imageUrl, ImageView image) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -102,40 +112,54 @@ public class UIHandler {
 
     public static void updateProgressBarLayoutTeam1(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {
         if (fragment.getActivity() != null && fragment.isAdded()) {
-            View view = mapOfProgressBarLayout.get(key.name());
-            TextView statisticProgress = view.findViewById(R.id.team1_progress_text);
-            ProgressBar progressBar = view.findViewById(R.id.team1_progressbar);
-
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setMax(max);
-                    statisticProgress.setText(String.valueOf(value));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar.setProgress(value, true);
-                    } else {
-                        progressBar.setProgress(value);
+                    View view = mapOfProgressBarLayout.get(key.name());
+                    TextView statisticProgress = view.findViewById(R.id.team1_progress_text);
+                    ProgressBar progressBar = view.findViewById(R.id.team1_progressbar);
+                    if (max != progressBar.getMax()) {
+                        progressBar.setMax(max);
                     }
+                    if (value != progressBar.getProgress()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            progressBar.setProgress(value, true);
+                        } else {
+                            progressBar.setProgress(value);
+                        }
+                    }
+                    String stringgValue = String.valueOf(value);
 
+                    if (!stringgValue.equalsIgnoreCase(statisticProgress.getText().toString())) {
+                        statisticProgress.setText(stringgValue);
+                    }
                 }
             });
         }
     }
 
     public static void updateProgressBarLayoutTeam2(Fragment fragment, HashMap<String, View> mapOfProgressBarLayout, LiveStatisticsEnum key, int max, int value) {
-        View view = mapOfProgressBarLayout.get(key.name());
-        TextView statisticProgress = view.findViewById(R.id.team2_progress_text);
-        ProgressBar progressBar = view.findViewById(R.id.team2_progressbar);
         if (fragment.getActivity() != null && fragment.isAdded()) {
             fragment.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setMax(max);
-                    statisticProgress.setText(String.valueOf(value));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar.setProgress(value, true);
-                    } else {
-                        progressBar.setProgress(value);
+                    View view = mapOfProgressBarLayout.get(key.name());
+                    TextView statisticProgress = view.findViewById(R.id.team2_progress_text);
+                    ProgressBar progressBar = view.findViewById(R.id.team2_progressbar);
+                    if (max != progressBar.getMax()) {
+                        progressBar.setMax(max);
+                    }
+                    if (value != progressBar.getProgress()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            progressBar.setProgress(value, true);
+                        } else {
+                            progressBar.setProgress(value);
+                        }
+                    }
+                    String stringgValue = String.valueOf(value);
+
+                    if (!stringgValue.equalsIgnoreCase(statisticProgress.getText().toString())) {
+                        statisticProgress.setText(stringgValue);
                     }
                 }
             });

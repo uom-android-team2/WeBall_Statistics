@@ -2,6 +2,7 @@ package uom.team2.weball_statistics.Model;
 
 
 import java.io.Serializable;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,11 +22,13 @@ public class Match implements Serializable {
     private int teamLandlord_id;
     private int Teamguest_id;
     private Status status; // UPCOMING, ONGOING, COMPLETED
+    private int progress = 0;
+    private long keepClock;
 
-    private boolean progress = false;
     private boolean completed = false;
     private ArrayList<Action> actions;
     private Referee referee;
+    private int actionsCount; //Need to keep the actions number, to give the correct id to each action of the match
 
 
     //Will added fields specified for comments and progress to appear them after the match completed
@@ -41,7 +44,7 @@ public class Match implements Serializable {
         actions = new ArrayList<Action>();
     }
 
-    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, boolean progress, boolean completed) {
+    public Match(int id, int teamLandlord_id, int Teamguest_id, int date, int progress, boolean completed) {
         this.id = id;
         this.teamLandlord_id = teamLandlord_id;
         this.Teamguest_id = Teamguest_id;
@@ -59,6 +62,13 @@ public class Match implements Serializable {
         this.status = status;
     }
 
+    public void setActionsCount(int actionsCount) {
+        this.actionsCount = actionsCount;
+    }
+
+    public int getActionsCount() {
+        return this.actionsCount;
+    }
 
     public void addAction(Action action) {
         this.actions.add(action);
@@ -109,11 +119,11 @@ public class Match implements Serializable {
     }
 
 
-    public void setProgress() {
-        progress = true;
+    public void setProgress(int b) {
+        this.progress = b;
     }
 
-    public boolean isProgress() {
+    public int isProgress() {
         return progress;
     }
 
@@ -121,9 +131,9 @@ public class Match implements Serializable {
         return completed;
     }
 
-    public void setCompleted() {
+    public void setCompleted(boolean b) {
 
-        completed = true;
+        completed = b;
     }
 
     public Referee getReferee() {
@@ -136,5 +146,13 @@ public class Match implements Serializable {
 
     public int getTeamguest_id() {
         return Teamguest_id;
+    }
+
+    public void setKeepClock(long cl){
+        keepClock= cl;
+    }
+
+    public long getKeepClock() {
+        return keepClock;
     }
 }

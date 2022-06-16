@@ -48,31 +48,33 @@ public class BestStarting5Controller {
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | PG");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
+        if(!"NOT FOUND".equals(player.getSurname())) {
         Picasso.get()
                 .load(Config.PLAYER_IMAGES_RESOURCES+player.getImagePath())
                 .resize(250, 400)
                 .centerCrop()
                 .into(imageViewPlayerPhoto);
-        //Getting team logo
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"team.php?name="+player.getTeamString())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        Team myTeam = JSONHandler.deserializeTeam(response.body().string());
+        //Getting team logo if player exists
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/json");
+            Request request = new Request.Builder()
+                    .url(Config.API_URL + "team.php?name=" + player.getTeamString())
+                    .method("GET", null)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = client.newCall(request).execute();
+            Team myTeam = JSONHandler.deserializeTeam(response.body().string());
 
-        Picasso.get()
-                .load(Config.TEAM_IMAGES_RESOURCES+myTeam.getBadgePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewTeamLogo);
+            Picasso.get()
+                    .load(Config.TEAM_IMAGES_RESOURCES + myTeam.getBadgePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewTeamLogo);
+        }
     }
     public void fillBestShootingGuardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includeSG;
@@ -84,30 +86,33 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | SG");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
-        Picasso.get()
-                .load(Config.PLAYER_IMAGES_RESOURCES+player.getImagePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewPlayerPhoto);
-        //Getting team logo
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"team.php?name="+player.getTeamString())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        Team myTeam = JSONHandler.deserializeTeam(response.body().string());
-        Picasso.get()
-                .load(Config.TEAM_IMAGES_RESOURCES+myTeam.getBadgePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewTeamLogo);
+        //Getting team logo if player exists
+        if(!"NOT FOUND".equals(player.getSurname())) {
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES + player.getImagePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewPlayerPhoto);
+            //Getting team logo
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/json");
+            Request request = new Request.Builder()
+                    .url(Config.API_URL + "team.php?name=" + player.getTeamString())
+                    .method("GET", null)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = client.newCall(request).execute();
+            Team myTeam = JSONHandler.deserializeTeam(response.body().string());
+            Picasso.get()
+                    .load(Config.TEAM_IMAGES_RESOURCES + myTeam.getBadgePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewTeamLogo);
+        }
 
     }
     public void fillBestSmallForwardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
@@ -120,30 +125,33 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | SF");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
-        Picasso.get()
-                .load(Config.PLAYER_IMAGES_RESOURCES+player.getImagePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewPlayerPhoto);
-        //Getting team logo
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"team.php?name="+player.getTeamString())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        Team myTeam = JSONHandler.deserializeTeam(response.body().string());
-        Picasso.get()
-                .load(Config.TEAM_IMAGES_RESOURCES+myTeam.getBadgePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewTeamLogo);
+        //Getting team logo if player exists
+        if(!"NOT FOUND".equals(player.getSurname())) {
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES + player.getImagePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewPlayerPhoto);
+            //Getting team logo
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/json");
+            Request request = new Request.Builder()
+                    .url(Config.API_URL + "team.php?name=" + player.getTeamString())
+                    .method("GET", null)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = client.newCall(request).execute();
+            Team myTeam = JSONHandler.deserializeTeam(response.body().string());
+            Picasso.get()
+                    .load(Config.TEAM_IMAGES_RESOURCES + myTeam.getBadgePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewTeamLogo);
+        }
     }
     public void fillBestPowerForwardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includePF;
@@ -155,30 +163,33 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | PF");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
-        Picasso.get()
-                .load(Config.PLAYER_IMAGES_RESOURCES+player.getImagePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewPlayerPhoto);
-        //Getting team logo
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"team.php?name="+player.getTeamString())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        Team myTeam = JSONHandler.deserializeTeam(response.body().string());
-        Picasso.get()
-                .load(Config.TEAM_IMAGES_RESOURCES+myTeam.getBadgePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewTeamLogo);
+        //Getting team logo if player exists
+        if(!"NOT FOUND".equals(player.getSurname())) {
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES + player.getImagePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewPlayerPhoto);
+            //Getting team logo
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/json");
+            Request request = new Request.Builder()
+                    .url(Config.API_URL + "team.php?name=" + player.getTeamString())
+                    .method("GET", null)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = client.newCall(request).execute();
+            Team myTeam = JSONHandler.deserializeTeam(response.body().string());
+            Picasso.get()
+                    .load(Config.TEAM_IMAGES_RESOURCES + myTeam.getBadgePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewTeamLogo);
+        }
     }
     public void fillBestCenterInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includeC;
@@ -190,29 +201,32 @@ public class BestStarting5Controller {
         TextView textViewPlayerName = (TextView) bestPlayerPerPositionLayoutBinding.firstnameLastname;
         TextView textViewEfValue = (TextView) bestPlayerPerPositionLayoutBinding.efficiencyValue;
 
-        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | "+player.getPosition());
+        textViewPlayerInfo.setText(player.getTeamString()+" | #"+player.getNumber()+" | C");
         textViewPlayerName.setText(player.getName()+" "+player.getSurname());
         textViewEfValue.setText("+ "+player.getEfficiency());
-        Picasso.get()
-                .load(Config.PLAYER_IMAGES_RESOURCES+player.getImagePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewPlayerPhoto);
-        //Getting team logo
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"team.php?name="+player.getTeamString())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        Team myTeam = JSONHandler.deserializeTeam(response.body().string());
-        Picasso.get()
-                .load(Config.TEAM_IMAGES_RESOURCES+myTeam.getBadgePath())
-                .resize(250, 400)
-                .centerCrop()
-                .into(imageViewTeamLogo);
+        //Getting team logo if player exists
+        if(!"NOT FOUND".equals(player.getSurname())) {
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES + player.getImagePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewPlayerPhoto);
+            //Getting team logo
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/json");
+            Request request = new Request.Builder()
+                    .url(Config.API_URL + "team.php?name=" + player.getTeamString())
+                    .method("GET", null)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = client.newCall(request).execute();
+            Team myTeam = JSONHandler.deserializeTeam(response.body().string());
+            Picasso.get()
+                    .load(Config.TEAM_IMAGES_RESOURCES + myTeam.getBadgePath())
+                    .resize(250, 400)
+                    .centerCrop()
+                    .into(imageViewTeamLogo);
+        }
     }
 }

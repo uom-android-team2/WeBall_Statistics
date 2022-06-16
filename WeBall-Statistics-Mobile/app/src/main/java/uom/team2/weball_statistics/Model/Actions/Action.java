@@ -1,19 +1,19 @@
 package uom.team2.weball_statistics.Model.Actions;
 
 public class Action {
-    protected int id; //Action id
     protected String actionDesc;
     protected String timeHappened;
     protected BelongsTo belongsTo;
+    protected String imageAction;
 
     public Action(){
         //Empty constructor required
     }
 
-    public Action (String timeHappened, int id, BelongsTo belongsTo) {
-        this.id = id;
+    public Action (String timeHappened, BelongsTo belongsTo, String imageAction) {
         this.timeHappened = timeHappened;
         this.belongsTo = belongsTo;
+        this.imageAction = imageAction;
     }
 
     //Method that will set the value that we want to appear to the action ui
@@ -30,11 +30,9 @@ public class Action {
         return this.timeHappened;
     };
 
-    public int getId() {
-        return id;
-    }
-
     public BelongsTo getBelongsTo() {
         return belongsTo;
     }
+
+    public String getImageAction() { return imageAction; }
 }

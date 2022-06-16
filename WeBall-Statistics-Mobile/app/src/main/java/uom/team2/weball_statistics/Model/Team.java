@@ -14,8 +14,8 @@ public class Team implements Serializable {
     private Coach teamCoach;
     private ArrayList<Player> teamPlayers;
     private Championship championshipIn; //The championship that participates
-    private final ArrayList<Player> keyPlayers = new ArrayList<Player>();
-    private final ArrayList<Player> subPlayers = new ArrayList<Player>();
+    private  ArrayList<Player> keyPlayers = new ArrayList<Player>();
+    private  ArrayList<Player> subPlayers = new ArrayList<Player>();
 
 
     //only for testing
@@ -134,5 +134,12 @@ public class Team implements Serializable {
         subPlayers.add(p);
     }
 
+    public void setSubPlayersList(ArrayList<Player> pList){
+        subPlayers=pList;
+    }
+
+    public void setKeyPlayersList(ArrayList<Player> pList){
+        keyPlayers=pList;
+    }
 
 }

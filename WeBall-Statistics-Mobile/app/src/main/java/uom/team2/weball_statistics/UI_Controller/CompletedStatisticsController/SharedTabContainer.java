@@ -8,7 +8,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import uom.team2.weball_statistics.databinding.FragmentCompletedStatsTabContainerBinding;
 import uom.team2.weball_statistics.databinding.FragmentSharedTabContainerBinding;
 
 /*

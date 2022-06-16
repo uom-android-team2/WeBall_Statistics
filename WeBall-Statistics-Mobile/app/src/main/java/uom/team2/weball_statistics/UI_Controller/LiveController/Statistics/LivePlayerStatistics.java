@@ -13,16 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLivePlayerStatisticsBinding;
 import uom.team2.weball_statistics.utils.Utils;
@@ -94,13 +94,7 @@ public class LivePlayerStatistics extends Fragment {
             LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    UIHandler.updateTeamImage(LivePlayerStatistics.this, finalTempTeam, binding.header.teamImage);
                     autoSelectPlayer(finalTempPlayers.get(0));
                     addPlayers(finalTempViews);
                     finalTempViews.get(0).setBackgroundColor(Utils.getColor(LivePlayerStatistics.this.getContext(), R.color.alt_blue));
@@ -132,10 +126,8 @@ public class LivePlayerStatistics extends Fragment {
                 public void run() {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             LivePlayerStatistics.this.getContext(), android.R.layout.simple_spinner_item, spinnerArray);
-
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.header.spinner.setAdapter(adapter);
-
                 }
             });
         }
@@ -178,18 +170,17 @@ public class LivePlayerStatistics extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DAOLiveTeamService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
+
+        if (binding == null) {
+            return;
+        }
+
+        UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
+        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, matchId);
 
         loadInitialTeamsPlayers();
-        loadTeamPlayers();
+        loadSecondTeamPlayers();
 
-        try {
-            UIHandler.updateTeamImage(LivePlayerStatistics.this, teamLandlord, binding.header.teamImage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -202,7 +193,7 @@ public class LivePlayerStatistics extends Fragment {
         autoSelectPlayer(teamLandlordPlayers.get(0));
 
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamLandlordId, teamLandlordPlayers.get(0).getId());
-        DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId);
+        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId);
 
         if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
             LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
@@ -216,7 +207,7 @@ public class LivePlayerStatistics extends Fragment {
         }
     }
 
-    public void loadTeamPlayers() {
+    public void loadSecondTeamPlayers() {
         for (Player player : teamGuestPlayers) {
             DAOLivePlayerStatistics.getInstance().initializeTable(matchId, player.getId());
         }
@@ -242,27 +233,23 @@ public class LivePlayerStatistics extends Fragment {
 
     public void createPlayers(ArrayList<Player> players, ArrayList<View> views) {
         for (Player player : players) {
-            try {
-                View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, player.getName(), player.getImagePath());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        1
-                );
-                if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
-                    this.requireActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            params.setMargins(5, 2, 5, 0);
-                            playerView.setLayoutParams(params);
-                        }
-                    });
-                    views.add(playerView);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            String fullName = player.getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + player.getSurname();
+            View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, fullName, player.getImagePath());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1
+            );
+            if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
+                this.requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        params.setMargins(5, 2, 5, 0);
+                        playerView.setLayoutParams(params);
+                    }
+                });
+                views.add(playerView);
             }
-
         }
     }
 
@@ -272,18 +259,15 @@ public class LivePlayerStatistics extends Fragment {
         int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
 
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamSelectedId, playerSelectedId);
-        DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
+        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
 
-        try {
-            UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
-                    player.getImagePath(),
-                    player.getName(),
-                    binding.selectedPlayerLayout.getRoot());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String fullName = player.getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + player.getSurname();
+
+        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
+                player.getImagePath(),
+                fullName,
+                binding.selectedPlayerLayout.getRoot());
+
 
     }
 
@@ -309,21 +293,18 @@ public class LivePlayerStatistics extends Fragment {
                     int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
 
                     DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, match.getId(), teamSelectedId, playerSelectedId);
-                    DAOLiveTeamService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId);
+                    DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId);
 
                     Utils.changeBackgroundColorInView(getContext(), playerView, R.color.alt_blue);
 
+                    String fullName = tempPlayers.get(index).getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + tempPlayers.get(index).getSurname();
 
-                    try {
-                        UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
-                                tempPlayers.get(index).getImagePath(),
-                                tempPlayers.get(index).getName(),
-                                binding.selectedPlayerLayout.getRoot());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
+                    UIHandler.updateSelectedPlayerImageLayout(LivePlayerStatistics.this,
+                            tempPlayers.get(index).getImagePath(),
+                            fullName,
+                            binding.selectedPlayerLayout.getRoot());
+
                     for (View other : views) {
                         if (!other.equals(playerView)) {
                             Utils.changeBackgroundColorInView(getContext(), other, R.color.statistics_background);

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UI_Controller.CompletedStatisticsController.LeadersStatsController.LeadersStats">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
         android:layout_width="match_parent"

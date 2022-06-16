@@ -28,18 +28,18 @@ import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 /*
  * @author Leonard Pepa ics20033
  */
-public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
-    public static DAOLiveTeamService instance;
+public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
+    public static DAOLiveMatchService instance;
     private final DatabaseReference databaseReference;
 
-    private DAOLiveTeamService() {
+    private DAOLiveMatchService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(TeamLiveStatistics.class.getSimpleName());
     }
 
-    public static DAOLiveTeamService getInstance() {
+    public static DAOLiveMatchService getInstance() {
         if (instance == null) {
-            instance = new DAOLiveTeamService();
+            instance = new DAOLiveMatchService();
         }
         return instance;
     }
@@ -67,17 +67,21 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            String clock = (String) dataSnapshot.getValue();
-                            if (fragment.getActivity() != null) {
-                                fragment.requireActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        clockText.setText(clock);
-                                    }
-                                });
+                            try {
+                                String clock = ((HashMap<String, String>) dataSnapshot.getValue()).get("clock");
+                                if (fragment.getActivity() != null && fragment.isAdded()) {
+                                    fragment.requireActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            clockText.setText(clock);
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e);
                             }
                         } else {
-                            if (fragment.getActivity() != null) {
+                            if (fragment.getActivity() != null && fragment.isAdded()) {
                                 String clock = "00:00";
                                 databaseReference.child("match_id: " + matchId).child("clock").setValue(clock);
                                 fragment.requireActivity().runOnUiThread(new Runnable() {
@@ -108,19 +112,19 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 // this method is called when the data is
                 // changed in our Firebase console.
 
-                TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
-                if (team1 == null) {
+                TeamLiveStatistics team = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
+                if (team == null) {
                     return;
                 }
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                    if (fragment.getActivity() != null) {
+                    if (fragment.getActivity() != null && fragment.isAdded()) {
                         UIHandler.updateProgressBarLayoutTeam2(fragment,
-                                fragment.getMapOfStatistics(),
+                                mapof,
                                 statistic,
-                                LiveStatisticsEnum.getStatisticValueByName(team1, statistic),
-                                LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
+                                LiveStatisticsEnum.getStatisticValueByName(team, statistic),
+                                LiveStatisticsEnum.getStatisticValueByName(team, statistic)
                         );
                     }
 
@@ -138,7 +142,8 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         });
     }
 
-    public void setListenerForPoints(Fragment fragment, MatchHeaderLayoutBinding layoutBinding, int matchId, int teamId1, int teamId2) {
+    //
+    public void setListenerForPoints(Fragment fragment, TextView textView, int matchId, int teamId1, int teamId2) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -151,13 +156,18 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                 TeamLiveStatistics team1 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
                 TeamLiveStatistics team2 = snapshot.child("match_id: " + matchId).child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
 
-                if (team1 == null || team2 == null) {
-                    return;
+                int scoreTeam1 = 0;
+                int scoreTeam2 = 0;
+
+                if (team1 != null) {
+                    scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
                 }
 
-                int scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
-                int scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
-                UIHandler.updateScore(fragment, layoutBinding, scoreTeam1, scoreTeam2);
+                if (team2 != null) {
+                    scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                }
+
+                UIHandler.updateScore(fragment, textView, scoreTeam1, scoreTeam2);
 
             }
 
@@ -191,9 +201,9 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
 
-                    if (fragment.getActivity() != null && fragment.getMapOfStatistics().get(statistic.name()) != null) {
+                    if (fragment.getActivity() != null && fragment.isAdded() && fragment.getMapOfStatistics().get(statistic.name()) != null) {
                         UIHandler.updateProgressBarLayoutTeam1(fragment,
-                                fragment.getMapOfStatistics(),
+                                mapof,
                                 statistic,
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
                                         + LiveStatisticsEnum.getStatisticValueByName(team2, statistic),
@@ -201,7 +211,7 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
                         );
 
                         UIHandler.updateProgressBarLayoutTeam2(fragment,
-                                fragment.getMapOfStatistics(),
+                                mapof,
                                 statistic,
                                 LiveStatisticsEnum.getStatisticValueByName(team1, statistic)
                                         + LiveStatisticsEnum.getStatisticValueByName(team2, statistic),
@@ -254,13 +264,13 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
 
     @Override
     public void update(TeamLiveStatistics data) {
-        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_TEAM_STATS_LIVE);
         HashMap<String, Object> h = (HashMap<String, Object>) data.toMap();
         databaseReference.child("match_id: " + data.getMatch_id()).child("team_id: " + data.getTeam_id()).updateChildren(h);
+        LiveStatisticsService.getInstance().updateModel(data, Config.API_URL + Config.API_TEAM_STATS_LIVE);
     }
 
     public void updateByMatchAndTeamId(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {
-        databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -281,25 +291,25 @@ public class DAOLiveTeamService implements DAOCRUDService<TeamLiveStatistics> {
         });
     }
 
-    public void initializeTable(int matchid, int teamId1, int teamId2) {
-        databaseReference.child("match_id: " + matchid).child("team_id: " + teamId1).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+    public void initializeTable(int matchId, int teamId1, int teamId2) {
+        get(matchId, teamId1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
                 } else {
-                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchid, teamId1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchId, teamId1);
                     insert(teamLiveStatistics);
                 }
             }
         });
-        databaseReference.child("match_id: " + matchid).child("team_id: " + teamId2).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        get(matchId, teamId2).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
                 } else {
-                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchid, teamId2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    TeamLiveStatistics teamLiveStatistics = new TeamLiveStatistics(matchId, teamId2);
                     insert(teamLiveStatistics);
                 }
             }

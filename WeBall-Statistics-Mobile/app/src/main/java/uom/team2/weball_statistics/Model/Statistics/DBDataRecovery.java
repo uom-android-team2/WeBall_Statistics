@@ -33,7 +33,7 @@ public class DBDataRecovery {
         Response response = client.newCall(request).execute();
         String data = response.body().string();
 
-   System.out.println(Config.API_URL + api + query);
+
 
 
 

@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -9,31 +10,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Stack;
 
+import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
+import uom.team2.weball_statistics.Model.Actions.ReboundAction.Rebound;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
+import uom.team2.weball_statistics.Model.Actions.Turnover.Turnover;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Statistics.DBDataRecovery;
+import uom.team2.weball_statistics.Model.Statistics.PlayerStats;
 import uom.team2.weball_statistics.Model.Statistics.Stats;
+import uom.team2.weball_statistics.Model.Statistics.TeamStats;
 import uom.team2.weball_statistics.Model.Status;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOAction;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
-import uom.team2.weball_statistics.Service.DAOLiveTeamService;
 import uom.team2.weball_statistics.Service.MatchService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
+import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
@@ -42,15 +58,14 @@ import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
  * Use the {@link AdminsView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminsView extends Fragment  {
+public class AdminsView extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();
-    private final Stack<Integer> undoButtonStack = new Stack<Integer>();
-    private final Match m = new Match(1, null, null, new Date(), Status.UPCOMING);
+    private final Stack<TextView> undoButtonStack = new Stack<TextView>();
     private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
@@ -68,15 +83,13 @@ public class AdminsView extends Fragment  {
     private boolean running = false;
     private Button start_end_button;
     private long pauseOffset;
+    private long keepClock;
     private boolean started = false;
     private boolean teamSelected = false;
     private int playerChecked = 1;
     private Match match;
-    private Team landLord;
-    private Team guest;
     private Player playerObjChecked;
     private Team teamObj;
-    private Team teamLand;
     private Team teamGuest;
     private Team teamLandlord;
     private TextView freeThrowBtn;
@@ -88,6 +101,11 @@ public class AdminsView extends Fragment  {
     private TextView blockBtn;
     private TextView foulBtn;
     private TextView turnoverBtn;
+    private TextView startBtn;
+    private TextView pauseBtn;
+    private TextView undoBtn;
+    private TextView substitutionBtn;
+    private final ArrayList<ImageView> playersImageViewList = new ArrayList<ImageView>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -121,16 +139,13 @@ public class AdminsView extends Fragment  {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         binding = FragmentAdminsViewBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
-
     }
 
 
@@ -146,52 +161,109 @@ public class AdminsView extends Fragment  {
         blockBtn = binding.blockButton;
         foulBtn = binding.foulButton;
         turnoverBtn = binding.turnoverButton;
+        startBtn = binding.startButton;
+        pauseBtn = binding.pauseButton;
+        undoBtn = binding.undoButton;
+        substitutionBtn = binding.substitutionButton;
 
-        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
-        teamLandlord = match.getTeamLandlord();
-        teamGuest = match.getGuest();
+//        //At start, we want to display only start button and substitutions
+//        freeThrowBtn.setVisibility(View.GONE);
+//        twoPointBtn.setVisibility(View.GONE);
+//        threePointBtn.setVisibility(View.GONE);
+//        reboundBtn.setVisibility(View.GONE);
+//        assistBtn.setVisibility(View.GONE);
+//        stealBtn.setVisibility(View.GONE);
+//        blockBtn.setVisibility(View.GONE);
+//        turnoverBtn.setVisibility(View.GONE);
+//        foulBtn.setVisibility(View.GONE);
+//        pauseBtn.setVisibility(View.GONE);
+//        undoBtn.setVisibility(View.GONE);
+//        substitutionBtn.setVisibility(View.GONE);
+//        binding.score.setVisibility(View.GONE);
+//        binding.shots.setVisibility(View.GONE);
 
-        //test
-        match = new Match(1, new Team(1, "jif", "kfsd", "euj"), new Team(2, "fkns", "kdlf", "akdk"), new Date(), Status.COMPLETED);
-        landLord = match.getTeamLandlord();
-        teamGuest = match.getGuest();
 
-        ArrayList<Player> team1 = new ArrayList<>();
-        ArrayList<Player> team2 = new ArrayList<>();
-        team1.add(new Player(1,"tp11", "test"));
-        team1.add(new Player(2,"tp12", "test"));
-        team1.add(new Player(3,"tp13", "test"));
-        team1.add(new Player(4,"tp14", "test"));
-        team1.add(new Player(5,"tp15", "test"));
-        team2.add(new Player(6,"tp21", "test"));
-        team2.add(new Player(7,"tp22", "test"));
-        team2.add(new Player(8,"tp23", "test"));
-        team2.add(new Player(9,"tp68", "test"));
-        team2.add(new Player(10,"tp79", "test"));
 
-        for (int i = 0; i < team1.size(); i++) {
-            landLord.addPlayerToKey(team1.get(i));
+        // orismata gia kathe match
+        Bundle bundle = getArguments();
+        match = (Match) bundle.getSerializable("match");
+        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+        teamGuest = (Team) bundle.getSerializable("teamGuest");
+        match.setTeamLandlord(teamLandlord);
+        match.setGuest(teamGuest);
+
+
+
+        DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
+        DAOLiveMatchService.getInstance().setListenerForPoints(this, binding.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
+
+
+
+
+
+        DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
+
+        DAOLiveMatchService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
+
+
+        for (Player player : teamLandlord.getTeamPlayers()) {
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
         }
-        for (int i = 0; i < team2.size(); i++) {
-            teamGuest.addPlayerToKey(team2.get(i));
-        }
-        for (int i = 0; i < team2.size(); i++) {
-            landLord.addPlayerToSub(team2.get(i));
+        for (Player player : teamGuest.getTeamPlayers()) {
+            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
         }
 
-        //'
-
-        //put images of the two teams
-        //teamLand=match.getTeamLandlord();
-        //teamGuest=match.getGuest();
-        // String badgeLand=teamLand.getBadgePath();
-        //  String badgeGuest=teamGuest.getBadgePath();
-
-        //binding.team1Banner.setImageURI(Uri.parse(badgeLand));
-        //binding.team2Banner.setImageURI(Uri.parse(badgeGuest));
+        UIHandler.updateTeamImage(this, teamLandlord, binding.team1Banner);
+        UIHandler.updateTeamImage(this, teamGuest, binding.team2Banner);
 
 
-        //
+        // kathe antikeimeno team exei mia lista me tous paiktes ths sto pedio teamPlayers
+        ArrayList<Player> tlList = teamLandlord.getTeamPlayers();
+        ArrayList<Player> tgList = teamGuest.getTeamPlayers();
+
+        for (int i = 0; i < tlList.size(); i++) {
+            if (i < 5) {
+                keyPlayersLandlord.add(tlList.get(i));
+            } else {
+                subPlayersLandlord.add(tlList.get(i));
+            }
+        }
+
+        for (int i = 0; i < tgList.size(); i++) {
+            if (i < 5) {
+                keyPlayersGuest.add(tgList.get(i));
+            } else {
+                subPlayersGuest.add(tgList.get(i));
+            }
+        }
+
+        match.getTeamLandlord().setKeyPlayersList(keyPlayersLandlord);
+        match.getTeamLandlord().setSubPlayersList(subPlayersLandlord);
+        match.getGuest().setKeyPlayersList(keyPlayersGuest);
+        match.getGuest().setSubPlayersList(subPlayersGuest);
+
+
+        teamLandlord.setKeyPlayersList(keyPlayersLandlord);
+        teamLandlord.setSubPlayersList(subPlayersLandlord);
+        teamGuest.setKeyPlayersList(keyPlayersGuest);
+        teamGuest.setSubPlayersList(subPlayersGuest);
+
+
+        //Add ImageViews for players into an ArrayList
+        playersImageViewList.add(binding.player1);
+        playersImageViewList.add(binding.player2);
+        playersImageViewList.add(binding.player3);
+        playersImageViewList.add(binding.player4);
+        playersImageViewList.add(binding.player5);
+        //Put images of the 1rst team Players
+        for (int i = 0; i < playersImageViewList.size(); i++) {
+            Picasso.get()
+                    .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(playersImageViewList.get(i));
+        }
+
 
         //When this page opens, we want to have the landlord team already selected
         teamSelected = false;
@@ -208,13 +280,41 @@ public class AdminsView extends Fragment  {
         binding.player1.setBackground(shape2);
         playerChecked = 1;
 
-        listenEvent();
+
+        //an to paixnidi exei idi ksekinisei alla o admin exei vgei apo
+        //tin othoni toy match, tote prepei to chronometer na sunexisei apo
+        //tin live ora.
+        if (match.isProgress()==1){
+
+            //vale to xronometro apo ekei pou stamatise
+            running = true;
+            started = true;
+            binding.startButton.setText("End");
+            binding.pauseButton.setEnabled(true);
+
+            binding.clock.start();
+            binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    // to match id tha allazei analoga to match
+                    DAOLiveMatchService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
+                }
+            });
 
 
-        //Load data for this team
+        }
 
 
-        //Load the data of the first team players.
+
+        //Done button
+        binding.doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.clock.stop();
+                keepClock = SystemClock.elapsedRealtime() - binding.clock.getBase();
+                running = false;
+            }
+        });
 
 
         //Banner Buttons -When the first team is selected -> variable "teamSelected"=false. Else, true.
@@ -245,6 +345,13 @@ public class AdminsView extends Fragment  {
                 //remove the background color from the other banner
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
+                for (int i = 0; i < playersImageViewList.size(); i++) {
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playersImageViewList.get(i));
+                }
 
             }
         });
@@ -278,6 +385,13 @@ public class AdminsView extends Fragment  {
                 binding.team1Banner.setBackgroundColor(0x00000000);
 
                 //Load data for this team
+                for (int i = 0; i < playersImageViewList.size(); i++) {
+                    Picasso.get()
+                            .load(Config.PLAYER_IMAGES_RESOURCES + teamGuest.getKeyPlayers().get(i).getImagePath())
+                            .resize(200, 200)
+                            .centerCrop()
+                            .into(playersImageViewList.get(i));
+                }
 
             }
         });
@@ -291,7 +405,24 @@ public class AdminsView extends Fragment  {
             @Override
             public void onClick(View view) {
 
+//                //Make visible hidden parts
+//                freeThrowBtn.setVisibility(View.VISIBLE);
+//                twoPointBtn.setVisibility(View.VISIBLE);
+//                threePointBtn.setVisibility(View.VISIBLE);
+//                reboundBtn.setVisibility(View.VISIBLE);
+//                assistBtn.setVisibility(View.VISIBLE);
+//                stealBtn.setVisibility(View.VISIBLE);
+//                blockBtn.setVisibility(View.VISIBLE);
+//                turnoverBtn.setVisibility(View.VISIBLE);
+//                foulBtn.setVisibility(View.VISIBLE);
+//                pauseBtn.setVisibility(View.VISIBLE);
+//                undoBtn.setVisibility(View.VISIBLE);
+//                substitutionBtn.setVisibility(View.VISIBLE);
+//                binding.score.setVisibility(View.GONE);
+//                binding.shots.setVisibility(View.GONE);
+
                 if (!started) {
+                    initStarters();
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
                     // Prosthiki apo leo gia na pairnw ta lepta
@@ -299,21 +430,43 @@ public class AdminsView extends Fragment  {
                         @Override
                         public void onChronometerTick(Chronometer chronometer) {
                             // to match id tha allazei analoga to match
-                            DAOLiveTeamService.getInstance().updateClock(1, chronometer.getText().toString());
+                            DAOLiveMatchService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
                         }
                     });
                     running = true;
                     started = true;
                     binding.startButton.setText("End");
                     binding.pauseButton.setEnabled(true);
-                    m.setStatus(Status.ONGOING);
-                    m.setProgress();
+                    match.setStatus(Status.ONGOING);
+
+                    //Add start's action description to firebase
+                    Action startMatchAction = new MatchFlow("00.00", FlowType.START);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
+
+                    match.setProgress(1);
+
                     MatchService ms = new MatchService();
                     try {
-                        ms.statusUpdate(m);
+                        ms.statusUpdate(match);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+
+                    listenEvent();
+
+                    DBDataRecovery teamsPlayed = new DBDataRecovery();
+                    try {
+                        Stats teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                        Stats teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                        ((TeamStats)teamLandlordStats).setMatches();
+                        ((TeamStats)teamGuestStats).setMatches();
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamLandlordStats);
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
 
                 }
                 //end button
@@ -325,15 +478,22 @@ public class AdminsView extends Fragment  {
                     binding.pauseButton.setEnabled(false);
                     binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                     binding.pauseButton.setText("Pause/Continue");
-                    m.setStatus(Status.COMPLETED);
+                    match.setStatus(Status.COMPLETED);
 
-                    m.setCompleted();
+                    //Add completed action description to firebase
+                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.COMPLETED);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
+
+                    match.setCompleted(true);
+                    match.setProgress(0);
                     MatchService ms = new MatchService();
                     try {
-                        ms.statusUpdate(m);
+                        ms.statusUpdate(match);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+
                 }
             }
 
@@ -349,11 +509,18 @@ public class AdminsView extends Fragment  {
                     binding.pauseButton.setText("Pause");
                     running = true;
 
+                    //Add resume's action description to firebase
+                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.RESUME);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
                 } else {
                     binding.pauseButton.setText("Continue");
                     binding.clock.stop();
                     pauseOffset = SystemClock.elapsedRealtime() - binding.clock.getBase();
                     running = false;
+
+                    //Add pause's action description to firebase
+                    Action startMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
+                    DAOAction.getInstance().insertAction(startMatchAction, match);
                 }
             }
         });
@@ -363,6 +530,45 @@ public class AdminsView extends Fragment  {
             @Override
             public void onClick(View view) {
 
+
+
+                if (!undoButtonStack.isEmpty()) {
+                    Player plObjForUndo = undoPlayerStack.pop();
+                    Team teamObjForUndo = undoTeamStack.pop();
+                    TextView lastAction = undoButtonStack.pop();
+
+
+                    DBDataRecovery dataRecovery = new DBDataRecovery();
+                    try {
+                        Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(plObjForUndo.getId()));
+                        Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObjForUndo.getId()));
+
+                        if (binding.freethrowButton.equals(lastAction)) {
+
+                        } else if (binding.twoPointerButton.equals(lastAction)) {
+                        } else if (binding.threePointerButton.equals(lastAction)) {// code block
+                        } else if (binding.reboundButton.equals(lastAction)) {
+                            updateRebound(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.assistButton.equals(lastAction)) {
+                            updateAssist(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.stealButton.equals(lastAction)) {
+                            updateSteal(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.blockButton.equals(lastAction)) {
+                            updateBlock(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.foulButton.equals(lastAction)) {
+                            updateFoul(playerStats, teamStats, dataRecovery, true);
+                        } else if (binding.turnoverButton.equals(lastAction)) {
+                            updateTurnover(playerStats, teamStats, dataRecovery, true);
+                        } else {
+                            //do nothing
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    System.out.println("No more actions for undo");
+                }
             }
         });
 
@@ -386,10 +592,14 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
+
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
+
                 }
 
             }
@@ -409,9 +619,13 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
+
                     binding.freethrowButton.setText(playerObjChecked.getName());
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
+
 
                 }
 
@@ -432,9 +646,12 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
+
                     binding.freethrowButton.setText(playerObjChecked.getName());
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
                 }
 
             }
@@ -454,10 +671,15 @@ public class AdminsView extends Fragment  {
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
+
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    listenEvent();
+                    if(started){
+                        listenEvent();
+                    }
+
+
+
 
                 }
 
@@ -475,16 +697,20 @@ public class AdminsView extends Fragment  {
                     view.setBackground(shape);
 
 
-
                     playerChecked = 5;
 
                     playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
 
-                    //
+
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
+                    if(started){
+                        listenEvent();
+                    }
 
-                    listenEvent();
+
+
+
 
                 }
 
@@ -512,48 +738,126 @@ public class AdminsView extends Fragment  {
         });
 
 
-
-
     }
 
-    private void listenEvent(){
+    private void listenEvent() {
         DBDataRecovery dataRecovery = new DBDataRecovery();
 
-        System.out.println("erifoejiks");
+
 
 
         try {
             Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
             Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObj.getId()));
             threePointBtn.setOnClickListener(e -> {
-                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked);
+                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             freeThrowBtn.setOnClickListener(e -> {
-                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
+                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             twoPointBtn.setOnClickListener(e -> {
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked);
+                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
-            reboundBtn.setOnClickListener(e -> updateRebound(playerStats, teamStats, dataRecovery));
-            assistBtn.setOnClickListener(e -> updateAssist(playerStats, teamStats, dataRecovery));
-            stealBtn.setOnClickListener(e -> updateSteal(playerStats, teamStats, dataRecovery));
-            blockBtn.setOnClickListener(e -> updateBlock(playerStats, teamStats, dataRecovery));
-            foulBtn.setOnClickListener(e -> updateFoul(playerStats, teamStats, dataRecovery));
-            turnoverBtn.setOnClickListener(e -> updateTurnover(playerStats, teamStats, dataRecovery));
+
+           
+            reboundBtn.setOnClickListener(e ->  {
+                updateRebound(playerStats, teamStats, dataRecovery,false);
+
+                //Insert rebound's action to firebase
+                Action reboundAction = null;
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    reboundAction = new Rebound(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
+                } else {
+                    reboundAction = new Rebound(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
+                }
+
+                if (reboundAction != null) {
+                    DAOAction.getInstance().insertAction(reboundAction, match);
+                }
+            });
+            assistBtn.setOnClickListener(e -> {
+                updateAssist(playerStats, teamStats, dataRecovery,false);
+            });
+            stealBtn.setOnClickListener(e -> {
+                updateSteal(playerStats, teamStats, dataRecovery,false);
+                //Insert steal's action to firebase
+                Action stealAction = null;
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    stealAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.STEAL);
+                } else {
+                    stealAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.STEAL);
+                }
+
+                if (stealAction != null) {
+                    DAOAction.getInstance().insertAction(stealAction, match);
+                }
+            });
+            blockBtn.setOnClickListener(e -> {
+                updateBlock(playerStats, teamStats, dataRecovery,false);
+                //Insert block's action to firebase
+                Action blockAction = null;
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    blockAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                } else {
+                    blockAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.BLOCK);
+                }
+
+                if (blockAction != null) {
+                    DAOAction.getInstance().insertAction(blockAction, match);
+                }
+            });
+            foulBtn.setOnClickListener(e -> {
+                updateFoul(playerStats, teamStats, dataRecovery,false);
+                //Insert block's action to firebase
+                Action foulAction = null;
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    foulAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, SBFActionType.FOUL);
+                } else {
+                    foulAction = new SBFAction(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, SBFActionType.FOUL);
+                }
+
+                if (foulAction != null) {
+                    DAOAction.getInstance().insertAction(foulAction, match);
+                }
+            });
+            turnoverBtn.setOnClickListener(e -> {
+                updateTurnover(playerStats, teamStats, dataRecovery,false);
+                //Insert block's action to firebase
+                Action turnOverAction = null;
+                if (match.getTeamLandlord_id() == teamObj.getId()) {
+                    turnOverAction = new Turnover(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj);
+                } else {
+                    turnOverAction = new Turnover(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj);
+                }
+
+                if (turnOverAction != null) {
+                    DAOAction.getInstance().insertAction(turnOverAction, match);
+                }
+            });
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void updateAssist(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
-        playerStats.setTotalAssists();
-        teamStats.setTotalAssists();
+    private void updateAssist(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
+        if (!isUndo){
+            playerStats.setTotalAssists();
+            teamStats.setTotalAssists();
+            Toast.makeText(getActivity().getApplicationContext(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            undoPlayerStack.push(playerObjChecked);
+            undoTeamStack.push(teamObj);
+            undoButtonStack.push(binding.assistButton);
+        }else{
+            playerStats.setAssist(playerStats.getTotalAssists()-1);
+            teamStats.setAssist(teamStats.getTotalAssists()-1);
+        }
+
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.assist);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.assist);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.assist);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.assist);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -561,12 +865,48 @@ public class AdminsView extends Fragment  {
         }
     }
 
-    private void updateRebound(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
-        playerStats.setTotalRebounds();
-        teamStats.setTotalRebounds();
+    private void updateRebound(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
+        if (!isUndo){
+            playerStats.setTotalRebounds();
+            teamStats.setTotalRebounds();
+            Toast.makeText(getActivity().getApplicationContext(),"Rebound for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            undoPlayerStack.push(playerObjChecked);
+            undoTeamStack.push(teamObj);
+            undoButtonStack.push(binding.reboundButton);
+        }else{
+            playerStats.setRebound(playerStats.getTotalRebounds()-1);
+            teamStats.setRebound(teamStats.getTotalRebounds()-1);
+        }
+
+
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.rebound);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.rebound);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.rebound);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.rebound);
+            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+
+    private void updateSteal(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
+        if (!isUndo){
+            playerStats.setTotalSteels();
+            teamStats.setTotalSteels();
+            Toast.makeText(getActivity().getApplicationContext(),"Steal for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            undoPlayerStack.push(playerObjChecked);
+            undoTeamStack.push(teamObj);
+            undoButtonStack.push(binding.stealButton);
+        }else{
+            playerStats.setSteal(playerStats.getTotalSteels()-1);
+            teamStats.setSteal(teamStats.getTotalSteels()-1);
+        }
+
+        try {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.steal);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.steal);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -574,25 +914,22 @@ public class AdminsView extends Fragment  {
         }
     }
 
-    private void updateSteal(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
-        playerStats.setTotalSteels();
-        teamStats.setTotalSteels();
-        try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.steal);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.steal);
-            dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
-            dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    private void updateBlock(Stats playerStats, Stats teamStats, DBDataRecovery dataRecovery,boolean isUndo) {
+        if (!isUndo){
+            playerStats.setTotalBlock();
+            teamStats.setTotalBlock();
+            Toast.makeText(getActivity().getApplicationContext(),"Block for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            undoPlayerStack.push(playerObjChecked);
+            undoTeamStack.push(teamObj);
+            undoButtonStack.push(binding.blockButton);
+        }else{
+            playerStats.setBlock(playerStats.getTotalBlocks()-1);
+            teamStats.setBlock(teamStats.getTotalBlocks()-1);
         }
-    }
 
-    private void updateBlock(Stats playerStats, Stats teamStats, DBDataRecovery dataRecovery) {
-        playerStats.setTotalBlock();
-        teamStats.setTotalBlock();
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.block);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.block);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.block);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.block);
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -600,12 +937,22 @@ public class AdminsView extends Fragment  {
         }
     }
 
-    private void updateFoul(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
-        playerStats.setTotalFouls();
-        teamStats.setTotalFouls();
+    private void updateFoul(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
+        if (!isUndo){
+            playerStats.setTotalFouls();
+            teamStats.setTotalFouls();
+            Toast.makeText(getActivity().getApplicationContext(),"Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            undoPlayerStack.push(playerObjChecked);
+            undoTeamStack.push(teamObj);
+            undoButtonStack.push(binding.foulButton);
+        }else{
+            playerStats.setFoul(playerStats.getTotalFouls()-1);
+            teamStats.setFoul(teamStats.getTotalFouls()-1);
+        }
+
         try {
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.foul);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.foul);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.foul);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.foul);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -613,17 +960,56 @@ public class AdminsView extends Fragment  {
         }
     }
 
-    private void updateTurnover(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery) {
-        playerStats.setTotalTurnovers();
-        teamStats.setTotalTurnovers();
+    private void updateTurnover(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
+        if (!isUndo){
+            playerStats.setTotalTurnovers();
+            teamStats.setTotalTurnovers();
+            Toast.makeText(getActivity().getApplicationContext(),"Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            undoPlayerStack.push(playerObjChecked);
+            undoTeamStack.push(teamObj);
+            undoButtonStack.push(binding.turnoverButton);
+        }else{
+            playerStats.setTurnover(playerStats.getTotalTurnovers()-1);
+            teamStats.setTurnover(teamStats.getTotalTurnovers()-1);
+        }
+
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),teamObj.getId(), LiveStatisticsEnum.turnover);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),playerObjChecked.getId(), LiveStatisticsEnum.turnover);
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.turnover);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+   public void setStartersMatchPlayed(int indexPlayer, Team team) {
+           DBDataRecovery dataRecovery = new DBDataRecovery();
+           try {
+               Stats stat = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(team.getTeamPlayers().get(indexPlayer).getId()));
+               ((PlayerStats) stat).setByOneMatches();
+               dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, stat);
+
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+    }
+
+    public void initStarters(){
+        Thread threadPlayerMatch = new Thread() {
+
+            @Override
+            public void run() {
+                super.run();
+                for (int i = 0; i < teamLandlord.getTeamPlayers().size(); i++) {
+                    setStartersMatchPlayed(i, teamLandlord);
+                }
+                for (int i = 0; i < teamGuest.getTeamPlayers().size(); i++) {
+                    setStartersMatchPlayed(i, teamGuest);
+                }
+            }
+        };
+        threadPlayerMatch.start();
     }
 
     //you call this function when you want to change player

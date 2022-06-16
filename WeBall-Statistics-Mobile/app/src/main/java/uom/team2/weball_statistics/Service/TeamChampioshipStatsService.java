@@ -51,6 +51,7 @@ public class TeamChampioshipStatsService {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         teamStats = new TeamStats();
                         teamStats.editJON(jsonArray.getJSONObject(i).toString());
+                        teamStats.setTeam_name(jsonArray.getJSONObject(i).getString("team_name"));
                         listOfTeamStats.add(teamStats);
                     }
                     callbackListener.callback(listOfTeamStats);

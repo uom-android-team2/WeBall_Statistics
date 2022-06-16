@@ -20,7 +20,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -44,9 +43,10 @@ public class UpcomingMatches extends Fragment {
     private FragmentUpcomingMatchesBinding binding;
     private boolean isAdmin = false;
 
-    public UpcomingMatches() { }
+    public UpcomingMatches() {
+    }
 
-    public static UpcomingMatches getInstance(Bundle bundle){
+    public static UpcomingMatches getInstance(Bundle bundle) {
         UpcomingMatches upcomingMatches = new UpcomingMatches();
         upcomingMatches.setArguments(bundle);
         return upcomingMatches;
@@ -76,6 +76,10 @@ public class UpcomingMatches extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if (binding == null){
+            return;
+        }
+
         MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
         matchesOnMainPageService.fetchUpcomingMatches(new CallbackListener<ArrayList<Match>>() {
             @Override
@@ -94,8 +98,28 @@ public class UpcomingMatches extends Fragment {
     private void createMatchLayout(ArrayList<Match> liveMatches) {
         //Create dynamic matches and add event Listener to button of each match
 
-        TeamService teamService = new TeamService();
+        if (this.getActivity() != null && this.isAdded() && liveMatches.size() == 0) {
 
+            this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView textView = new TextView(getContext());
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText("There are no upcoming matches");
+                    textView.setTextSize(20);
+
+                    ImageView imageView = new ImageView(getContext());
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.basket));
+
+                    binding.matchesLayoutContainer.addView(imageView);
+                    binding.matchesLayoutContainer.addView(textView);
+
+                }
+            });
+
+        }
+
+        TeamService teamService = new TeamService();
 
         for (int i = 0; i < liveMatches.size(); i++) {
             if (UpcomingMatches.this.getActivity() != null) {
@@ -112,36 +136,27 @@ public class UpcomingMatches extends Fragment {
                     public void callback(Team returnedObject) {
                         pair.teamLandlord = returnedObject;
                         View team1 = viewMatch.findViewById(R.id.team1);
-                        try {
-                            UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team1);
-                            fillPlayers(returnedObject, viewMatch, true);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team1);
+                        fillPlayers(returnedObject, viewMatch, true);
+
                     }
                 });
 
+                int finalI = i;
                 teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
                     @Override
                     public void callback(Team returnedObject) {
                         pair.teamGuest = returnedObject;
                         View team2 = viewMatch.findViewById(R.id.team2);
-                        try {
-                            UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team2);
-                            fillPlayers(returnedObject, viewMatch, false);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team2);
+                        fillPlayers(returnedObject, viewMatch, false);
+                        navigate(viewMatch, liveMatches.get(finalI).getId());
                     }
                 });
 
                 onclickView(viewMatch, liveMatches.get(i).getId());
                 hashMap.put(liveMatches.get(i).getId(), pair);
-                if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null ){
+                if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null) {
                     UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -151,24 +166,31 @@ public class UpcomingMatches extends Fragment {
                         }
                     });
                 }
-                navigate(viewMatch, liveMatches.get(i).getId());
             }
         }
     }
 
-    public void navigate(View viewMatch, int matchid) {
-        ImageButton imageButton = viewMatch.findViewById(R.id.imageButtonEditMatch);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("match", mapOfMatches.get(matchid));
-                bundle.putSerializable("teamLandlord", hashMap.get(matchid).teamLandlord);
-                bundle.putSerializable("teamGuest", hashMap.get(matchid).teamGuest);
-                NavHostFragment.findNavController(UpcomingMatches.this)
-                        .navigate(R.id.action_matchesTabContainer_to_adminsView, bundle);
-            }
-        });
+    public void navigate(View viewMatch, int matchId) {
+        if (UpcomingMatches.this.getActivity() != null && UpcomingMatches.this.isAdded()) {
+
+            UpcomingMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ImageButton imageButton = viewMatch.findViewById(R.id.imageButtonEditMatch);
+                    imageButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("match", mapOfMatches.get(matchId));
+                            bundle.putSerializable("teamLandlord", hashMap.get(matchId).teamLandlord);
+                            bundle.putSerializable("teamGuest", hashMap.get(matchId).teamGuest);
+                            NavHostFragment.findNavController(UpcomingMatches.this)
+                                    .navigate(R.id.action_matchesTabContainer_to_adminsView, bundle);
+                        }
+                    });
+                }
+            });
+        }
     }
 
 
@@ -181,7 +203,7 @@ public class UpcomingMatches extends Fragment {
                 team.setTeamPlayers(players);
                 for (int i = 0; i < players.size(); i++) {
 
-                    if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null ){
+                    if (UpcomingMatches.this.isAdded() && UpcomingMatches.this.getActivity() != null) {
 
                         View playerView = getLayoutInflater().inflate(R.layout.player_layout, null);
                         View container = viewMatch.findViewById(R.id.matchPlayersInfo);
@@ -232,7 +254,6 @@ public class UpcomingMatches extends Fragment {
         });
 
     }
-
 
 
 }

@@ -26,6 +26,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.PlayerChampionshipStatsService;
 import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
+import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.LiveMatches;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
 
@@ -37,12 +38,9 @@ public class LeadersStats extends Fragment {
 
     private String[] statsNames;
     private FragmentLeadersStatsBinding binding;
-    private String[] tags ;
-
 
     public LeadersStats() {
         statsNames = new String[] {"Points Per Game","Assist Per Game", "Rebounds Per Game", "Blocks Per Game", "Fouls Per Game"};
-        tags = new String[] {"PPG", "RPG", "APG", "BPG", "FPG"};
     }
 
     public static LeadersStats newInstance() {
@@ -58,7 +56,7 @@ public class LeadersStats extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addTitles();
+
     }
 
     @Override
@@ -70,6 +68,7 @@ public class LeadersStats extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
     public void onStart(){
         super.onStart();
         PlayerService playerService = new PlayerService();
@@ -78,23 +77,23 @@ public class LeadersStats extends Fragment {
         playerChampionshipStatsService.getAllPlayerStatistics(new CallbackListener<ArrayList<PlayerStats>>() {
             @Override
             public void callback(ArrayList<PlayerStats> returnedObject) {
-                System.out.println("RETURNED OBJECT");
-                System.out.println("TO SIZE EINAI = " + returnedObject.size());
-                System.out.println(returnedObject);
-
                 ArrayList<PlayerStats> points = new ArrayList<>();
                 ArrayList<PlayerStats> assists = new ArrayList<>();
                 ArrayList<PlayerStats> blocks = new ArrayList<>();
                 ArrayList<PlayerStats> rebounds = new ArrayList<>();
                 ArrayList<PlayerStats> fouls = new ArrayList<>();
 
+                //sort every arrayList
                 points = sortByPoints(returnedObject);
-                System.out.println("POSA EINAI TA POINTS??" + points);
                 assists = sortByAssists(returnedObject);
                 blocks = sortByBlocks(returnedObject);
                 rebounds = sortByRebounds(returnedObject);
                 fouls = sortByFouls(returnedObject);
 
+                //add titles
+                addTitles();
+
+                //updatePlayers
                 updatePlayers(playerService,points,Type.POINTS);
                 updatePlayers(playerService,assists,Type.ASSISTS);
                 updatePlayers(playerService,blocks,Type.REBOUNDS);
@@ -107,18 +106,21 @@ public class LeadersStats extends Fragment {
 
     public void addTitles() {
 
+        //set the name of the statistic e.g. Points Per Game
         binding.PPG.statisticTitle.setText(statsNames[0]);
         binding.APG.statisticTitle.setText(statsNames[1]);
         binding.RPG.statisticTitle.setText(statsNames[2]);
         binding.BPG.statisticTitle.setText(statsNames[3]);
         binding.FPG.statisticTitle.setText(statsNames[4]);
 
+        //change top player's statistic
         changeTopPlayerLayout(binding.PPG.topPlayerContainer,"PPG");
         changeTopPlayerLayout(binding.APG.topPlayerContainer,"APG");
         changeTopPlayerLayout(binding.RPG.topPlayerContainer,"RPG");
         changeTopPlayerLayout(binding.BPG.topPlayerContainer,"BPG");
         changeTopPlayerLayout(binding.FPG.topPlayerContainer,"FPG");
 
+        //set the statistic e.g. PPG
         binding.PPG.ranktab.rankTabStat.setText("PPG");
         binding.APG.ranktab.rankTabStat.setText("APG");
         binding.RPG.ranktab.rankTabStat.setText("RPG");
@@ -134,9 +136,7 @@ public class LeadersStats extends Fragment {
 
     }
 
-
-
-
+    //update every player in the playersLayout
     public void updatePlayers(PlayerService playerService, ArrayList<PlayerStats> playerStats, Type target){
 
         int ranks = 4;
@@ -171,7 +171,7 @@ public class LeadersStats extends Fragment {
             double finalValue = value;
 
 
-            //creates top Player
+            //creates top leader aka top player in a specific statistic e.g. top leader in PointsPerGame is Curry
             LinearLayout topFinalLayout = topPlayerLayout;
             playerService.findPlayerById2(playerStats.get(0).getPlayer_id(), new CallbackListener<Player>() {
 
@@ -185,7 +185,7 @@ public class LeadersStats extends Fragment {
                 }
             });
 
-            //creates other players
+            //creates other leaders
             LinearLayout playerFinalLayout = playerLayout;
             playerService.findPlayerById2(playerStats.get(i+1).getPlayer_id(), new CallbackListener<Player>() {
 
@@ -199,12 +199,12 @@ public class LeadersStats extends Fragment {
         }
     }
 
-    // replace "name surname" with "N. SURNAME"
+    // replace "Name Surname" with "N. SURNAME"
     public String nameFormat(String name, String surname){
         return String.valueOf(name.charAt(0))+ ". " + surname.toUpperCase();
     }
 
-    // replace e.g. "POINT_GUARD" with "PG" or "CENTER" with "C"
+    // replace e.g. "POINT_GUARD" with "PG" or "CENTER" with "C" etc.
     public String positionFormat(String position){
         if (position.contains("_")) {
             position = position.replace("_", " ");
@@ -223,66 +223,68 @@ public class LeadersStats extends Fragment {
         return team.toUpperCase().substring(0,3);
     }
 
-
-
+    //creates leaders except top leader in a statistic
     public void createPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue)
     {
        View view = linearLayout.getChildAt(num);
-       System.out.println("RANKS CHILDREN = "+ linearLayout.getChildCount());
+       
+       if (LeadersStats.this.isAdded() && LeadersStats.this.getActivity() != null) {
+           LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
+               @Override
+               public void run() {
+                   TextView playerView = view.findViewById(R.id.player);
+                   playerView.setText(player);
 
-       LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               TextView playerView = view.findViewById(R.id.player);
-               playerView.setText(player);
+                   TextView rankView = view.findViewById(R.id.rank);
+                   rankView.setText(String.valueOf(num + 2));
 
-               TextView rankView = view.findViewById(R.id.rank);
-               rankView.setText(String.valueOf(num+2));
+                   TextView teamView = view.findViewById(R.id.team);
+                   teamView.setText(team);
 
-               TextView teamView = view.findViewById(R.id.team);
-               teamView.setText(team);
-
-               TextView statView = view.findViewById(R.id.statValue);
-               statView.setText(statValue);
-           }
-       });
+                   TextView statView = view.findViewById(R.id.statValue);
+                   statView.setText(statValue);
+               }
+           });
+       }
     }
 
+    //creates top leader
     public void createTopPlayer(LinearLayout linearLayout, String player, String team, int num, String statValue,
-                                int playerNumber, String position,  String url)
-    {
+                                int playerNumber, String position,  String url) {
         View view = linearLayout.getChildAt(num);
-        System.out.println("TOP PLAYER CHILDREN = "+ linearLayout.getChildCount());
 
-        LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                TextView playerView = view.findViewById(R.id.topPlayerName);
-                playerView.setText(player);
+        if (LeadersStats.this.isAdded() && LeadersStats.this.getActivity() != null) {
+            LeadersStats.this.requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView playerView = view.findViewById(R.id.topPlayerName);
+                    playerView.setText(player);
 
-                TextView teamView = view.findViewById(R.id.topTeamName);
-                teamView.setText(team);
+                    TextView teamView = view.findViewById(R.id.topTeamName);
+                    teamView.setText(team);
 
-                TextView valueView = view.findViewById(R.id.topStatValue);
-                valueView.setText(statValue);
+                    TextView valueView = view.findViewById(R.id.topStatValue);
+                    valueView.setText(statValue);
 
-                TextView numView = view.findViewById(R.id.topNumber);
-                numView.setText(String.valueOf(playerNumber));
+                    TextView numView = view.findViewById(R.id.topNumber);
+                    numView.setText(String.valueOf(playerNumber));
 
-                TextView positionView = view.findViewById(R.id.topPosition);
-                positionView.setText(position);
+                    TextView positionView = view.findViewById(R.id.topPosition);
+                    positionView.setText(position);
 
-                ImageView imageView = view.findViewById(R.id.topPlayerImage);
-                Picasso.get()
-                        .load(url)
-                        .resize(200,200)
-                        .centerCrop()
-                        .transform(new RoundedCorners())
-                        .into(imageView);
-            }
-        });
+                    ImageView imageView = view.findViewById(R.id.topPlayerImage);
+                    Picasso.get()
+                            .load(url)
+                            .resize(200, 200)
+                            .centerCrop()
+                            .transform(new RoundedCorners())
+                            .into(imageView);
+                }
+            });
+        }
     }
 
+    //sorting algorithms for leaders stats
     public ArrayList<PlayerStats> sortByPoints(ArrayList<PlayerStats> list) {
 
         Collections.sort(list, new Comparator<PlayerStats>() {
@@ -367,27 +369,5 @@ public class LeadersStats extends Fragment {
     }
 
     enum Type {POINTS, ASSISTS, BLOCKS, REBOUNDS, FOULS}
-
-//    public void navigate() {
-//
-//        binding.leadersContainer.findViewById(R.id.button).setOnClickListener(e -> {
-//                NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.RPG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.APG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.SPG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.BPG.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//        binding.FGM3.BUTTON.expButton.setOnClickListener(e -> {
-//            NavHostFragment.findNavController(this).navigate(R.id.action_sharedTabContainer_to_expandedLeadersStat); });
-//
-//    }
 
 }

@@ -67,9 +67,11 @@ public class LiveGameStatistics extends Fragment {
         // Inflate the layout for this fragment
 
         Bundle bundle = getArguments();
-        match = (Match) bundle.getSerializable("match");
-        teamLandlord = (Team) bundle.getSerializable("teamLandlord");
-        teamGuest = (Team) bundle.getSerializable("teamGuest");
+        if (bundle != null) {
+            match = (Match) bundle.getSerializable("match");
+            teamLandlord = (Team) bundle.getSerializable("teamLandlord");
+            teamGuest = (Team) bundle.getSerializable("teamGuest");
+        }
 
         binding = FragmentLiveGameStatisticsBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -95,13 +97,9 @@ public class LiveGameStatistics extends Fragment {
             return;
         }
 
-        DAOLiveMatchService.getInstance().clockDataListener(this, binding.header.clock.clockText, match.getId());
-        daoLiveMatchService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
-        daoLiveMatchService.setListenerForPoints(this, binding.header.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
-
-        UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamLandlord, binding.header.team1.getRoot());
-        UIHandler.updateTeamImageInMatch(LiveGameStatistics.this, teamGuest, binding.header.team2.getRoot());
-
+        if (match != null && teamLandlord != null && teamGuest != null) {
+            daoLiveMatchService.setDataChangeListener(this, match.getId(), teamLandlord.getId(), teamGuest.getId());
+        }
 
     }
 

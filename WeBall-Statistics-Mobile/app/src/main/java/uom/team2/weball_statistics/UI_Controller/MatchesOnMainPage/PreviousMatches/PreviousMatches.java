@@ -73,7 +73,7 @@ public class PreviousMatches extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (binding == null){
+        if (binding == null) {
             return;
         }
 
@@ -126,6 +126,10 @@ public class PreviousMatches extends Fragment {
                 mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_previous_layout, null);
+
+                UIHandler.updateScore(PreviousMatches.this, viewMatch.findViewById(R.id.score_text), liveMatches.get(i).getTeamLandlord_id(), liveMatches.get(i).getTeamguest_id());
+
+
                 teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
                     @Override
                     public void callback(Team returnedObject) {
@@ -165,7 +169,7 @@ public class PreviousMatches extends Fragment {
     }
 
     public void navigate(View viewMatch, int matchId) {
-        if (PreviousMatches.this.getActivity() != null && PreviousMatches.this.isAdded()){
+        if (PreviousMatches.this.getActivity() != null && PreviousMatches.this.isAdded()) {
             PreviousMatches.this.requireActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

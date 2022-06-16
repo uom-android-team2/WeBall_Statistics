@@ -29,18 +29,18 @@ import uom.team2.weball_statistics.configuration.Config;
 public class popupViewTwoPoints extends Dialog implements
         android.view.View.OnClickListener {
 
+    private final DBDataRecovery dbdatarecovery;
+    private final int points;
+    private final Match match;
+    private final Team team;
+    private final Player player;
+    private final String time; //For the action when happened;
     public Activity c;
     public Dialog d;
     public Button yes, no;
     Stats playerStats;
     Stats teamStats;
-    private final DBDataRecovery dbdatarecovery;
     private String str;
-    private Match match;
-    private Team team;
-    private Player player;
-    private String time; //For the action when happened;
-    private final int points;
 
 
     public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match match, Team team, Player player, String time) {
@@ -86,7 +86,7 @@ public class popupViewTwoPoints extends Dialog implements
                 teamStats.setSuccessfulTwoPointer();
                 teamStats.setSuccessfulEffort();
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_twopointer);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_twopointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_twopointer);
                 //Insert 2point's action to firebase
                 Action twoPointThrowAction = null;
 
@@ -104,7 +104,7 @@ public class popupViewTwoPoints extends Dialog implements
                 break;
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_twopointer);
                 dismiss();
                 break;
             default:

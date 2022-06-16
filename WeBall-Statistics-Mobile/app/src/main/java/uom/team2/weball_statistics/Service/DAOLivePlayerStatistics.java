@@ -41,6 +41,21 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
         return instance;
     }
 
+
+    public void undo(int matchId, int playerId, LiveStatisticsEnum statisticsEnum) {
+        get(matchId, playerId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                PlayerLiveStatistics playerLiveStatistics = dataSnapshot.getValue(PlayerLiveStatistics.class);
+                if (playerLiveStatistics != null) {
+                    LiveStatisticsEnum.undoStatistic(playerLiveStatistics, statisticsEnum);
+                    update(playerLiveStatistics);
+                }
+            }
+        });
+    }
+
+
     public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int teamId, int playerId) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -81,7 +96,6 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }
@@ -131,7 +145,6 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 }
                 PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId);
                 insert(playerLiveStatistics);
-
             }
         });
     }

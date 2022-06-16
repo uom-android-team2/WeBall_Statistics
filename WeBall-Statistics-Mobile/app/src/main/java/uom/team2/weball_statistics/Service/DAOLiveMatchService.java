@@ -23,7 +23,6 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveP
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.configuration.Config;
-import uom.team2.weball_statistics.databinding.MatchHeaderLayoutBinding;
 
 /*
  * @author Leonard Pepa ics20033
@@ -43,6 +42,21 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
         }
         return instance;
     }
+
+
+    public void undo(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {
+        get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
+                if (teamLiveStatistics != null) {
+                    LiveStatisticsEnum.undoStatistic(teamLiveStatistics, statisticsEnum);
+                    update(teamLiveStatistics);
+                }
+            }
+        });
+    }
+
 
     public void updateClock(int matchId, String value) {
         databaseReference.child("match_id: " + matchId).child("clock").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
@@ -137,7 +151,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }
@@ -175,7 +188,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }
@@ -228,7 +240,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }

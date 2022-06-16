@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.PreviousMatches;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -31,8 +32,10 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.Service.TeamService;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
+import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.LiveMatches;
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.Service.MatchesOnMainPageService;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentPreviousMatchesBinding;
@@ -42,6 +45,7 @@ public class PreviousMatches extends Fragment {
     private final HashMap<Integer, Pair<Team>> hashMap = new HashMap<>();
     private final HashMap<Integer, Match> mapOfMatches = new HashMap<>();
     private FragmentPreviousMatchesBinding binding;
+    private ProgressDialog progressDialog;
 
     public PreviousMatches() {
     }
@@ -68,6 +72,11 @@ public class PreviousMatches extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        progressDialog = LayoutFactory.createNonCancelableProgressBar(getContext());
+        if (binding != null) {
+            binding.getRoot().setVisibility(View.INVISIBLE);
+            progressDialog.show();
+        }
     }
 
     @Override
@@ -79,12 +88,34 @@ public class PreviousMatches extends Fragment {
         }
 
         MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
-        matchesOnMainPageService.fetchCompletedMatches(new CallbackListener<ArrayList<Match>>() {
+        Thread thread = matchesOnMainPageService.fetchCompletedMatches(new CallbackListener<ArrayList<Match>>() {
             @Override
             public void callback(ArrayList<Match> returnedObject) {
                 createMatchLayout(returnedObject);
             }
         });
+
+        Thread waitingThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (PreviousMatches.this.getActivity() != null && PreviousMatches.this.isAdded()) {
+                        PreviousMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.getRoot().setVisibility(View.VISIBLE);
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        waitingThread.start();
     }
 
     @Override

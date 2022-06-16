@@ -28,7 +28,7 @@ public class MatchesOnMainPageService {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public void fetchLiveMatches(CallbackListener<ArrayList<Match>> callbackListener) {
+    public Thread fetchLiveMatches(CallbackListener<ArrayList<Match>> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,9 +54,10 @@ public class MatchesOnMainPageService {
             }
         });
         thread.start();
+        return thread;
     }
 
-    public void fetchCompletedMatches(CallbackListener<ArrayList<Match>> callbackListener) {
+    public Thread fetchCompletedMatches(CallbackListener<ArrayList<Match>> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -82,9 +83,10 @@ public class MatchesOnMainPageService {
             }
         });
         thread.start();
+        return thread;
     }
 
-    public void fetchUpcomingMatches(CallbackListener<ArrayList<Match>> callbackListener) {
+    public Thread fetchUpcomingMatches(CallbackListener<ArrayList<Match>> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -110,6 +112,7 @@ public class MatchesOnMainPageService {
             }
         });
         thread.start();
+        return thread;
     }
 
 

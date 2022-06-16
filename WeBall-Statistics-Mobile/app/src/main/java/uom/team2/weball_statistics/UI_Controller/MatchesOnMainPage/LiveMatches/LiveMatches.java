@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -32,6 +33,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.Service.TeamService;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.Service.MatchesOnMainPageService;
@@ -44,6 +46,7 @@ public class LiveMatches extends Fragment {
     private final HashMap<Integer, Match> mapOfMatches = new HashMap<>();
     private FragmentLiveMatchesBinding binding;
     private boolean isAdmin = false;
+    private ProgressDialog progressDialog;
 
     public LiveMatches() {
     }
@@ -71,6 +74,11 @@ public class LiveMatches extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         isAdmin = bundle.getBoolean("isAdmin");
+        progressDialog = LayoutFactory.createNonCancelableProgressBar(getContext());
+        if (binding != null) {
+            binding.getRoot().setVisibility(View.INVISIBLE);
+            progressDialog.show();
+        }
     }
 
     @Override
@@ -86,14 +94,36 @@ public class LiveMatches extends Fragment {
         if (binding == null) {
             return;
         }
-        MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
 
-        matchesOnMainPageService.fetchLiveMatches(new CallbackListener<ArrayList<Match>>() {
+        MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
+        Thread thread = matchesOnMainPageService.fetchLiveMatches(new CallbackListener<ArrayList<Match>>() {
             @Override
             public void callback(ArrayList<Match> returnedObject) {
                 createMatchLayout(returnedObject);
             }
         });
+
+        Thread waitingThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (LiveMatches.this.getActivity() != null && LiveMatches.this.isAdded()) {
+                        LiveMatches.this.requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.getRoot().setVisibility(View.VISIBLE);
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        waitingThread.start();
     }
 
 
@@ -220,7 +250,7 @@ public class LiveMatches extends Fragment {
     public void fillPlayers(Team team, View viewMatch, boolean home) {
         PlayerService playerService = new PlayerService();
 
-        playerService.findAllPlayersByTeamName(team.getTeamName(), new CallbackListener<ArrayList<Player>>() {
+        Thread thread = playerService.findAllPlayersByTeamName(team.getTeamName(), new CallbackListener<ArrayList<Player>>() {
             @Override
             public void callback(ArrayList<Player> players) {
                 team.setTeamPlayers(players);
@@ -253,6 +283,11 @@ public class LiveMatches extends Fragment {
                 }
             }
         });
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onclickView(View viewMatch, int matchId) {

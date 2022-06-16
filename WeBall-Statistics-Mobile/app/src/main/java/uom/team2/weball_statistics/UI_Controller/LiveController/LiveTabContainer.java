@@ -62,18 +62,6 @@ public class LiveTabContainer extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLiveTabContainerBinding.inflate(inflater, container, false);
 
-        Bundle bundle = getArguments();
-
-        Fragment matchHeaderFragment = MatchHeaderFragment.getInstance(bundle);
-
-        if (this.getActivity() != null && this.isAdded()){
-            int anyTagName = this.getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView2,
-                            matchHeaderFragment.getClass(),
-                            bundle,
-                            "anyTagName").commit();
-        }
-
         return binding.getRoot();
     }
 
@@ -83,6 +71,17 @@ public class LiveTabContainer extends Fragment {
 
         Bundle bundle = getArguments();
 
+        Fragment matchHeaderFragment = MatchHeaderFragment.getInstance(bundle);
+
+        if (this.getActivity() != null && this.isAdded()) {
+            this.requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView2,
+                            matchHeaderFragment.getClass(),
+                            bundle,
+                            "header").commit();
+        }
+
+        
         // configure tablayout with view pager
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager(), bundle);
         ViewPager viewPager = binding.viewPager;

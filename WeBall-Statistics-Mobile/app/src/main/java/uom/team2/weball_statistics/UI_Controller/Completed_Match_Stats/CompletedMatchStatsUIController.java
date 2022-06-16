@@ -1,6 +1,7 @@
 package uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats;
 
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -27,6 +28,8 @@ import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.CompleteMatchLeadersBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchHeaderLayoutBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchTeamPlayerStatsBinding;
+import uom.team2.weball_statistics.databinding.CompletedMatchTeamStatsBinding;
+import uom.team2.weball_statistics.databinding.LiveStatisticsProgressbarLayoutBinding;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 //--------------------CLASS NEEDS REFACTORING--------------------
@@ -683,5 +686,98 @@ public class CompletedMatchStatsUIController {
 
         rebsLeaderValueH.setText(maxHomeREBS+"");
         rebsLeaderValueA.setText(maxAwayREBS+"");
+    }
+    public void fillTeamStatsProgressBars(CompletedMatchStats completedMatchStats, Team homeTeam, Team awayTeam) {
+        CompletedMatchTeamStatsBinding completedMatchTeamStatsBinding = completedMatchStats.getBinding().includeScrollbars;
+
+
+        //Team Logos
+        ImageView homeTeamLogo = completedMatchTeamStatsBinding.imageView7;
+        ImageView awayTeamLogo = completedMatchTeamStatsBinding.imageView8;
+        Picasso.get()
+                .load(Config.TEAM_IMAGES_RESOURCES + homeTeam.getBadgePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(homeTeamLogo);
+
+        Picasso.get()
+                .load(Config.TEAM_IMAGES_RESOURCES + awayTeam.getBadgePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(awayTeamLogo);
+
+
+        ProgressBar homeFg = completedMatchTeamStatsBinding.homeFgPB;
+        ProgressBar awayFg = completedMatchTeamStatsBinding.awayFgPB;
+        TextView homeFgValue = completedMatchTeamStatsBinding.homeFgValue;
+        TextView awayFgValue = completedMatchTeamStatsBinding.awayFgValue;
+
+        ProgressBar home3 = completedMatchTeamStatsBinding.home3PB;
+        ProgressBar away3 = completedMatchTeamStatsBinding.away3PB;
+        TextView home3Value = completedMatchTeamStatsBinding.home3Value;
+        TextView away3Value = completedMatchTeamStatsBinding.away3value;
+
+        ProgressBar home2 = completedMatchTeamStatsBinding.home2PB;
+        ProgressBar away2 = completedMatchTeamStatsBinding.away2PB;
+        TextView home2Value = completedMatchTeamStatsBinding.home2Value;
+        TextView away2Value = completedMatchTeamStatsBinding.away2Value;
+
+        ProgressBar home1 = completedMatchTeamStatsBinding.home1PB;
+        ProgressBar away1 = completedMatchTeamStatsBinding.away1PB;
+        TextView home1Value = completedMatchTeamStatsBinding.home1Value;
+        TextView away1Value = completedMatchTeamStatsBinding.away1Value;
+
+        ProgressBar homeAst = completedMatchTeamStatsBinding.homeAstPB;
+        ProgressBar awayAst = completedMatchTeamStatsBinding.awayAstPB;
+        TextView homeAstValue = completedMatchTeamStatsBinding.homeAstValue;
+        TextView awayAstValue = completedMatchTeamStatsBinding.awayAstValue;
+
+        ProgressBar homeFouls = completedMatchTeamStatsBinding.homeFoulsPB;
+        ProgressBar awayFouls = completedMatchTeamStatsBinding.awayFoulsPB;
+        TextView homeFoulsValue = completedMatchTeamStatsBinding.homeFoulsValue;
+        TextView awayFoulsValue = completedMatchTeamStatsBinding.awayFoulsValue;
+
+        ProgressBar homeTurnovers = completedMatchTeamStatsBinding.homeTurnoversPB;
+        ProgressBar awayTurnovers = completedMatchTeamStatsBinding.awayTurnoversPB;
+        TextView homeTurnoversValue = completedMatchTeamStatsBinding.homeTurnoversValue;
+        TextView awayTurnoversValue = completedMatchTeamStatsBinding.awayTurnoversValue;
+
+        double homeTeamFg = (double)(homeTeamLiveStats.getSuccessful_freethrow()/homeTeamLiveStats.getTotal_freethrow())+((double)homeTeamLiveStats.getSuccessful_threepointer()/+homeTeamLiveStats.getTotal_threepointer())+((double)homeTeamLiveStats.getSuccessful_twopointer()/homeTeamLiveStats.getTotal_twopointer());
+        double awayTeamFg = (double)(awayTeamLiveStats.getSuccessful_freethrow()/awayTeamLiveStats.getTotal_freethrow())+((double)awayTeamLiveStats.getSuccessful_threepointer()/+awayTeamLiveStats.getTotal_threepointer())+((double)awayTeamLiveStats.getSuccessful_twopointer()/awayTeamLiveStats.getTotal_twopointer());
+
+        homeFg.setProgress(100-(int)homeTeamFg);
+        homeFgValue.setText(100-(int)homeTeamFg+"%");
+        awayFg.setProgress(100-(int)awayTeamFg);
+        awayFgValue.setText(100-(int)awayTeamFg+"%");
+
+        home3.setProgress(homeTeamLiveStats.getTotal_threepointer());
+        home3Value.setText(homeTeamLiveStats.getTotal_threepointer()+"");
+        away3.setProgress(awayTeamLiveStats.getTotal_threepointer());
+        away3Value.setText(awayTeamLiveStats.getTotal_threepointer()+"");
+
+        home2.setProgress(homeTeamLiveStats.getTotal_twopointer());
+        home2Value.setText(homeTeamLiveStats.getTotal_twopointer()+"");
+        away2.setProgress(awayTeamLiveStats.getTotal_twopointer());
+        away2Value.setText(awayTeamLiveStats.getTotal_twopointer()+"");
+
+        home1.setProgress(homeTeamLiveStats.getSuccessful_freethrow());
+        home1Value.setText(homeTeamLiveStats.getSuccessful_freethrow()+"");
+        away1.setProgress(awayTeamLiveStats.getSuccessful_freethrow());
+        away1Value.setText(awayTeamLiveStats.getSuccessful_freethrow()+"");
+
+        homeAst.setProgress(homeTeamLiveStats.getAssist());
+        homeAstValue.setText(homeTeamLiveStats.getAssist()+"");
+        awayAst.setProgress(awayTeamLiveStats.getAssist());
+        awayAstValue.setText(awayTeamLiveStats.getAssist()+"");
+
+        homeFouls.setProgress(homeTeamLiveStats.getFoul());
+        homeFoulsValue.setText(homeTeamLiveStats.getFoul()+"");
+        awayFouls.setProgress(awayTeamLiveStats.getFoul());
+        awayFoulsValue.setText(awayTeamLiveStats.getFoul()+"");
+
+        homeTurnovers.setProgress(homeTeamLiveStats.getTurnover());
+        homeTurnoversValue.setText(homeTeamLiveStats.getTurnover()+"");
+        awayTurnovers.setProgress(awayTeamLiveStats.getTurnover());
+        awayTurnoversValue.setText(awayTeamLiveStats.getTurnover()+"");
     }
 }

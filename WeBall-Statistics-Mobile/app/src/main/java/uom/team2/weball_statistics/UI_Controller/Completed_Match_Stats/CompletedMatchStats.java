@@ -7,8 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 import uom.team2.weball_statistics.Model.Match;
+
 import uom.team2.weball_statistics.Model.Team;
+
 import uom.team2.weball_statistics.databinding.CompletedMatchStatsBinding;
 
 public class CompletedMatchStats extends Fragment {
@@ -16,8 +22,11 @@ public class CompletedMatchStats extends Fragment {
     private CompletedMatchStatsUIController completedMatchStatsUIController = CompletedMatchStatsUIController.getInstance();
     private CompletedMatchStatsBinding binding;
 
+
     public CompletedMatchStats() {
+
     }
+
 
     public static uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats getInstance() {
         return new uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats();
@@ -34,11 +43,23 @@ public class CompletedMatchStats extends Fragment {
         binding = CompletedMatchStatsBinding.inflate(inflater, container, false);
         Bundle bundle = getArguments();
 
+
         Match match = (Match) bundle.getSerializable("match");
         Team teamLandlord = (Team) bundle.getSerializable("teamLandlord");
         Team teamGuest = (Team) bundle.getSerializable("teamGuest");
+
         //Change call to method
-        completedMatchStatsUIController.fillMatchHeaderInformation(this);
+        try {
+            completedMatchStatsUIController.fillMatchHeaderInformation(this,match,teamLandlord,teamGuest);
+            completedMatchStatsUIController.fillCompleteMatchTeamPlayerStats(this,match,teamLandlord,teamGuest);
+            completedMatchStatsUIController.fillCompleteMatchTeamLeaderStats(this,teamLandlord,teamGuest);
+            completedMatchStatsUIController.fillTeamStatsProgressBars(this,teamLandlord,teamGuest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         return binding.getRoot();
     }

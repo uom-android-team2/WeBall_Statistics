@@ -81,11 +81,11 @@
         android:id="@+id/match_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="9dp"
         android:text="@string/match_start_date_text"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/team2_logo"
-        app:layout_constraintStart_toEndOf="@+id/team1_logo"
+        app:layout_constraintEnd_toStartOf="@+id/team2_name"
+        app:layout_constraintStart_toEndOf="@+id/team1_name"
         app:layout_constraintTop_toBottomOf="@+id/score_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

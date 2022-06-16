@@ -12,6 +12,7 @@ import uom.team2.weball_statistics.Model.Team;
  * Also for the specific 3, in a future software upgrade we can add the opponent player to whom the action was caused.
  */
 public class SBFAction extends Action {
+
     private Player playerObj; //The player (obj) who does the action
     private Team teamObj; //The team (obj) that the player who does the action belongs to
     private SBFActionType sbfActionType; //STEAL, BLOCK OR FOUL

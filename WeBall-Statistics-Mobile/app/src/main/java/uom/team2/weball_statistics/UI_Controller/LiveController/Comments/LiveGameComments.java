@@ -18,6 +18,9 @@ import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlowComment;
 import uom.team2.weball_statistics.Model.Actions.ReboundAction.ReboundComment;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionComment;
+import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Referee;
@@ -69,11 +72,20 @@ public class LiveGameComments extends Fragment {
         Team team = new Team("Paok");
         Action actionRebound = new ReboundComment("30.21", BelongsTo.HOME, player, team);
         Action action = new MatchFlowComment("0.01", FlowType.START, this.getContext());
+        Action actionSteal = new SBFActionComment("32.32", BelongsTo.HOME, player, team, SBFActionType.STEAL, this.getContext());
+        Action actionFoul = new SBFActionComment("32.32", BelongsTo.HOME, player, team, SBFActionType.FOUL, this.getContext());
+        Action actionBlock = new SBFActionComment("32.32", BelongsTo.HOME, player, team, SBFActionType.BLOCK, this.getContext());
         System.out.println(action.getActionDesc());
         System.out.println(actionRebound.getActionDesc());
+        System.out.println(actionSteal.getActionDesc());
+        System.out.println(actionFoul.getActionDesc());
+        System.out.println(actionBlock.getActionDesc());
         Match match = new Match(1, null, null, new Date(), Status.ONGOING);
         DAOAction.getInstance().insertCommentDesc(action, match);
         DAOAction.getInstance().insertCommentDesc(actionRebound, match);
+        DAOAction.getInstance().insertCommentDesc(actionSteal, match);
+        DAOAction.getInstance().insertCommentDesc(actionFoul, match);
+        DAOAction.getInstance().insertCommentDesc(actionBlock, match);
     }
 
     @Override

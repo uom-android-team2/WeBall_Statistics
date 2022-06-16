@@ -159,4 +159,25 @@
         <item>It\'s time for the referee to whistle at the end of the match!</item>
         <item>It\'s time for the referee to whistle at the end of the match!</item>
     </string-array>
+    <string-array name="steal">
+        <item>Clever steal by</item>
+        <item>Fast steal by</item>
+        <item>He read the opponents and the ball was stolen by</item>
+        <item>The ball was suddenly stolen by</item>
+    </string-array>
+    <string-array name="block">
+        <item>Great block by</item>
+        <item>Fantastic block by</item>
+        <item>Amazing block by</item>
+        <item>Important block by</item>
+        <item>Great block by</item>
+        <item>The score remains the same due to the amazing block made by</item>
+    </string-array>
+    <string-array name="foul">
+        <item>Hard foul by</item>
+        <item>An unnecessary foul was made by</item>
+        <item>Dangerous foul done by</item>
+        <item>Fast foul on the counterattack was occurred by</item>
+        <item>This is a clever foul by</item>
+    </string-array>
 </resources>

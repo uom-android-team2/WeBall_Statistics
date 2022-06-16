@@ -161,7 +161,7 @@ public class UpcomingMatches extends Fragment {
                 } else {
                     viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.INVISIBLE);
                 }
-                teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
+                Thread team1Thread = teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {
                     @Override
                     public void callback(Team returnedObject) {
                         pair.teamLandlord = returnedObject;
@@ -172,7 +172,7 @@ public class UpcomingMatches extends Fragment {
                 });
 
                 int finalI = i;
-                teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
+                Thread team2Thread = teamService.findTeamById(liveMatches.get(i).getTeamguest_id(), new CallbackListener<Team>() {
                     @Override
                     public void callback(Team returnedObject) {
                         pair.teamGuest = returnedObject;
@@ -182,6 +182,15 @@ public class UpcomingMatches extends Fragment {
                         navigate(viewMatch, liveMatches.get(finalI).getId());
                     }
                 });
+
+                if (isAdmin) {
+                    try {
+                        team1Thread.join();
+                        team2Thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 onclickView(viewMatch, liveMatches.get(i).getId());
                 hashMap.put(liveMatches.get(i).getId(), pair);

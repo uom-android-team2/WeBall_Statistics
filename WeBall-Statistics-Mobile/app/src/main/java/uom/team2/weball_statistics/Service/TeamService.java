@@ -31,7 +31,7 @@ public class TeamService {
     }
 
 
-    public void findTeamById(int id, CallbackListener<Team> callbackListener) {
+    public Thread findTeamById(int id, CallbackListener<Team> callbackListener) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,6 +58,7 @@ public class TeamService {
         });
 
         thread.start();
+        return thread;
     }
 
     public void findAllTeams(CallbackListener<ArrayList<Team>> callbackListener) {

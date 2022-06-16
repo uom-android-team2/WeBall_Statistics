@@ -226,4 +226,11 @@
         <item>The coach changes his strategy</item>
         <item>The coach asked for a substitution</item>
     </string-array>
+    <string-array name="turnover">
+        <item>Loss of possession due to a mistake by</item>
+        <item>Fatal mistake by</item>
+        <item>Significant mistake by</item>
+        <item>A mistake at a critical point was noted by</item>
+        <item>Mistake done by</item>
+    </string-array>
 </resources>

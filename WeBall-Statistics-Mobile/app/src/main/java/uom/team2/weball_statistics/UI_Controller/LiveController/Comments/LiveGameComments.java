@@ -26,6 +26,7 @@ import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
 import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Actions.Substitution.SubstitutionComment;
+import uom.team2.weball_statistics.Model.Actions.Turnover.TurnoverComment;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Referee;
@@ -72,12 +73,7 @@ public class LiveGameComments extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        Player player = new Player("Minas", "Charakopoulos");
-        Player playerAssist = new Player("Leo", "Pepa");
-        Team team = new Team("Paok");
-        Match match = new Match(1, null, null, new Date(), Status.ONGOING);
-        Assist assist = new Assist(playerAssist);
+        
     }
 
     @Override

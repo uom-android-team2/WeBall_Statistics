@@ -29,6 +29,8 @@ import uom.team2.weball_statistics.databinding.CompletedMatchHeaderLayoutBinding
 import uom.team2.weball_statistics.databinding.CompletedMatchTeamPlayerStatsBinding;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
+//--------------------CLASS NEEDS REFACTORING--------------------
+
 public class CompletedMatchStatsUIController {
 
     private TeamLiveStatistics homeTeamLiveStats;
@@ -521,10 +523,165 @@ public class CompletedMatchStatsUIController {
         cNameA.setText(findPlayerById(awayTeamPlayers,bestCA.getPlayer_id()).getName()+"");
 
     }
-    public void fillCompleteMatchTeamLeaderStats(CompletedMatchStats completedMatchStats, Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
+    public void fillCompleteMatchTeamLeaderStats(CompletedMatchStats completedMatchStats, Team homeTeam, Team awayTeam) throws IOException, JSONException {
         CompleteMatchLeadersBinding completeMatchLeadersBinding = completedMatchStats.getBinding().includeLeaders;
 
+        //Team Logos
+        ImageView homeTeamLogo = completeMatchLeadersBinding.imageView5;
+        ImageView awayTeamLogo = completeMatchLeadersBinding.imageView6;
+        Picasso.get()
+                .load(Config.TEAM_IMAGES_RESOURCES + homeTeam.getBadgePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(homeTeamLogo);
+
+        Picasso.get()
+                .load(Config.TEAM_IMAGES_RESOURCES + awayTeam.getBadgePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(awayTeamLogo);
+
+        //Most Pts for each team
+        ImageView ptsLeaderH = completeMatchLeadersBinding.mostPtsHphoto;
+        ImageView ptsLeaderA = completeMatchLeadersBinding.mostPtsAphoto;
+
+        TextView ptsLeadernameH = completeMatchLeadersBinding.mostPtsHname;
+        TextView ptsLeadernameA = completeMatchLeadersBinding.mostPtsAname;
+
+        TextView ptsLeaderValueH = completeMatchLeadersBinding.mostPtsHvalue;
+        TextView ptsLeaderValueA = completeMatchLeadersBinding.mostPtsAvalue;
 
 
+        //Most Ast for each team
+        ImageView astLeaderH = completeMatchLeadersBinding.mostAstHphoto;
+        ImageView astLeaderA = completeMatchLeadersBinding.mostAstAphoto;
+
+        TextView astLeadernameH = completeMatchLeadersBinding.mostAstHname;
+        TextView astLeadernameA = completeMatchLeadersBinding.mostAstAname;
+
+        TextView astLeaderValueH = completeMatchLeadersBinding.mostAstHvalue;
+        TextView astLeaderValueA = completeMatchLeadersBinding.mostAstAvalue;
+
+        //Most Rebs for each team
+        ImageView rebsLeaderH = completeMatchLeadersBinding.mostRebsHphoto;
+        ImageView rebsLeaderA = completeMatchLeadersBinding.mostRebsAphoto;
+
+        TextView rebsLeadernameH = completeMatchLeadersBinding.mostRebsHname;
+        TextView rebsLeadernameA = completeMatchLeadersBinding.mostRebsAname;
+
+        TextView rebsLeaderValueH = completeMatchLeadersBinding.mostRebsHvalue;
+        TextView rebsLeaderValueA = completeMatchLeadersBinding.mostRebsAvalue;
+
+
+        //Calculating pts Leader for both teams
+        PlayerLiveStatistics[] homePlayers = {bestPgH,bestSgH,bestSfH,bestPfH,bestCH};
+        int maxHome = bestPgH.getSuccessful_freethrow()*1+bestPgH.getSuccessful_twopointer()*2+bestPgH.getSuccessful_threepointer()*3;
+
+        PlayerLiveStatistics[] awayPlayers = {bestPgA,bestSgA,bestSfA,bestPfA,bestCA};
+        int maxAway = bestPgA.getSuccessful_freethrow()*1+bestPgA.getSuccessful_twopointer()*2+bestPgA.getSuccessful_threepointer()*3;
+
+        Player ptsLeaderHOME = findPlayerById(homeTeamPlayers, bestPgH.getPlayer_id());
+        Player ptsLeaderAWAY = findPlayerById(awayTeamPlayers, bestPgA.getPlayer_id());
+        for(int j=1;j<5;j++){
+            if(homePlayers[j].getSuccessful_freethrow()*1+homePlayers[j].getSuccessful_twopointer()*2+homePlayers[j].getSuccessful_threepointer()*3>=maxHome){
+                ptsLeaderHOME = findPlayerById(homeTeamPlayers, homePlayers[j].getPlayer_id());
+                maxHome = homePlayers[j].getSuccessful_freethrow()*1+homePlayers[j].getSuccessful_twopointer()*2+homePlayers[j].getSuccessful_threepointer()*3;
+            }
+            if(awayPlayers[j].getSuccessful_freethrow()*1+awayPlayers[j].getSuccessful_twopointer()*2+awayPlayers[j].getSuccessful_threepointer()*3>=maxAway){
+                ptsLeaderAWAY = findPlayerById(awayTeamPlayers, awayPlayers[j].getPlayer_id());
+                maxAway = awayPlayers[j].getSuccessful_freethrow()*1+awayPlayers[j].getSuccessful_twopointer()*2+awayPlayers[j].getSuccessful_threepointer()*3;
+            }
+        }
+
+        //Calculating ast Leader for both teams
+        int maxHomeAST = bestPgH.getAssist();
+        int maxAwayAST = bestPgA.getAssist();
+
+        Player astLeaderHOME = findPlayerById(homeTeamPlayers, bestPgH.getPlayer_id());
+        Player astLeaderAWAY = findPlayerById(awayTeamPlayers, bestPgA.getPlayer_id());
+
+        for(int j=1;j<5;j++){
+            if(homePlayers[j].getAssist()>=maxHomeAST){
+                astLeaderHOME = findPlayerById(homeTeamPlayers, homePlayers[j].getPlayer_id());
+                maxHomeAST = homePlayers[j].getAssist();
+            }
+            if(awayPlayers[j].getAssist()>=maxAwayAST){
+                astLeaderAWAY = findPlayerById(awayTeamPlayers, awayPlayers[j].getPlayer_id());
+                maxAwayAST = awayPlayers[j].getAssist();
+            }
+        }
+
+        //Calculating rebs Leader for both teams
+        int maxHomeREBS = bestPgH.getRebound();
+        int maxAwayREBS = bestPgA.getRebound();
+
+        Player rebsLeaderHOME = findPlayerById(homeTeamPlayers, bestPgH.getPlayer_id());
+        Player rebsLeaderAWAY = findPlayerById(awayTeamPlayers, bestPgA.getPlayer_id());
+
+        for(int j=1;j<5;j++){
+            if(homePlayers[j].getRebound()>=maxHomeREBS){
+                rebsLeaderHOME = findPlayerById(homeTeamPlayers, homePlayers[j].getPlayer_id());
+                maxHomeREBS = homePlayers[j].getRebound();
+            }
+            if(awayPlayers[j].getRebound()>=maxAwayREBS){
+                rebsLeaderAWAY = findPlayerById(awayTeamPlayers, awayPlayers[j].getPlayer_id());
+                maxAwayREBS = awayPlayers[j].getRebound();
+            }
+        }
+
+        //Pts leaders pictures
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+ptsLeaderHOME.getImagePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(ptsLeaderH);
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+ptsLeaderAWAY.getImagePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(ptsLeaderA);
+
+        //Ast leader pictures
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+astLeaderHOME.getImagePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(astLeaderH);
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+astLeaderAWAY.getImagePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(astLeaderA);
+
+        //Rebs leader pictures
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+rebsLeaderHOME.getImagePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(rebsLeaderH);
+        Picasso.get()
+                .load(Config.PLAYER_IMAGES_RESOURCES+rebsLeaderAWAY.getImagePath())
+                .resize(400, 400)
+                .centerCrop()
+                .into(rebsLeaderA);
+
+
+        ptsLeadernameH.setText(ptsLeaderHOME.getName()+"");
+        ptsLeadernameA.setText(ptsLeaderAWAY.getName()+"");
+
+        astLeadernameH.setText(astLeaderHOME.getName()+"");
+        astLeadernameA.setText(astLeaderAWAY.getName()+"");
+
+        rebsLeadernameH.setText(rebsLeaderHOME.getName()+"");
+        rebsLeadernameA.setText(rebsLeaderAWAY.getName()+"");
+
+        ptsLeaderValueH.setText(maxHome+"");
+        ptsLeaderValueA.setText(maxAway+"");
+
+        astLeaderValueH.setText(maxHomeAST+"");
+        astLeaderValueA.setText(maxAwayAST+"");
+
+        rebsLeaderValueH.setText(maxHomeREBS+"");
+        rebsLeaderValueA.setText(maxAwayREBS+"");
     }
 }

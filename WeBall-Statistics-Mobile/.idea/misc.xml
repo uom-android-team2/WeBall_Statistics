@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Money Maker/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/best_player_per_position_layout.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/comment_match_away_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/comment_match_general_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/comment_match_home_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_comments.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/fragment_live_game_progress.xml" value="0.22010869565217392" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/matches_live_layout.xml" value="0.3392210144927536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/matches_previous_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WeBall_Statistics/WeBall-Statistics-Mobile/app/src/main/res/layout/matches_upcoming_layout.xml" value="0.36666666666666664" />

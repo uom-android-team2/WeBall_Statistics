@@ -35,7 +35,6 @@ import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
-import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.LiveMatches;
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.Service.MatchesOnMainPageService;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentPreviousMatchesBinding;
@@ -185,7 +184,6 @@ public class PreviousMatches extends Fragment {
                         View team2 = viewMatch.findViewById(R.id.team2);
                         UIHandler.updateTeamImageInMatch(PreviousMatches.this, returnedObject, team2);
                         fillPlayers(returnedObject, viewMatch, false);
-                        navigate(viewMatch, liveMatches.get(finalI).getId());
 
                     }
                 });
@@ -193,8 +191,11 @@ public class PreviousMatches extends Fragment {
                 try {
                     team1Thread.join();
                     team2Thread.join();
+                    navigate(viewMatch, liveMatches.get(finalI).getId());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }finally {
+
                 }
 
                 onclickView(viewMatch, liveMatches.get(i).getId());

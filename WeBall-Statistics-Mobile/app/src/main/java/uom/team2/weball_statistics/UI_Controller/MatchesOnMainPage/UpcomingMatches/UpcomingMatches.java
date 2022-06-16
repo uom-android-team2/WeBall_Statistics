@@ -179,18 +179,17 @@ public class UpcomingMatches extends Fragment {
                         View team2 = viewMatch.findViewById(R.id.team2);
                         UIHandler.updateTeamImageInMatch(UpcomingMatches.this, returnedObject, team2);
                         fillPlayers(returnedObject, viewMatch, false);
-                        navigate(viewMatch, liveMatches.get(finalI).getId());
                     }
                 });
 
-                if (isAdmin) {
-                    try {
-                        team1Thread.join();
-                        team2Thread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    team1Thread.join();
+                    team2Thread.join();
+                    navigate(viewMatch, liveMatches.get(finalI).getId());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+
 
                 onclickView(viewMatch, liveMatches.get(i).getId());
                 hashMap.put(liveMatches.get(i).getId(), pair);

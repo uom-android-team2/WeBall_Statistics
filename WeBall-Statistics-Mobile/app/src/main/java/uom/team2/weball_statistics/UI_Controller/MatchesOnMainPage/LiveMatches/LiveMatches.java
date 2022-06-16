@@ -190,7 +190,6 @@ public class LiveMatches extends Fragment {
                         View team2 = viewMatch.findViewById(R.id.team2);
                         UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team2);
                         fillPlayers(returnedObject, viewMatch, false);
-                        navigate(viewMatch, liveMatches.get(finalI).getId());
 
                     }
                 });
@@ -198,6 +197,7 @@ public class LiveMatches extends Fragment {
                 try {
                     team1Thread.join();
                     team2Thread.join();
+                    navigate(viewMatch, liveMatches.get(finalI).getId());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

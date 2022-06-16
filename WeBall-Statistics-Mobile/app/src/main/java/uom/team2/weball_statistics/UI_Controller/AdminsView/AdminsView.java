@@ -249,11 +249,14 @@ public class AdminsView extends Fragment  {
         playersImageViewList.add(binding.player5);
         //Put images of the 1rst team Players
         for(int i=0;i<playersImageViewList.size();i++){
-            Picasso.get()
-                    .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
-                    .resize(200, 200)
-                    .centerCrop()
-                    .into(playersImageViewList.get(i));
+            if(teamLandlord.getKeyPlayers().get(i)!=null){
+                Picasso.get()
+                        .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                        .resize(200, 200)
+                        .centerCrop()
+                        .into(playersImageViewList.get(i));
+            }
+
         }
 
         //When this page opens, we want to have the landlord team already selected
@@ -337,11 +340,13 @@ public class AdminsView extends Fragment  {
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
                 for(int i=0;i<playersImageViewList.size();i++){
-                    Picasso.get()
-                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
-                            .resize(200, 200)
-                            .centerCrop()
-                            .into(playersImageViewList.get(i));
+                    if(teamLandlord.getKeyPlayers().get(i)!=null) {
+                        Picasso.get()
+                                .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                                .resize(200, 200)
+                                .centerCrop()
+                                .into(playersImageViewList.get(i));
+                    }
                 }
 
             }
@@ -377,11 +382,13 @@ public class AdminsView extends Fragment  {
 
                 //Load data for this team
                 for(int i=0;i<playersImageViewList.size();i++){
-                    Picasso.get()
-                            .load(Config.PLAYER_IMAGES_RESOURCES+ teamGuest.getKeyPlayers().get(i).getImagePath())
-                            .resize(200, 200)
-                            .centerCrop()
-                            .into(playersImageViewList.get(i));
+                    if(teamLandlord.getKeyPlayers().get(i)!=null) {
+                        Picasso.get()
+                                .load(Config.PLAYER_IMAGES_RESOURCES + teamGuest.getKeyPlayers().get(i).getImagePath())
+                                .resize(200, 200)
+                                .centerCrop()
+                                .into(playersImageViewList.get(i));
+                    }
                 }
 
             }

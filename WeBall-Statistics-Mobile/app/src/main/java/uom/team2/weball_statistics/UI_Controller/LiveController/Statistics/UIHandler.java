@@ -76,6 +76,7 @@ public class UIHandler {
                 @Override
                 public void run() {
                     TextView nameTextView = imageLayout.findViewById(R.id.player_name);
+                    nameTextView.setTextSize(14);
                     nameTextView.setText(name);
                     ImageView image = imageLayout.findViewById(R.id.player_image);
                     Picasso.get()

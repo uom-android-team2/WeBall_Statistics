@@ -238,21 +238,8 @@ public class LivePlayerStatistics extends Fragment {
         for (Player player : players) {
             String fullName = player.getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + player.getSurname();
             View playerView = LayoutFactory.createPayerImageLayout(LivePlayerStatistics.this, fullName, player.getImagePath());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    1
-            );
-            if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
-                this.requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        params.setMargins(5, 2, 5, 0);
-                        playerView.setLayoutParams(params);
-                    }
-                });
-                views.add(playerView);
-            }
+            views.add(playerView);
+
         }
     }
 

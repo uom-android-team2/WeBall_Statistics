@@ -205,12 +205,16 @@ public class AdminsView extends Fragment {
 
         DAOLiveMatchService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
 
-
-        for (Player player : teamLandlord.getTeamPlayers()) {
-            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+        if (teamLandlord != null) {
+            for (Player player : teamLandlord.getTeamPlayers()) {
+                DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+            }
         }
-        for (Player player : teamGuest.getTeamPlayers()) {
-            DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+
+        if (teamGuest != null) {
+            for (Player player : teamGuest.getTeamPlayers()) {
+                DAOLivePlayerStatistics.getInstance().initializeTable(match.getId(), player.getId());
+            }
         }
 
         UIHandler.updateTeamImage(this, teamLandlord, binding.team1Banner);

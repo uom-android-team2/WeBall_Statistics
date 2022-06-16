@@ -15,7 +15,6 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/match_start_date"
         app:layout_constraintEnd_toStartOf="@+id/team2"
         app:layout_constraintStart_toEndOf="@+id/team1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +28,7 @@
         android:foreground="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/match_start_date" />
+        app:layout_constraintTop_toBottomOf="@+id/team1" />
 
     <TextView
         android:id="@+id/game_text"
@@ -57,19 +56,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_text" />
-
-    <TextView
-        android:id="@+id/match_start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/match_start_date_text"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/header_top_divider"
-        app:layout_constraintEnd_toEndOf="@+id/score_text"
-        app:layout_constraintStart_toStartOf="@+id/score_text"
-        app:layout_constraintTop_toBottomOf="@+id/score_text" />
 
     <include
         android:id="@+id/clock"

@@ -41,6 +41,21 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
         return instance;
     }
 
+
+    public void undo(int matchId, int playerId, LiveStatisticsEnum statisticsEnum) {
+        get(matchId, playerId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                PlayerLiveStatistics playerLiveStatistics = dataSnapshot.getValue(PlayerLiveStatistics.class);
+                if (playerLiveStatistics != null) {
+                    LiveStatisticsEnum.undoStatistic(playerLiveStatistics, statisticsEnum);
+                    update(playerLiveStatistics);
+                }
+            }
+        });
+    }
+
+
     public void setDataChangeListener(LivePlayerStatistics fragment, int matchId, int teamId, int playerId) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -43,6 +43,21 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
         return instance;
     }
 
+
+    public void undo(int matchId, int teamId, LiveStatisticsEnum statisticsEnum) {
+        get(matchId, teamId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                TeamLiveStatistics teamLiveStatistics = dataSnapshot.getValue(TeamLiveStatistics.class);
+                if (teamLiveStatistics != null) {
+                    LiveStatisticsEnum.undoStatistic(teamLiveStatistics, statisticsEnum);
+                    update(teamLiveStatistics);
+                }
+            }
+        });
+    }
+
+
     public void updateClock(int matchId, String value) {
         databaseReference.child("match_id: " + matchId).child("clock").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override

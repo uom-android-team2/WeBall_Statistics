@@ -853,6 +853,8 @@ public class AdminsView extends Fragment {
         }else{
             playerStats.setAssist(playerStats.getTotalAssists()-1);
             teamStats.setAssist(teamStats.getTotalAssists()-1);
+            DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.assist);
+            DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.assist);
         }
 
         try {
@@ -876,6 +878,8 @@ public class AdminsView extends Fragment {
         }else{
             playerStats.setRebound(playerStats.getTotalRebounds()-1);
             teamStats.setRebound(teamStats.getTotalRebounds()-1);
+            DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.rebound);
+            DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.rebound);
         }
 
 
@@ -902,6 +906,8 @@ public class AdminsView extends Fragment {
         }else{
             playerStats.setSteal(playerStats.getTotalSteels()-1);
             teamStats.setSteal(teamStats.getTotalSteels()-1);
+            DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.steal);
+            DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.steal);
         }
 
         try {
@@ -925,6 +931,8 @@ public class AdminsView extends Fragment {
         }else{
             playerStats.setBlock(playerStats.getTotalBlocks()-1);
             teamStats.setBlock(teamStats.getTotalBlocks()-1);
+            DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.block);
+            DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.block);
         }
 
         try {
@@ -948,6 +956,8 @@ public class AdminsView extends Fragment {
         }else{
             playerStats.setFoul(playerStats.getTotalFouls()-1);
             teamStats.setFoul(teamStats.getTotalFouls()-1);
+            DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.foul);
+            DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.foul);
         }
 
         try {
@@ -971,6 +981,8 @@ public class AdminsView extends Fragment {
         }else{
             playerStats.setTurnover(playerStats.getTotalTurnovers()-1);
             teamStats.setTurnover(teamStats.getTotalTurnovers()-1);
+            DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.turnover);
+            DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         }
 
         try {

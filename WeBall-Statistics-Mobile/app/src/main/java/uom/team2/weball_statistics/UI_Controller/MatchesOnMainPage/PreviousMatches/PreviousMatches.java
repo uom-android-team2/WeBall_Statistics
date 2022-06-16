@@ -28,6 +28,7 @@ import uom.team2.weball_statistics.Model.Pair;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.PlayerService;
 import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
@@ -127,7 +128,11 @@ public class PreviousMatches extends Fragment {
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_previous_layout, null);
 
-                UIHandler.updateScore(PreviousMatches.this, viewMatch.findViewById(R.id.score_text), liveMatches.get(i).getTeamLandlord_id(), liveMatches.get(i).getTeamguest_id());
+                DAOLiveMatchService.getInstance().setListenerForPoints(PreviousMatches.this,
+                        viewMatch.findViewById(R.id.score_text),
+                        liveMatches.get(i).getId(),
+                        liveMatches.get(i).getTeamLandlord_id(),
+                        liveMatches.get(i).getTeamguest_id());
 
 
                 teamService.findTeamById(liveMatches.get(i).getTeamLandlord_id(), new CallbackListener<Team>() {

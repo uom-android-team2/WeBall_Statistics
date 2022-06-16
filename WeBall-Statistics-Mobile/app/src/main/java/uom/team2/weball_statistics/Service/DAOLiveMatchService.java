@@ -136,7 +136,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }
@@ -174,7 +173,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }
@@ -227,7 +225,6 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }

@@ -81,7 +81,6 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                throw new RuntimeException(error.getMessage());
             }
         });
     }
@@ -131,7 +130,6 @@ public class DAOLivePlayerStatistics implements DAOCRUDService<PlayerLiveStatist
                 }
                 PlayerLiveStatistics playerLiveStatistics = new PlayerLiveStatistics(matchId, playerId);
                 insert(playerLiveStatistics);
-
             }
         });
     }

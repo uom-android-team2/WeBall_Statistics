@@ -127,7 +127,7 @@ public class LiveMatches extends Fragment {
                 mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
-                
+
                 UIHandler.updateScore(LiveMatches.this, viewMatch.findViewById(R.id.score_text), liveMatches.get(i).getTeamLandlord_id(), liveMatches.get(i).getTeamguest_id());
 
 

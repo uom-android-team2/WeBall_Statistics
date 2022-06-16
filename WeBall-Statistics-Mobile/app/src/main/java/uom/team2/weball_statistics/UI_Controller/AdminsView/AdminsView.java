@@ -23,12 +23,14 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.FlowType;
 import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlow;
+import uom.team2.weball_statistics.Model.Actions.MatchFlow.MatchFlowComment;
 import uom.team2.weball_statistics.Model.Actions.ReboundAction.Rebound;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
@@ -446,6 +448,9 @@ public class AdminsView extends Fragment {
                     //Add start's action description to firebase
                     Action startMatchAction = new MatchFlow("00.00", FlowType.START);
                     DAOAction.getInstance().insertAction(startMatchAction, match);
+                    //Add start's comment description to firebase
+                    Action startMatchComment = new MatchFlowComment("00.00", FlowType.START, getContext());
+                    DAOAction.getInstance().insertCommentDesc(startMatchComment, match);
 
                     match.setProgress(1);
 

@@ -43,7 +43,7 @@ public class LiveCommentsUIController {
             LinearLayout linearLayout = liveGameCommentsFragment.getBinding().commentsLayoutContainer;
             View commentAsView = layoutInflater.inflate(R.layout.comment_match_home_layout, null);
 
-            TextView time = (TextView) commentAsView.findViewById(R.id.time_happened);
+            TextView time = (TextView) commentAsView.findViewById(R.id.timeHappened);
             time.setText(action.getTimeHappened());
 
             ImageView picture = (ImageView) commentAsView.findViewById(R.id.imageView);
@@ -67,7 +67,7 @@ public class LiveCommentsUIController {
             LinearLayout linearLayout = liveGameCommentsFragment.getBinding().commentsLayoutContainer;
             View commentAsView = layoutInflater.inflate(R.layout.comment_match_away_layout, null);
 
-            TextView time = (TextView) commentAsView.findViewById(R.id.time_happened);
+            TextView time = (TextView) commentAsView.findViewById(R.id.timeHappened);
             time.setText(action.getTimeHappened());
 
             ImageView picture = (ImageView) commentAsView.findViewById(R.id.imageView);
@@ -91,7 +91,7 @@ public class LiveCommentsUIController {
             LinearLayout linearLayout = liveGameCommentsFragment.getBinding().commentsLayoutContainer;
             View commentAsView = layoutInflater.inflate(R.layout.comment_match_general_layout, null);
 
-            TextView time = (TextView) commentAsView.findViewById(R.id.time_happened);
+            TextView time = (TextView) commentAsView.findViewById(R.id.timeHappened);
             time.setText(action.getTimeHappened());
 
             ImageView picture = (ImageView) commentAsView.findViewById(R.id.imageView);

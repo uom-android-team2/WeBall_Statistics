@@ -24,6 +24,7 @@ import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5;
 import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Factory;
 import uom.team2.weball_statistics.configuration.Config;
+import uom.team2.weball_statistics.databinding.CompleteMatchLeadersBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchHeaderLayoutBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchTeamPlayerStatsBinding;
 import uom.team2.weball_statistics.utils.JSONHandler;
@@ -34,9 +35,23 @@ public class CompletedMatchStatsUIController {
     private ArrayList<Player> homeTeamPlayers = new ArrayList<>();
     private TeamLiveStatistics awayTeamLiveStats;
     private ArrayList<Player> awayTeamPlayers = new ArrayList<>();
-    private ArrayList<PlayerLiveStatistics> best5StatsHome = new ArrayList<>();
-    private ArrayList<PlayerLiveStatistics> best5StatsAway = new ArrayList<>();
 
+
+    private PlayerLiveStatistics bestPgH;
+    private PlayerLiveStatistics bestSgH;
+    private PlayerLiveStatistics bestSfH ;
+    private PlayerLiveStatistics bestPfH ;
+    private PlayerLiveStatistics bestCH ;
+
+
+    private PlayerLiveStatistics bestPgA;
+    private PlayerLiveStatistics bestSgA;
+    private PlayerLiveStatistics bestSfA;
+    private PlayerLiveStatistics bestPfA;
+    private PlayerLiveStatistics bestCA;
+
+    private ArrayList<PlayerLiveStatistics> filteredAllHomePlayerStats = new ArrayList<>();
+    private ArrayList<PlayerLiveStatistics> filteredAllAwayPlayerStats = new ArrayList<>();
 
 
     public static CompletedMatchStatsUIController instance = new CompletedMatchStatsUIController();
@@ -48,145 +63,7 @@ public class CompletedMatchStatsUIController {
         }
         return instance;
     }
-
-    public void getPlayerLiveStatsForBoth(Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
-
-        //fetching stats for all players of the hometeam for this match
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"playerLiveStatistics.php?match_id="+myMatch.getId()+"&team_id="+homeTeam.getId())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        ArrayList<PlayerLiveStatistics> allHomePlayerStats = JSONHandler.deserializeListOfPlayerLiveStatistics(response.body().string());
-
-        //fetching stats for all players of the away team for this match
-        OkHttpClient client2 = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType2 = MediaType.parse("application/json");
-        Request request2 = new Request.Builder()
-                .url(Config.API_URL+"playerLiveStatistics.php?match_id="+myMatch.getId()+"&team_id="+homeTeam.getId())
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response2 = client2.newCall(request2).execute();
-        ArrayList<PlayerLiveStatistics> allAwayPlayerStats = JSONHandler.deserializeListOfPlayerLiveStatistics(response2.body().string());
-
-        //HOME TEAM
-        int maxPGH=-100;
-        PlayerLiveStatistics bestPgH = null;
-        int maxSGH=-100;
-        PlayerLiveStatistics bestSgH = null;
-        int maxSFH=-100;
-        PlayerLiveStatistics bestSfH = null;
-        int maxPFH=-100;
-        PlayerLiveStatistics bestPfH = null;
-        int maxCH=-100;
-        PlayerLiveStatistics bestCH = null;
-
-        //Sorting stats to the best 5 for the home team
-        for(int i=0;i<allHomePlayerStats.size();i++){
-            if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxPGH) {
-                    maxPGH=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestPgH=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SHOOTING_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxSGH) {
-                    maxSGH=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestSgH=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SMALL_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxSFH) {
-                    maxSFH=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestSfH=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POWER_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxPFH) {
-                    maxPFH=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestPfH=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("CENTER")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxCH) {
-                    maxCH=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestCH=allHomePlayerStats.get(i);
-                }
-            }
-        }
-        best5StatsHome.add(bestPgH);
-        best5StatsHome.add(bestSgH);
-        best5StatsHome.add(bestSfH);
-        best5StatsHome.add(bestPfH);
-        best5StatsHome.add(bestCH);
-
-        //AWAY TEAM
-        int maxPGA=-100;
-        PlayerLiveStatistics bestPgA = null;
-        int maxSGA=-100;
-        PlayerLiveStatistics bestSgA = null;
-        int maxSFA=-100;
-        PlayerLiveStatistics bestSfA = null;
-        int maxPFA=-100;
-        PlayerLiveStatistics bestPfA = null;
-        int maxCA=-100;
-        PlayerLiveStatistics bestCA = null;
-
-        //Sorting stats to the best 5 for the home team
-        for(int i=0;i<allHomePlayerStats.size();i++){
-            if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxPGA) {
-                    maxPGA=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestPgA=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SHOOTING_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxSGA) {
-                    maxSGA=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestSgA=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SMALL_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxSFA) {
-                    maxSFA=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestSfA=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POWER_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxPFA) {
-                    maxPFA=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestPfA=allHomePlayerStats.get(i);
-                }
-            }
-            else if(findPlayerById(homeTeamPlayers,allHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("CENTER")) {
-                if(BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i))>maxCA) {
-                    maxCA=BestStarting5Factory.calculateEffic(allHomePlayerStats.get(i));
-                    bestCA=allHomePlayerStats.get(i);
-                }
-            }
-        }
-        best5StatsAway.add(bestPgA);
-        best5StatsAway.add(bestSgA);
-        best5StatsAway.add(bestSfA);
-        best5StatsAway.add(bestPfA);
-        best5StatsAway.add(bestCA);
-
-    }
-    public Player findPlayerById(ArrayList<Player> myPlayers,int id){
-        for(int i=0;i<myPlayers.size();i++){
-            if(myPlayers.get(i).getId()==id){
-                return myPlayers.get(i);
-            }
-        }
-        return null;
-    }
-
+    //Works
     public void getTeamLiveStatsForBoth(Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
         //Fetching score statistics for the home team
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -212,6 +89,7 @@ public class CompletedMatchStatsUIController {
         awayTeamLiveStats = JSONHandler.deserializeTeamLiveStatistics(response2.body().string());
     }
 
+    //Works
     public void getPlayersForBoth(Team homeTeam, Team awayTeam) throws IOException, JSONException {
         //Fetching all players playing for the home team
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -238,6 +116,150 @@ public class CompletedMatchStatsUIController {
         awayTeamPlayers = JSONHandler.deserializeListOfPlayers2(response2.body().string());
     }
 
+    //Does this work?
+    public void getPlayerLiveStatsForBoth(Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
+
+        //fetching stats for all players of the hometeam for this match
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("application/json");
+        Request request = new Request.Builder()
+                .url(Config.API_URL+"playerLiveStatistics.php?match_id="+myMatch.getId())
+                .method("GET", null)
+                .addHeader("Content-Type", "application/json")
+                .build();
+        Response response = client.newCall(request).execute();
+        ArrayList<PlayerLiveStatistics> unfilteredAllHomePlayerStats = JSONHandler.deserializeListOfPlayerLiveStatistics(response.body().string());
+        for(int i=0;i<unfilteredAllHomePlayerStats.size();i++){
+            if(this.isInTeam(homeTeamPlayers,unfilteredAllHomePlayerStats.get(i).getPlayer_id())){
+                filteredAllHomePlayerStats.add(unfilteredAllHomePlayerStats.get(i));
+            }
+        }
+
+        //fetching stats for all players of the away team for this match
+        OkHttpClient client2 = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType2 = MediaType.parse("application/json");
+        Request request2 = new Request.Builder()
+                .url(Config.API_URL+"playerLiveStatistics.php?match_id="+myMatch.getId())
+                .method("GET", null)
+                .addHeader("Content-Type", "application/json")
+                .build();
+        Response response2 = client2.newCall(request2).execute();
+        ArrayList<PlayerLiveStatistics> unfilteredAllAwayPlayerStats = JSONHandler.deserializeListOfPlayerLiveStatistics(response2.body().string());
+        for(int i=0;i<unfilteredAllAwayPlayerStats.size();i++){
+            if(this.isInTeam(awayTeamPlayers,unfilteredAllAwayPlayerStats.get(i).getPlayer_id())){
+                filteredAllAwayPlayerStats.add(unfilteredAllAwayPlayerStats.get(i));
+            }
+        }
+
+        //HOME TEAM
+        int maxPGH=-100;
+        int maxSGH=-100;
+        int maxSFH=-100;
+        int maxPFH=-100;
+        int maxCH=-100;
+
+
+
+        //Sorting stats to the best 5 for the home team
+        for(int i=0;i<filteredAllHomePlayerStats.size();i++){
+            if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxPGH) {
+                    maxPGH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                    bestPgH=filteredAllHomePlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SHOOTING_GUARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxSGH) {
+                    maxSGH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                    bestSgH=filteredAllHomePlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SMALL_FORWARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxSFH) {
+                    maxSFH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                    bestSfH=filteredAllHomePlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POWER_FORWARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxPFH) {
+                    maxPFH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                    bestPfH=filteredAllHomePlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("CENTER")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxCH) {
+                    maxCH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                    bestCH=filteredAllHomePlayerStats.get(i);
+                }
+            }
+        }
+
+        //AWAY TEAM
+        int maxPGA=-100;
+        int maxSGA=-100;
+        int maxSFA=-100;
+        int maxPFA=-100;
+        int maxCA=-100;
+
+        //Sorting stats to the best 5 for the away team
+        for(int i=0;i<filteredAllAwayPlayerStats.size();i++){
+            if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxPGA) {
+                    maxPGA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                    bestPgA=filteredAllAwayPlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("SHOOTING_GUARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxSGA) {
+                    maxSGA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                    bestSgA=filteredAllAwayPlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("SMALL_FORWARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxSFA) {
+                    maxSFA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                    bestSfA=filteredAllAwayPlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("POWER_FORWARD")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxPFA) {
+                    maxPFA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                    bestPfA=filteredAllAwayPlayerStats.get(i);
+                }
+            }
+            else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("CENTER")) {
+                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxCA) {
+                    maxCA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                    bestCA=filteredAllAwayPlayerStats.get(i);
+                }
+            }
+        }
+
+    }
+    public Player findPlayerById(ArrayList<Player> myPlayers,int id){
+
+        for(int i=0;i<myPlayers.size();i++){
+            if(myPlayers.get(i).getId()==id){
+
+                return myPlayers.get(i);
+
+            }
+        }
+        return null;
+    }
+
+    public boolean isInTeam(ArrayList<Player> myPlayers, int id){
+        for(int i=0;i<myPlayers.size();i++){
+            if(myPlayers.get(i).getId()==id)
+                return true;
+        }
+        return false;
+    }
+
+
+
     public void fillMatchHeaderInformation(CompletedMatchStats completedMatchStats, Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
         CompletedMatchHeaderLayoutBinding completedMatchHeaderLayoutBinding = completedMatchStats.getBinding().includeMatchHeader;
 
@@ -249,6 +271,7 @@ public class CompletedMatchStatsUIController {
         TextView textViewMatchDate = completedMatchHeaderLayoutBinding.matchStartDate;
 
         this.getTeamLiveStatsForBoth(myMatch,homeTeam,awayTeam);
+
         int homeTeamScore = homeTeamLiveStats.getSuccessful_freethrow()*1 + homeTeamLiveStats.getSuccessful_twopointer()*2+ homeTeamLiveStats.getSuccessful_threepointer()*3;
         int awayTeamScore = awayTeamLiveStats.getSuccessful_freethrow()*1 + awayTeamLiveStats.getSuccessful_twopointer()*2+ awayTeamLiveStats.getSuccessful_threepointer()*3;
 
@@ -278,6 +301,8 @@ public class CompletedMatchStatsUIController {
 
         this.getPlayersForBoth(homeTeam,awayTeam);
 
+
+        //Pgs
         ImageView homeLogo = completedMatchHeaderLayoutBindingHome.teamLogo;
         TextView pgNameH = completedMatchHeaderLayoutBindingHome.pgName;
         TextView pgMinsH = completedMatchHeaderLayoutBindingHome.pgMins;
@@ -296,9 +321,82 @@ public class CompletedMatchStatsUIController {
         TextView pgRebsA = completedMatchHeaderLayoutBindingAway.pgRebs;
         TextView pgStlA = completedMatchHeaderLayoutBindingAway.pgStl;
 
+        //Sgs
+        TextView sgNameH = completedMatchHeaderLayoutBindingHome.sgName;
+        TextView sgMinsH = completedMatchHeaderLayoutBindingHome.sgMins;
+        TextView sgPtsH = completedMatchHeaderLayoutBindingHome.sgPts;
+        TextView sgAstH = completedMatchHeaderLayoutBindingHome.sgAst;
+        TextView sgBlkH = completedMatchHeaderLayoutBindingHome.sgBlk;
+        TextView sgRebsH = completedMatchHeaderLayoutBindingHome.sgRebs;
+        TextView sgStlH = completedMatchHeaderLayoutBindingHome.sgStl;
+
+        TextView sgNameA = completedMatchHeaderLayoutBindingAway.sgName;
+        TextView sgMinsA = completedMatchHeaderLayoutBindingAway.sgMins;
+        TextView sgPtsA = completedMatchHeaderLayoutBindingAway.sgPts;
+        TextView sgAstA = completedMatchHeaderLayoutBindingAway.sgAst;
+        TextView sgBlkA = completedMatchHeaderLayoutBindingAway.sgBlk;
+        TextView sgRebsA = completedMatchHeaderLayoutBindingAway.sgRebs;
+        TextView sgStlA = completedMatchHeaderLayoutBindingAway.sgStl;
+
+        //Sfs
+        TextView sfNameH = completedMatchHeaderLayoutBindingHome.sfName;
+        TextView sfMinsH = completedMatchHeaderLayoutBindingHome.sfMins;
+        TextView sfPtsH = completedMatchHeaderLayoutBindingHome.sfPts;
+        TextView sfAstH = completedMatchHeaderLayoutBindingHome.sfAst;
+        TextView sfBlkH = completedMatchHeaderLayoutBindingHome.sfBlk;
+        TextView sfRebsH = completedMatchHeaderLayoutBindingHome.sfRebs;
+        TextView sfStlH = completedMatchHeaderLayoutBindingHome.sfStl;
+
+        TextView sfNameA = completedMatchHeaderLayoutBindingAway.sfName;
+        TextView sfMinsA = completedMatchHeaderLayoutBindingAway.sfMins;
+        TextView sfPtsA = completedMatchHeaderLayoutBindingAway.sfPts;
+        TextView sfAstA = completedMatchHeaderLayoutBindingAway.sfAst;
+        TextView sfBlkA = completedMatchHeaderLayoutBindingAway.sfBlk;
+        TextView sfRebsA = completedMatchHeaderLayoutBindingAway.sfRebs;
+        TextView sfStlA = completedMatchHeaderLayoutBindingAway.sfStl;
+
+        //Pfs
+        TextView pfNameH = completedMatchHeaderLayoutBindingHome.pfName;
+        TextView pfMinsH = completedMatchHeaderLayoutBindingHome.pfMins;
+        TextView pfPtsH = completedMatchHeaderLayoutBindingHome.pfPts;
+        TextView pfAstH = completedMatchHeaderLayoutBindingHome.pfAst;
+        TextView pfBlkH = completedMatchHeaderLayoutBindingHome.pfBlk;
+        TextView pfRebsH = completedMatchHeaderLayoutBindingHome.pfRebs;
+        TextView pfStlH = completedMatchHeaderLayoutBindingHome.pfStl;
+
+        TextView pfNameA = completedMatchHeaderLayoutBindingAway.pfName;
+        TextView pfMinsA = completedMatchHeaderLayoutBindingAway.pfMins;
+        TextView pfPtsA = completedMatchHeaderLayoutBindingAway.pfPts;
+        TextView pfAstA = completedMatchHeaderLayoutBindingAway.pfAst;
+        TextView pfBlkA = completedMatchHeaderLayoutBindingAway.pfBlk;
+        TextView pfRebsA = completedMatchHeaderLayoutBindingAway.pfRebs;
+        TextView pfStlA = completedMatchHeaderLayoutBindingAway.pfStl;
+
+        //Cs
+        TextView cNameH = completedMatchHeaderLayoutBindingHome.cName;
+        TextView cMinsH = completedMatchHeaderLayoutBindingHome.cMins;
+        TextView cPtsH = completedMatchHeaderLayoutBindingHome.cPts;
+        TextView cAstH = completedMatchHeaderLayoutBindingHome.cAst;
+        TextView cBlkH = completedMatchHeaderLayoutBindingHome.cBlk;
+        TextView cRebsH = completedMatchHeaderLayoutBindingHome.cRebs;
+        TextView cStlH = completedMatchHeaderLayoutBindingHome.cStl;
+
+        TextView cNameA = completedMatchHeaderLayoutBindingAway.cName;
+        TextView cMinsA = completedMatchHeaderLayoutBindingAway.cMins;
+        TextView cPtsA = completedMatchHeaderLayoutBindingAway.cPts;
+        TextView cAstA = completedMatchHeaderLayoutBindingAway.cAst;
+        TextView cBlkA = completedMatchHeaderLayoutBindingAway.cBlk;
+        TextView cRebsA = completedMatchHeaderLayoutBindingAway.cRebs;
+        TextView cStlA = completedMatchHeaderLayoutBindingAway.cStl;
+
+
+        //Pgs
         this.getPlayerLiveStatsForBoth(myMatch, homeTeam, awayTeam);
-        pgNameH.setText(findPlayerById(homeTeamPlayers,best5StatsHome.get(0).getPlayer_id()).getName());
-        pgNameA.setText(findPlayerById(awayTeamPlayers,best5StatsAway.get(0).getPlayer_id()).getName());
+
+        pgNameH.setText(findPlayerById(homeTeamPlayers,bestPgH.getPlayer_id()).getName()+"");
+        pgNameA.setText(findPlayerById(awayTeamPlayers,bestPgA.getPlayer_id()).getName()+"");
+
+
 
         Picasso.get()
                 .load(Config.TEAM_IMAGES_RESOURCES + homeTeam.getBadgePath())
@@ -312,27 +410,121 @@ public class CompletedMatchStatsUIController {
                 .centerCrop()
                 .into(awayLogo);
 
-        //player 1
-        pgMinsH.setText(best5StatsHome.get(0).getMinutes()+"");
-        pgMinsA.setText(best5StatsAway.get(0).getMinutes()+"");
 
-        pgPtsH.setText(best5StatsHome.get(0).getSuccessful_freethrow()*1+best5StatsHome.get(0).getSuccessful_twopointer()*2+best5StatsHome.get(0).getSuccessful_threepointer()*3);
-        pgPtsA.setText(best5StatsAway.get(0).getSuccessful_freethrow()*1+best5StatsAway.get(0).getSuccessful_twopointer()*2+best5StatsAway.get(0).getSuccessful_threepointer()*3);
+        pgMinsH.setText(bestPgH.getMinutes()+"");
+        pgMinsA.setText(bestPgA.getMinutes()+"");
 
-        pgAstH.setText(best5StatsHome.get(0).getAssist());
-        pgAstA.setText(best5StatsAway.get(0).getAssist());
 
-        pgBlkH.setText(best5StatsHome.get(0).getBlock());
-        pgBlkA.setText(best5StatsAway.get(0).getBlock());
+        pgPtsH.setText(bestPgH.getSuccessful_freethrow()*1+bestPgH.getSuccessful_twopointer()*2+bestPgH.getSuccessful_threepointer()*3+"");
+        pgPtsA.setText(bestPgA.getSuccessful_freethrow()*1+bestPgA.getSuccessful_twopointer()*2+bestPgA.getSuccessful_threepointer()*3+"");
 
-        pgRebsH.setText(best5StatsHome.get(0).getRebound());
-        pgRebsA.setText(best5StatsAway.get(0).getRebound());
 
-        pgStlH.setText(best5StatsHome.get(0).getSteal());
-        pgStlA.setText(best5StatsAway.get(0).getSteal());
 
-        //repeat process for other 4 players
+        pgAstH.setText(bestPgH.getAssist()+"");
+        pgAstA.setText(bestPgA.getAssist()+"");
+
+        pgBlkH.setText(bestPgH.getBlock()+"");
+        pgBlkA.setText(bestPgA.getBlock()+"");
+
+        pgRebsH.setText(bestPgH.getRebound()+"");
+        pgRebsA.setText(bestPgA.getRebound()+"");
+
+        pgStlH.setText(bestPgH.getSteal()+"");
+        pgStlA.setText(bestPgA.getSteal()+"");
+
+        //Sgs
+        sgMinsH.setText(bestSgH.getMinutes()+"");
+        sgMinsA.setText(bestSgA.getMinutes()+"");
+
+        sgPtsH.setText(bestSgH.getSuccessful_freethrow()*1+bestSgH.getSuccessful_twopointer()*2+bestSgH.getSuccessful_threepointer()*3+"");
+        sgPtsA.setText(bestSgA.getSuccessful_freethrow()*1+bestSgA.getSuccessful_twopointer()*2+bestSgA.getSuccessful_threepointer()*3+"");
+
+        sgAstH.setText(bestSgH.getAssist()+"");
+        sgAstA.setText(bestSgA.getAssist()+"");
+
+        sgBlkH.setText(bestSgH.getBlock()+"");
+        sgBlkA.setText(bestSgA.getBlock()+"");
+
+        sgRebsH.setText(bestSgH.getRebound()+"");
+        sgRebsA.setText(bestSgA.getRebound()+"");
+
+        sgStlH.setText(bestSgH.getSteal()+"");
+        sgStlA.setText(bestSgA.getSteal()+"");
+
+        sgNameH.setText(findPlayerById(homeTeamPlayers,bestSgH.getPlayer_id()).getName()+"");
+        sgNameA.setText(findPlayerById(awayTeamPlayers,bestSgA.getPlayer_id()).getName()+"");
+
+        //Sfs
+        sfMinsH.setText(bestSfH.getMinutes()+"");
+        sfMinsA.setText(bestSfA.getMinutes()+"");
+
+        sfPtsH.setText(bestSfH.getSuccessful_freethrow()*1+bestSfH.getSuccessful_twopointer()*2+bestSfH.getSuccessful_threepointer()*3+"");
+        sfPtsA.setText(bestSfA.getSuccessful_freethrow()*1+bestSfA.getSuccessful_twopointer()*2+bestSfA.getSuccessful_threepointer()*3+"");
+
+        sfAstH.setText(bestSfH.getAssist()+"");
+        sfAstA.setText(bestSfA.getAssist()+"");
+
+        sfBlkH.setText(bestSfH.getBlock()+"");
+        sfBlkA.setText(bestSfA.getBlock()+"");
+
+        sfRebsH.setText(bestSfH.getRebound()+"");
+        sfRebsA.setText(bestSfA.getRebound()+"");
+
+        sfStlH.setText(bestSfH.getSteal()+"");
+        sfStlA.setText(bestSfA.getSteal()+"");
+
+        sfNameH.setText(findPlayerById(homeTeamPlayers,bestSfH.getPlayer_id()).getName()+"");
+        sfNameA.setText(findPlayerById(awayTeamPlayers,bestSfA.getPlayer_id()).getName()+"");
+
+        //Pfs
+        pfMinsH.setText(bestPfH.getMinutes()+"");
+        pfMinsA.setText(bestPfA.getMinutes()+"");
+
+        pfPtsH.setText(bestPfH.getSuccessful_freethrow()*1+bestPfH.getSuccessful_twopointer()*2+bestPfH.getSuccessful_threepointer()*3+"");
+        pfPtsA.setText(bestPfA.getSuccessful_freethrow()*1+bestPfA.getSuccessful_twopointer()*2+bestPfA.getSuccessful_threepointer()*3+"");
+
+        pfAstH.setText(bestPfH.getAssist()+"");
+        pfAstA.setText(bestPfA.getAssist()+"");
+
+        pfBlkH.setText(bestPfH.getBlock()+"");
+        pfBlkA.setText(bestPfA.getBlock()+"");
+
+        pfRebsH.setText(bestPfH.getRebound()+"");
+        pfRebsA.setText(bestPfA.getRebound()+"");
+
+        pfStlH.setText(bestPfH.getSteal()+"");
+        pfStlA.setText(bestPfA.getSteal()+"");
+
+        pfNameH.setText(findPlayerById(homeTeamPlayers,bestPfH.getPlayer_id()).getName()+"");
+        pfNameA.setText(findPlayerById(awayTeamPlayers,bestPfA.getPlayer_id()).getName()+"");
+
+        //Cs
+        cMinsH.setText(bestCH.getMinutes()+"");
+        cMinsA.setText(bestCA.getMinutes()+"");
+
+        cPtsH.setText(bestCH.getSuccessful_freethrow()*1+bestCH.getSuccessful_twopointer()*2+bestCH.getSuccessful_threepointer()*3+"");
+        cPtsA.setText(bestCA.getSuccessful_freethrow()*1+bestCA.getSuccessful_twopointer()*2+bestCA.getSuccessful_threepointer()*3+"");
+
+        cAstH.setText(bestCH.getAssist()+"");
+        cAstA.setText(bestCA.getAssist()+"");
+
+        cBlkH.setText(bestCH.getBlock()+"");
+        cBlkA.setText(bestCA.getBlock()+"");
+
+        cRebsH.setText(bestCH.getRebound()+"");
+        cRebsA.setText(bestCA.getRebound()+"");
+
+        cStlH.setText(bestCH.getSteal()+"");
+        cStlA.setText(bestCA.getSteal()+"");
+
+        cNameH.setText(findPlayerById(homeTeamPlayers,bestCH.getPlayer_id()).getName()+"");
+        cNameA.setText(findPlayerById(awayTeamPlayers,bestCA.getPlayer_id()).getName()+"");
 
     }
+    public void fillCompleteMatchTeamLeaderStats(CompletedMatchStats completedMatchStats, Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
+        CompleteMatchLeadersBinding completeMatchLeadersBinding = completedMatchStats.getBinding().includeLeaders;
 
+
+
+    }
 }

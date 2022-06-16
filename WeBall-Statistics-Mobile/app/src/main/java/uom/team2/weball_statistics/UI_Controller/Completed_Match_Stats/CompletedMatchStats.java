@@ -51,6 +51,7 @@ public class CompletedMatchStats extends Fragment {
         //Change call to method
         try {
             completedMatchStatsUIController.fillMatchHeaderInformation(this,match,teamLandlord,teamGuest);
+            completedMatchStatsUIController.fillCompleteMatchTeamPlayerStats(this,match,teamLandlord,teamGuest);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

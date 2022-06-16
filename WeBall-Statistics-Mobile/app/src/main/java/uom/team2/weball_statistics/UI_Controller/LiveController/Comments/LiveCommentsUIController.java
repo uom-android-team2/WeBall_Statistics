@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveGameProgress;
 
 public class LiveCommentsUIController {
 

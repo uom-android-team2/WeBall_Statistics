@@ -37,6 +37,8 @@ public class LiveGameComments extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        daoAction = DAOAction.getInstance();
     }
 
     @Override

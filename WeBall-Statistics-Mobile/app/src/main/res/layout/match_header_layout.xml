@@ -42,6 +42,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/header_bottom_divider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_top_divider" />
 

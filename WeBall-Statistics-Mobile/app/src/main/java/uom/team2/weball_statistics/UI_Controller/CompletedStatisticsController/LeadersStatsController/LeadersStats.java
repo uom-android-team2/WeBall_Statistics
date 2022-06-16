@@ -90,6 +90,11 @@ public class LeadersStats extends Fragment {
                 rebounds = sortByRebounds(returnedObject);
                 fouls = sortByFouls(returnedObject);
 
+                System.out.println("ASS " + assists.get(0).getPlayer_id()+" " +assists.get(0).calculateAssistPercentage());
+                System.out.println("ASS " + assists.get(1).getPlayer_id()+" " +assists.get(1).calculateAssistPercentage());
+                System.out.println("ASS " + assists.get(2).getPlayer_id()+" " +assists.get(2).calculateAssistPercentage());
+
+//
                 //add titles
                 addTitles();
 
@@ -151,7 +156,7 @@ public class LeadersStats extends Fragment {
         if (playerStats.size() < 4) {
             ranks = playerStats.size();
         }
-        for (int i=0;i<ranks;i++) {
+        for (int i=0;i<=ranks;i++) {
             int finalI = i;
             double value = -1;
             LinearLayout topPlayerLayout = binding.PPG.topPlayerContainer;
@@ -177,32 +182,34 @@ public class LeadersStats extends Fragment {
             }
             double finalValue = value;
 
+            if(i==0) {
+                //creates top leader aka top player in a specific statistic e.g. top leader in PointsPerGame is Curry
+                LinearLayout topFinalLayout = topPlayerLayout;
+                System.out.println("SEE "+i+" " + playerStats.get(i).getPlayer_id()+" " +playerStats.get(i).calculatePointsPercentage());
+                playerService.findPlayerById2(playerStats.get(i).getPlayer_id(), new CallbackListener<Player>() {
 
-            //creates top leader aka top player in a specific statistic e.g. top leader in PointsPerGame is Curry
-            LinearLayout topFinalLayout = topPlayerLayout;
-            playerService.findPlayerById2(playerStats.get(0).getPlayer_id(), new CallbackListener<Player>() {
+                    @Override
+                    public void callback(Player returnedObject) {
+                        createTopPlayer(topFinalLayout, returnedObject.getName() + " " + returnedObject.getSurname(),
+                                teamFormat(returnedObject.getTeamString()), 0, finalValue + "", returnedObject.getNumber(),
+                                positionFormat(returnedObject.getPosition()),
+                                Config.PLAYER_IMAGES_RESOURCES + returnedObject.getImagePath());
 
-                @Override
-                public void callback(Player returnedObject) {
-                    createTopPlayer(topFinalLayout, returnedObject.getName()+" " +returnedObject.getSurname(),
-                            teamFormat(returnedObject.getTeamString()), 0 , finalValue + "" , returnedObject.getNumber(),
-                            positionFormat(returnedObject.getPosition()),
-                            Config.PLAYER_IMAGES_RESOURCES + returnedObject.getImagePath());
+                    }
+                });
+            } else {
 
-                }
-            });
+                //creates other leaders
+                LinearLayout playerFinalLayout = playerLayout;
+                playerService.findPlayerById2(playerStats.get(i).getPlayer_id(), new CallbackListener<Player>() {
 
-            //creates other leaders
-            LinearLayout playerFinalLayout = playerLayout;
-            playerService.findPlayerById2(playerStats.get(i+1).getPlayer_id(), new CallbackListener<Player>() {
-
-                @Override
-                public void callback(Player returnedObject) {
-                    createPlayer(playerFinalLayout, nameFormat(returnedObject.getName(), returnedObject.getSurname()),
-                            teamFormat(returnedObject.getTeamString()), finalI , finalValue + "");
-                }
-            });
-
+                    @Override
+                    public void callback(Player returnedObject) {
+                        createPlayer(playerFinalLayout, nameFormat(returnedObject.getName(), returnedObject.getSurname()),
+                                teamFormat(returnedObject.getTeamString()), finalI - 1, finalValue + "");
+                    }
+                });
+            }
         }
     }
 

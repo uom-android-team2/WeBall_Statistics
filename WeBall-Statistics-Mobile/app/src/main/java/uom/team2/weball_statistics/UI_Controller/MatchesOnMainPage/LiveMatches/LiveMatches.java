@@ -82,7 +82,7 @@ public class LiveMatches extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (binding == null){
+        if (binding == null) {
             return;
         }
         MatchesOnMainPageService matchesOnMainPageService = new MatchesOnMainPageService();
@@ -127,6 +127,9 @@ public class LiveMatches extends Fragment {
                 mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_live_layout, null);
+                
+                UIHandler.updateScore(LiveMatches.this, viewMatch.findViewById(R.id.score_text), liveMatches.get(i).getTeamLandlord_id(), liveMatches.get(i).getTeamguest_id());
+
 
                 if (isAdmin) {
                     viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.VISIBLE);
@@ -141,7 +144,6 @@ public class LiveMatches extends Fragment {
                         View team1 = viewMatch.findViewById(R.id.team1);
                         UIHandler.updateTeamImageInMatch(LiveMatches.this, returnedObject, team1);
                         fillPlayers(returnedObject, viewMatch, true);
-
                     }
                 });
 

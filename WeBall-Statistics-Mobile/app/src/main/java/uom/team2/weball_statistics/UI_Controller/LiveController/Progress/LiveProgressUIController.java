@@ -23,7 +23,7 @@ import uom.team2.weball_statistics.databinding.MatchInformationLayoutBinding;
 
 public class LiveProgressUIController {
 
-    public static LiveProgressUIController instance = new LiveProgressUIController();
+    public static LiveProgressUIController instance = null;
 
     //Implement singleton pattern
     public static LiveProgressUIController getInstance(){

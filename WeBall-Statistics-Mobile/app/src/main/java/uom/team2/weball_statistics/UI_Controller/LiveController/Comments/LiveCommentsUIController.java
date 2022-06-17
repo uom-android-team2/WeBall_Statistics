@@ -13,7 +13,7 @@ import uom.team2.weball_statistics.R;
 
 public class LiveCommentsUIController {
 
-    public static LiveCommentsUIController instance = new LiveCommentsUIController();
+    public static LiveCommentsUIController instance = null;
 
     //Implement singleton pattern
     public static LiveCommentsUIController getInstance(){

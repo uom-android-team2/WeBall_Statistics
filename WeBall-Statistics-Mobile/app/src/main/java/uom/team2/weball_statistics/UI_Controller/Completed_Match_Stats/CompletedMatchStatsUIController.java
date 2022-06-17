@@ -60,12 +60,15 @@ public class CompletedMatchStatsUIController {
     private ArrayList<PlayerLiveStatistics> filteredAllAwayPlayerStats = new ArrayList<>();
 
 
-    public static CompletedMatchStatsUIController instance = new CompletedMatchStatsUIController();
+    public static CompletedMatchStatsUIController instance = null;
+
+    public CompletedMatchStatsUIController() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+    }
 
     //Implement singleton pattern
     public static CompletedMatchStatsUIController getInstance() {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
         if (instance == null) {
             instance = new CompletedMatchStatsUIController();
         }

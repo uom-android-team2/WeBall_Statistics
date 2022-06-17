@@ -22,6 +22,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -95,6 +97,14 @@ public class UpcomingMatches extends Fragment {
                 Thread thread = matchesOnMainPageService.fetchUpcomingMatches(new CallbackListener<ArrayList<Match>>() {
                     @Override
                     public void callback(ArrayList<Match> returnedObject) {
+
+                        Collections.sort(returnedObject, new Comparator<Match>() {
+                            @Override
+                            public int compare(Match o1, Match o2) {
+                                return o1.getDate() - o2.getDate();
+                            }
+                        });
+
                         createMatchLayout(returnedObject);
                     }
                 });
@@ -157,6 +167,8 @@ public class UpcomingMatches extends Fragment {
                 mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_upcoming_layout, null);
+                TextView dateView = viewMatch.findViewById(R.id.match_start_date);
+                dateView.setText("Week " + liveMatches.get(i).getDate());
                 if (isAdmin) {
                     viewMatch.findViewById(R.id.imageButtonEditMatch).setVisibility(View.VISIBLE);
                 } else {

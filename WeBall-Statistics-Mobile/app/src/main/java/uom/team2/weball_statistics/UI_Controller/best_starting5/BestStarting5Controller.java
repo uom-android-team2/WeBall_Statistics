@@ -40,7 +40,25 @@ public class BestStarting5Controller {
     public void fillBestPointGuardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includePG;
 
-        bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.PG));
+        if(player.getTeamString().equals("Atlanta Hawks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hawks));
+        }else if(player.getTeamString().equals("Brooklyn Nets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nets));
+        }else if(player.getTeamString().equals("Boston Celtics")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Celtics));
+        }else if(player.getTeamString().equals("Cleveland Cavaliers")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Cavaliers));
+        }else if(player.getTeamString().equals("Dallas Mavericks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Mavericks));
+        }else if(player.getTeamString().equals("Charlotte Hornets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hornets));
+        }else if(player.getTeamString().equals("Chicago Bulls")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Bulls));
+        }else if(player.getTeamString().equals("Denver Nuggets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nuggets));
+        }else{
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.other));
+        }
         ImageView imageViewTeamLogo = (ImageView) bestPlayerPerPositionLayoutBinding.logoImage;
         ImageView imageViewPlayerPhoto = (ImageView) bestPlayerPerPositionLayoutBinding.playerImage;
         TextView textViewPlayerInfo = (TextView) bestPlayerPerPositionLayoutBinding.cityTeamNumberPosition;
@@ -79,7 +97,25 @@ public class BestStarting5Controller {
     public void fillBestShootingGuardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includeSG;
 
-        bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.SG));
+        if(player.getTeamString().equals("Atlanta Hawks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hawks));
+        }else if(player.getTeamString().equals("Brooklyn Nets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nets));
+        }else if(player.getTeamString().equals("Boston Celtics")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Celtics));
+        }else if(player.getTeamString().equals("Cleveland Cavaliers")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Cavaliers));
+        }else if(player.getTeamString().equals("Dallas Mavericks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Mavericks));
+        }else if(player.getTeamString().equals("Charlotte Hornets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hornets));
+        }else if(player.getTeamString().equals("Chicago Bulls")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Bulls));
+        }else if(player.getTeamString().equals("Denver Nuggets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nuggets));
+        }else{
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.other));
+        }
         ImageView imageViewTeamLogo = (ImageView) bestPlayerPerPositionLayoutBinding.logoImage;
         ImageView imageViewPlayerPhoto = (ImageView) bestPlayerPerPositionLayoutBinding.playerImage;
         TextView textViewPlayerInfo = (TextView) bestPlayerPerPositionLayoutBinding.cityTeamNumberPosition;
@@ -118,7 +154,25 @@ public class BestStarting5Controller {
     public void fillBestSmallForwardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includeSF;
 
-        bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.SF));
+        if(player.getTeamString().equals("Atlanta Hawks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hawks));
+        }else if(player.getTeamString().equals("Brooklyn Nets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nets));
+        }else if(player.getTeamString().equals("Boston Celtics")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Celtics));
+        }else if(player.getTeamString().equals("Cleveland Cavaliers")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Cavaliers));
+        }else if(player.getTeamString().equals("Dallas Mavericks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Mavericks));
+        }else if(player.getTeamString().equals("Charlotte Hornets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hornets));
+        }else if(player.getTeamString().equals("Chicago Bulls")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Bulls));
+        }else if(player.getTeamString().equals("Denver Nuggets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nuggets));
+        }else{
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.other));
+        }
         ImageView imageViewTeamLogo = (ImageView) bestPlayerPerPositionLayoutBinding.logoImage;
         ImageView imageViewPlayerPhoto = (ImageView) bestPlayerPerPositionLayoutBinding.playerImage;
         TextView textViewPlayerInfo = (TextView) bestPlayerPerPositionLayoutBinding.cityTeamNumberPosition;
@@ -156,7 +210,25 @@ public class BestStarting5Controller {
     public void fillBestPowerForwardInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includePF;
 
-        bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.PF));
+        if(player.getTeamString().equals("Atlanta Hawks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hawks));
+        }else if(player.getTeamString().equals("Brooklyn Nets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nets));
+        }else if(player.getTeamString().equals("Boston Celtics")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Celtics));
+        }else if(player.getTeamString().equals("Cleveland Cavaliers")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Cavaliers));
+        }else if(player.getTeamString().equals("Dallas Mavericks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Mavericks));
+        }else if(player.getTeamString().equals("Charlotte Hornets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hornets));
+        }else if(player.getTeamString().equals("Chicago Bulls")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Bulls));
+        }else if(player.getTeamString().equals("Denver Nuggets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nuggets));
+        }else{
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.other));
+        }
         ImageView imageViewTeamLogo = (ImageView) bestPlayerPerPositionLayoutBinding.logoImage;
         ImageView imageViewPlayerPhoto = (ImageView) bestPlayerPerPositionLayoutBinding.playerImage;
         TextView textViewPlayerInfo = (TextView) bestPlayerPerPositionLayoutBinding.cityTeamNumberPosition;
@@ -194,7 +266,25 @@ public class BestStarting5Controller {
     public void fillBestCenterInfo(Player player, BestStarting5 bestStarting5Fragment) throws IOException, JSONException {
         BestPlayerPerPositionLayoutBinding bestPlayerPerPositionLayoutBinding = bestStarting5Fragment.getBinding().includeC;
 
-        bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.C));
+        if(player.getTeamString().equals("Atlanta Hawks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hawks));
+        }else if(player.getTeamString().equals("Brooklyn Nets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nets));
+        }else if(player.getTeamString().equals("Boston Celtics")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Celtics));
+        }else if(player.getTeamString().equals("Cleveland Cavaliers")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Cavaliers));
+        }else if(player.getTeamString().equals("Dallas Mavericks")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Mavericks));
+        }else if(player.getTeamString().equals("Charlotte Hornets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Hornets));
+        }else if(player.getTeamString().equals("Chicago Bulls")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Bulls));
+        }else if(player.getTeamString().equals("Denver Nuggets")){
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.Nuggets));
+        }else{
+            bestPlayerPerPositionLayoutBinding.background.setBackgroundColor(Utils.getColor(bestStarting5Fragment.getContext(), R.color.other));
+        }
         ImageView imageViewTeamLogo = (ImageView) bestPlayerPerPositionLayoutBinding.logoImage;
         ImageView imageViewPlayerPhoto = (ImageView) bestPlayerPerPositionLayoutBinding.playerImage;
         TextView textViewPlayerInfo = (TextView) bestPlayerPerPositionLayoutBinding.cityTeamNumberPosition;

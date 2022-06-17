@@ -1,7 +1,9 @@
 package uom.team2.weball_statistics.Service;
 
 
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,57 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             instance = new DAOLiveMatchService();
         }
         return instance;
+    }
+
+    public void setChronometerTime(int matchId, Fragment fragment, Chronometer chronometer) {
+
+        get(matchId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && dataSnapshot.child("time").exists() && dataSnapshot.child("stop").exists()) {
+                    try {
+                        HashMap<String, Object> time = (HashMap<String, Object>) dataSnapshot.child("time").getValue();
+                        Long longTime = (Long) time.get("time");
+
+                        HashMap<String, Object> stop = (HashMap<String, Object>) dataSnapshot.child("stop").getValue();
+                        Long stopTime = (Long) stop.get("stop");
+                        longTime = longTime + (SystemClock.elapsedRealtime() - stopTime);
+                        if (fragment.getActivity() != null && fragment.isAdded()) {
+                            Long finalLongTime = longTime;
+                            fragment.requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    chronometer.setBase(finalLongTime);
+                                    chronometer.start();
+                                }
+                            });
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            }
+        });
+
+    }
+
+    public void updateClockLong(int matchId, Long clockLong, String type) {
+        get(matchId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(type).exists()) {
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put(type, clockLong);
+                    databaseReference.child("match_id: " + matchId).child(type).updateChildren(map);
+
+                } else {
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put(type, clockLong);
+                    databaseReference.child("match_id: " + matchId).child(type).setValue(map);
+                }
+            }
+        });
     }
 
 
@@ -267,6 +320,11 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
     public Task<DataSnapshot> get(int matchId, int teamId) {
         return databaseReference.child("match_id: " + matchId).child("team_id: " + teamId).get();
     }
+
+    public Task<DataSnapshot> get(int matchId) {
+        return databaseReference.child("match_id: " + matchId).get();
+    }
+
 
     @Override
     public TeamLiveStatistics get(TeamLiveStatistics data) {

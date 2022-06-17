@@ -248,12 +248,12 @@ public class AdminsView extends Fragment {
             binding.startButton.setText("End");
             binding.pauseButton.setEnabled(true);
 
-            binding.clock.start();
+            DAOLiveMatchService.getInstance().setChronometerTime(match.getId(), AdminsView.this, binding.clock);
             binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
                 @Override
                 public void onChronometerTick(Chronometer chronometer) {
-                    // to match id tha allazei analoga to match
                     DAOLiveMatchService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
+                    DAOLiveMatchService.getInstance().updateClockLong(match.getId(), chronometer.getBase(), "time");
                 }
             });
         }
@@ -264,6 +264,9 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 binding.clock.stop();
+                if (running) {
+                    DAOLiveMatchService.getInstance().updateClockLong(match.getId(), SystemClock.elapsedRealtime(), "stop");
+                }
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("isAdmin", true);
                 NavHostFragment.findNavController(AdminsView.this).navigate(R.id.action_adminsView_to_matchesTabContainer, bundle);
@@ -373,6 +376,7 @@ public class AdminsView extends Fragment {
                         public void onChronometerTick(Chronometer chronometer) {
                             // to match id tha allazei analoga to match
                             DAOLiveMatchService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
+                            DAOLiveMatchService.getInstance().updateClockLong(match.getId(), chronometer.getBase(), "time");
                         }
                     });
                     running = true;
@@ -445,6 +449,7 @@ public class AdminsView extends Fragment {
                 } else {
                     binding.pauseButton.setText("Continue");
                     binding.clock.stop();
+                    DAOLiveMatchService.getInstance().updateClockLong(match.getId(), SystemClock.elapsedRealtime(), "stop");
                     pauseOffset = SystemClock.elapsedRealtime() - binding.clock.getBase();
                     running = false;
 

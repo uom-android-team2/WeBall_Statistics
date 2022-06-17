@@ -122,7 +122,7 @@ public class CompletedMatchStatsUIController {
     }
 
     //Does this work?
-    public void getPlayerLiveStatsForBoth(Match myMatch, Team homeTeam, Team awayTeam) throws IOException, JSONException {
+    public void getPlayerLiveStatsForBoth(Match myMatch) throws IOException, JSONException {
 
         //fetching stats for all players of the hometeam for this match
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -140,6 +140,10 @@ public class CompletedMatchStatsUIController {
                 filteredAllHomePlayerStats.add(unfilteredAllHomePlayerStats.get(i));
             }
         }
+        System.out.println("---------IN FILTERED Home------------");
+        for(int i =0;i<filteredAllHomePlayerStats.size();i++){
+            System.out.println(filteredAllHomePlayerStats.get(i).getPlayer_id());
+        }
 
         //fetching stats for all players of the away team for this match
         OkHttpClient client2 = new OkHttpClient().newBuilder()
@@ -156,6 +160,10 @@ public class CompletedMatchStatsUIController {
             if(this.isInTeam(awayTeamPlayers,unfilteredAllAwayPlayerStats.get(i).getPlayer_id())){
                 filteredAllAwayPlayerStats.add(unfilteredAllAwayPlayerStats.get(i));
             }
+        }
+        System.out.println("---------IN FILTERED away------------");
+        for(int i =0;i<filteredAllAwayPlayerStats.size();i++){
+            System.out.println(filteredAllAwayPlayerStats.get(i).getPlayer_id());
         }
 
         //HOME TEAM
@@ -199,8 +207,9 @@ public class CompletedMatchStatsUIController {
                     bestCH=filteredAllHomePlayerStats.get(i);
                 }
             }
-        }
 
+        }
+        filteredAllHomePlayerStats.clear();
         //AWAY TEAM
         int maxPGA=-100;
         int maxSGA=-100;
@@ -241,7 +250,7 @@ public class CompletedMatchStatsUIController {
                 }
             }
         }
-
+    filteredAllAwayPlayerStats.clear();
     }
     public Player findPlayerById(ArrayList<Player> myPlayers,int id){
 
@@ -385,7 +394,7 @@ public class CompletedMatchStatsUIController {
         TextView cStlA = completedMatchHeaderLayoutBindingAway.cStl;
 
 
-        this.getPlayerLiveStatsForBoth(myMatch, homeTeam, awayTeam);
+        this.getPlayerLiveStatsForBoth(myMatch);
 
         pgNameH.setText(findPlayerById(homeTeamPlayers,bestPgH.getPlayer_id()).getName()+"");
         pgNameA.setText(findPlayerById(awayTeamPlayers,bestPgA.getPlayer_id()).getName()+"");

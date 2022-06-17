@@ -60,16 +60,7 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHan
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminsView#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AdminsView extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();
     private final Stack<TextView> undoButtonStack = new Stack<TextView>();
@@ -114,31 +105,15 @@ public class AdminsView extends Fragment {
     private TextView undoBtn;
     private TextView substitutionBtn;
     private final ArrayList<ImageView> playersImageViewList = new ArrayList<ImageView>();
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public AdminsView() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminsViewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AdminsView newInstance(String param1, String param2) {
+    public static AdminsView newInstance() {
         AdminsView fragment = new AdminsView();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-
-
 
         return fragment;
     }
@@ -146,8 +121,6 @@ public class AdminsView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
     }
 
@@ -179,7 +152,7 @@ public class AdminsView extends Fragment {
         substitutionBtn = binding.substitutionButton;
 
         setAlphaAdminBtn(120);
-
+        binding.startButton.getBackground().setAlpha(255);
 
         // orismata gia kathe match
         Bundle bundle = getArguments();
@@ -446,6 +419,12 @@ public class AdminsView extends Fragment {
                 //end button
                 else {
                     //Appear the dialog window
+                    try {
+                        teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                        teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     FinishGameDialog finishGameDialog = new FinishGameDialog(getContext(), binding, match, teamLandlordStats, teamGuestStats, teamsPlayed);
                     finishGameDialog.show();
                 }
@@ -1001,6 +980,8 @@ public class AdminsView extends Fragment {
         blockBtn.getBackground().setAlpha(alpha);
         foulBtn.getBackground().setAlpha(alpha);
         turnoverBtn.getBackground().setAlpha(alpha);
+        pauseBtn.getBackground().setAlpha(alpha);
+        undoBtn.getBackground().setAlpha(alpha);
     }
 
     //you call this function when you want to change player

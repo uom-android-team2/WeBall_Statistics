@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats;
 
+import android.os.StrictMode;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class CompletedMatchStatsUIController {
 
     //Implement singleton pattern
     public static CompletedMatchStatsUIController getInstance() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         if (instance == null) {
             instance = new CompletedMatchStatsUIController();
         }

@@ -64,7 +64,11 @@
         android:id="@+id/adminsView"
         android:name="uom.team2.weball_statistics.UI_Controller.AdminsView.AdminsView"
         android:label="Welcome Admin"
-        tools:layout="@layout/fragment_admins_view" />
+        tools:layout="@layout/fragment_admins_view" >
+        <action
+            android:id="@+id/action_adminsView_to_matchesTabContainer"
+            app:destination="@id/matchesTabContainer" />
+    </fragment>
     <fragment
         android:id="@+id/sharedTabContainer"
         android:name="uom.team2.weball_statistics.UI_Controller.CompletedStatisticsController.SharedTabContainer"

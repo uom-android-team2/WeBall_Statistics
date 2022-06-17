@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.squareup.picasso.Picasso;
 
@@ -263,8 +264,9 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
                 binding.clock.stop();
-                keepClock = SystemClock.elapsedRealtime() - binding.clock.getBase();
-                running = false;
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isAdmin", true);
+                NavHostFragment.findNavController(AdminsView.this).navigate(R.id.action_adminsView_to_matchesTabContainer, bundle);
             }
         });
 

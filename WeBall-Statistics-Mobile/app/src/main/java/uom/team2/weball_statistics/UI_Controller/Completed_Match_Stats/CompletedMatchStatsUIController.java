@@ -310,7 +310,6 @@ public class CompletedMatchStatsUIController {
         //Pgs
         ImageView homeLogo = completedMatchHeaderLayoutBindingHome.teamLogo;
         TextView pgNameH = completedMatchHeaderLayoutBindingHome.pgName;
-        TextView pgMinsH = completedMatchHeaderLayoutBindingHome.pgMins;
         TextView pgPtsH = completedMatchHeaderLayoutBindingHome.pgPts;
         TextView pgAstH = completedMatchHeaderLayoutBindingHome.pgAst;
         TextView pgBlkH = completedMatchHeaderLayoutBindingHome.pgBlk;
@@ -319,7 +318,6 @@ public class CompletedMatchStatsUIController {
 
         ImageView awayLogo = completedMatchHeaderLayoutBindingAway.teamLogo;
         TextView pgNameA = completedMatchHeaderLayoutBindingAway.pgName;
-        TextView pgMinsA = completedMatchHeaderLayoutBindingAway.pgMins;
         TextView pgPtsA = completedMatchHeaderLayoutBindingAway.pgPts;
         TextView pgAstA = completedMatchHeaderLayoutBindingAway.pgAst;
         TextView pgBlkA = completedMatchHeaderLayoutBindingAway.pgBlk;
@@ -328,7 +326,6 @@ public class CompletedMatchStatsUIController {
 
         //Sgs
         TextView sgNameH = completedMatchHeaderLayoutBindingHome.sgName;
-        TextView sgMinsH = completedMatchHeaderLayoutBindingHome.sgMins;
         TextView sgPtsH = completedMatchHeaderLayoutBindingHome.sgPts;
         TextView sgAstH = completedMatchHeaderLayoutBindingHome.sgAst;
         TextView sgBlkH = completedMatchHeaderLayoutBindingHome.sgBlk;
@@ -336,7 +333,6 @@ public class CompletedMatchStatsUIController {
         TextView sgStlH = completedMatchHeaderLayoutBindingHome.sgStl;
 
         TextView sgNameA = completedMatchHeaderLayoutBindingAway.sgName;
-        TextView sgMinsA = completedMatchHeaderLayoutBindingAway.sgMins;
         TextView sgPtsA = completedMatchHeaderLayoutBindingAway.sgPts;
         TextView sgAstA = completedMatchHeaderLayoutBindingAway.sgAst;
         TextView sgBlkA = completedMatchHeaderLayoutBindingAway.sgBlk;
@@ -345,7 +341,6 @@ public class CompletedMatchStatsUIController {
 
         //Sfs
         TextView sfNameH = completedMatchHeaderLayoutBindingHome.sfName;
-        TextView sfMinsH = completedMatchHeaderLayoutBindingHome.sfMins;
         TextView sfPtsH = completedMatchHeaderLayoutBindingHome.sfPts;
         TextView sfAstH = completedMatchHeaderLayoutBindingHome.sfAst;
         TextView sfBlkH = completedMatchHeaderLayoutBindingHome.sfBlk;
@@ -353,7 +348,6 @@ public class CompletedMatchStatsUIController {
         TextView sfStlH = completedMatchHeaderLayoutBindingHome.sfStl;
 
         TextView sfNameA = completedMatchHeaderLayoutBindingAway.sfName;
-        TextView sfMinsA = completedMatchHeaderLayoutBindingAway.sfMins;
         TextView sfPtsA = completedMatchHeaderLayoutBindingAway.sfPts;
         TextView sfAstA = completedMatchHeaderLayoutBindingAway.sfAst;
         TextView sfBlkA = completedMatchHeaderLayoutBindingAway.sfBlk;
@@ -362,7 +356,6 @@ public class CompletedMatchStatsUIController {
 
         //Pfs
         TextView pfNameH = completedMatchHeaderLayoutBindingHome.pfName;
-        TextView pfMinsH = completedMatchHeaderLayoutBindingHome.pfMins;
         TextView pfPtsH = completedMatchHeaderLayoutBindingHome.pfPts;
         TextView pfAstH = completedMatchHeaderLayoutBindingHome.pfAst;
         TextView pfBlkH = completedMatchHeaderLayoutBindingHome.pfBlk;
@@ -370,7 +363,6 @@ public class CompletedMatchStatsUIController {
         TextView pfStlH = completedMatchHeaderLayoutBindingHome.pfStl;
 
         TextView pfNameA = completedMatchHeaderLayoutBindingAway.pfName;
-        TextView pfMinsA = completedMatchHeaderLayoutBindingAway.pfMins;
         TextView pfPtsA = completedMatchHeaderLayoutBindingAway.pfPts;
         TextView pfAstA = completedMatchHeaderLayoutBindingAway.pfAst;
         TextView pfBlkA = completedMatchHeaderLayoutBindingAway.pfBlk;
@@ -379,7 +371,6 @@ public class CompletedMatchStatsUIController {
 
         //Cs
         TextView cNameH = completedMatchHeaderLayoutBindingHome.cName;
-        TextView cMinsH = completedMatchHeaderLayoutBindingHome.cMins;
         TextView cPtsH = completedMatchHeaderLayoutBindingHome.cPts;
         TextView cAstH = completedMatchHeaderLayoutBindingHome.cAst;
         TextView cBlkH = completedMatchHeaderLayoutBindingHome.cBlk;
@@ -387,7 +378,6 @@ public class CompletedMatchStatsUIController {
         TextView cStlH = completedMatchHeaderLayoutBindingHome.cStl;
 
         TextView cNameA = completedMatchHeaderLayoutBindingAway.cName;
-        TextView cMinsA = completedMatchHeaderLayoutBindingAway.cMins;
         TextView cPtsA = completedMatchHeaderLayoutBindingAway.cPts;
         TextView cAstA = completedMatchHeaderLayoutBindingAway.cAst;
         TextView cBlkA = completedMatchHeaderLayoutBindingAway.cBlk;
@@ -395,7 +385,6 @@ public class CompletedMatchStatsUIController {
         TextView cStlA = completedMatchHeaderLayoutBindingAway.cStl;
 
 
-        //Pgs
         this.getPlayerLiveStatsForBoth(myMatch, homeTeam, awayTeam);
 
         pgNameH.setText(findPlayerById(homeTeamPlayers,bestPgH.getPlayer_id()).getName()+"");
@@ -416,9 +405,7 @@ public class CompletedMatchStatsUIController {
                 .into(awayLogo);
 
 
-        pgMinsH.setText(bestPgH.getMinutes()+"");
-        pgMinsA.setText(bestPgA.getMinutes()+"");
-
+        //Pgs
 
         pgPtsH.setText(bestPgH.getSuccessful_freethrow()*1+bestPgH.getSuccessful_twopointer()*2+bestPgH.getSuccessful_threepointer()*3+"");
         pgPtsA.setText(bestPgA.getSuccessful_freethrow()*1+bestPgA.getSuccessful_twopointer()*2+bestPgA.getSuccessful_threepointer()*3+"");
@@ -438,8 +425,6 @@ public class CompletedMatchStatsUIController {
         pgStlA.setText(bestPgA.getSteal()+"");
 
         //Sgs
-        sgMinsH.setText(bestSgH.getMinutes()+"");
-        sgMinsA.setText(bestSgA.getMinutes()+"");
 
         sgPtsH.setText(bestSgH.getSuccessful_freethrow()*1+bestSgH.getSuccessful_twopointer()*2+bestSgH.getSuccessful_threepointer()*3+"");
         sgPtsA.setText(bestSgA.getSuccessful_freethrow()*1+bestSgA.getSuccessful_twopointer()*2+bestSgA.getSuccessful_threepointer()*3+"");
@@ -460,8 +445,6 @@ public class CompletedMatchStatsUIController {
         sgNameA.setText(findPlayerById(awayTeamPlayers,bestSgA.getPlayer_id()).getName()+"");
 
         //Sfs
-        sfMinsH.setText(bestSfH.getMinutes()+"");
-        sfMinsA.setText(bestSfA.getMinutes()+"");
 
         sfPtsH.setText(bestSfH.getSuccessful_freethrow()*1+bestSfH.getSuccessful_twopointer()*2+bestSfH.getSuccessful_threepointer()*3+"");
         sfPtsA.setText(bestSfA.getSuccessful_freethrow()*1+bestSfA.getSuccessful_twopointer()*2+bestSfA.getSuccessful_threepointer()*3+"");
@@ -482,8 +465,6 @@ public class CompletedMatchStatsUIController {
         sfNameA.setText(findPlayerById(awayTeamPlayers,bestSfA.getPlayer_id()).getName()+"");
 
         //Pfs
-        pfMinsH.setText(bestPfH.getMinutes()+"");
-        pfMinsA.setText(bestPfA.getMinutes()+"");
 
         pfPtsH.setText(bestPfH.getSuccessful_freethrow()*1+bestPfH.getSuccessful_twopointer()*2+bestPfH.getSuccessful_threepointer()*3+"");
         pfPtsA.setText(bestPfA.getSuccessful_freethrow()*1+bestPfA.getSuccessful_twopointer()*2+bestPfA.getSuccessful_threepointer()*3+"");
@@ -504,8 +485,6 @@ public class CompletedMatchStatsUIController {
         pfNameA.setText(findPlayerById(awayTeamPlayers,bestPfA.getPlayer_id()).getName()+"");
 
         //Cs
-        cMinsH.setText(bestCH.getMinutes()+"");
-        cMinsA.setText(bestCA.getMinutes()+"");
 
         cPtsH.setText(bestCH.getSuccessful_freethrow()*1+bestCH.getSuccessful_twopointer()*2+bestCH.getSuccessful_threepointer()*3+"");
         cPtsA.setText(bestCA.getSuccessful_freethrow()*1+bestCA.getSuccessful_twopointer()*2+bestCA.getSuccessful_threepointer()*3+"");

@@ -6,17 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/cMins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="MIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pfMins" />
-
-    <TextView
         android:id="@+id/cPts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,17 +83,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sfName" />
-
-    <TextView
-        android:id="@+id/pfMins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="MIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sfMins" />
 
     <TextView
         android:id="@+id/pfPts"
@@ -229,17 +207,6 @@
         app:layout_constraintTop_toBottomOf="@+id/sgBlk" />
 
     <TextView
-        android:id="@+id/sfMins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="MIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sgMins" />
-
-    <TextView
         android:id="@+id/sfName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -307,17 +274,6 @@
         app:layout_constraintTop_toBottomOf="@+id/pgBlk" />
 
     <TextView
-        android:id="@+id/sgMins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="MIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pgMins" />
-
-    <TextView
         android:id="@+id/sgName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -381,17 +337,6 @@
         android:text="BLK"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider7" />
-
-    <TextView
-        android:id="@+id/pgMins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="MIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
@@ -471,17 +416,6 @@
         android:text="PTS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-    <TextView
-        android:id="@+id/minutes_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="MIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 

@@ -15,8 +15,8 @@ public class TeamStats extends Stats {
 
     protected int team_id;
     private int total_matches;
-    private int wins;
-    private int loses;
+    private int win;
+    private int lose;
     protected Boolean isMatchId = false;
     private ArrayList<String> UniqueKeysOfTeam = new ArrayList<String>(Arrays.asList("team_id", "total_matches","win", "lose")); // This arraylist holds the unique fields of the team.
     private String team_name;
@@ -24,12 +24,12 @@ public class TeamStats extends Stats {
         isMatchId = true;
     }
 
-    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int team_id, int total_matches, int wins, int loses) {
+    public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int team_id, int total_matches, int win, int lose) {
         super(successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
         this.team_id = team_id;
         this.total_matches = total_matches;
-        this.wins = wins;
-        this.loses = loses;
+        this.win = win;
+        this.lose = lose;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class TeamStats extends Stats {
             team_id = Integer.parseInt(hashMapData.get("team_id"));
             if(isMatchId){
                 total_matches = Integer.parseInt(hashMapData.get("total_matches"));
-                wins = Integer.parseInt(hashMapData.get("win"));
-                loses = Integer.parseInt(hashMapData.get("lose"));
+                win = Integer.parseInt(hashMapData.get("win"));
+                lose = Integer.parseInt(hashMapData.get("lose"));
             }
 
 
@@ -79,7 +79,7 @@ public class TeamStats extends Stats {
     }
 
     public int getGrades(){
-        return wins * Config.COEFFICIENT_WIN + loses * Config.COEFFICIENT_LOOSE;
+        return win * Config.COEFFICIENT_WIN + lose * Config.COEFFICIENT_LOOSE;
     }
 
     public double calculatePointsPercentage(){
@@ -118,9 +118,17 @@ public class TeamStats extends Stats {
         total_matches++;
     }
 
-    public int getWins(){return wins;}
+    public void setWins(){
+        win++;
+    }
 
-    public  int getLoses(){return loses;}
+    public void setLoses(){
+        lose++;
+    }
+
+    public int getWins(){return win;}
+
+    public  int getLoses(){return lose;}
 
     public int getTeamId() {
         return team_id;

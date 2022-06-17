@@ -1,11 +1,13 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -89,6 +91,7 @@ public class AdminsView extends Fragment {
     private Button start_end_button;
     private long pauseOffset;
     private long keepClock;
+
     private boolean started = false;
     private boolean teamSelected = false;
     private int playerChecked = 1;
@@ -135,12 +138,16 @@ public class AdminsView extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
 
+
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -156,6 +163,9 @@ public class AdminsView extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
 
         freeThrowBtn = binding.freethrowButton;
         twoPointBtn = binding.twoPointerButton;
@@ -188,6 +198,11 @@ public class AdminsView extends Fragment {
 //        binding.shots.setVisibility(View.GONE);
 
 
+        setAlphaAdminBtn(120);
+
+
+
+
 
         // orismata gia kathe match
         Bundle bundle = getArguments();
@@ -201,7 +216,6 @@ public class AdminsView extends Fragment {
 
         DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
         DAOLiveMatchService.getInstance().setListenerForPoints(this, binding.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
-
 
 
 
@@ -295,6 +309,7 @@ public class AdminsView extends Fragment {
         //tin live ora.
         if (match.isProgress()==1){
 
+
             //vale to xronometro apo ekei pou stamatise
             running = true;
             started = true;
@@ -365,6 +380,7 @@ public class AdminsView extends Fragment {
             }
         });
 
+
         // Banner2
         binding.team2Banner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -410,27 +426,21 @@ public class AdminsView extends Fragment {
 
         //Start Button
 
+
+
         binding.startButton.setOnClickListener(new View.OnClickListener() {
+
+
+            DBDataRecovery teamsPlayed = new DBDataRecovery();
+            Stats teamLandlordStats = null, teamGuestStats = null;
             @Override
             public void onClick(View view) {
 
-//                //Make visible hidden parts
-//                freeThrowBtn.setVisibility(View.VISIBLE);
-//                twoPointBtn.setVisibility(View.VISIBLE);
-//                threePointBtn.setVisibility(View.VISIBLE);
-//                reboundBtn.setVisibility(View.VISIBLE);
-//                assistBtn.setVisibility(View.VISIBLE);
-//                stealBtn.setVisibility(View.VISIBLE);
-//                blockBtn.setVisibility(View.VISIBLE);
-//                turnoverBtn.setVisibility(View.VISIBLE);
-//                foulBtn.setVisibility(View.VISIBLE);
-//                pauseBtn.setVisibility(View.VISIBLE);
-//                undoBtn.setVisibility(View.VISIBLE);
-//                substitutionBtn.setVisibility(View.VISIBLE);
-//                binding.score.setVisibility(View.GONE);
-//                binding.shots.setVisibility(View.GONE);
+
+
 
                 if (!started) {
+                    setAlphaAdminBtn(255);
                     initStarters();
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
@@ -467,10 +477,10 @@ public class AdminsView extends Fragment {
 
                     listenEvent();
 
-                    DBDataRecovery teamsPlayed = new DBDataRecovery();
+
                     try {
-                        Stats teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
-                        Stats teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                         teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                         teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
                         ((TeamStats)teamLandlordStats).setMatches();
                         ((TeamStats)teamGuestStats).setMatches();
                         teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamLandlordStats);
@@ -504,6 +514,20 @@ public class AdminsView extends Fragment {
                     MatchService ms = new MatchService();
                     try {
                         ms.statusUpdate(match);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                        ((TeamStats)teamLandlordStats).setWins();
+                        ((TeamStats) teamGuestStats).setWins();
+
+                        System.out.println(((TeamStats) teamLandlordStats).getWins());
+
+                    try {
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamLandlordStats);
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -763,7 +787,6 @@ public class AdminsView extends Fragment {
 
     private void listenEvent() {
         DBDataRecovery dataRecovery = new DBDataRecovery();
-
 
 
 
@@ -1080,6 +1103,18 @@ public class AdminsView extends Fragment {
         threadPlayerMatch.start();
     }
 
+    private void setAlphaAdminBtn(int alpha) {
+        freeThrowBtn.getBackground().setAlpha(alpha);
+        twoPointBtn.getBackground().setAlpha(alpha);
+        threePointBtn.getBackground().setAlpha(alpha);
+        reboundBtn.getBackground().setAlpha(alpha);
+        assistBtn.getBackground().setAlpha(alpha);
+        stealBtn.getBackground().setAlpha(alpha);
+        blockBtn.getBackground().setAlpha(alpha);
+        foulBtn.getBackground().setAlpha(alpha);
+        turnoverBtn.getBackground().setAlpha(alpha);
+    }
+
     //you call this function when you want to change player
     public void deleteThePreviousBackground() {
         if (playerChecked == 1) {
@@ -1096,6 +1131,8 @@ public class AdminsView extends Fragment {
 
 
     }
+
+
 
 
 }

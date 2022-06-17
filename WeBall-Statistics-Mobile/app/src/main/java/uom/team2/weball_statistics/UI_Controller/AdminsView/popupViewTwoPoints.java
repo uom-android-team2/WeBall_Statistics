@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -86,8 +87,12 @@ public class popupViewTwoPoints extends Dialog implements
                 playerStats.setSuccessfulEffort();
                 teamStats.setSuccessfulTwoPointer();
                 teamStats.setSuccessfulEffort();
+
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_twopointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_twopointer);
+
+                Toast.makeText(c.getApplicationContext(),"Successful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
+
                 //Insert 2point's action to firebase
                 Action twoPointThrowAction = null;
                 Action twoPointThrowComment = null;
@@ -133,6 +138,10 @@ public class popupViewTwoPoints extends Dialog implements
         playerStats.setTotalEffort();
         teamStats.setTotalTwoPointer();
         teamStats.setTotalEffort();
+
+
+
+        Toast.makeText(c.getApplicationContext(),"Successful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);

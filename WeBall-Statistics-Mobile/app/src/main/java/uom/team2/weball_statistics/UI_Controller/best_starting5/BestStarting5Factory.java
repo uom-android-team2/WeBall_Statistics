@@ -10,6 +10,7 @@ import okhttp3.*;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
+import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
@@ -50,6 +51,14 @@ public class BestStarting5Factory {
         -(myStats.getTotal_threepointer()+myStats.getTotal_twopointer()-myStats.getSuccessful_threepointer()-myStats.getSuccessful_twopointer())
                 -(myStats.getTotal_freethrow()-myStats.getSuccessful_freethrow());
         return playerEffic;
+    }
+    public static int teamEfficpublic(TeamLiveStatistics myStats){
+
+        int teamEffic = (myStats.getSuccessful_twopointer()*2)+(myStats.getSuccessful_threepointer()*3)+(myStats.getSuccessful_freethrow()*1)
+                +myStats.getRebound()+myStats.getAssist()+myStats.getSteal()+myStats.getBlock()-(myStats.getTurnover()*4)-(myStats.getFoul()*2)
+                -(myStats.getTotal_threepointer()+myStats.getTotal_twopointer()-myStats.getSuccessful_threepointer()-myStats.getSuccessful_twopointer())
+                -(myStats.getTotal_freethrow()-myStats.getSuccessful_freethrow());
+        return teamEffic;
     }
         int maxEfficPG=-100;
         int maxEfficSG=-100;

@@ -49,19 +49,22 @@ public class DAOAction implements DAOCRUDService <Action> {
 
                         if (liveGameProgressFragment.isAdded() && liveGameProgressFragment.getActivity() != null) {
 
-                            liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+                            if (liveGameProgressFragment.getBinding() != null) {
 
-                            if (dataSnapshot.getChildrenCount() <= 0 ) {
-                                liveProgressUIController.noActionsMessage(liveGameProgressFragment);
-                            } else {
-                                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                    Action action = data.getValue(Action.class);
-                                    if (action.getBelongsTo() == BelongsTo.HOME) {
-                                        liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
-                                    } else if (action.getBelongsTo() == BelongsTo.GUEST) {
-                                        liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
-                                    } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
-                                        liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                                liveGameProgressFragment.getBinding().actionsLayoutContainer.removeAllViews();
+
+                                if (dataSnapshot.getChildrenCount() <= 0) {
+                                    liveProgressUIController.noActionsMessage(liveGameProgressFragment);
+                                } else {
+                                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                        Action action = data.getValue(Action.class);
+                                        if (action.getBelongsTo() == BelongsTo.HOME) {
+                                            liveProgressUIController.addActionForHomeTeam(liveGameProgressFragment, action);
+                                        } else if (action.getBelongsTo() == BelongsTo.GUEST) {
+                                            liveProgressUIController.addActionForGuestTeam(liveGameProgressFragment, action);
+                                        } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
+                                            liveProgressUIController.addActionForGeneral(liveGameProgressFragment, action);
+                                        }
                                     }
                                 }
                             }
@@ -85,19 +88,22 @@ public class DAOAction implements DAOCRUDService <Action> {
 
                 if (liveGameCommentsFragment.isAdded() && liveGameCommentsFragment.getActivity() != null) {
 
-                    liveGameCommentsFragment.getBinding().commentsLayoutContainer.removeAllViews();
+                    if (liveGameCommentsFragment.getBinding() != null) {
 
-                    if (dataSnapshot.getChildrenCount() <= 0 ) {
-                        liveCommentsUIController.noActionsMessage(liveGameCommentsFragment);
-                    } else {
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Action action = data.getValue(Action.class);
-                            if (action.getBelongsTo() == BelongsTo.HOME) {
-                                liveCommentsUIController.addCommentForHomeTeam(liveGameCommentsFragment, action);
-                            } else if (action.getBelongsTo() == BelongsTo.GUEST) {
-                                liveCommentsUIController.addCommentForGuestTeam(liveGameCommentsFragment, action);
-                            } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
-                                liveCommentsUIController.addCommentForGeneral(liveGameCommentsFragment, action);
+                        liveGameCommentsFragment.getBinding().commentsLayoutContainer.removeAllViews();
+
+                        if (dataSnapshot.getChildrenCount() <= 0) {
+                            liveCommentsUIController.noActionsMessage(liveGameCommentsFragment);
+                        } else {
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                Action action = data.getValue(Action.class);
+                                if (action.getBelongsTo() == BelongsTo.HOME) {
+                                    liveCommentsUIController.addCommentForHomeTeam(liveGameCommentsFragment, action);
+                                } else if (action.getBelongsTo() == BelongsTo.GUEST) {
+                                    liveCommentsUIController.addCommentForGuestTeam(liveGameCommentsFragment, action);
+                                } else if (action.getBelongsTo() == BelongsTo.GENERAL) {
+                                    liveCommentsUIController.addCommentForGeneral(liveGameCommentsFragment, action);
+                                }
                             }
                         }
                     }

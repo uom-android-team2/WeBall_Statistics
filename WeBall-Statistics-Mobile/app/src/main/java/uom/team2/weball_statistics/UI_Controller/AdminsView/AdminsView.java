@@ -483,32 +483,9 @@ public class AdminsView extends Fragment {
                 }
                 //end button
                 else {
-                    binding.clock.stop();
-                    binding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                    binding.startButton.setText("Start/End");
-                    binding.startButton.setEnabled(false);
-                    binding.pauseButton.setEnabled(false);
-                    binding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                    binding.pauseButton.setText("Pause/Continue");
-                    match.setStatus(Status.COMPLETED);
-
-                    //Add completed action description to firebase
-                    Action completedMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.COMPLETED);
-                    DAOAction.getInstance().insertAction(completedMatchAction, match);
-                    //Add completed comment description to firebase
-                    Action completedMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.COMPLETED, getContext());
-                    DAOAction.getInstance().insertCommentDesc(completedMatchComment, match);
-
-                    match.setCompleted(true);
-                    match.setProgress(0);
-                    MatchService ms = new MatchService();
-                    try {
-                        ms.statusUpdate(match);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
+                    //Appear the dialog window
+                    FinishGameDialog finishGameDialog = new FinishGameDialog(getContext(), binding, match);
+                    finishGameDialog.show();
                 }
             }
 

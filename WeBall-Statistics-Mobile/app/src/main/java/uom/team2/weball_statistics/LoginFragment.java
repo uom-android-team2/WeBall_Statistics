@@ -32,7 +32,6 @@ public class LoginFragment extends Fragment {
 
     }
 
-
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
 

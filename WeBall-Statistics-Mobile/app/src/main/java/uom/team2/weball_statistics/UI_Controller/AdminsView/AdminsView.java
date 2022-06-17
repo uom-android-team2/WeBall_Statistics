@@ -541,10 +541,12 @@ public class AdminsView extends Fragment  {
 
 
                         } else if (binding.twoPointerButton.equals(lastAction)) {
+                            System.out.println("mpika2 re2 mlk2222");
                             String sc=scoreStack.pop();
                             if (sc.equals(binding.scoreText.getText().toString())){
 
                             }else {
+                                System.out.println("mpika re mlk");
                                 playerStats.setterForSuccessfulTwoPointer(playerStats.getTotalTwoPointer()-1);
                                 teamStats.setterForSuccessfulTwoPointer(teamStats.getTotalTwoPointer()-1);
                             }
@@ -747,7 +749,7 @@ public class AdminsView extends Fragment  {
             threePointBtn.setOnClickListener(e -> {
                 undoPlayerStack.push(playerObjChecked);
                 undoTeamStack.push(teamObj);
-                undoButtonStack.push(binding.freethrowButton);
+                undoButtonStack.push(binding.threePointerButton);
                 scoreStack.push(binding.scoreText.getText().toString());
                 popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
@@ -764,7 +766,7 @@ public class AdminsView extends Fragment  {
             twoPointBtn.setOnClickListener(e -> {
                 undoPlayerStack.push(playerObjChecked);
                 undoTeamStack.push(teamObj);
-                undoButtonStack.push(binding.freethrowButton);
+                undoButtonStack.push(binding.twoPointerButton);
                 scoreStack.push(binding.scoreText.getText().toString());
                 popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();

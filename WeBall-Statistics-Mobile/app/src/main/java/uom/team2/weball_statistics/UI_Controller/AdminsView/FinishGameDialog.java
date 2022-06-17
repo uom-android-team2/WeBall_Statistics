@@ -66,13 +66,13 @@ public class FinishGameDialog extends Dialog implements android.view.View.OnClic
                 this.fragmentAdminsViewBinding.clock.stop();
                 this.fragmentAdminsViewBinding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                 this.fragmentAdminsViewBinding.startButton.setText("Finished");
-                this.fragmentAdminsViewBinding.startButton.setEnabled(false);
-                this.fragmentAdminsViewBinding.pauseButton.setEnabled(false);
-                this.fragmentAdminsViewBinding.undoButton.setEnabled(false);
                 this.fragmentAdminsViewBinding.undoButton.setText("-");
                 this.fragmentAdminsViewBinding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
                 this.fragmentAdminsViewBinding.pauseButton.setText("-");
                 match.setStatus(Status.COMPLETED);
+
+                this.disableButtonsColorOnAdminsPanel(120);
+                this.disableButtonsOnAdminsPanel();
 
                 //Add completed action description to firebase
                 Action completedMatchAction = new MatchFlow(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED);
@@ -109,5 +109,37 @@ public class FinishGameDialog extends Dialog implements android.view.View.OnClic
                 break;
         }
         dismiss();
+    }
+
+    private void disableButtonsOnAdminsPanel() {
+        this.fragmentAdminsViewBinding.freethrowButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.twoPointerButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.threePointerButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.reboundButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.assistButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.stealButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.blockButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.foulButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.turnoverButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.substitutionButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.startButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.pauseButton.setEnabled(false);
+        this.fragmentAdminsViewBinding.undoButton.setEnabled(false);
+    }
+
+    public void disableButtonsColorOnAdminsPanel(int alpha) {
+        this.fragmentAdminsViewBinding.freethrowButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.twoPointerButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.threePointerButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.reboundButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.assistButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.stealButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.blockButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.foulButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.turnoverButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.substitutionButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.startButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.pauseButton.getBackground().setAlpha(alpha);
+        this.fragmentAdminsViewBinding.undoButton.getBackground().setAlpha(alpha);
     }
 }

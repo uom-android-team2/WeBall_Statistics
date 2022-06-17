@@ -164,9 +164,6 @@ public class AdminsView extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
-
         freeThrowBtn = binding.freethrowButton;
         twoPointBtn = binding.twoPointerButton;
         threePointBtn = binding.threePointerButton;
@@ -181,27 +178,7 @@ public class AdminsView extends Fragment {
         undoBtn = binding.undoButton;
         substitutionBtn = binding.substitutionButton;
 
-//        //At start, we want to display only start button and substitutions
-//        freeThrowBtn.setVisibility(View.GONE);
-//        twoPointBtn.setVisibility(View.GONE);
-//        threePointBtn.setVisibility(View.GONE);
-//        reboundBtn.setVisibility(View.GONE);
-//        assistBtn.setVisibility(View.GONE);
-//        stealBtn.setVisibility(View.GONE);
-//        blockBtn.setVisibility(View.GONE);
-//        turnoverBtn.setVisibility(View.GONE);
-//        foulBtn.setVisibility(View.GONE);
-//        pauseBtn.setVisibility(View.GONE);
-//        undoBtn.setVisibility(View.GONE);
-//        substitutionBtn.setVisibility(View.GONE);
-//        binding.score.setVisibility(View.GONE);
-//        binding.shots.setVisibility(View.GONE);
-
-
         setAlphaAdminBtn(120);
-
-
-
 
 
         // orismata gia kathe match
@@ -212,17 +189,8 @@ public class AdminsView extends Fragment {
         match.setTeamLandlord(teamLandlord);
         match.setGuest(teamGuest);
 
-
-
         DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
         DAOLiveMatchService.getInstance().setListenerForPoints(this, binding.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
-
-
-
-
-        DAOLiveMatchService.getInstance().initializeTable(match.getId(), teamLandlord.getId(), teamGuest.getId());
-
-        DAOLiveMatchService.getInstance().setListenerForPoints(this,binding.scoreText,match.getId(),teamLandlord.getId(),teamGuest.getId());
 
         if (teamLandlord != null) {
             for (Player player : teamLandlord.getTeamPlayers()) {
@@ -308,8 +276,6 @@ public class AdminsView extends Fragment {
         //tin othoni toy match, tote prepei to chronometer na sunexisei apo
         //tin live ora.
         if (match.isProgress()==1){
-
-
             //vale to xronometro apo ekei pou stamatise
             running = true;
             started = true;
@@ -324,8 +290,6 @@ public class AdminsView extends Fragment {
                     DAOLiveMatchService.getInstance().updateClock(match.getId(), chronometer.getText().toString());
                 }
             });
-
-
         }
 
 
@@ -422,12 +386,6 @@ public class AdminsView extends Fragment {
         });
 
 
-//Start Button
-
-        //Start Button
-
-
-
         binding.startButton.setOnClickListener(new View.OnClickListener() {
 
 
@@ -435,8 +393,6 @@ public class AdminsView extends Fragment {
             Stats teamLandlordStats = null, teamGuestStats = null;
             @Override
             public void onClick(View view) {
-
-
 
 
                 if (!started) {
@@ -474,10 +430,6 @@ public class AdminsView extends Fragment {
                         e.printStackTrace();
                     }
 
-
-                    listenEvent();
-
-
                     try {
                          teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
                          teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
@@ -489,7 +441,7 @@ public class AdminsView extends Fragment {
                         e.printStackTrace();
                     }
 
-
+                    listenEvent();
                 }
                 //end button
                 else {
@@ -580,12 +532,6 @@ public class AdminsView extends Fragment {
             }
         });
 
-
-//Player Buttons-
-
-
-        //Player Buttons-
-
         binding.player1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -606,8 +552,6 @@ public class AdminsView extends Fragment {
                     if(started){
                         listenEvent();
                     }
-
-
                 }
 
             }
@@ -632,9 +576,6 @@ public class AdminsView extends Fragment {
                     if(started){
                         listenEvent();
                     }
-
-
-
                 }
 
             }
@@ -659,7 +600,6 @@ public class AdminsView extends Fragment {
                     if(started){
                         listenEvent();
                     }
-
                 }
 
             }
@@ -685,10 +625,6 @@ public class AdminsView extends Fragment {
                     if(started){
                         listenEvent();
                     }
-
-
-
-
                 }
 
             }
@@ -715,14 +651,7 @@ public class AdminsView extends Fragment {
                     if(started){
                         listenEvent();
                     }
-
-
-
-
-
                 }
-
-
             }
         });
 
@@ -745,13 +674,10 @@ public class AdminsView extends Fragment {
             }
         });
 
-
     }
 
     private void listenEvent() {
         DBDataRecovery dataRecovery = new DBDataRecovery();
-
-
 
         try {
             Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
@@ -769,7 +695,6 @@ public class AdminsView extends Fragment {
                 ppv.show();
             });
 
-           
             reboundBtn.setOnClickListener(e ->  {
                 updateRebound(playerStats, teamStats, dataRecovery,false);
 
@@ -1091,8 +1016,6 @@ public class AdminsView extends Fragment {
         } else if (playerChecked == 5) {
             binding.player5.setBackgroundColor(0x00000000);
         }
-
-
     }
 
 

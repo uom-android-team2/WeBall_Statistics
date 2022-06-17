@@ -52,7 +52,7 @@ public class BestStarting5Factory {
                 -(myStats.getTotal_freethrow()-myStats.getSuccessful_freethrow());
         return playerEffic;
     }
-    public static int teamEfficpublic(TeamLiveStatistics myStats){
+    public static int calculateTeamEffic(TeamLiveStatistics myStats){
 
         int teamEffic = (myStats.getSuccessful_twopointer()*2)+(myStats.getSuccessful_threepointer()*3)+(myStats.getSuccessful_freethrow()*1)
                 +myStats.getRebound()+myStats.getAssist()+myStats.getSteal()+myStats.getBlock()-(myStats.getTurnover()*4)-(myStats.getFoul()*2)

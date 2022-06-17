@@ -686,10 +686,10 @@ public class CompletedMatchStatsUIController {
                 .into(awayTeamLogo);
 
 
-        ProgressBar homeFg = completedMatchTeamStatsBinding.homeFgPB;
-        ProgressBar awayFg = completedMatchTeamStatsBinding.awayFgPB;
-        TextView homeFgValue = completedMatchTeamStatsBinding.homeFgValue;
-        TextView awayFgValue = completedMatchTeamStatsBinding.awayFgValue;
+        ProgressBar homeEf = completedMatchTeamStatsBinding.homeEfPB;
+        ProgressBar awayEf = completedMatchTeamStatsBinding.awayEfPB;
+        TextView homeEfValue = completedMatchTeamStatsBinding.homeEfValue;
+        TextView awayEfValue = completedMatchTeamStatsBinding.awayEfValue;
 
         ProgressBar home3 = completedMatchTeamStatsBinding.home3PB;
         ProgressBar away3 = completedMatchTeamStatsBinding.away3PB;
@@ -721,13 +721,13 @@ public class CompletedMatchStatsUIController {
         TextView homeTurnoversValue = completedMatchTeamStatsBinding.homeTurnoversValue;
         TextView awayTurnoversValue = completedMatchTeamStatsBinding.awayTurnoversValue;
 
-        double homeTeamFg = (double)(homeTeamLiveStats.getSuccessful_freethrow()/homeTeamLiveStats.getTotal_freethrow())+((double)homeTeamLiveStats.getSuccessful_threepointer()/+homeTeamLiveStats.getTotal_threepointer())+((double)homeTeamLiveStats.getSuccessful_twopointer()/homeTeamLiveStats.getTotal_twopointer());
-        double awayTeamFg = (double)(awayTeamLiveStats.getSuccessful_freethrow()/awayTeamLiveStats.getTotal_freethrow())+((double)awayTeamLiveStats.getSuccessful_threepointer()/+awayTeamLiveStats.getTotal_threepointer())+((double)awayTeamLiveStats.getSuccessful_twopointer()/awayTeamLiveStats.getTotal_twopointer());
+        int homeTeamEffiency = BestStarting5Factory.calculateTeamEffic(homeTeamLiveStats);
+        int awayTeamEffiency = BestStarting5Factory.calculateTeamEffic(awayTeamLiveStats);
 
-        homeFg.setProgress(100-(int)homeTeamFg);
-        homeFgValue.setText(100-(int)homeTeamFg+"%");
-        awayFg.setProgress(100-(int)awayTeamFg);
-        awayFgValue.setText(100-(int)awayTeamFg+"%");
+        homeEf.setProgress(homeTeamEffiency);
+        homeEfValue.setText("+"+homeTeamEffiency);
+        awayEf.setProgress(awayTeamEffiency);
+        awayEfValue.setText("+"+awayTeamEffiency);
 
         home3.setProgress(homeTeamLiveStats.getTotal_threepointer());
         home3Value.setText(homeTeamLiveStats.getTotal_threepointer()+"");

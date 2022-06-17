@@ -980,8 +980,6 @@ public class AdminsView extends Fragment {
         blockBtn.getBackground().setAlpha(alpha);
         foulBtn.getBackground().setAlpha(alpha);
         turnoverBtn.getBackground().setAlpha(alpha);
-        pauseBtn.getBackground().setAlpha(alpha);
-        undoBtn.getBackground().setAlpha(alpha);
     }
 
     //you call this function when you want to change player

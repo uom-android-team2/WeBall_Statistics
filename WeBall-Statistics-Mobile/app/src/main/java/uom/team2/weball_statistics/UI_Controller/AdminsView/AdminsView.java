@@ -1,13 +1,9 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,11 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Stack;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
@@ -76,13 +69,13 @@ public class AdminsView extends Fragment {
     //private TeamLiveStatistics teamCheckedLiveStatistics = null;
     private final ArrayList<TeamLiveStatistics> teamLiveStatisticsGuest = new ArrayList<TeamLiveStatistics>();
     private final PlayerLiveStatistics playerCheckedLiveStatistics = null;
+    private final ArrayList<ImageView> playersImageViewList = new ArrayList<ImageView>();
     private FragmentAdminsViewBinding binding;
     private Chronometer chronometer;
     private boolean running = false;
     private Button start_end_button;
     private long pauseOffset;
     private long keepClock;
-
     private boolean started = false;
     private boolean teamSelected = false;
     private int playerChecked = 1;
@@ -104,7 +97,6 @@ public class AdminsView extends Fragment {
     private TextView pauseBtn;
     private TextView undoBtn;
     private TextView substitutionBtn;
-    private final ArrayList<ImageView> playersImageViewList = new ArrayList<ImageView>();
 
     public AdminsView() {
         // Required empty public constructor
@@ -248,7 +240,7 @@ public class AdminsView extends Fragment {
         //an to paixnidi exei idi ksekinisei alla o admin exei vgei apo
         //tin othoni toy match, tote prepei to chronometer na sunexisei apo
         //tin live ora.
-        if (match.isProgress()==1){
+        if (match.isProgress() == 1) {
             //vale to xronometro apo ekei pou stamatise
             running = true;
             started = true;
@@ -264,7 +256,6 @@ public class AdminsView extends Fragment {
                 }
             });
         }
-
 
 
         //Done button
@@ -362,8 +353,9 @@ public class AdminsView extends Fragment {
         binding.startButton.setOnClickListener(new View.OnClickListener() {
 
 
-            DBDataRecovery teamsPlayed = new DBDataRecovery();
+            final DBDataRecovery teamsPlayed = new DBDataRecovery();
             Stats teamLandlordStats = null, teamGuestStats = null;
+
             @Override
             public void onClick(View view) {
 
@@ -404,12 +396,12 @@ public class AdminsView extends Fragment {
                     }
 
                     try {
-                         teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
-                         teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
-                        ((TeamStats)teamLandlordStats).setMatches();
-                        ((TeamStats)teamGuestStats).setMatches();
-                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamLandlordStats);
-                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
+                        teamLandlordStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                        teamGuestStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                        ((TeamStats) teamLandlordStats).setMatches();
+                        ((TeamStats) teamGuestStats).setMatches();
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamLandlordStats);
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamGuestStats);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -420,8 +412,8 @@ public class AdminsView extends Fragment {
                 else {
                     //Appear the dialog window
                     try {
-                        teamLandlordStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
-                        teamGuestStats =  teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                        teamLandlordStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                        teamGuestStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -470,7 +462,6 @@ public class AdminsView extends Fragment {
             public void onClick(View view) {
 
 
-
                 if (!undoButtonStack.isEmpty()) {
                     Player plObjForUndo = undoPlayerStack.pop();
                     Team teamObjForUndo = undoTeamStack.pop();
@@ -504,8 +495,7 @@ public class AdminsView extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     System.out.println("No more actions for undo");
                 }
             }
@@ -528,7 +518,7 @@ public class AdminsView extends Fragment {
 
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    if(started){
+                    if (started) {
                         listenEvent();
                     }
                 }
@@ -552,7 +542,7 @@ public class AdminsView extends Fragment {
 
 
                     binding.freethrowButton.setText(playerObjChecked.getName());
-                    if(started){
+                    if (started) {
                         listenEvent();
                     }
                 }
@@ -576,7 +566,7 @@ public class AdminsView extends Fragment {
 
 
                     binding.freethrowButton.setText(playerObjChecked.getName());
-                    if(started){
+                    if (started) {
                         listenEvent();
                     }
                 }
@@ -601,7 +591,7 @@ public class AdminsView extends Fragment {
 
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    if(started){
+                    if (started) {
                         listenEvent();
                     }
                 }
@@ -627,7 +617,7 @@ public class AdminsView extends Fragment {
 
                     binding.freethrowButton.setText(playerObjChecked.getName());
 
-                    if(started){
+                    if (started) {
                         listenEvent();
                     }
                 }
@@ -674,8 +664,8 @@ public class AdminsView extends Fragment {
                 ppv.show();
             });
 
-            reboundBtn.setOnClickListener(e ->  {
-                updateRebound(playerStats, teamStats, dataRecovery,false);
+            reboundBtn.setOnClickListener(e -> {
+                updateRebound(playerStats, teamStats, dataRecovery, false);
 
                 //Insert rebound's action to firebase
                 Action reboundAction = null;
@@ -697,10 +687,10 @@ public class AdminsView extends Fragment {
                 }
             });
             assistBtn.setOnClickListener(e -> {
-                updateAssist(playerStats, teamStats, dataRecovery,false);
+                updateAssist(playerStats, teamStats, dataRecovery, false);
             });
             stealBtn.setOnClickListener(e -> {
-                updateSteal(playerStats, teamStats, dataRecovery,false);
+                updateSteal(playerStats, teamStats, dataRecovery, false);
                 //Insert steal's action to firebase
                 Action stealAction = null;
                 Action stealComment = null;
@@ -721,7 +711,7 @@ public class AdminsView extends Fragment {
                 }
             });
             blockBtn.setOnClickListener(e -> {
-                updateBlock(playerStats, teamStats, dataRecovery,false);
+                updateBlock(playerStats, teamStats, dataRecovery, false);
                 //Insert block's action to firebase
                 Action blockAction = null;
                 Action blockComment = null;
@@ -742,7 +732,7 @@ public class AdminsView extends Fragment {
                 }
             });
             foulBtn.setOnClickListener(e -> {
-                updateFoul(playerStats, teamStats, dataRecovery,false);
+                updateFoul(playerStats, teamStats, dataRecovery, false);
                 //Insert block's action to firebase
                 Action foulAction = null;
                 Action foulComment = null;
@@ -763,7 +753,7 @@ public class AdminsView extends Fragment {
                 }
             });
             turnoverBtn.setOnClickListener(e -> {
-                updateTurnover(playerStats, teamStats, dataRecovery,false);
+                updateTurnover(playerStats, teamStats, dataRecovery, false);
                 //Insert block's action to firebase
                 Action turnOverAction = null;
                 Action turnOverComment = null;
@@ -788,24 +778,28 @@ public class AdminsView extends Fragment {
         }
     }
 
-    private void updateAssist(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
-        if (!isUndo){
+    private void updateAssist(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery, boolean isUndo) {
+        if (!isUndo) {
             playerStats.setTotalAssists();
             teamStats.setTotalAssists();
             Toast.makeText(getActivity().getApplicationContext(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);
-        }else{
-            playerStats.setAssist(playerStats.getTotalAssists()-1);
-            teamStats.setAssist(teamStats.getTotalAssists()-1);
+        } else {
+            playerStats.setAssist(playerStats.getTotalAssists() - 1);
+            teamStats.setAssist(teamStats.getTotalAssists() - 1);
+        }
+
+        if (isUndo) {
             DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.assist);
             DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.assist);
+        } else {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.assist);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.assist);
         }
 
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.assist);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.assist);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -813,25 +807,29 @@ public class AdminsView extends Fragment {
         }
     }
 
-    private void updateRebound(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
-        if (!isUndo){
+    private void updateRebound(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery, boolean isUndo) {
+        if (!isUndo) {
             playerStats.setTotalRebounds();
             teamStats.setTotalRebounds();
-            Toast.makeText(getActivity().getApplicationContext(),"Rebound for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Rebound for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.reboundButton);
-        }else{
-            playerStats.setRebound(playerStats.getTotalRebounds()-1);
-            teamStats.setRebound(teamStats.getTotalRebounds()-1);
+        } else {
+            playerStats.setRebound(playerStats.getTotalRebounds() - 1);
+            teamStats.setRebound(teamStats.getTotalRebounds() - 1);
+        }
+
+        if (isUndo) {
             DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.rebound);
             DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.rebound);
+        } else {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.rebound);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.rebound);
         }
 
 
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.rebound);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.rebound);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -841,24 +839,28 @@ public class AdminsView extends Fragment {
 
     }
 
-    private void updateSteal(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
-        if (!isUndo){
+    private void updateSteal(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery, boolean isUndo) {
+        if (!isUndo) {
             playerStats.setTotalSteels();
             teamStats.setTotalSteels();
-            Toast.makeText(getActivity().getApplicationContext(),"Steal for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Steal for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.stealButton);
-        }else{
-            playerStats.setSteal(playerStats.getTotalSteels()-1);
-            teamStats.setSteal(teamStats.getTotalSteels()-1);
+        } else {
+            playerStats.setSteal(playerStats.getTotalSteels() - 1);
+            teamStats.setSteal(teamStats.getTotalSteels() - 1);
+        }
+
+        if (isUndo) {
             DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.steal);
             DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.steal);
+        } else {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.steal);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.steal);
         }
 
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.steal);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.steal);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -866,24 +868,28 @@ public class AdminsView extends Fragment {
         }
     }
 
-    private void updateBlock(Stats playerStats, Stats teamStats, DBDataRecovery dataRecovery,boolean isUndo) {
-        if (!isUndo){
+    private void updateBlock(Stats playerStats, Stats teamStats, DBDataRecovery dataRecovery, boolean isUndo) {
+        if (!isUndo) {
             playerStats.setTotalBlock();
             teamStats.setTotalBlock();
-            Toast.makeText(getActivity().getApplicationContext(),"Block for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Block for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.blockButton);
-        }else{
-            playerStats.setBlock(playerStats.getTotalBlocks()-1);
-            teamStats.setBlock(teamStats.getTotalBlocks()-1);
+        } else {
+            playerStats.setBlock(playerStats.getTotalBlocks() - 1);
+            teamStats.setBlock(teamStats.getTotalBlocks() - 1);
+        }
+
+        if (isUndo) {
             DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.block);
             DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.block);
+        } else {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.block);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.block);
         }
 
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.block);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.block);
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -891,24 +897,28 @@ public class AdminsView extends Fragment {
         }
     }
 
-    private void updateFoul(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
-        if (!isUndo){
+    private void updateFoul(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery, boolean isUndo) {
+        if (!isUndo) {
             playerStats.setTotalFouls();
             teamStats.setTotalFouls();
-            Toast.makeText(getActivity().getApplicationContext(),"Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.foulButton);
-        }else{
-            playerStats.setFoul(playerStats.getTotalFouls()-1);
-            teamStats.setFoul(teamStats.getTotalFouls()-1);
+        } else {
+            playerStats.setFoul(playerStats.getTotalFouls() - 1);
+            teamStats.setFoul(teamStats.getTotalFouls() - 1);
+        }
+
+        if (isUndo) {
             DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.foul);
             DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.foul);
+        } else {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.foul);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.foul);
         }
 
         try {
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.foul);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.foul);
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
         } catch (IOException ex) {
@@ -916,44 +926,48 @@ public class AdminsView extends Fragment {
         }
     }
 
-    private void updateTurnover(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery,boolean isUndo) {
-        if (!isUndo){
+    private void updateTurnover(Stats playerStats, Stats teamStats, DBDataRecovery dbDataRecovery, boolean isUndo) {
+        if (!isUndo) {
             playerStats.setTotalTurnovers();
             teamStats.setTotalTurnovers();
-            Toast.makeText(getActivity().getApplicationContext(),"Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.turnoverButton);
-        }else{
-            playerStats.setTurnover(playerStats.getTotalTurnovers()-1);
-            teamStats.setTurnover(teamStats.getTotalTurnovers()-1);
+        } else {
+            playerStats.setTurnover(playerStats.getTotalTurnovers() - 1);
+            teamStats.setTurnover(teamStats.getTotalTurnovers() - 1);
+        }
+
+        if (isUndo) {
             DAOLiveMatchService.getInstance().undo(match.getId(), teamObj.getId(), LiveStatisticsEnum.turnover);
             DAOLivePlayerStatistics.getInstance().undo(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.turnover);
+        } else {
+            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.turnover);
+            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         }
 
         try {
             dbDataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbDataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
-            DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.turnover);
-            DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.turnover);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-   public void setStartersMatchPlayed(int indexPlayer, Team team) {
-           DBDataRecovery dataRecovery = new DBDataRecovery();
-           try {
-               Stats stat = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(team.getTeamPlayers().get(indexPlayer).getId()));
-               ((PlayerStats) stat).setByOneMatches();
-               dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, stat);
+    public void setStartersMatchPlayed(int indexPlayer, Team team) {
+        DBDataRecovery dataRecovery = new DBDataRecovery();
+        try {
+            Stats stat = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(team.getTeamPlayers().get(indexPlayer).getId()));
+            ((PlayerStats) stat).setByOneMatches();
+            dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, stat);
 
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void initStarters(){
+    public void initStarters() {
         Thread threadPlayerMatch = new Thread() {
 
             @Override
@@ -996,8 +1010,6 @@ public class AdminsView extends Fragment {
             binding.player5.setBackgroundColor(0x00000000);
         }
     }
-
-
 
 
 }

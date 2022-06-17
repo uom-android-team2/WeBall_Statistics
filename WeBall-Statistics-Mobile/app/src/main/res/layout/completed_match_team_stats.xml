@@ -187,6 +187,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/awayTurnoversPB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView25" />
@@ -211,6 +213,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/awayFoulsPB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
@@ -235,6 +239,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/awayAstPB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -247,6 +253,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/away1PB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -295,6 +303,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/away2PB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
@@ -307,6 +317,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/away3PB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -461,6 +473,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
+        android:rotationX="180"
+        android:rotationY="180"
         app:layout_constraintEnd_toStartOf="@+id/awayEfPB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

@@ -739,38 +739,52 @@ public class CompletedMatchStatsUIController {
         int homeTeamEffiency = BestStarting5Factory.calculateTeamEffic(homeTeamLiveStats);
         int awayTeamEffiency = BestStarting5Factory.calculateTeamEffic(awayTeamLiveStats);
 
+        homeEf.setMax(homeTeamEffiency+awayTeamEffiency);
         homeEf.setProgress(homeTeamEffiency);
         homeEfValue.setText("+"+homeTeamEffiency);
+        awayEf.setMax(homeTeamEffiency+awayTeamEffiency);
         awayEf.setProgress(awayTeamEffiency);
         awayEfValue.setText("+"+awayTeamEffiency);
 
+        home3.setMax(homeTeamLiveStats.getTotal_threepointer()+awayTeamLiveStats.getTotal_threepointer());
         home3.setProgress(homeTeamLiveStats.getTotal_threepointer());
         home3Value.setText(homeTeamLiveStats.getTotal_threepointer()+"");
+        away3.setMax(homeTeamLiveStats.getTotal_threepointer()+awayTeamLiveStats.getTotal_threepointer());
         away3.setProgress(awayTeamLiveStats.getTotal_threepointer());
         away3Value.setText(awayTeamLiveStats.getTotal_threepointer()+"");
 
+        home2.setMax(homeTeamLiveStats.getTotal_twopointer()+awayTeamLiveStats.getTotal_twopointer());
         home2.setProgress(homeTeamLiveStats.getTotal_twopointer());
         home2Value.setText(homeTeamLiveStats.getTotal_twopointer()+"");
+        away2.setMax(homeTeamLiveStats.getTotal_twopointer()+awayTeamLiveStats.getTotal_twopointer());
         away2.setProgress(awayTeamLiveStats.getTotal_twopointer());
         away2Value.setText(awayTeamLiveStats.getTotal_twopointer()+"");
 
+        home1.setMax(homeTeamLiveStats.getSuccessful_freethrow()+awayTeamLiveStats.getSuccessful_freethrow());
         home1.setProgress(homeTeamLiveStats.getSuccessful_freethrow());
         home1Value.setText(homeTeamLiveStats.getSuccessful_freethrow()+"");
+        away1.setMax(homeTeamLiveStats.getSuccessful_freethrow()+awayTeamLiveStats.getSuccessful_freethrow());
         away1.setProgress(awayTeamLiveStats.getSuccessful_freethrow());
         away1Value.setText(awayTeamLiveStats.getSuccessful_freethrow()+"");
 
+        homeAst.setMax(homeTeamLiveStats.getAssist()+awayTeamLiveStats.getAssist());
         homeAst.setProgress(homeTeamLiveStats.getAssist());
         homeAstValue.setText(homeTeamLiveStats.getAssist()+"");
+        awayAst.setMax(homeTeamLiveStats.getAssist()+awayTeamLiveStats.getAssist());
         awayAst.setProgress(awayTeamLiveStats.getAssist());
         awayAstValue.setText(awayTeamLiveStats.getAssist()+"");
 
+        homeFouls.setMax(homeTeamLiveStats.getFoul()+awayTeamLiveStats.getFoul());
         homeFouls.setProgress(homeTeamLiveStats.getFoul());
         homeFoulsValue.setText(homeTeamLiveStats.getFoul()+"");
+        awayFouls.setMax(homeTeamLiveStats.getFoul()+awayTeamLiveStats.getFoul());
         awayFouls.setProgress(awayTeamLiveStats.getFoul());
         awayFoulsValue.setText(awayTeamLiveStats.getFoul()+"");
 
+        homeTurnovers.setMax(homeTeamLiveStats.getTurnover()+awayTeamLiveStats.getTurnover());
         homeTurnovers.setProgress(homeTeamLiveStats.getTurnover());
         homeTurnoversValue.setText(homeTeamLiveStats.getTurnover()+"");
+        awayTurnovers.setMax(homeTeamLiveStats.getTurnover()+awayTeamLiveStats.getTurnover());
         awayTurnovers.setProgress(awayTeamLiveStats.getTurnover());
         awayTurnoversValue.setText(awayTeamLiveStats.getTurnover()+"");
     }

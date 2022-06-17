@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -81,6 +82,7 @@ public class popupViewThreePoints extends Dialog implements
                 playerStats.setSuccessfulEffort();
                 teamStats.setSuccessfulThreePointer();
                 teamStats.setSuccessfulEffort();
+                Toast.makeText(c.getApplicationContext(),"Successful three-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
                 DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_threepointer);
                 //Insert 3point's action to firebase
@@ -110,6 +112,7 @@ public class popupViewThreePoints extends Dialog implements
         playerStats.setTotalEffort();
         teamStats.setTotalThreePointer();
         teamStats.setTotalEffort();
+        Toast.makeText(c.getApplicationContext(),"Unsuccessful three-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);

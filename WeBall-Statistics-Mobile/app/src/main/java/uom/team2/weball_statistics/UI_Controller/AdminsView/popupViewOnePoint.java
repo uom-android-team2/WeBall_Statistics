@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -85,7 +86,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
                 teamStats.setSuccessfulFreeThrow();
                 DAOLiveTeamService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.successful_freethrow);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.successful_freethrow);
-
+                Toast.makeText(c.getApplicationContext(),"Successful freethrow-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
                 //Insert freethrow's action to firebase
                 Action freeThrowAction = null;
 
@@ -111,6 +112,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
         }
         playerStats.setTotalFreeThrow();
         teamStats.setTotalFreeThrow();
+        Toast.makeText(c.getApplicationContext(),"Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
         try {
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);

@@ -112,9 +112,9 @@ public class popupViewThreePoints extends Dialog implements
                 //Insert 3point's action to firebase
                 Action treePointThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
-                    treePointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.THREE_POINTER, true, null, getContext());
+                    treePointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.THREE_POINTER, false, null, getContext());
                 } else if (this.match.getTeamguest_id() == this.team.getId()) {
-                    treePointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, true, null, getContext());
+                    treePointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.THREE_POINTER, false, null, getContext());
                 }
 
                 if (treePointThrowCommentMissed != null) {

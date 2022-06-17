@@ -115,9 +115,9 @@ public class popupViewTwoPoints extends Dialog implements
 
                 Action twoPointThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
-                    twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, true, null, getContext());
+                    twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, false, null, getContext());
                 } else if (this.match.getTeamguest_id() == this.team.getId()) {
-                    twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, true, null, getContext());
+                    twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.GUEST, player, team, ShotType.TWO_POINTER, false, null, getContext());
                 }
 
                 if (twoPointThrowCommentMissed != null) {

@@ -62,6 +62,7 @@ public class AdminsView extends Fragment  {
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();
     private final Stack<TextView> undoButtonStack = new Stack<TextView>();
+    private Stack<String> scoreStack=new Stack<String>();
     private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
@@ -522,9 +523,59 @@ public class AdminsView extends Fragment  {
                         Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObjForUndo.getId()));
 
                         if (binding.freethrowButton.equals(lastAction)) {
+                            String sc=scoreStack.pop();
+                            if (sc.equals(binding.scoreText.getText().toString())){
+
+                            }else {
+                                playerStats.setterForSuccessfulFreethrow(playerStats.getTotalFreeThrow()-1);
+                                teamStats.setterForSuccessfulFreethrow(teamStats.getTotalFreeThrow()-1);
+                            }
+                            playerStats.setFreethrow(playerStats.getTotalFreeThrow()-1);
+                            teamStats.setFreethrow(teamStats.getTotalFreeThrow()-1);
+                            try {
+                                dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                                dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+
 
                         } else if (binding.twoPointerButton.equals(lastAction)) {
-                        } else if (binding.threePointerButton.equals(lastAction)) {// code block
+                            String sc=scoreStack.pop();
+                            if (sc.equals(binding.scoreText.getText().toString())){
+
+                            }else {
+                                playerStats.setterForSuccessfulTwoPointer(playerStats.getTotalTwoPointer()-1);
+                                teamStats.setterForSuccessfulTwoPointer(teamStats.getTotalTwoPointer()-1);
+                            }
+                            playerStats.setTwoPointer(playerStats.getTotalTwoPointer()-1);
+                            teamStats.setTwoPointer(teamStats.getTotalTwoPointer()-1);
+                            try {
+                                dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                                dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+
+
+                        } else if (binding.threePointerButton.equals(lastAction)) {
+                            String sc=scoreStack.pop();
+                            if (sc.equals(binding.scoreText.getText().toString())){
+
+                            }else {
+                                playerStats.setterForSuccessfulThreePointer(playerStats.getTotalThreePointer()-1);
+                                teamStats.setterForSuccessfulThreePointer(teamStats.getTotalThreePointer()-1);
+                            }
+                            playerStats.setThreePointer(playerStats.getTotalThreePointer()-1);
+                            teamStats.setThreePointer(teamStats.getTotalThreePointer()-1);
+                            try {
+                                dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                                dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+
+
                         } else if (binding.reboundButton.equals(lastAction)) {
                             updateRebound(playerStats, teamStats, dataRecovery, true);
                         } else if (binding.assistButton.equals(lastAction)) {
@@ -694,14 +745,27 @@ public class AdminsView extends Fragment  {
             Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
             Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObj.getId()));
             threePointBtn.setOnClickListener(e -> {
+                undoPlayerStack.push(playerObjChecked);
+                undoTeamStack.push(teamObj);
+                undoButtonStack.push(binding.freethrowButton);
+                scoreStack.push(binding.scoreText.getText().toString());
                 popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             freeThrowBtn.setOnClickListener(e -> {
+                undoPlayerStack.push(playerObjChecked);
+                undoTeamStack.push(teamObj);
+                undoButtonStack.push(binding.freethrowButton);
+                scoreStack.push(binding.scoreText.getText().toString());
                 popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
+
             });
             twoPointBtn.setOnClickListener(e -> {
+                undoPlayerStack.push(playerObjChecked);
+                undoTeamStack.push(teamObj);
+                undoButtonStack.push(binding.freethrowButton);
+                scoreStack.push(binding.scoreText.getText().toString());
                 popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
@@ -791,6 +855,7 @@ public class AdminsView extends Fragment  {
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);
         }else{
+            //here
             playerStats.setAssist(playerStats.getTotalAssists()-1);
             teamStats.setAssist(teamStats.getTotalAssists()-1);
         }

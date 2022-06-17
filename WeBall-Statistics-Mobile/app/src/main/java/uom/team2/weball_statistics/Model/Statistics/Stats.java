@@ -288,6 +288,19 @@ public abstract class Stats implements editFieldsFromDB {
         this.total_threepointer = total_threepointer;
     }
 
+    public void setterForSuccessfulFreethrow(int sft){this.successful_freethrow=sft;}
+
+    public void setterForSuccessfulTwoPointer(int stp){this.successful_twopointer=stp;}
+
+    public void setterForSuccessfulThreePointer(int stp){this.successful_threepointer=stp;}
+
+
+    public void setTwoPointer(int tp){this.total_twopointer=tp;}
+
+    public void setThreePointer(int tp){this.total_threepointer=tp;}
+
+    public void setFreethrow(int ft){this.total_freethrow=ft;}
+
     public void setSteal(int steal) {
         this.steal = steal;
     }

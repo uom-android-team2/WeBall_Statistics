@@ -722,7 +722,7 @@ public class AdminsView extends Fragment {
                 //steile ton paikti
 
                 //emfanise to popup
-                SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked, playersImageViewList);
+                SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked, playersImageViewList, binding.clock.getText().toString(), match);
                 ppv.show();
 
                 ppv.setOnDismissListener(new DialogInterface.OnDismissListener() {

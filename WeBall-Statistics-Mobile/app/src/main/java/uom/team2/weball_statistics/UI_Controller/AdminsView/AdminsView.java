@@ -701,14 +701,6 @@ public class AdminsView extends Fragment {
                 SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked, playersImageViewList);
                 ppv.show();
 
-                //refresh the players
-                if (teamSelected) {
-                    binding.team2Banner.callOnClick();
-                } else {
-                    binding.team1Banner.callOnClick();
-                }
-
-
             }
         });
 

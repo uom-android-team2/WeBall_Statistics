@@ -1,38 +1,34 @@
 package uom.team2.weball_statistics.UI_Controller.best_starting5;
 
-import android.graphics.Color;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
-import uom.team2.weball_statistics.UI_Controller.LiveController.Progress.LiveProgressUIController;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.BestPlayerPerPositionLayoutBinding;
 import uom.team2.weball_statistics.utils.JSONHandler;
 import uom.team2.weball_statistics.utils.Utils;
 
-public class BestStarting5Controller {
+public class BestStarting5UIController {
 
-    public static BestStarting5Controller instance = new BestStarting5Controller();
+    public static BestStarting5UIController instance = new BestStarting5UIController();
 
     //Implement singleton pattern
-    public static BestStarting5Controller getInstance(){
+    public static BestStarting5UIController getInstance(){
         if(instance == null){
-            instance = new BestStarting5Controller();
+            instance = new BestStarting5UIController();
         }
         return instance;
     }

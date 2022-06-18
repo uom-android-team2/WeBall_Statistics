@@ -242,6 +242,7 @@ public class AdminsView extends Fragment {
         //tin othoni toy match, tote prepei to chronometer na sunexisei apo
         //tin live ora.
         if (match.isProgress() == 1) {
+            setAlphaAdminBtn(255);
             //vale to xronometro apo ekei pou stamatise
             running = true;
             started = true;
@@ -310,6 +311,8 @@ public class AdminsView extends Fragment {
                             .into(playersImageViewList.get(i));
                 }
 
+                listenEvent();
+
             }
         });
 
@@ -350,6 +353,8 @@ public class AdminsView extends Fragment {
                             .centerCrop()
                             .into(playersImageViewList.get(i));
                 }
+
+                listenEvent();
 
             }
         });

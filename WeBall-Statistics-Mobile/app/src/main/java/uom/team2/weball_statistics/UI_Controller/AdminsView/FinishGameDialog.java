@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -34,10 +35,12 @@ public class FinishGameDialog extends Dialog implements android.view.View.OnClic
     private Stats teamLandlordStats;
     private Stats teamGuestStats;
     private DBDataRecovery teamsPlayed;
+    private Context ct;
 
     public FinishGameDialog(@NonNull Context context, FragmentAdminsViewBinding fragmentAdminsViewBinding, Match match,
                             Stats teamLandlordStats, Stats teamGuestStats, DBDataRecovery teamsPlayed) {
         super(context);
+        this.ct = context;
         this.fragmentAdminsViewBinding = fragmentAdminsViewBinding;
         this.match = match;
         this.teamLandlordStats = teamLandlordStats;
@@ -63,41 +66,63 @@ public class FinishGameDialog extends Dialog implements android.view.View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.dialog_Yes:
-                this.fragmentAdminsViewBinding.clock.stop();
-                this.fragmentAdminsViewBinding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                this.fragmentAdminsViewBinding.startButton.setText("Finished");
-                this.fragmentAdminsViewBinding.undoButton.setText("-");
-                this.fragmentAdminsViewBinding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                this.fragmentAdminsViewBinding.pauseButton.setText("-");
-                match.setStatus(Status.COMPLETED);
 
-                this.disableButtonsColorOnAdminsPanel(120);
-                this.disableButtonsOnAdminsPanel();
+                String[] scores = fragmentAdminsViewBinding.scoreText.getText().toString().trim().split("-");
+                int scoreTeamLandlord = Integer.parseInt(scores[0].trim());
+                int scoreTeamGuest = Integer.parseInt(scores[1].trim());
 
-                //Add completed action description to firebase
-                Action completedMatchAction = new MatchFlow(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED);
-                DAOAction.getInstance().insertAction(completedMatchAction, match);
-                //Add completed comment description to firebase
-                Action completedMatchComment = new MatchFlowComment(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED, getContext());
-                DAOAction.getInstance().insertCommentDesc(completedMatchComment, match);
+                if(scoreTeamLandlord != scoreTeamGuest){
 
-                match.setCompleted(true);
-                match.setProgress(0);
-                MatchService ms = new MatchService();
-                try {
-                    ms.statusUpdate(match);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    this.fragmentAdminsViewBinding.clock.stop();
+                    this.fragmentAdminsViewBinding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                    this.fragmentAdminsViewBinding.startButton.setText("Finished");
+                    this.fragmentAdminsViewBinding.undoButton.setText("-");
+                    this.fragmentAdminsViewBinding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                    this.fragmentAdminsViewBinding.pauseButton.setText("-");
+                    match.setStatus(Status.COMPLETED);
 
-                ((TeamStats)teamLandlordStats).setWins();
-                ((TeamStats) teamGuestStats).setWins();
+                    this.disableButtonsColorOnAdminsPanel(120);
+                    this.disableButtonsOnAdminsPanel();
 
-                try {
-                    teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamLandlordStats);
-                    teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    //Add completed action description to firebase
+                    Action completedMatchAction = new MatchFlow(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED);
+                    DAOAction.getInstance().insertAction(completedMatchAction, match);
+                    //Add completed comment description to firebase
+                    Action completedMatchComment = new MatchFlowComment(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED, getContext());
+                    DAOAction.getInstance().insertCommentDesc(completedMatchComment, match);
+
+                    match.setCompleted(true);
+                    match.setProgress(0);
+                    MatchService ms = new MatchService();
+                    try {
+                        ms.statusUpdate(match);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(teamLandlordStats != null && teamGuestStats != null){
+
+                        if(scoreTeamLandlord > scoreTeamGuest){
+                            ((TeamStats)teamLandlordStats).setWins();
+                            ((TeamStats) teamGuestStats).setLoses();
+                        }
+
+                        if(scoreTeamLandlord < scoreTeamGuest){
+                            ((TeamStats)teamGuestStats).setWins();
+                            ((TeamStats) teamLandlordStats).setLoses();
+                        }
+
+                    }
+
+                    try {
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamLandlordStats);
+                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }else{
+                    Toast.makeText(ct.getApplicationContext(),"This match has not a winner yet.Please continue.", Toast.LENGTH_LONG).show();
                 }
 
                 dismiss();

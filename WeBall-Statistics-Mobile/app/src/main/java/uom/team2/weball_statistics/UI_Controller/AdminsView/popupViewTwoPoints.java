@@ -117,7 +117,7 @@ public class popupViewTwoPoints extends Dialog implements
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_twopointer);
-
+                Toast.makeText(c.getApplicationContext(),"Unsuccessful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
                 Action twoPointThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
                     twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, false, null, getContext());
@@ -141,7 +141,6 @@ public class popupViewTwoPoints extends Dialog implements
 
 
 
-        Toast.makeText(c.getApplicationContext(),"Successful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);

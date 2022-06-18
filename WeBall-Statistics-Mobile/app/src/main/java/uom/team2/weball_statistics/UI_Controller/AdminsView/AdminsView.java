@@ -266,6 +266,13 @@ public class AdminsView extends Fragment {
             initStarters();
             listenEvent();
 
+            //Add resume's action description to firebase
+            Action resumeMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.RESUME);
+            DAOAction.getInstance().insertAction(resumeMatchAction, match);
+            //Add resume's comment description to firebase
+            Action resumeMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.RESUME, getContext());
+            DAOAction.getInstance().insertCommentDesc(resumeMatchComment, match);
+
             DAOLiveMatchService.getInstance().setChronometerTime(match.getId(), AdminsView.this, binding.clock);
             binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
                 @Override
@@ -285,6 +292,13 @@ public class AdminsView extends Fragment {
                 if (running) {
                     DAOLiveMatchService.getInstance().updateClockLong(match.getId(), SystemClock.elapsedRealtime(), "stop");
                 }
+                //Add pause's action description to firebase
+                Action pauseMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
+                DAOAction.getInstance().insertAction(pauseMatchAction, match);
+                //Add pause's comment description to firebase
+                Action pauseMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.PAUSE, getContext());
+                DAOAction.getInstance().insertCommentDesc(pauseMatchComment, match);
+
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("isAdmin", true);
                 NavHostFragment.findNavController(AdminsView.this).navigate(R.id.action_adminsView_to_matchesTabContainer, bundle);

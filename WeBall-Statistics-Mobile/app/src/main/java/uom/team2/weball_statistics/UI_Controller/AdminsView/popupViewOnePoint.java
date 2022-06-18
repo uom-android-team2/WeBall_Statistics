@@ -112,7 +112,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_freethrow);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_freethrow);
-
+                Toast.makeText(c.getApplicationContext(),"Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
                 //Insert missed freethrow's action to firebase
                 Action freeThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
@@ -132,7 +132,6 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
         }
         playerStats.setTotalFreeThrow();
         teamStats.setTotalFreeThrow();
-        Toast.makeText(c.getApplicationContext(),"Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
         try {
             dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);

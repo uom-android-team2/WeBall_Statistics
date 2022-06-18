@@ -114,6 +114,7 @@ public class popupViewThreePoints extends Dialog implements
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_threepointer);
+                Toast.makeText(c.getApplicationContext(),"Unsuccessful three-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
                 //Insert 3point's action to firebase
                 Action treePointThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
@@ -134,7 +135,6 @@ public class popupViewThreePoints extends Dialog implements
         playerStats.setTotalEffort();
         teamStats.setTotalThreePointer();
         teamStats.setTotalEffort();
-        Toast.makeText(c.getApplicationContext(),"Unsuccessful three-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
             dbdatarecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);

@@ -264,6 +264,7 @@ public class AdminsView extends Fragment {
             //enable again the buttons
             setAlphaAdminBtn(255);
             initStarters();
+            listenEvent();
 
             DAOLiveMatchService.getInstance().setChronometerTime(match.getId(), AdminsView.this, binding.clock);
             binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {

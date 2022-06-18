@@ -2,7 +2,6 @@ package uom.team2.weball_statistics.configuration;
 
 public class Config {
     
-
     public static final String IP = "172.19.96.1";
     public static final String API_URL = "http://" + IP + "/WeBall_Statistics-Backend/API/";
     public static final String MATCHES_API = "http://" + IP + "/weBall_Statistics-Backend/API/match.php";

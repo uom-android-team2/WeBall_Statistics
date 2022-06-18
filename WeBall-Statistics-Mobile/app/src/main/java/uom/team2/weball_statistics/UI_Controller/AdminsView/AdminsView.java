@@ -260,6 +260,9 @@ public class AdminsView extends Fragment {
             started = true;
             binding.startButton.setText("End");
             binding.pauseButton.setEnabled(true);
+            //enable again the buttons
+            setAlphaAdminBtn(255);
+            initStarters();
 
             DAOLiveMatchService.getInstance().setChronometerTime(match.getId(), AdminsView.this, binding.clock);
             binding.clock.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {

@@ -128,6 +128,12 @@ public class AdminsView extends Fragment {
     }
 
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        DAOLiveMatchService.getInstance().updateClockLong(match.getId(), SystemClock.elapsedRealtime(), "stop");
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

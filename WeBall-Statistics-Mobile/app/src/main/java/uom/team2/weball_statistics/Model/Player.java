@@ -3,7 +3,7 @@ package uom.team2.weball_statistics.Model;
 import java.io.Serializable;
 
 /*
- * @author Minas - Theodoros Charakopoulos ics20072 and Lougaris Dionisis ics20058
+ * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris ics20058
  */
 public class Player implements Serializable {
     private String teamName;

@@ -21,6 +21,10 @@ import uom.team2.weball_statistics.databinding.BestPlayerPerPositionLayoutBindin
 import uom.team2.weball_statistics.utils.JSONHandler;
 import uom.team2.weball_statistics.utils.Utils;
 
+
+/*
+ * @author Dionisis Lougaris ics20058
+ */
 public class BestStarting5UIController {
 
     public static BestStarting5UIController instance = new BestStarting5UIController();

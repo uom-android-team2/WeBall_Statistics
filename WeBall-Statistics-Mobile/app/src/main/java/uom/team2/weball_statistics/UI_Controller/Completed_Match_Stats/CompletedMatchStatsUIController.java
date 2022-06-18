@@ -31,6 +31,9 @@ import uom.team2.weball_statistics.utils.JSONHandler;
 
 //--------------------CLASS NEEDS REFACTORING--------------------
 
+/*
+ * @author George Stefou ics20051 and Dionisis Lougaris ics20058
+ */
 public class CompletedMatchStatsUIController {
 
     private TeamLiveStatistics homeTeamLiveStats;

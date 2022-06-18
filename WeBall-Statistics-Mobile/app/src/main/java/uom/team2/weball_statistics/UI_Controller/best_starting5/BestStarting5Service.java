@@ -19,6 +19,10 @@ import uom.team2.weball_statistics.Model.PlayerPosition;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
+
+/*
+ * @author Dionisis Lougaris ics20058
+ */
 public class BestStarting5Service {
 
     public static ArrayList<Match> getCompletedMatches() throws IOException, JSONException {

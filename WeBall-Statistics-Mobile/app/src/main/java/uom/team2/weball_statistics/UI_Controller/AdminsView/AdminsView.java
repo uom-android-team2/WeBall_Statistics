@@ -698,7 +698,7 @@ public class AdminsView extends Fragment {
                 //steile ton paikti
 
                 //emfanise to popup
-                SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked);
+                SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked, playersImageViewList);
                 ppv.show();
 
                 //refresh the players
@@ -707,6 +707,8 @@ public class AdminsView extends Fragment {
                 } else {
                     binding.team1Banner.callOnClick();
                 }
+
+
             }
         });
 

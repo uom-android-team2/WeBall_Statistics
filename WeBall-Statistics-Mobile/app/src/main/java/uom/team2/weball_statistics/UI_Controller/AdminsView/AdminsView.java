@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.AdminsView;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -701,6 +702,16 @@ public class AdminsView extends Fragment {
                 SubstitutionPopupView ppv = new SubstitutionPopupView(getActivity(), playerObjChecked, teamObj, playerChecked, playersImageViewList);
                 ppv.show();
 
+                ppv.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (teamSelected) {
+                            binding.team2Banner.callOnClick();
+                        } else {
+                            binding.team1Banner.callOnClick();
+                        }
+                    }
+                });
             }
         });
 

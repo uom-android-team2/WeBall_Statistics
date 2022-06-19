@@ -159,7 +159,7 @@ public class PreviousMatches extends Fragment {
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_previous_layout, null);
                 TextView dateView = viewMatch.findViewById(R.id.match_start_date2);
                 dateView.setText("Week " + liveMatches.get(i).getDate());
-                DAOLiveMatchService.getInstance().setListenerForPoints(PreviousMatches.this,
+                DAOLiveMatchService.getInstance().setPoints(PreviousMatches.this,
                         viewMatch.findViewById(R.id.score_text),
                         liveMatches.get(i).getId(),
                         liveMatches.get(i).getTeamLandlord_id(),
@@ -195,7 +195,7 @@ public class PreviousMatches extends Fragment {
                     navigate(viewMatch, liveMatches.get(finalI).getId());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
 
                 }
 

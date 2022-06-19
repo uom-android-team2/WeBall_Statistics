@@ -216,7 +216,30 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
         databaseReference.addValueEventListener(listenerForPlayer);
     }
 
-    //
+    public void setPoints(Fragment fragment, TextView textView, int matchId, int teamId1, int teamId2) {
+        get(matchId).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                TeamLiveStatistics team1 = dataSnapshot.child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
+                TeamLiveStatistics team2 = dataSnapshot.child("team_id: " + teamId2).getValue(TeamLiveStatistics.class);
+
+                int scoreTeam1 = 0;
+                int scoreTeam2 = 0;
+
+                if (team1 != null) {
+                    scoreTeam1 = team1.getSuccessful_threepointer() * 3 + team1.getSuccessful_twopointer() * 2 + team1.getSuccessful_freethrow();
+                }
+
+                if (team2 != null) {
+                    scoreTeam2 = team2.getSuccessful_threepointer() * 3 + team2.getSuccessful_twopointer() * 2 + team2.getSuccessful_freethrow();
+                }
+
+                UIHandler.updateScore(fragment, textView, scoreTeam1, scoreTeam2);
+
+            }
+        });
+    }
+
     public void setListenerForPoints(Fragment fragment, TextView textView, int matchId, int teamId1, int teamId2) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -459,15 +460,25 @@ public class AdminsView extends Fragment {
                 }
                 //end button
                 else {
-                    //Appear the dialog window
-                    try {
-                        teamLandlordStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
-                        teamGuestStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    String[] scores = binding.scoreText.getText().toString().trim().split("-");
+                    int scoreTeamLandlord = Integer.parseInt(scores[0].trim());
+                    int scoreTeamGuest = Integer.parseInt(scores[1].trim());
+
+                    if (scoreTeamLandlord == scoreTeamGuest) {
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Can't finish a draw game!", Snackbar.LENGTH_SHORT);
+                        snackbar.setBackgroundTint(Utils.getColor(getContext(), R.color.red));
+                        snackbar.show();
+                    } else {
+                        //Appear the dialog window
+                        try {
+                            teamLandlordStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamLandlord.getId()));
+                            teamGuestStats = teamsPlayed.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamGuest.getId()));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        FinishGameDialog finishGameDialog = new FinishGameDialog(getContext(), binding, match, teamLandlordStats, teamGuestStats, teamsPlayed);
+                        finishGameDialog.show();
                     }
-                    FinishGameDialog finishGameDialog = new FinishGameDialog(getContext(), binding, match, teamLandlordStats, teamGuestStats, teamsPlayed);
-                    finishGameDialog.show();
                 }
             }
 

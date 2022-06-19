@@ -18,23 +18,23 @@
     <string name="tab_container_Label">Live Game</string>
 
     <!--    Live Game Strings-->
-    <string name="score_text">164 - 182</string>
+    <string name="score_text">0 - 0</string>
     <string name="team1_name_text">Team</string>
     <string name="team2_name_text">Team 2</string>
     <string name="game_live_text">Game</string>
-    <string name="clock_text">32:45</string>
+    <string name="clock_text">0:00</string>
     <string name="view_players_live_statistics_button_text">View Players Live Statistics</string>
     <string name="team_logo_description">Team Logo</string>
     <string name="match_start_date_text">Week </string>
-    <string name="time_text">8.28\'</string>
+    <string name="time_text">0.00\'</string>
     <string name="action_small_desc_landlord_text">+3 (G. Antetokounmpo)</string>
     <string name="statistic_name_text">Statistic Name</string>
     <string name="team1_progress_text">0</string>
     <string name="team2_progress_text">0</string>
-    <string name="time_happened_guest_text">9.30\'</string>
+    <string name="time_happened_guest_text">0.00\'</string>
     <string name="action_small_desc_guest_text">(G. Antetokounmpo) +3</string>
     <string name="quarter_text">Quarter</string>
-    <string name="time_happened_comment_text">3.45\'</string>
+    <string name="time_happened_comment_text">0.00\'</string>
     <string name="comment_text">CommentCommentCommentCommentCommentCommentCommentCommentCommentCommentComment</string>
     <string name="head_referee_text">Referee</string>
     <string name="stadium_text">Stadium/City</string>

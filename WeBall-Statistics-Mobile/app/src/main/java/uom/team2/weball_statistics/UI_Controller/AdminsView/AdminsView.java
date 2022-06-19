@@ -236,13 +236,23 @@ public class AdminsView extends Fragment {
         playersImageViewList.add(binding.player5);
         //Put images of the 1rst team Players
 
-        for (int i = 0; i < playersImageViewList.size(); i++) {
-            if (teamLandlord.getKeyPlayers().get(i) != null) {
+        if (teamLandlord.getKeyPlayers().size() <= 5) {
+            for (int i = 0; i < teamLandlord.getKeyPlayers().size(); i++) {
                 Picasso.get()
                         .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
                         .resize(200, 200)
                         .centerCrop()
                         .into(playersImageViewList.get(i));
+
+            }
+        } else if (teamLandlord.getKeyPlayers().size() > 5) {
+            for (int i = 0; i < 5; i++) {
+                Picasso.get()
+                        .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                        .resize(200, 200)
+                        .centerCrop()
+                        .into(playersImageViewList.get(i));
+
             }
         }
 
@@ -345,15 +355,24 @@ public class AdminsView extends Fragment {
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
 
-                for (int i = 0; i < playersImageViewList.size(); i++) {
-                    if (teamLandlord.getKeyPlayers().get(i) != null) {
+                if (teamLandlord.getKeyPlayers().size() <= 5) {
+                    for (int i = 0; i < teamLandlord.getKeyPlayers().size(); i++) {
                         Picasso.get()
                                 .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
                                 .resize(200, 200)
                                 .centerCrop()
                                 .into(playersImageViewList.get(i));
-                    }
 
+                    }
+                } else if (teamLandlord.getKeyPlayers().size() > 5) {
+                    for (int i = 0; i < 5; i++) {
+                        Picasso.get()
+                                .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                                .resize(200, 200)
+                                .centerCrop()
+                                .into(playersImageViewList.get(i));
+
+                    }
                 }
 
                 listenEvent();
@@ -392,15 +411,24 @@ public class AdminsView extends Fragment {
 
                 //Load data for this team
 
-                for (int i = 0; i < playersImageViewList.size(); i++) {
-                    if (teamLandlord.getKeyPlayers().get(i) != null) {
+                if (teamGuest.getKeyPlayers().size() <= 5) {
+                    for (int i = 0; i < teamGuest.getKeyPlayers().size(); i++) {
+                        Picasso.get()
+                                .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                                .resize(200, 200)
+                                .centerCrop()
+                                .into(playersImageViewList.get(i));
+
+                    }
+                } else if (teamGuest.getKeyPlayers().size() > 5) {
+                    for (int i = 0; i < 5; i++) {
                         Picasso.get()
                                 .load(Config.PLAYER_IMAGES_RESOURCES + teamGuest.getKeyPlayers().get(i).getImagePath())
                                 .resize(200, 200)
                                 .centerCrop()
                                 .into(playersImageViewList.get(i));
-                    }
 
+                    }
                 }
 
                 listenEvent();
@@ -633,8 +661,11 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked = 1;
-
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    try {
+                        playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
 
                     if (started) {
                         listenEvent();
@@ -655,8 +686,11 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked = 2;
-
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    try {
+                        playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
 
                     if (started) {
                         listenEvent();
@@ -677,8 +711,11 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked = 3;
-
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    try {
+                        playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
 
                     if (started) {
                         listenEvent();
@@ -699,8 +736,11 @@ public class AdminsView extends Fragment {
                     view.setBackground(shape);
 
                     playerChecked = 4;
-
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    try {
+                        playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
 
 
                     if (started) {
@@ -723,8 +763,11 @@ public class AdminsView extends Fragment {
 
 
                     playerChecked = 5;
-
-                    playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    try {
+                        playerObjChecked = teamObj.getKeyPlayers().get(playerChecked - 1);
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
 
                     if (started) {
                         listenEvent();

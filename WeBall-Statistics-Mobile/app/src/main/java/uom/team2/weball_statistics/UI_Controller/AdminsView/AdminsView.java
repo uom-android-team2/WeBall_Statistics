@@ -21,7 +21,6 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.concurrent.atomic.AtomicReference;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
@@ -59,7 +58,7 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveS
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
-import uom.team2.weball_statistics.utils.Utils;
+
 /*
  * @author Ouzounidis Kyriakos iis20033
  */
@@ -782,17 +781,17 @@ public class AdminsView extends Fragment {
                     teamStats.setSuccessfulEffort();
 
                     DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_threepointer);
-                    DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_threepointer);
+                    DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.successful_threepointer);
 
                     //Insert 3point's action to firebase
                     Action treePointThrowAction = null;
                     Action treePointThrowComment = null;
                     if (this.match.getTeamLandlord_id() == this.playerObjChecked.getId()) {
                         treePointThrowAction = new Shot(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade);
-                        treePointThrowComment = new ShotComment(String.valueOf(binding.clock.getText().toString()), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
+                        treePointThrowComment = new ShotComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
                     } else if (this.match.getTeamguest_id() == this.teamObj.getId()) {
-                        treePointThrowAction = new Shot(String.valueOf(binding.clock.getText().toString()), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade);
-                        treePointThrowComment = new ShotComment(String.valueOf(binding.clock.getText().toString()), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
+                        treePointThrowAction = new Shot(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade);
+                        treePointThrowComment = new ShotComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
                     }
 
                     if (treePointThrowAction != null) {
@@ -845,7 +844,7 @@ public class AdminsView extends Fragment {
                     teamStats.setSuccessfulEffort();
 
                     DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_twopointer);
-                    DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_twopointer);
+                    DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), playerObjChecked.getId(), LiveStatisticsEnum.successful_twopointer);
                     //Insert 2point's action to firebase
                     Action twoPointThrowAction = null;
                     Action twoPointThrowComment = null;
@@ -1003,7 +1002,7 @@ public class AdminsView extends Fragment {
             teamStats.setTotalAssists();
 
             LayoutFactory.createSnackbar(binding.getRoot(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
-            
+
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);

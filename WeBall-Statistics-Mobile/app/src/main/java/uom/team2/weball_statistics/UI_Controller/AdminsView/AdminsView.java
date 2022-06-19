@@ -133,6 +133,12 @@ public class AdminsView extends Fragment {
     public void onStop() {
         super.onStop();
         DAOLiveMatchService.getInstance().updateClockLong(match.getId(), SystemClock.elapsedRealtime(), "stop");
+        //Add pause's action description to firebase
+        Action pauseMatchAction = new MatchFlow(binding.clock.getText().toString(), FlowType.PAUSE);
+        DAOAction.getInstance().insertAction(pauseMatchAction, match);
+        //Add pause's comment description to firebase
+        Action pauseMatchComment = new MatchFlowComment(binding.clock.getText().toString(), FlowType.PAUSE, getContext());
+        DAOAction.getInstance().insertCommentDesc(pauseMatchComment, match);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

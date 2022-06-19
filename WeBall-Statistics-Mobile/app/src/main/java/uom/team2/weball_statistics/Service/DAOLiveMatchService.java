@@ -186,7 +186,7 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();
 
                 for (LiveStatisticsEnum statistic : LiveStatisticsEnum.values()) {
-                    if (fragment.getActivity() != null && fragment.isAdded()) {
+                    if (fragment.getActivity() != null && fragment.isAdded() && mapof.get(statistic.name()) != null) {
                         UIHandler.updateProgressBarLayoutTeam2(fragment,
                                 mapof,
                                 statistic,

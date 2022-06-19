@@ -829,7 +829,7 @@ public class AdminsView extends Fragment {
                     //Insert 3point's action to firebase
                     Action treePointThrowAction = null;
                     Action treePointThrowComment = null;
-                    if (this.match.getTeamLandlord_id() == this.playerObjChecked.getId()) {
+                    if (this.match.getTeamLandlord_id() == this.teamObj.getId()) {
                         treePointThrowAction = new Shot(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade);
                         treePointThrowComment = new ShotComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
                     } else if (this.match.getTeamguest_id() == this.teamObj.getId()) {

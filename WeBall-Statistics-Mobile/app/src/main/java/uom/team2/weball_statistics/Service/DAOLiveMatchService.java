@@ -32,6 +32,7 @@ import uom.team2.weball_statistics.configuration.Config;
 public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
     public static DAOLiveMatchService instance;
     private final DatabaseReference databaseReference;
+    private ValueEventListener listenerForPlayer;
 
     private DAOLiveMatchService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -172,7 +173,12 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
     }
 
     public void setDataListenerForPlayer(LivePlayerStatistics fragment, int matchId, int teamId1) {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+        if (listenerForPlayer != null) {
+            databaseReference.removeEventListener(listenerForPlayer);
+        }
+
+        listenerForPlayer = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // this method is call to get the realtime
@@ -206,7 +212,8 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
             }
-        });
+        };
+        databaseReference.addValueEventListener(listenerForPlayer);
     }
 
     //

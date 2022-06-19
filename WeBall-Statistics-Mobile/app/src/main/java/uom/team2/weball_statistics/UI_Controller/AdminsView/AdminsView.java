@@ -812,7 +812,7 @@ public class AdminsView extends Fragment {
                         ex.printStackTrace();
                     }
 
-                    Utils.createSnackbar(binding.getRoot(), "Successful three-pointer for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+                    LayoutFactory.createSnackbar(binding.getRoot(), "Successful three-pointer for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
                     enableButtonAfterAssistAndShoot(255);
                 }
             });
@@ -875,7 +875,7 @@ public class AdminsView extends Fragment {
                         ex.printStackTrace();
                     }
 
-                    Utils.createSnackbar(binding.getRoot(), "Successful two-pointer for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+                    LayoutFactory.createSnackbar(binding.getRoot(), "Successful two-pointer for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
                     enableButtonAfterAssistAndShoot(255);
                 }
             });

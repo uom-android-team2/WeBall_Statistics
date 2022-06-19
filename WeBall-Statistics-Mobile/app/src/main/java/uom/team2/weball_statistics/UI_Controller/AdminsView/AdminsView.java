@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -55,6 +54,7 @@ import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.Service.MatchService;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.configuration.Config;
@@ -266,7 +266,6 @@ public class AdminsView extends Fragment {
         //tin othoni toy match, tote prepei to chronometer na sunexisei apo
         //tin live ora.
         if (match.isProgress() == 1) {
-            setAlphaAdminBtn(255);
             //vale to xronometro apo ekei pou stamatise
             running = true;
             started = true;
@@ -274,7 +273,6 @@ public class AdminsView extends Fragment {
             binding.pauseButton.setEnabled(true);
             //enable again the buttons
             setAlphaAdminBtn(255);
-            initStarters();
             listenEvent();
 
             //Add resume's action description to firebase
@@ -422,7 +420,7 @@ public class AdminsView extends Fragment {
 
                 if (!started) {
                     setAlphaAdminBtn(255);
-                    initStarters();
+                    initPlayers();
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
                     // Prosthiki apo leo gia na pairnw ta lepta
@@ -476,9 +474,7 @@ public class AdminsView extends Fragment {
                     int scoreTeamGuest = Integer.parseInt(scores[1].trim());
 
                     if (scoreTeamLandlord == scoreTeamGuest) {
-                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Can't finish a draw game!", Snackbar.LENGTH_SHORT);
-                        snackbar.setBackgroundTint(Utils.getColor(getContext(), R.color.red));
-                        snackbar.show();
+                        LayoutFactory.createSnackbar(binding.getRoot(), "Can't finish a draw game!", R.color.red).show();
                     } else {
                         //Appear the dialog window
                         try {
@@ -1003,7 +999,9 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalAssists();
             teamStats.setTotalAssists();
-            Utils.createSnackbar(binding.getRoot(), "Assist made by " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+
+            LayoutFactory.createSnackbar(binding.getRoot(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);
@@ -1034,7 +1032,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalRebounds();
             teamStats.setTotalRebounds();
-            Utils.createSnackbar(binding.getRoot(), "Rebound for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Rebound for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.reboundButton);
@@ -1066,7 +1064,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalSteels();
             teamStats.setTotalSteels();
-            Utils.createSnackbar(binding.getRoot(), "Steal for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Steal for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.stealButton);
@@ -1095,7 +1093,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalBlock();
             teamStats.setTotalBlock();
-            Utils.createSnackbar(binding.getRoot(), "Block for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Block for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.blockButton);
@@ -1124,7 +1122,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalFouls();
             teamStats.setTotalFouls();
-            Utils.createSnackbar(binding.getRoot(), "Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.foulButton);
@@ -1153,7 +1151,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalTurnovers();
             teamStats.setTotalTurnovers();
-            Utils.createSnackbar(binding.getRoot(), "Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.turnoverButton);
@@ -1190,7 +1188,7 @@ public class AdminsView extends Fragment {
         }
     }
 
-    public void initStarters() {
+    public void initPlayers() {
         Thread threadPlayerMatch = new Thread() {
 
             @Override

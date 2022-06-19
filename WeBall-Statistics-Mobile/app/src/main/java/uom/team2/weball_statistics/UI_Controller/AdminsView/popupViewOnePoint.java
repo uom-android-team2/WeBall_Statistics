@@ -24,6 +24,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.Utils;
@@ -88,7 +89,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_freethrow);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_freethrow);
 
-                Utils.createSnackbar(view, "Successful freethrow-pointer for " + player.getName() + " " + player.getSurname(), R.color.success_green).show();
+                LayoutFactory.createSnackbar(view, "Successful freethrow-pointer for " + player.getName() + " " + player.getSurname(), R.color.success_green).show();
 
                 //Insert freethrow's action to firebase
                 Action freeThrowAction = null;
@@ -114,7 +115,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_freethrow);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_freethrow);
-                Utils.createSnackbar(view, "Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), R.color.missed)
+                LayoutFactory.createSnackbar(view, "Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), R.color.missed)
                         .setTextColor(Utils.getColor(getContext(), R.color.black))
                         .show();
 

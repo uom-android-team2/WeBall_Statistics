@@ -25,6 +25,7 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.Utils;
@@ -89,7 +90,7 @@ public class popupViewThreePoints extends Dialog implements
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_threepointer);
 
-                Utils.createSnackbar(view, "Successful three-pointer for " + player.getName() + " " + player.getSurname(), R.color.success_green).show();
+                LayoutFactory.createSnackbar(view, "Successful three-pointer for " + player.getName() + " " + player.getSurname(), R.color.success_green).show();
 
                 //Insert 3point's action to firebase
                 Action treePointThrowAction = null;
@@ -115,7 +116,7 @@ public class popupViewThreePoints extends Dialog implements
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_threepointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_threepointer);
-                Utils.createSnackbar(view, "Unsuccessful three-pointer for " + player.getName() + " " + player.getSurname(), R.color.missed)
+                LayoutFactory.createSnackbar(view, "Unsuccessful three-pointer for " + player.getName() + " " + player.getSurname(), R.color.missed)
                         .setTextColor(Utils.getColor(getContext(), R.color.black))
                         .show();
 

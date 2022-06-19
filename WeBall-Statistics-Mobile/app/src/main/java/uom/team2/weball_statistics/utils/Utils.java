@@ -22,11 +22,4 @@ public class Utils {
         view.setBackgroundColor(Utils.getColor(context, colorId));
     }
 
-    public static Snackbar createSnackbar(View view, String text, int color) {
-        Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT);
-        snackbar.setBackgroundTint(getColor(view.getContext(), color));
-        return snackbar;
-    }
-
-
 }

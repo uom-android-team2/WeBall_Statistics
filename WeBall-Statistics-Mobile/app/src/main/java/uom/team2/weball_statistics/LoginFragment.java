@@ -15,8 +15,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.io.IOException;
 
 import uom.team2.weball_statistics.Model.LoginAdmin;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLoginBinding;
-import uom.team2.weball_statistics.utils.Utils;
 
 
 public class LoginFragment extends Fragment {
@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment {
                     username.setText("");
                     password.setText("");
 
-                    Utils.createSnackbar(binding.getRoot(), "No correct Credits.Please try again", R.color.red).show();
+                    LayoutFactory.createSnackbar(binding.getRoot(), "No correct Credits.Please try again", R.color.red).show();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -76,7 +76,7 @@ public class LoginFragment extends Fragment {
         } else {
             username.setText("");
             password.setText("");
-            Utils.createSnackbar(binding.getRoot(), "Invalid username or password format.Please try again", R.color.red).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Invalid username or password format.Please try again", R.color.red).show();
         }
     }
 

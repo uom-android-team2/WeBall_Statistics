@@ -145,10 +145,6 @@ public class CompletedMatchStatsUIController {
                 filteredAllHomePlayerStats.add(unfilteredAllHomePlayerStats.get(i));
             }
         }
-        System.out.println("---------IN FILTERED Home------------");
-        for(int i =0;i<filteredAllHomePlayerStats.size();i++){
-            System.out.println(filteredAllHomePlayerStats.get(i).getPlayer_id());
-        }
 
         //fetching stats for all players of the away team for this match
         OkHttpClient client2 = new OkHttpClient().newBuilder()
@@ -166,10 +162,7 @@ public class CompletedMatchStatsUIController {
                 filteredAllAwayPlayerStats.add(unfilteredAllAwayPlayerStats.get(i));
             }
         }
-        System.out.println("---------IN FILTERED away------------");
-        for(int i =0;i<filteredAllAwayPlayerStats.size();i++){
-            System.out.println(filteredAllAwayPlayerStats.get(i).getPlayer_id());
-        }
+      
 
         //HOME TEAM
         int maxPGH=-100;

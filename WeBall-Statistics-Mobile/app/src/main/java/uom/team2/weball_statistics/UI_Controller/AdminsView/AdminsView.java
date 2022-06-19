@@ -255,7 +255,6 @@ public class AdminsView extends Fragment {
         //tin othoni toy match, tote prepei to chronometer na sunexisei apo
         //tin live ora.
         if (match.isProgress() == 1) {
-            setAlphaAdminBtn(255);
             //vale to xronometro apo ekei pou stamatise
             running = true;
             started = true;
@@ -263,7 +262,6 @@ public class AdminsView extends Fragment {
             binding.pauseButton.setEnabled(true);
             //enable again the buttons
             setAlphaAdminBtn(255);
-            initStarters();
             listenEvent();
 
             DAOLiveMatchService.getInstance().setChronometerTime(match.getId(), AdminsView.this, binding.clock);
@@ -397,7 +395,7 @@ public class AdminsView extends Fragment {
 
                 if (!started) {
                     setAlphaAdminBtn(255);
-                    initStarters();
+                    initPlayers();
                     binding.clock.setBase(SystemClock.elapsedRealtime());
                     binding.clock.start();
                     // Prosthiki apo leo gia na pairnw ta lepta
@@ -1067,7 +1065,7 @@ public class AdminsView extends Fragment {
         }
     }
 
-    public void initStarters() {
+    public void initPlayers() {
         Thread threadPlayerMatch = new Thread() {
 
             @Override

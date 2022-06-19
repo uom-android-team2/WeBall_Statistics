@@ -92,6 +92,13 @@ public abstract class Stats implements editFieldsFromDB {
         return total_threepointer > 0 ? (successful_threepointer * 100)/total_threepointer : 0;
     }
 
+    public abstract double calculateFreethrowPointAVG();
+
+    public abstract double calculateTwoPointAVG();
+
+    public abstract double calculateThreePointsAVG();
+
+
     public int calculateTotalPoints(){
         return successful_twopointer * Config.COEFFICIENT_TWO_POINT + successful_freethrow * Config.COEFFICIENT_ONE_POINT + successful_threepointer * Config.COEFFICIENT_THREE_POINT;
     }

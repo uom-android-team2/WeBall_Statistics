@@ -24,6 +24,21 @@ public class TeamStats extends Stats {
         isMatchId = true;
     }
 
+    @Override
+    public double calculateFreethrowPointAVG() {
+        return total_matches > 0 ? Math.round((Double.valueOf(successful_freethrow) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateTwoPointAVG() {
+        return total_matches > 0 ? Math.round((Double.valueOf(successful_twopointer) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateThreePointsAVG() {
+        return total_matches > 0 ? Math.round((Double.valueOf(successful_threepointer) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
+    }
+
     public TeamStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int team_id, int total_matches, int win, int lose) {
         super(successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
         this.team_id = team_id;
@@ -83,33 +98,33 @@ public class TeamStats extends Stats {
     }
 
     public double calculatePointsPercentage(){
-        return total_matches > 0 ? super.calculateTotalPoints() / total_matches : 0;
+        return total_matches > 0 ?  Math.round((Double.valueOf(super.calculateTotalPoints()) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
     }
 
     public double calculateAssistPercentage(){
-        return total_matches > 0 ? assist / total_matches : 0;
+        return total_matches > 0 ? Math.round((Double.valueOf(assist) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
     }
 
     public double calculateReboundPercentage(){
-        return total_matches > 0 ? rebound / total_matches : 0;
+        return total_matches > 0 ? Math.round((Double.valueOf(rebound) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
     }
 
     public double calculateBlockPercentage(){
-       return total_matches > 0 ? block / total_matches : 0;
+       return total_matches > 0 ? Math.round((Double.valueOf(block) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
     }
 
     public double calculateSteelPercentage(){
-        return total_matches > 0 ? steal / total_matches : 0;
+        return total_matches > 0 ? Math.round((Double.valueOf(steal) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
 
     }
 
     public double calculateFoulPercentage(){
-      return total_matches > 0  ? foul / total_matches : 0;
+      return total_matches > 0  ? Math.round((Double.valueOf(foul) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
 
     }
 
     public double calculateTurnoverPercentage(){
-       return total_matches > 0 ?  turnover / total_matches : 0;
+        return total_matches > 0 ? Math.round((Double.valueOf(turnover) / Double.valueOf(total_matches))*100.0)/100.0 : 0;
     }
 
     public int getTotalMatches(){ return total_matches;}

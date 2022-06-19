@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -27,24 +26,25 @@ import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
+import uom.team2.weball_statistics.utils.Utils;
 
 public class popupViewOnePoint extends Dialog implements android.view.View.OnClickListener {
 
+    private final DBDataRecovery dataRecovery;
+    private final int points;
+    private final Match match;
+    private final Team team;
+    private final Player player;
+    private final String time; //For action when happened
+    private final View view;
     public Activity c;
     public Dialog d;
     public Button yes, no;
     Stats playerStats;
     Stats teamStats;
-    private final DBDataRecovery dataRecovery;
     private String str;
-    private Match match;
-    private Team team;
-    private Player player;
-    private String time; //For action when happened
-    private final int points;
 
-
-    public popupViewOnePoint(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team team, Player player, String time) {
+    public popupViewOnePoint(Activity a, View view, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match m, Team team, Player player, String time) {
         super(a);
         playerStats = ps;
         teamStats = ts;
@@ -56,7 +56,7 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
         this.time = time;
         // TODO Auto-generated constructor stub
         this.c = a;
-
+        this.view = view;
     }
 
     @Override
@@ -85,9 +85,11 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
             case R.id.dialog_Yes:
                 playerStats.setSuccessfulFreeThrow();
                 teamStats.setSuccessfulFreeThrow();
-                DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(),team.getId(), LiveStatisticsEnum.successful_freethrow);
-                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(),player.getId(), LiveStatisticsEnum.successful_freethrow);
-                Toast.makeText(c.getApplicationContext(),"Successful freethrow-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
+                DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_freethrow);
+                DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_freethrow);
+
+                Utils.createSnackbar(view, "Successful freethrow-pointer for " + player.getName() + " " + player.getSurname(), R.color.success_green).show();
+
                 //Insert freethrow's action to firebase
                 Action freeThrowAction = null;
                 Action freeThrowComment = null;
@@ -112,7 +114,10 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_freethrow);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_freethrow);
-                Toast.makeText(c.getApplicationContext(),"Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
+                Utils.createSnackbar(view, "Unsuccessful freethrow-pointer for" + player.getName() + " " + player.getSurname(), R.color.missed)
+                        .setTextColor(Utils.getColor(getContext(), R.color.black))
+                        .show();
+
                 //Insert missed freethrow's action to firebase
                 Action freeThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {

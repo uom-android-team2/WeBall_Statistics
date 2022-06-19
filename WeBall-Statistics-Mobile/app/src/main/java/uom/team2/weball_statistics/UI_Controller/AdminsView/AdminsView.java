@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -54,12 +52,12 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveS
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHandler;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
+import uom.team2.weball_statistics.utils.Utils;
 
 public class AdminsView extends Fragment {
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();
     private final Stack<TextView> undoButtonStack = new Stack<TextView>();
-    private Stack<String> scoreStack=new Stack<String>();
     private final ArrayList<Player> keyPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> subPlayersLandlord = new ArrayList<Player>();
     private final ArrayList<Player> keyPlayersGuest = new ArrayList<Player>();
@@ -73,6 +71,7 @@ public class AdminsView extends Fragment {
     private final ArrayList<TeamLiveStatistics> teamLiveStatisticsGuest = new ArrayList<TeamLiveStatistics>();
     private final PlayerLiveStatistics playerCheckedLiveStatistics = null;
     private final ArrayList<ImageView> playersImageViewList = new ArrayList<ImageView>();
+    private final Stack<String> scoreStack = new Stack<String>();
     private FragmentAdminsViewBinding binding;
     private Chronometer chronometer;
     private boolean running = false;
@@ -222,10 +221,10 @@ public class AdminsView extends Fragment {
         playersImageViewList.add(binding.player5);
         //Put images of the 1rst team Players
 
-        for(int i=0;i<playersImageViewList.size();i++){
-            if(teamLandlord.getKeyPlayers().get(i)!=null){
+        for (int i = 0; i < playersImageViewList.size(); i++) {
+            if (teamLandlord.getKeyPlayers().get(i) != null) {
                 Picasso.get()
-                        .load(Config.PLAYER_IMAGES_RESOURCES+ teamLandlord.getKeyPlayers().get(i).getImagePath())
+                        .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
                         .resize(200, 200)
                         .centerCrop()
                         .into(playersImageViewList.get(i));
@@ -335,8 +334,8 @@ public class AdminsView extends Fragment {
                 binding.team2Banner.setBackgroundColor(0x00000000);
 
 
-                for(int i=0;i<playersImageViewList.size();i++){
-                    if(teamLandlord.getKeyPlayers().get(i)!=null) {
+                for (int i = 0; i < playersImageViewList.size(); i++) {
+                    if (teamLandlord.getKeyPlayers().get(i) != null) {
                         Picasso.get()
                                 .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
                                 .resize(200, 200)
@@ -382,8 +381,8 @@ public class AdminsView extends Fragment {
 
                 //Load data for this team
 
-                for(int i=0;i<playersImageViewList.size();i++){
-                    if(teamLandlord.getKeyPlayers().get(i)!=null) {
+                for (int i = 0; i < playersImageViewList.size(); i++) {
+                    if (teamLandlord.getKeyPlayers().get(i) != null) {
                         Picasso.get()
                                 .load(Config.PLAYER_IMAGES_RESOURCES + teamGuest.getKeyPlayers().get(i).getImagePath())
                                 .resize(200, 200)
@@ -525,15 +524,15 @@ public class AdminsView extends Fragment {
                         Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObjForUndo.getId()));
 
                         if (binding.freethrowButton.equals(lastAction)) {
-                            String sc=scoreStack.pop();
-                            if (sc.equals(binding.scoreText.getText().toString())){
+                            String sc = scoreStack.pop();
+                            if (sc.equals(binding.scoreText.getText().toString())) {
 
-                            }else {
-                                playerStats.setterForSuccessfulFreethrow(playerStats.getTotalFreeThrow()-1);
-                                teamStats.setterForSuccessfulFreethrow(teamStats.getTotalFreeThrow()-1);
+                            } else {
+                                playerStats.setterForSuccessfulFreethrow(playerStats.getTotalFreeThrow() - 1);
+                                teamStats.setterForSuccessfulFreethrow(teamStats.getTotalFreeThrow() - 1);
                             }
-                            playerStats.setFreethrow(playerStats.getTotalFreeThrow()-1);
-                            teamStats.setFreethrow(teamStats.getTotalFreeThrow()-1);
+                            playerStats.setFreethrow(playerStats.getTotalFreeThrow() - 1);
+                            teamStats.setFreethrow(teamStats.getTotalFreeThrow() - 1);
                             try {
                                 dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
                                 dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -544,16 +543,16 @@ public class AdminsView extends Fragment {
 
                         } else if (binding.twoPointerButton.equals(lastAction)) {
                             System.out.println("mpika2 re2 mlk2222");
-                            String sc=scoreStack.pop();
-                            if (sc.equals(binding.scoreText.getText().toString())){
+                            String sc = scoreStack.pop();
+                            if (sc.equals(binding.scoreText.getText().toString())) {
 
-                            }else {
+                            } else {
                                 System.out.println("mpika re mlk");
-                                playerStats.setterForSuccessfulTwoPointer(playerStats.getTotalTwoPointer()-1);
-                                teamStats.setterForSuccessfulTwoPointer(teamStats.getTotalTwoPointer()-1);
+                                playerStats.setterForSuccessfulTwoPointer(playerStats.getTotalTwoPointer() - 1);
+                                teamStats.setterForSuccessfulTwoPointer(teamStats.getTotalTwoPointer() - 1);
                             }
-                            playerStats.setTwoPointer(playerStats.getTotalTwoPointer()-1);
-                            teamStats.setTwoPointer(teamStats.getTotalTwoPointer()-1);
+                            playerStats.setTwoPointer(playerStats.getTotalTwoPointer() - 1);
+                            teamStats.setTwoPointer(teamStats.getTotalTwoPointer() - 1);
                             try {
                                 dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
                                 dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -563,15 +562,15 @@ public class AdminsView extends Fragment {
 
 
                         } else if (binding.threePointerButton.equals(lastAction)) {
-                            String sc=scoreStack.pop();
-                            if (sc.equals(binding.scoreText.getText().toString())){
+                            String sc = scoreStack.pop();
+                            if (sc.equals(binding.scoreText.getText().toString())) {
 
-                            }else {
-                                playerStats.setterForSuccessfulThreePointer(playerStats.getTotalThreePointer()-1);
-                                teamStats.setterForSuccessfulThreePointer(teamStats.getTotalThreePointer()-1);
+                            } else {
+                                playerStats.setterForSuccessfulThreePointer(playerStats.getTotalThreePointer() - 1);
+                                teamStats.setterForSuccessfulThreePointer(teamStats.getTotalThreePointer() - 1);
                             }
-                            playerStats.setThreePointer(playerStats.getTotalThreePointer()-1);
-                            teamStats.setThreePointer(teamStats.getTotalThreePointer()-1);
+                            playerStats.setThreePointer(playerStats.getTotalThreePointer() - 1);
+                            teamStats.setThreePointer(teamStats.getTotalThreePointer() - 1);
                             try {
                                 dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
                                 dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
@@ -751,7 +750,7 @@ public class AdminsView extends Fragment {
                 undoTeamStack.push(teamObj);
                 undoButtonStack.push(binding.threePointerButton);
                 scoreStack.push(binding.scoreText.getText().toString());
-                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), binding.getRoot(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
                 ppv.show();
             });
             freeThrowBtn.setOnClickListener(e -> {
@@ -760,7 +759,7 @@ public class AdminsView extends Fragment {
                 undoTeamStack.push(teamObj);
                 undoButtonStack.push(binding.freethrowButton);
                 scoreStack.push(binding.scoreText.getText().toString());
-                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), 1, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                popupViewOnePoint ppv = new popupViewOnePoint(getActivity(), binding.getRoot(), 1, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
 
                 ppv.show();
 
@@ -771,7 +770,7 @@ public class AdminsView extends Fragment {
                 undoTeamStack.push(teamObj);
                 undoButtonStack.push(binding.twoPointerButton);
                 scoreStack.push(binding.scoreText.getText().toString());
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), 2, playerStats, teamStats, dataRecovery,match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), binding.getRoot(), 2, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
 
                 ppv.show();
             });
@@ -894,7 +893,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalAssists();
             teamStats.setTotalAssists();
-            Toast.makeText(getActivity().getApplicationContext(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Utils.createSnackbar(binding.getRoot(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);
@@ -925,7 +924,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalRebounds();
             teamStats.setTotalRebounds();
-            Toast.makeText(getActivity().getApplicationContext(), "Rebound for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Utils.createSnackbar(binding.getRoot(), "Rebound for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.reboundButton);
@@ -957,7 +956,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalSteels();
             teamStats.setTotalSteels();
-            Toast.makeText(getActivity().getApplicationContext(), "Steal for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Utils.createSnackbar(binding.getRoot(), "Steal for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.stealButton);
@@ -986,7 +985,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalBlock();
             teamStats.setTotalBlock();
-            Toast.makeText(getActivity().getApplicationContext(), "Block for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Utils.createSnackbar(binding.getRoot(), "Block for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.blockButton);
@@ -1015,7 +1014,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalFouls();
             teamStats.setTotalFouls();
-            Toast.makeText(getActivity().getApplicationContext(), "Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Utils.createSnackbar(binding.getRoot(), "Foul for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.foulButton);
@@ -1044,7 +1043,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalTurnovers();
             teamStats.setTotalTurnovers();
-            Toast.makeText(getActivity().getApplicationContext(), "Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), Toast.LENGTH_LONG).show();
+            Utils.createSnackbar(binding.getRoot(), "Turnover for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.turnoverButton);

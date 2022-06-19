@@ -3,6 +3,8 @@ package uom.team2.weball_statistics.Model.Statistics;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,12 +18,14 @@ public class PlayerStats extends Stats {
     protected float minutes;
     protected boolean hasMatchPlayed = false;
     private ArrayList<String> UniqueKeysOfPlayer = new ArrayList<String>(Arrays.asList("player_id", "matches_played","minutes")); // This arraylist holds the unique fields of the team.
+    private BigDecimal bigDecimal;
 
 
     // This method is the constructor of class PlayerStats which initialize the parameters of this class.
     public PlayerStats(){
         hasMatchPlayed = true;
     }
+
 
     public PlayerStats(int successful_effort, int total_effort, int successful_freethrow, int total_freethrow, int successful_twopointer, int total_twopointer, int successful_threepointer, int total_threepointer, int steal, int rebound, int assist, int block, int foul, int turnover, int player_id, int matches_played, int minutes) {
         super( successful_effort, total_effort, successful_freethrow, total_freethrow, successful_twopointer, total_twopointer, successful_threepointer, total_threepointer, steal, rebound, assist, block, foul, turnover);
@@ -69,31 +73,46 @@ public class PlayerStats extends Stats {
 
     @Override
     public double calculatePointsPercentage() {
-        return   matches_played > 0 ? super.calculateTotalPoints() / matches_played : 0;
+        return   matches_played > 0 ? Math.round((Double.valueOf(super.calculateTotalPoints()) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
+    }
+    @Override
+    public double calculateFreethrowPointAVG() {
+        return   matches_played > 0 ?  Math.round((Double.valueOf(successful_freethrow) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateTwoPointAVG() {
+        return   matches_played > 0 ?  Math.round((Double.valueOf(successful_twopointer) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateThreePointsAVG() {
+        return   matches_played > 0 ?  Math.round((Double.valueOf(successful_threepointer) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public double calculateSteelPercentage() {
-        return   matches_played > 0 ? steal / matches_played : 0;
+        return   matches_played > 0 ? Math.round((Double.valueOf(steal) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public double calculateReboundPercentage() {
-        return   matches_played > 0 ? rebound / matches_played : 0;
+        return   matches_played > 0 ?  Math.round((Double.valueOf(rebound) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public double calculateAssistPercentage() {
-        return   matches_played > 0 ? assist / matches_played : 0;
+
+        return   matches_played > 0 ? Math.round((Double.valueOf(assist) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public double calculateBlockPercentage() {
-        return   matches_played > 0 ? block / matches_played : 0;
+        return   matches_played > 0 ? Math.round((Double.valueOf(block) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public double calculateFoulPercentage() {
-        return   matches_played > 0 ? foul / matches_played : 0;
+        return   matches_played > 0 ? Math.round((Double.valueOf(foul) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public double calculateTurnoverPercentage() {
-        return   matches_played > 0 ? turnover / matches_played : 0;
+        return   matches_played > 0 ?  Math.round((Double.valueOf(turnover) / Double.valueOf(matches_played))*100.0)/100.0 : 0;
     }
 
     public int getMatchesPlayed(){return matches_played;}

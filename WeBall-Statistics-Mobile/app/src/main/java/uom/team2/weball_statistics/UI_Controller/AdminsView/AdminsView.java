@@ -548,8 +548,8 @@ public class AdminsView extends Fragment {
                             if (sc.equals(binding.scoreText.getText().toString())) {
 
                             } else {
-                                playerStats.setterForSuccessfulFreethrow(playerStats.getTotalFreeThrow() - 1);
-                                teamStats.setterForSuccessfulFreethrow(teamStats.getTotalFreeThrow() - 1);
+                                playerStats.setterForSuccessfulFreethrow(playerStats.getSuccessfulFreeThrow() - 1);
+                                teamStats.setterForSuccessfulFreethrow(teamStats.getSuccessfulFreeThrow() - 1);
                             }
                             playerStats.setFreethrow(playerStats.getTotalFreeThrow() - 1);
                             teamStats.setFreethrow(teamStats.getTotalFreeThrow() - 1);
@@ -562,14 +562,14 @@ public class AdminsView extends Fragment {
 
 
                         } else if (binding.twoPointerButton.equals(lastAction)) {
-                            System.out.println("mpika2 re2 mlk2222");
+
                             String sc = scoreStack.pop();
                             if (sc.equals(binding.scoreText.getText().toString())) {
 
                             } else {
-                                System.out.println("mpika re mlk");
-                                playerStats.setterForSuccessfulTwoPointer(playerStats.getTotalTwoPointer() - 1);
-                                teamStats.setterForSuccessfulTwoPointer(teamStats.getTotalTwoPointer() - 1);
+
+                                playerStats.setterForSuccessfulTwoPointer(playerStats.getSuccessFulTwoPointer() - 1);
+                                teamStats.setterForSuccessfulTwoPointer(teamStats.getSuccessFulTwoPointer() - 1);
                             }
                             playerStats.setTwoPointer(playerStats.getTotalTwoPointer() - 1);
                             teamStats.setTwoPointer(teamStats.getTotalTwoPointer() - 1);
@@ -586,8 +586,8 @@ public class AdminsView extends Fragment {
                             if (sc.equals(binding.scoreText.getText().toString())) {
 
                             } else {
-                                playerStats.setterForSuccessfulThreePointer(playerStats.getTotalThreePointer() - 1);
-                                teamStats.setterForSuccessfulThreePointer(teamStats.getTotalThreePointer() - 1);
+                                playerStats.setterForSuccessfulThreePointer(playerStats.getSuccessFulThreePointer() - 1);
+                                teamStats.setterForSuccessfulThreePointer(teamStats.getSuccessFulThreePointer() - 1);
                             }
                             playerStats.setThreePointer(playerStats.getTotalThreePointer() - 1);
                             teamStats.setThreePointer(teamStats.getTotalThreePointer() - 1);

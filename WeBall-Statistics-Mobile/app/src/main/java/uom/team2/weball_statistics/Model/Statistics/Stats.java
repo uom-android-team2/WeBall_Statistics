@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import uom.team2.weball_statistics.configuration.Config;
+/*
+ * @author Ouzounidis Kyriakos iis20033
+ */
 
 public abstract class Stats implements editFieldsFromDB {
     

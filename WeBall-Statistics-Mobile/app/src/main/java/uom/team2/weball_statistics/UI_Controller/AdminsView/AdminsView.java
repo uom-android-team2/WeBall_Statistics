@@ -60,7 +60,9 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.UIHan
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 import uom.team2.weball_statistics.utils.Utils;
-
+/*
+ * @author Ouzounidis Kyriakos iis20033
+ */
 public class AdminsView extends Fragment {
     private final Stack<Team> undoTeamStack = new Stack<Team>();
     private final Stack<Player> undoPlayerStack = new Stack<Player>();

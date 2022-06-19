@@ -28,6 +28,9 @@ import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.Utils;
+/*
+ * @author Ouzounidis Kyriakos iis20033
+ */
 
 public class popupViewOnePoint extends Dialog implements android.view.View.OnClickListener {
 

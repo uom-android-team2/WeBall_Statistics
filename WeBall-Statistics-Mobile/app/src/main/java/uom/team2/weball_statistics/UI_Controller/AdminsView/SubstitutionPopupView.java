@@ -25,7 +25,9 @@ import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.configuration.Config;
-
+/*
+ * @author Ouzounidis Kyriakos iis20033
+ */
 public class SubstitutionPopupView extends Dialog {
 
     private final Player swapPlayer;

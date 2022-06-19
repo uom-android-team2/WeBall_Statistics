@@ -30,6 +30,9 @@ import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveS
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.Utils;
 
+/*
+ * @author Ouzounidis Kyriakos iis20033
+ */
 public class popupViewTwoPoints extends Dialog implements
         android.view.View.OnClickListener {
 

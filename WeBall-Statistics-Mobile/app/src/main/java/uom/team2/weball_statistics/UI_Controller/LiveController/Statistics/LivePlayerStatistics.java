@@ -195,8 +195,9 @@ public class LivePlayerStatistics extends Fragment {
         createPlayers(teamLandlordPlayers, teamLandlordPlayerViews);
         autoSelectPlayer(teamLandlordPlayers.get(0));
 
+        DAOLiveMatchService.getInstance().setListenerForTeam(true);
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamLandlordId, teamLandlordPlayers.get(0).getId());
-        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId);
+        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamLandlordId, true);
 
         if (LivePlayerStatistics.this.getActivity() != null && LivePlayerStatistics.this.isAdded()) {
             LivePlayerStatistics.this.requireActivity().runOnUiThread(new Runnable() {
@@ -248,8 +249,9 @@ public class LivePlayerStatistics extends Fragment {
         int playerSelectedId = teamSelected ? teamLandlordPlayers.get(index).getId() : teamGuestPlayers.get(index).getId();
         int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
 
+        DAOLiveMatchService.getInstance().setListenerForTeam(teamSelected);
         DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, matchId, teamSelectedId, playerSelectedId);
-        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId);
+        DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, matchId, teamSelectedId, teamSelected);
 
         String fullName = player.getName().toUpperCase(Locale.ROOT).charAt(0) + ". " + player.getSurname();
 
@@ -282,8 +284,9 @@ public class LivePlayerStatistics extends Fragment {
 
                     int teamSelectedId = teamSelected ? teamLandlordId : teamGuestId;
 
+                    DAOLiveMatchService.getInstance().setListenerForTeam(teamSelected);
                     DAOLivePlayerStatistics.getInstance().setDataChangeListener(LivePlayerStatistics.this, match.getId(), teamSelectedId, playerSelectedId);
-                    DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId);
+                    DAOLiveMatchService.getInstance().setDataListenerForPlayer(LivePlayerStatistics.this, match.getId(), teamSelectedId, teamSelected);
 
                     Utils.changeBackgroundColorInView(getContext(), playerView, R.color.alt_blue);
 

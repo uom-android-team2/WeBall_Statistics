@@ -32,6 +32,7 @@ import uom.team2.weball_statistics.configuration.Config;
 public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
     public static DAOLiveMatchService instance;
     private final DatabaseReference databaseReference;
+    private boolean listenerForTeam = true;
 
     private DAOLiveMatchService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -43,6 +44,14 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
             instance = new DAOLiveMatchService();
         }
         return instance;
+    }
+
+    public boolean isListenerForTeam() {
+        return listenerForTeam;
+    }
+
+    public void setListenerForTeam(boolean listenerForTeam) {
+        this.listenerForTeam = listenerForTeam;
     }
 
     public void setChronometerTime(int matchId, Fragment fragment, Chronometer chronometer) {
@@ -170,7 +179,7 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
         });
     }
 
-    public void setDataListenerForPlayer(LivePlayerStatistics fragment, int matchId, int teamId1) {
+    public void setDataListenerForPlayer(LivePlayerStatistics fragment, int matchId, int teamId1, boolean teamSelected) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -181,6 +190,9 @@ public class DAOLiveMatchService implements DAOCRUDService<TeamLiveStatistics> {
 
                 TeamLiveStatistics team = snapshot.child("match_id: " + matchId).child("team_id: " + teamId1).getValue(TeamLiveStatistics.class);
                 if (team == null) {
+                    return;
+                }
+                if (teamSelected != listenerForTeam) {
                     return;
                 }
                 HashMap<String, View> mapof = fragment.getMapOfStatistics();

@@ -414,7 +414,7 @@ public class AdminsView extends Fragment {
                 if (teamGuest.getKeyPlayers().size() <= 5) {
                     for (int i = 0; i < teamGuest.getKeyPlayers().size(); i++) {
                         Picasso.get()
-                                .load(Config.PLAYER_IMAGES_RESOURCES + teamLandlord.getKeyPlayers().get(i).getImagePath())
+                                .load(Config.PLAYER_IMAGES_RESOURCES + teamGuest.getKeyPlayers().get(i).getImagePath())
                                 .resize(200, 200)
                                 .centerCrop()
                                 .into(playersImageViewList.get(i));

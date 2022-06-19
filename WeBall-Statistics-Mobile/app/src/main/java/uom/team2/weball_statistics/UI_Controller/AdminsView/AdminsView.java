@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -21,6 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicReference;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 import uom.team2.weball_statistics.Model.Actions.BelongsTo;
@@ -32,6 +34,10 @@ import uom.team2.weball_statistics.Model.Actions.ReboundAction.ReboundComment;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFAction;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionComment;
 import uom.team2.weball_statistics.Model.Actions.SBFActions.SBFActionType;
+import uom.team2.weball_statistics.Model.Actions.Shots.Assist;
+import uom.team2.weball_statistics.Model.Actions.Shots.Shot;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotComment;
+import uom.team2.weball_statistics.Model.Actions.Shots.ShotType;
 import uom.team2.weball_statistics.Model.Actions.Turnover.Turnover;
 import uom.team2.weball_statistics.Model.Actions.Turnover.TurnoverComment;
 import uom.team2.weball_statistics.Model.Match;
@@ -100,6 +106,7 @@ public class AdminsView extends Fragment {
     private TextView pauseBtn;
     private TextView undoBtn;
     private TextView substitutionBtn;
+    private Assist assistMade = null;
 
     public AdminsView() {
         // Required empty public constructor
@@ -236,8 +243,6 @@ public class AdminsView extends Fragment {
                         .centerCrop()
                         .into(playersImageViewList.get(i));
             }
-
-
         }
 
 
@@ -762,13 +767,58 @@ public class AdminsView extends Fragment {
         try {
             Stats playerStats = dataRecovery.readData(Config.API_PLAYER_STATISTICS_COMPLETED, String.valueOf(playerObjChecked.getId()));
             Stats teamStats = dataRecovery.readData(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, String.valueOf(teamObj.getId()));
+
             threePointBtn.setOnClickListener(e -> {
                 undoPlayerStack.push(playerObjChecked);
                 undoTeamStack.push(teamObj);
                 undoButtonStack.push(binding.threePointerButton);
                 scoreStack.push(binding.scoreText.getText().toString());
-                popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), binding.getRoot(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
-                ppv.show();
+
+                if (assistMade == null) {
+                    popupViewThreePoints ppv = new popupViewThreePoints(getActivity(), binding.getRoot(), 3, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                    ppv.show();
+                } else {
+                    playerStats.setSuccessfulThreePointer();
+                    playerStats.setSuccessfulEffort();
+                    teamStats.setSuccessfulThreePointer();
+                    teamStats.setSuccessfulEffort();
+
+                    DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_threepointer);
+                    DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_threepointer);
+
+                    //Insert 3point's action to firebase
+                    Action treePointThrowAction = null;
+                    Action treePointThrowComment = null;
+                    if (this.match.getTeamLandlord_id() == this.playerObjChecked.getId()) {
+                        treePointThrowAction = new Shot(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade);
+                        treePointThrowComment = new ShotComment(String.valueOf(binding.clock.getText().toString()), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
+                    } else if (this.match.getTeamguest_id() == this.teamObj.getId()) {
+                        treePointThrowAction = new Shot(String.valueOf(binding.clock.getText().toString()), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade);
+                        treePointThrowComment = new ShotComment(String.valueOf(binding.clock.getText().toString()), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.THREE_POINTER, true, this.assistMade, getContext());
+                    }
+
+                    if (treePointThrowAction != null) {
+                        DAOAction.getInstance().insertAction(treePointThrowAction, match);
+                    }
+
+                    if (treePointThrowComment != null) {
+                        DAOAction.getInstance().insertCommentDesc(treePointThrowComment, match);
+                    }
+
+                    playerStats.setTotalThreePointer();
+                    playerStats.setTotalEffort();
+                    teamStats.setTotalThreePointer();
+                    teamStats.setTotalEffort();
+                    try {
+                        dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                        dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    Utils.createSnackbar(binding.getRoot(), "Successful three-pointer for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+                    enableButtonAfterAssistAndShoot(255);
+                }
             });
             freeThrowBtn.setOnClickListener(e -> {
 
@@ -787,9 +837,51 @@ public class AdminsView extends Fragment {
                 undoTeamStack.push(teamObj);
                 undoButtonStack.push(binding.twoPointerButton);
                 scoreStack.push(binding.scoreText.getText().toString());
-                popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), binding.getRoot(), 2, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                if (assistMade == null) {
+                    popupViewTwoPoints ppv = new popupViewTwoPoints(getActivity(), binding.getRoot(), 2, playerStats, teamStats, dataRecovery, match, teamObj, playerObjChecked, binding.clock.getText().toString());
+                    ppv.show();
+                } else {
+                    playerStats.setSuccessfulTwoPointer();
+                    playerStats.setSuccessfulEffort();
+                    teamStats.setSuccessfulTwoPointer();
+                    teamStats.setSuccessfulEffort();
 
-                ppv.show();
+                    DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_twopointer);
+                    DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), teamObj.getId(), LiveStatisticsEnum.successful_twopointer);
+                    //Insert 2point's action to firebase
+                    Action twoPointThrowAction = null;
+                    Action twoPointThrowComment = null;
+                    if (this.match.getTeamLandlord_id() == teamObj.getId()) {
+                        twoPointThrowAction = new Shot(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.TWO_POINTER, true, this.assistMade);
+                        twoPointThrowComment = new ShotComment(binding.clock.getText().toString(), BelongsTo.HOME, playerObjChecked, teamObj, ShotType.TWO_POINTER, true, this.assistMade, getContext());
+                    } else if (this.match.getTeamguest_id() == teamObj.getId()) {
+                        twoPointThrowAction = new Shot(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.TWO_POINTER, true, this.assistMade);
+                        twoPointThrowComment = new ShotComment(binding.clock.getText().toString(), BelongsTo.GUEST, playerObjChecked, teamObj, ShotType.TWO_POINTER, true, this.assistMade, getContext());
+                    }
+
+                    if (twoPointThrowAction != null) {
+                        DAOAction.getInstance().insertAction(twoPointThrowAction, match);
+                    }
+
+                    if (twoPointThrowComment != null) {
+                        DAOAction.getInstance().insertCommentDesc(twoPointThrowComment, match);
+                    }
+
+                    playerStats.setTotalTwoPointer();
+                    playerStats.setTotalEffort();
+                    teamStats.setTotalTwoPointer();
+                    teamStats.setTotalEffort();
+
+                    try {
+                        dataRecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);
+                        dataRecovery.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamStats);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    Utils.createSnackbar(binding.getRoot(), "Successful two-pointer for" + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+                    enableButtonAfterAssistAndShoot(255);
+                }
             });
 
             reboundBtn.setOnClickListener(e -> {
@@ -816,6 +908,7 @@ public class AdminsView extends Fragment {
             });
             assistBtn.setOnClickListener(e -> {
                 updateAssist(playerStats, teamStats, dataRecovery, false);
+                disableButtonsAfterAssist(120);
             });
             stealBtn.setOnClickListener(e -> {
                 updateSteal(playerStats, teamStats, dataRecovery, false);
@@ -910,7 +1003,7 @@ public class AdminsView extends Fragment {
         if (!isUndo) {
             playerStats.setTotalAssists();
             teamStats.setTotalAssists();
-            Utils.createSnackbar(binding.getRoot(), "Assist for " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
+            Utils.createSnackbar(binding.getRoot(), "Assist made by " + playerObjChecked.getName() + " " + playerObjChecked.getSurname(), R.color.success_green).show();
             undoPlayerStack.push(playerObjChecked);
             undoTeamStack.push(teamObj);
             undoButtonStack.push(binding.assistButton);
@@ -1139,6 +1232,47 @@ public class AdminsView extends Fragment {
         } else if (playerChecked == 5) {
             binding.player5.setBackgroundColor(0x00000000);
         }
+    }
+
+    public void disableButtonsAfterAssist(int alpha) {
+        freeThrowBtn.setEnabled(false);
+        freeThrowBtn.getBackground().setAlpha(alpha);
+        reboundBtn.setEnabled(false);
+        reboundBtn.getBackground().setAlpha(alpha);
+        assistBtn.setEnabled(false);
+        assistBtn.getBackground().setAlpha(alpha);
+        stealBtn.setEnabled(false);
+        stealBtn.getBackground().setAlpha(alpha);
+        blockBtn.setEnabled(false);
+        blockBtn.getBackground().setAlpha(alpha);
+        turnoverBtn.setEnabled(false);
+        turnoverBtn.getBackground().setAlpha(alpha);
+        substitutionBtn.setEnabled(false);
+        substitutionBtn.getBackground().setAlpha(alpha);
+        foulBtn.setEnabled(false);
+        foulBtn.getBackground().setAlpha(alpha);
+
+        this.assistMade = new Assist(playerObjChecked);
+    }
+
+    public void enableButtonAfterAssistAndShoot(int alpha) {
+        freeThrowBtn.getBackground().setAlpha(alpha);
+        reboundBtn.setEnabled(true);
+        reboundBtn.getBackground().setAlpha(alpha);
+        assistBtn.setEnabled(true);
+        assistBtn.getBackground().setAlpha(alpha);
+        stealBtn.setEnabled(true);
+        stealBtn.getBackground().setAlpha(alpha);
+        blockBtn.setEnabled(true);
+        blockBtn.getBackground().setAlpha(alpha);
+        turnoverBtn.setEnabled(true);
+        turnoverBtn.getBackground().setAlpha(alpha);
+        substitutionBtn.setEnabled(true);
+        substitutionBtn.getBackground().setAlpha(alpha);
+        foulBtn.setEnabled(true);
+        foulBtn.getBackground().setAlpha(alpha);
+
+        this.assistMade = null;
     }
 
 

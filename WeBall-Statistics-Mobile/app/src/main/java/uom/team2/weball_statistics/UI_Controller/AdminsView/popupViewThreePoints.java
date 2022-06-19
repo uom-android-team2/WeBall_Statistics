@@ -146,7 +146,6 @@ public class popupViewThreePoints extends Dialog implements
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
 }

@@ -34,13 +34,22 @@ import uom.team2.weball_statistics.databinding.FragmentLeadersStatsBinding;
  *  @author Evmorfia Elpida Dasyra ics20006
  */
 
+/*
+ * Description
+ * Leaders Stats shows Players' Championship Statistics by certain categories
+ * for example, top 5 players so far in Points Per Game are:
+ * Giannis Antetkoumpo with 50 points/game,
+ * Lukas Doncic with 45 points/game,
+ * Lebron James with 43 points/game
+ * ... etc
+*/
 public class LeadersStats extends Fragment {
 
     private String[] statsNames;
     private FragmentLeadersStatsBinding binding;
 
     public LeadersStats() {
-        statsNames = new String[] {"Points Per Game","Assist Per Game", "Rebounds Per Game", "Blocks Per Game", "Fouls Per Game"};
+        statsNames = new String[] {"Points Per Game","Assists Per Game", "Rebounds Per Game", "Blocks Per Game", "Fouls Per Game"};
     }
 
     public static LeadersStats newInstance() {
@@ -71,7 +80,9 @@ public class LeadersStats extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
+        //player service retrieves players' data from db
         PlayerService playerService = new PlayerService();
+        // playerChampionshipStatsService retrieves players' statistics in championship so far
         PlayerChampionshipStatsService playerChampionshipStatsService = new PlayerChampionshipStatsService();
 
         playerChampionshipStatsService.getAllPlayerStatistics(new CallbackListener<ArrayList<PlayerStats>>() {
@@ -83,18 +94,17 @@ public class LeadersStats extends Fragment {
                 ArrayList<PlayerStats> rebounds = new ArrayList<>();
                 ArrayList<PlayerStats> fouls = new ArrayList<>();
 
-                //sort every arrayList
+                //sort every list by statisticValue
                 points = sortByPoints(returnedObject);
                 assists = sortByAssists(returnedObject);
                 blocks = sortByBlocks(returnedObject);
                 rebounds = sortByRebounds(returnedObject);
                 fouls = sortByFouls(returnedObject);
 
-                System.out.println("ASS " + assists.get(0).getPlayer_id()+" " +assists.get(0).calculateAssistPercentage());
-                System.out.println("ASS " + assists.get(1).getPlayer_id()+" " +assists.get(1).calculateAssistPercentage());
-                System.out.println("ASS " + assists.get(2).getPlayer_id()+" " +assists.get(2).calculateAssistPercentage());
+//                System.out.println("assist for 1st player " + assists.get(0).getPlayer_id()+" " +assists.get(0).calculateAssistPercentage());
+//                System.out.println("assist for 2nd player " + assists.get(1).getPlayer_id()+" " +assists.get(1).calculateAssistPercentage());
+//                System.out.println("assist for 3rd player " + assists.get(2).getPlayer_id()+" " +assists.get(2).calculateAssistPercentage());
 
-//
                 //add titles
                 addTitles();
 
@@ -132,7 +142,7 @@ public class LeadersStats extends Fragment {
         binding.BPG.ranktab.rankTabStat.setText("BPG");
         binding.FPG.ranktab.rankTabStat.setText("FPG");
     }
-
+    
     public void changeTopPlayerLayout(LinearLayout linearLayout, String value){
 
         if (this.getActivity() != null && this.isAdded()) {
@@ -380,6 +390,12 @@ public class LeadersStats extends Fragment {
             }
         });
         return new ArrayList<>(list);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     enum Type {POINTS, ASSISTS, BLOCKS, REBOUNDS, FOULS}

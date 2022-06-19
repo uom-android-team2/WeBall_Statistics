@@ -9,6 +9,9 @@ import com.squareup.picasso.Transformation;
 
 /*
  * @author Evmorfia ELpida Dasyra ics20006
+ *
+ * this class is used for making rounded ImageViews
+ * with Picasso
  */
 public class RoundedCorners implements Transformation {
     @Override

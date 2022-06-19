@@ -3,6 +3,8 @@ package uom.team2.weball_statistics.utils;
 import android.content.Context;
 import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
+
 /*
  *@author Leonard Pepa ics20033
  */
@@ -19,6 +21,5 @@ public class Utils {
     public static void changeBackgroundColorInView(Context context, View view, int colorId) {
         view.setBackgroundColor(Utils.getColor(context, colorId));
     }
-
 
 }

@@ -25,8 +25,10 @@ import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.Service.DAOLiveMatchService;
 import uom.team2.weball_statistics.Service.DAOLivePlayerStatistics;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.LiveStatisticsEnum;
 import uom.team2.weball_statistics.configuration.Config;
+import uom.team2.weball_statistics.utils.Utils;
 
 public class popupViewTwoPoints extends Dialog implements
         android.view.View.OnClickListener {
@@ -37,6 +39,7 @@ public class popupViewTwoPoints extends Dialog implements
     private final Team team;
     private final Player player;
     private final String time; //For the action when happened;
+    private final View view;
     public Activity c;
     public Dialog d;
     public Button yes, no;
@@ -44,8 +47,7 @@ public class popupViewTwoPoints extends Dialog implements
     Stats teamStats;
     private String str;
 
-
-    public popupViewTwoPoints(Activity a, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match match, Team team, Player player, String time) {
+    public popupViewTwoPoints(Activity a, View view, int p, Stats ps, Stats ts, DBDataRecovery dbd, Match match, Team team, Player player, String time) {
         super(a);
         points = p;
         dbdatarecovery = dbd;
@@ -57,6 +59,7 @@ public class popupViewTwoPoints extends Dialog implements
         this.time = time;
         // TODO Auto-generated constructor stub
         this.c = a;
+        this.view = view;
     }
 
     @Override
@@ -91,8 +94,7 @@ public class popupViewTwoPoints extends Dialog implements
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.successful_twopointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.successful_twopointer);
 
-                Toast.makeText(c.getApplicationContext(),"Successful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
-
+                LayoutFactory.createSnackbar(view, "Successful two-pointer for" + player.getName() + " " + player.getSurname(), R.color.success_green).show();
                 //Insert 2point's action to firebase
                 Action twoPointThrowAction = null;
                 Action twoPointThrowComment = null;
@@ -117,7 +119,9 @@ public class popupViewTwoPoints extends Dialog implements
             case R.id.dialog_No:
                 DAOLiveMatchService.getInstance().updateByMatchAndTeamId(match.getId(), team.getId(), LiveStatisticsEnum.total_twopointer);
                 DAOLivePlayerStatistics.getInstance().updateByMatchAndTeamId(match.getId(), player.getId(), LiveStatisticsEnum.total_twopointer);
-                Toast.makeText(c.getApplicationContext(),"Unsuccessful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
+                LayoutFactory.createSnackbar(view, "Unsuccessful two-pointer for" + player.getName() + " " + player.getSurname(), R.color.missed)
+                        .setTextColor(Utils.getColor(getContext(), R.color.black)).show();
+                Toast.makeText(c.getApplicationContext(), "Unsuccessful two-pointer for" + player.getName() + " " + player.getSurname(), Toast.LENGTH_LONG).show();
                 Action twoPointThrowCommentMissed = null;
                 if (this.match.getTeamLandlord_id() == this.team.getId()) {
                     twoPointThrowCommentMissed = new ShotComment(String.valueOf(time), BelongsTo.HOME, player, team, ShotType.TWO_POINTER, false, null, getContext());
@@ -138,7 +142,6 @@ public class popupViewTwoPoints extends Dialog implements
         playerStats.setTotalEffort();
         teamStats.setTotalTwoPointer();
         teamStats.setTotalEffort();
-
 
 
         try {

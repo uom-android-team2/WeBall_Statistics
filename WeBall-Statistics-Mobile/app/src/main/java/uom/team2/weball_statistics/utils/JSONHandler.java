@@ -15,7 +15,7 @@ import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 
 /*
- * @author Leonard Pepa ics20033
+ * @author Leonard Pepa ics20033 and Dionisis Lougaris ics20058
  */
 public class JSONHandler {
 

@@ -16,7 +16,9 @@ import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Team;
 
 import uom.team2.weball_statistics.databinding.CompletedMatchStatsBinding;
-
+/*
+ * @author George Stefou ics20051 and Dionisis Lougaris ics20058 and Minas Theodoros Charakopoulos ics20072
+ */
 public class CompletedMatchStats extends Fragment {
 
     private CompletedMatchStatsUIController completedMatchStatsUIController = CompletedMatchStatsUIController.getInstance();

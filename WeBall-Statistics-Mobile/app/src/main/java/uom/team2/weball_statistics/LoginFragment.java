@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.io.IOException;
 
 import uom.team2.weball_statistics.Model.LoginAdmin;
+import uom.team2.weball_statistics.UIFactory.LayoutFactory;
 import uom.team2.weball_statistics.databinding.FragmentLoginBinding;
 
 
@@ -45,12 +44,13 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        if (binding != null) {
+            username = binding.textUsername;
+            password = binding.textPassword;
+            loginButton = binding.btnLogin;
 
-        username = binding.textUsername;
-        password = binding.textPassword;
-        loginButton = binding.btnLogin;
-
-        loginButton.setOnClickListener(e -> checkLogin());
+            loginButton.setOnClickListener(e -> checkLogin());
+        }
     }
 
     private void checkLogin() {
@@ -63,12 +63,12 @@ public class LoginFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("isAdmin", true);
                     bundle.putString("username", username.getText().toString());
-
                     NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_matchesTabContainer, bundle);
                 } else {
                     username.setText("");
                     password.setText("");
-                    Toast.makeText(getActivity().getApplicationContext(), "No correct Credits.Please try again", Toast.LENGTH_LONG).show();
+
+                    LayoutFactory.createSnackbar(binding.getRoot(), "No correct Credits.Please try again", R.color.red).show();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -76,7 +76,7 @@ public class LoginFragment extends Fragment {
         } else {
             username.setText("");
             password.setText("");
-            Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password format.Please try again", Toast.LENGTH_LONG).show();
+            LayoutFactory.createSnackbar(binding.getRoot(), "Invalid username or password format.Please try again", R.color.red).show();
         }
     }
 

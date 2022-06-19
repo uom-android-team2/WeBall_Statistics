@@ -67,7 +67,8 @@
         tools:layout="@layout/fragment_admins_view" >
         <action
             android:id="@+id/action_adminsView_to_matchesTabContainer"
-            app:destination="@id/matchesTabContainer" />
+            app:destination="@id/matchesTabContainer"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/sharedTabContainer"

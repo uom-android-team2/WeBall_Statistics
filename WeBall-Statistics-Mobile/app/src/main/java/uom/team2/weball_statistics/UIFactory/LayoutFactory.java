@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
 import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.configuration.Config;
+import uom.team2.weball_statistics.utils.Utils;
 
 /*
  * @author Leonard Pepa ics20033
@@ -67,4 +69,9 @@ public class LayoutFactory {
         return progress;
     }
 
+    public static Snackbar createSnackbar(View view, String text, int color) {
+        Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT);
+        snackbar.setBackgroundTint(Utils.getColor(view.getContext(), color));
+        return snackbar;
+    }
 }

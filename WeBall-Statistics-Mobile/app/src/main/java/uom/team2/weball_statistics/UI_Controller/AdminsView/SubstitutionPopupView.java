@@ -15,9 +15,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import uom.team2.weball_statistics.Model.Actions.Action;
+import uom.team2.weball_statistics.Model.Actions.BelongsTo;
+import uom.team2.weball_statistics.Model.Actions.Substitution.Substitution;
+import uom.team2.weball_statistics.Model.Actions.Substitution.SubstitutionComment;
+import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.R;
+import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.configuration.Config;
 
 public class SubstitutionPopupView extends Dialog {
@@ -33,14 +39,18 @@ public class SubstitutionPopupView extends Dialog {
     private String n;
     private Player helperVariable;
     private ArrayList<ImageView> views = new ArrayList<>();
+    private String timeHappened;
+    private Match match;
 
-    public SubstitutionPopupView(Activity a, Player p, Team t, int pChecked, ArrayList<ImageView> views) {
+    public SubstitutionPopupView(Activity a, Player p, Team t, int pChecked, ArrayList<ImageView> views, String timeHappened, Match match) {
         super(a);
         swapPlayer = p;
         team = t;
         this.playerChecked = pChecked - 1;
         this.c = a;
         this.views = views;
+        this.timeHappened = timeHappened;
+        this.match = match;
     }
 
     @Override
@@ -71,6 +81,8 @@ public class SubstitutionPopupView extends Dialog {
                     team.setSubPlayers(map.get(v), swapPlayer);
                     team.setKeyPlayers(playerChecked, helperVariable);
 
+                    insertSubAction(); //Insert sub action to firebase
+
                     Picasso.get().load(Config.PLAYER_IMAGES_RESOURCES + helperVariable.getImagePath())
                             .centerCrop()
                             .resize(200, 200)
@@ -88,10 +100,26 @@ public class SubstitutionPopupView extends Dialog {
                 dismiss();
             }
         });
+    }
 
-        //
+    public void insertSubAction() {
+        Action substitutionAction = null;
+        Action substitutionComment = null;
+        if (team.getId() == match.getTeamLandlord_id()) {
+            substitutionAction = new Substitution(timeHappened, BelongsTo.HOME, helperVariable, swapPlayer,  team);
+            substitutionComment = new SubstitutionComment(timeHappened, BelongsTo.HOME, helperVariable, swapPlayer,  team, getContext());
+        } else {
+            substitutionAction = new Substitution(timeHappened, BelongsTo.GUEST, helperVariable, swapPlayer, team);
+            substitutionComment = new SubstitutionComment(timeHappened, BelongsTo.GUEST, helperVariable, swapPlayer,  team, getContext());
+        }
 
+        if (substitutionAction != null) {
+            DAOAction.getInstance().insertAction(substitutionAction, match);
+        }
 
+        if (substitutionComment != null) {
+            DAOAction.getInstance().insertCommentDesc(substitutionComment, match);
+        }
     }
 
 }

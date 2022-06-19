@@ -28,7 +28,7 @@ import uom.team2.weball_statistics.Service.MatchService;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.FragmentAdminsViewBinding;
 
-public class FinishGameDialog extends Dialog implements android.view.View.OnClickListener{
+public class FinishGameDialog extends Dialog implements android.view.View.OnClickListener {
 
     private FragmentAdminsViewBinding fragmentAdminsViewBinding;
     private Match match;
@@ -71,58 +71,50 @@ public class FinishGameDialog extends Dialog implements android.view.View.OnClic
                 int scoreTeamLandlord = Integer.parseInt(scores[0].trim());
                 int scoreTeamGuest = Integer.parseInt(scores[1].trim());
 
-                if(scoreTeamLandlord != scoreTeamGuest){
+                this.fragmentAdminsViewBinding.clock.stop();
+                this.fragmentAdminsViewBinding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                this.fragmentAdminsViewBinding.startButton.setText("Finished");
+                this.fragmentAdminsViewBinding.undoButton.setText("-");
+                this.fragmentAdminsViewBinding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
+                this.fragmentAdminsViewBinding.pauseButton.setText("-");
+                match.setStatus(Status.COMPLETED);
+                this.disableButtonsColorOnAdminsPanel(120);
+                this.disableButtonsOnAdminsPanel();
 
-                    this.fragmentAdminsViewBinding.clock.stop();
-                    this.fragmentAdminsViewBinding.startButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                    this.fragmentAdminsViewBinding.startButton.setText("Finished");
-                    this.fragmentAdminsViewBinding.undoButton.setText("-");
-                    this.fragmentAdminsViewBinding.pauseButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
-                    this.fragmentAdminsViewBinding.pauseButton.setText("-");
-                    match.setStatus(Status.COMPLETED);
+                //Add completed action description to firebase
+                Action completedMatchAction = new MatchFlow(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED);
+                DAOAction.getInstance().insertAction(completedMatchAction, match);
+                //Add completed comment description to firebase
+                Action completedMatchComment = new MatchFlowComment(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED, getContext());
+                DAOAction.getInstance().insertCommentDesc(completedMatchComment, match);
 
-                    this.disableButtonsColorOnAdminsPanel(120);
-                    this.disableButtonsOnAdminsPanel();
+                match.setCompleted(true);
+                match.setProgress(0);
+                MatchService ms = new MatchService();
+                try {
+                    ms.statusUpdate(match);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                    //Add completed action description to firebase
-                    Action completedMatchAction = new MatchFlow(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED);
-                    DAOAction.getInstance().insertAction(completedMatchAction, match);
-                    //Add completed comment description to firebase
-                    Action completedMatchComment = new MatchFlowComment(this.fragmentAdminsViewBinding.clock.getText().toString(), FlowType.COMPLETED, getContext());
-                    DAOAction.getInstance().insertCommentDesc(completedMatchComment, match);
+                if (teamLandlordStats != null && teamGuestStats != null) {
 
-                    match.setCompleted(true);
-                    match.setProgress(0);
-                    MatchService ms = new MatchService();
-                    try {
-                        ms.statusUpdate(match);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (scoreTeamLandlord > scoreTeamGuest) {
+                        ((TeamStats) teamLandlordStats).setWins();
+                        ((TeamStats) teamGuestStats).setLoses();
                     }
 
-                    if(teamLandlordStats != null && teamGuestStats != null){
-
-                        if(scoreTeamLandlord > scoreTeamGuest){
-                            ((TeamStats)teamLandlordStats).setWins();
-                            ((TeamStats) teamGuestStats).setLoses();
-                        }
-
-                        if(scoreTeamLandlord < scoreTeamGuest){
-                            ((TeamStats)teamGuestStats).setWins();
-                            ((TeamStats) teamLandlordStats).setLoses();
-                        }
-
+                    if (scoreTeamLandlord < scoreTeamGuest) {
+                        ((TeamStats) teamGuestStats).setWins();
+                        ((TeamStats) teamLandlordStats).setLoses();
                     }
+                }
 
-                    try {
-                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamLandlordStats);
-                        teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED,teamGuestStats);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }else{
-                    Toast.makeText(ct.getApplicationContext(),"This match has not a winner yet.Please continue.", Toast.LENGTH_LONG).show();
+                try {
+                    teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamLandlordStats);
+                    teamsPlayed.updateDataDB(Config.API_ΤΕΑΜ_STATISTICS_COMPLETED, teamGuestStats);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
                 dismiss();

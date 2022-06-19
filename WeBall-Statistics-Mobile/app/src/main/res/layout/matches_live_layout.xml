@@ -20,6 +20,18 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/match_start_date3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/match_start_date_text"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imageButtonDropdown"
+                app:layout_constraintEnd_toStartOf="@+id/team2"
+                app:layout_constraintStart_toEndOf="@+id/team1"
+                app:layout_constraintTop_toBottomOf="@+id/score_text" />
+
+            <TextView
                 android:id="@+id/score_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

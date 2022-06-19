@@ -14,7 +14,11 @@ import uom.team2.weball_statistics.Model.TeamLiveStatistics;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
-public class BestStarting5Factory {
+
+/*
+ * @author Dionisis Lougaris ics20058
+ */
+public class BestStarting5Model {
 
     private ArrayList<Match> allMatches = new ArrayList<Match>();
     private ArrayList<PlayerLiveStatistics> allPlayerLiveStatistics= new ArrayList<>();
@@ -30,11 +34,12 @@ public class BestStarting5Factory {
     //Get statistics from db for all players during their last match
     //Calculate Effic for every player
 
-    public BestStarting5Factory() throws JSONException, IOException {
+    public BestStarting5Model() throws JSONException, IOException {
         //Chaining all methods
-        this.getCompletedMatches();
-        this.getPlayerLiveStatistics();
-        this.getPlayers();
+        allMatches=BestStarting5Service.getCompletedMatches();
+        allLatestMatches = this.removePreviousWeekMatches(allMatches);
+        allPlayerLiveStatistics=BestStarting5Service.getPlayerLiveStatistics();
+        allPlayers=BestStarting5Service.getPlayers();
         this.cleanData();
         this.getBestStarting5();
 
@@ -60,52 +65,6 @@ public class BestStarting5Factory {
                 -(myStats.getTotal_freethrow()-myStats.getSuccessful_freethrow());
         return teamEffic;
     }
-        int maxEfficPG=-100;
-        int maxEfficSG=-100;
-        int maxEfficSF=-100;
-        int maxEfficPF=-100;
-        int maxEfficC=-100;
-
-    public void getCompletedMatches() throws IOException, JSONException {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        Request request = new Request.Builder()
-                .url(Config.API_URL+"match.php?completed=true")
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = client.newCall(request).execute();
-        allMatches = JSONHandler.deserializeListOfMatches(response.body().string());
-        allLatestMatches = this.removePreviousWeekMatches(allMatches);
-    }
-    public void getPlayerLiveStatistics()throws IOException, JSONException {
-        OkHttpClient client2 = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType2 = MediaType.parse("application/json");
-        Request request2 = new Request.Builder()
-                .url(Config.API_URL+"playerLiveStatistics.php")
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response2 = client2.newCall(request2).execute();
-        allPlayerLiveStatistics = JSONHandler.deserializeListOfPlayerLiveStatistics(response2.body().string());
-    }
-
-    public void getPlayers()throws IOException, JSONException {
-        OkHttpClient client3 = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType3 = MediaType.parse("application/json");
-        Request request3 = new Request.Builder()
-                .url(Config.API_URL+"player.php")
-                .method("GET", null)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response3 = client3.newCall(request3).execute();
-        allPlayers = JSONHandler.deserializeListOfPlayers2(response3.body().string());
-    }
 
     public void cleanData() {
         //Getting playerstatistics for all COMPLETED LATEST matches
@@ -115,6 +74,13 @@ public class BestStarting5Factory {
             }
         }
     }
+
+                                    int maxEfficPG=-100;
+                                    int maxEfficSG=-100;
+                                    int maxEfficSF=-100;
+                                    int maxEfficPF=-100;
+                                    int maxEfficC=-100;
+
 
     public void getBestStarting5() {
         System.out.println("----------------------------");

@@ -157,7 +157,8 @@ public class PreviousMatches extends Fragment {
                 mapOfMatches.put(liveMatches.get(i).getId(), liveMatches.get(i));
                 Pair<Team> pair = new Pair<Team>();
                 View viewMatch = getLayoutInflater().inflate(R.layout.matches_previous_layout, null);
-
+                TextView dateView = viewMatch.findViewById(R.id.match_start_date2);
+                dateView.setText("Week " + liveMatches.get(i).getDate());
                 DAOLiveMatchService.getInstance().setListenerForPoints(PreviousMatches.this,
                         viewMatch.findViewById(R.id.score_text),
                         liveMatches.get(i).getId(),

@@ -46,4 +46,7 @@
     <color name="Bulls">#FF6164</color>
     <color name="Nuggets">#FCF982</color>
 
+    <color name="success_green">#198754</color>
+    <color name="missed">#EFF0C0</color>
+
 </resources>

@@ -4,24 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.fragment.app.*;
-import androidx.navigation.fragment.NavHostFragment;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 
-import uom.team2.weball_statistics.Model.Player;
-import uom.team2.weball_statistics.R;
 import uom.team2.weball_statistics.databinding.FragmentBestStarting5Binding;
 
+
+/*
+ * @author Dionisis Lougaris ics20058
+ */
 public class BestStarting5 extends Fragment {
 
     private FragmentBestStarting5Binding binding;
-    private BestStarting5Controller bestStarting5Controller = BestStarting5Controller.getInstance();
+    private BestStarting5UIController bestStarting5UIController = BestStarting5UIController.getInstance();
 
     public BestStarting5() { }
 
@@ -39,12 +38,12 @@ public class BestStarting5 extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentBestStarting5Binding.inflate(inflater, container, false);
         try {
-            BestStarting5Factory bs5 = new BestStarting5Factory();
-            this.bestStarting5Controller.fillBestPointGuardInfo(bs5.getBestPG(), this);
-            this.bestStarting5Controller.fillBestShootingGuardInfo(bs5.getBestSG(), this);
-            this.bestStarting5Controller.fillBestSmallForwardInfo(bs5.getBestSF(), this);
-            this.bestStarting5Controller.fillBestPowerForwardInfo(bs5.getBestPF(), this);
-            this.bestStarting5Controller.fillBestCenterInfo(bs5.getBestC(), this);
+            BestStarting5Model bs5 = new BestStarting5Model();
+            this.bestStarting5UIController.fillBestPointGuardInfo(bs5.getBestPG(), this);
+            this.bestStarting5UIController.fillBestShootingGuardInfo(bs5.getBestSG(), this);
+            this.bestStarting5UIController.fillBestSmallForwardInfo(bs5.getBestSF(), this);
+            this.bestStarting5UIController.fillBestPowerForwardInfo(bs5.getBestPF(), this);
+            this.bestStarting5UIController.fillBestCenterInfo(bs5.getBestC(), this);
 
         } catch (JSONException e) {
             e.printStackTrace();

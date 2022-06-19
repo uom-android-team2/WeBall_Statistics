@@ -1,5 +1,6 @@
 package uom.team2.weball_statistics.UI_Controller.LiveController;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class MatchHeaderFragment extends Fragment {
     private Match match;
     private Team teamLandlord;
     private Team teamGuest;
+    private ProgressDialog progressDialog;
 
     public MatchHeaderFragment() {
 
@@ -50,9 +52,9 @@ public class MatchHeaderFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = MatchHeaderLayoutBinding.inflate(inflater, container, false);
-
         Bundle bundle = getArguments();
         if (bundle != null) {
+
             match = (Match) bundle.getSerializable("match");
             teamLandlord = (Team) bundle.getSerializable("teamLandlord");
             teamGuest = (Team) bundle.getSerializable("teamGuest");
@@ -64,11 +66,12 @@ public class MatchHeaderFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (match != null && teamGuest != null && teamGuest != null) {
+        if (binding != null && match != null && teamGuest != null && teamGuest != null) {
             UIHandler.updateTeamImageInMatch(this, teamLandlord, binding.team1.getRoot());
             UIHandler.updateTeamImageInMatch(this, teamGuest, binding.team2.getRoot());
             DAOLiveMatchService.getInstance().clockDataListener(this, binding.clock.clockText, match.getId());
             DAOLiveMatchService.getInstance().setListenerForPoints(this, binding.scoreText, match.getId(), teamLandlord.getId(), teamGuest.getId());
+            binding.matchHeaderWeek.setText("Week " + match.getDate());
         }
     }
 

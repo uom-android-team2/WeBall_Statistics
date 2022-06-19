@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,25 +15,25 @@ import java.util.ArrayList;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import uom.team2.weball_statistics.Model.Match;
 import uom.team2.weball_statistics.Model.Player;
 import uom.team2.weball_statistics.Model.PlayerLiveStatistics;
 import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Model.TeamLiveStatistics;
-import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5;
-import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Factory;
+import uom.team2.weball_statistics.UI_Controller.best_starting5.BestStarting5Model;
 import uom.team2.weball_statistics.configuration.Config;
 import uom.team2.weball_statistics.databinding.CompleteMatchLeadersBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchHeaderLayoutBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchTeamPlayerStatsBinding;
 import uom.team2.weball_statistics.databinding.CompletedMatchTeamStatsBinding;
-import uom.team2.weball_statistics.databinding.LiveStatisticsProgressbarLayoutBinding;
 import uom.team2.weball_statistics.utils.JSONHandler;
 
 //--------------------CLASS NEEDS REFACTORING--------------------
 
+/*
+ * @author George Stefou ics20051 and Dionisis Lougaris ics20058
+ */
 public class CompletedMatchStatsUIController {
 
     private TeamLiveStatistics homeTeamLiveStats;
@@ -184,32 +183,32 @@ public class CompletedMatchStatsUIController {
         //Sorting stats to the best 5 for the home team
         for(int i=0;i<filteredAllHomePlayerStats.size();i++){
             if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxPGH) {
-                    maxPGH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i))>maxPGH) {
+                    maxPGH= BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i));
                     bestPgH=filteredAllHomePlayerStats.get(i);
                 }
             }
             else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SHOOTING_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxSGH) {
-                    maxSGH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i))>maxSGH) {
+                    maxSGH= BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i));
                     bestSgH=filteredAllHomePlayerStats.get(i);
                 }
             }
             else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("SMALL_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxSFH) {
-                    maxSFH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i))>maxSFH) {
+                    maxSFH= BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i));
                     bestSfH=filteredAllHomePlayerStats.get(i);
                 }
             }
             else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POWER_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxPFH) {
-                    maxPFH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i))>maxPFH) {
+                    maxPFH= BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i));
                     bestPfH=filteredAllHomePlayerStats.get(i);
                 }
             }
             else if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("CENTER")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i))>maxCH) {
-                    maxCH=BestStarting5Factory.calculateEffic(filteredAllHomePlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i))>maxCH) {
+                    maxCH= BestStarting5Model.calculateEffic(filteredAllHomePlayerStats.get(i));
                     bestCH=filteredAllHomePlayerStats.get(i);
                 }
             }
@@ -226,32 +225,32 @@ public class CompletedMatchStatsUIController {
         //Sorting stats to the best 5 for the away team
         for(int i=0;i<filteredAllAwayPlayerStats.size();i++){
             if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxPGA) {
-                    maxPGA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxPGA) {
+                    maxPGA= BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i));
                     bestPgA=filteredAllAwayPlayerStats.get(i);
                 }
             }
             else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("SHOOTING_GUARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxSGA) {
-                    maxSGA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxSGA) {
+                    maxSGA= BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i));
                     bestSgA=filteredAllAwayPlayerStats.get(i);
                 }
             }
             else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("SMALL_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxSFA) {
-                    maxSFA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxSFA) {
+                    maxSFA= BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i));
                     bestSfA=filteredAllAwayPlayerStats.get(i);
                 }
             }
             else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("POWER_FORWARD")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxPFA) {
-                    maxPFA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxPFA) {
+                    maxPFA= BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i));
                     bestPfA=filteredAllAwayPlayerStats.get(i);
                 }
             }
             else if(findPlayerById(awayTeamPlayers,filteredAllAwayPlayerStats.get(i).getPlayer_id()).getPosition().equals("CENTER")) {
-                if(BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxCA) {
-                    maxCA=BestStarting5Factory.calculateEffic(filteredAllAwayPlayerStats.get(i));
+                if(BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i))>maxCA) {
+                    maxCA= BestStarting5Model.calculateEffic(filteredAllAwayPlayerStats.get(i));
                     bestCA=filteredAllAwayPlayerStats.get(i);
                 }
             }
@@ -736,8 +735,8 @@ public class CompletedMatchStatsUIController {
         TextView homeTurnoversValue = completedMatchTeamStatsBinding.homeTurnoversValue;
         TextView awayTurnoversValue = completedMatchTeamStatsBinding.awayTurnoversValue;
 
-        int homeTeamEffiency = BestStarting5Factory.calculateTeamEffic(homeTeamLiveStats);
-        int awayTeamEffiency = BestStarting5Factory.calculateTeamEffic(awayTeamLiveStats);
+        int homeTeamEffiency = BestStarting5Model.calculateTeamEffic(homeTeamLiveStats);
+        int awayTeamEffiency = BestStarting5Model.calculateTeamEffic(awayTeamLiveStats);
 
         homeEf.setMax(homeTeamEffiency+awayTeamEffiency);
         homeEf.setProgress(homeTeamEffiency);

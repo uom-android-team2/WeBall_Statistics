@@ -1254,6 +1254,7 @@ public class AdminsView extends Fragment {
     }
 
     public void enableButtonAfterAssistAndShoot(int alpha) {
+        freeThrowBtn.setEnabled(false);
         freeThrowBtn.getBackground().setAlpha(alpha);
         reboundBtn.setEnabled(true);
         reboundBtn.getBackground().setAlpha(alpha);

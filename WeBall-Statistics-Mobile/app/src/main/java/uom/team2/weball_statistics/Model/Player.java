@@ -2,9 +2,6 @@ package uom.team2.weball_statistics.Model;
 
 import java.io.Serializable;
 
-/*
- * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris ics20058
- */
 public class Player implements Serializable {
     private String teamName;
     private int id;
@@ -17,7 +14,6 @@ public class Player implements Serializable {
     private String teamString;
     private String imagePath;
     private int efficiency;
-    //Other fields for Statistics that made in other branch...
 
     //only for testing
     public Player(String name, String surname) {

@@ -8,10 +8,6 @@ import java.util.Date;
 
 import uom.team2.weball_statistics.Model.Actions.Action;
 
-
-/*
- * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris ics20058
- */
 public class Match implements Serializable {
     private int id; //unique id for every match
 
@@ -24,14 +20,10 @@ public class Match implements Serializable {
     private Status status; // UPCOMING, ONGOING, COMPLETED
     private int progress = 0;
     private long keepClock;
-
     private boolean completed = false;
     private ArrayList<Action> actions;
     private Referee referee;
     private int actionsCount; //Need to keep the actions number, to give the correct id to each action of the match
-
-
-    //Will added fields specified for comments and progress to appear them after the match completed
 
 
     public Match(int id, Team teamLandlord, Team guest, Date matchDate, Status status, Referee referee) {
@@ -51,7 +43,6 @@ public class Match implements Serializable {
         this.date = date;
         this.progress = progress;
         this.completed = completed;
-        //   actions = new ArrayList<Action>();
     }
 
     public Match(int id, Team teamLandlord, Team teamGuest, Date date, Status status) {

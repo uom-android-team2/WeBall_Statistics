@@ -21,29 +21,22 @@ public class TeamStatsLive extends TeamStats {
     }
 
     public void editJON(String data) {
-        System.out.println(data);
         try {
-
             JSONArray jsonArray = new JSONArray(data);
             String jsonStr = jsonArray.getJSONObject(0).toString() ;
             JSONObject json = new JSONObject(jsonStr);
             Iterator<String> keys = json.keys();
             HashMap<String , String> hashMapData = new HashMap<String , String>();
-
             while(keys.hasNext()) {
-
                 String key = keys.next();
                 String dataFromKey = json.get(key).toString();
 
                 if(key.equals("match_id")){
                     hashMapData.put(key, dataFromKey);
                 }
-
             }
-
             match_id = Integer.parseInt(hashMapData.get("match_id"));
             super.editJON(json.toString());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -50,10 +50,7 @@ public class TeamStats extends Stats {
     @Override
     public void editJON(String data) {
 
-
-        //System.out.println(data);
         try {
-
             JSONObject json= new JSONObject(data);
             Iterator<String> keys = json.keys();
             HashMap<String , String> hashMapData = new HashMap<String , String>();
@@ -68,17 +65,13 @@ public class TeamStats extends Stats {
                     hashMapData.put(key, dataFromKey);
                 }
             }
-
             team_id = Integer.parseInt(hashMapData.get("team_id"));
             if(isMatchId){
                 total_matches = Integer.parseInt(hashMapData.get("total_matches"));
                 win = Integer.parseInt(hashMapData.get("win"));
                 lose = Integer.parseInt(hashMapData.get("lose"));
             }
-
-
             super.editJON(data);
-
        } catch (JSONException e) {
             e.printStackTrace();
         }

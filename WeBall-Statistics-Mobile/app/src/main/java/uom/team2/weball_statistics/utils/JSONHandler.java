@@ -181,9 +181,6 @@ public class JSONHandler {
         String team = jsonObject.getString("team");
         String photo = jsonObject.getString("photo");
 
-
-
-
         return new Player(id,name,surname,number,position,team,photo);
     }
 

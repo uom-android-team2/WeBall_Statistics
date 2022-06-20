@@ -386,7 +386,6 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 teamSelected = true;
                 teamObj = match.getGuest();
 
@@ -398,7 +397,6 @@ public class AdminsView extends Fragment {
                 binding.player1.setBackground(shape2);
                 playerChecked = 1;
                 playerObjChecked = teamObj.getKeyPlayers().get(0);
-
 
                 //put background color to the banner so the admin knows which team is selected
                 GradientDrawable shape = new GradientDrawable();
@@ -427,25 +425,18 @@ public class AdminsView extends Fragment {
                                 .resize(200, 200)
                                 .centerCrop()
                                 .into(playersImageViewList.get(i));
-
                     }
                 }
-
                 listenEvent();
-
             }
         });
 
-
         binding.startButton.setOnClickListener(new View.OnClickListener() {
-
-
             final DBDataRecovery teamsPlayed = new DBDataRecovery();
             Stats teamLandlordStats = null, teamGuestStats = null;
 
             @Override
             public void onClick(View view) {
-
 
                 if (!started) {
                     setAlphaAdminBtn(255);
@@ -558,12 +549,10 @@ public class AdminsView extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 if (!undoButtonStack.isEmpty()) {
                     Player plObjForUndo = undoPlayerStack.pop();
                     Team teamObjForUndo = undoTeamStack.pop();
                     TextView lastAction = undoButtonStack.pop();
-
 
                     DBDataRecovery dataRecovery = new DBDataRecovery();
                     try {
@@ -589,12 +578,10 @@ public class AdminsView extends Fragment {
 
 
                         } else if (binding.twoPointerButton.equals(lastAction)) {
-                            System.out.println("mpika2 re2 mlk2222");
                             String sc = scoreStack.pop();
                             if (sc.equals(binding.scoreText.getText().toString())) {
 
                             } else {
-                                System.out.println("mpika re mlk");
                                 playerStats.setterForSuccessfulTwoPointer(playerStats.getTotalTwoPointer() - 1);
                                 teamStats.setterForSuccessfulTwoPointer(teamStats.getTotalTwoPointer() - 1);
                             }
@@ -1317,6 +1304,4 @@ public class AdminsView extends Fragment {
 
         this.assistMade = null;
     }
-
-
 }

@@ -213,7 +213,6 @@ public abstract class Stats implements editFieldsFromDB {
     @Override
     public void editJON(String data) {
 
-   System.out.println(data);
         try {
             JSONObject json = new JSONObject(data);
             Iterator<String> keys = json.keys();

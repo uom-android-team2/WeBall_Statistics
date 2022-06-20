@@ -17,9 +17,6 @@ import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.LiveMatches.L
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.PreviousMatches.PreviousMatches;
 import uom.team2.weball_statistics.UI_Controller.MatchesOnMainPage.UpcomingMatches.UpcomingMatches;
 
-/*
- * @author Minas - Theodoros Charakopoulos ics20072
- */
 public class SectionsPagerAdapterMatches extends FragmentPagerAdapter {
 
     @StringRes

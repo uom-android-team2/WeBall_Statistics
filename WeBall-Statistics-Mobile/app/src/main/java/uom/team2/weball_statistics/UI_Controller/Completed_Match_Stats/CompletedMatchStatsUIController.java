@@ -171,8 +171,6 @@ public class CompletedMatchStatsUIController {
         int maxPFH=-100;
         int maxCH=-100;
 
-
-
         //Sorting stats to the best 5 for the home team
         for(int i=0;i<filteredAllHomePlayerStats.size();i++){
             if(findPlayerById(homeTeamPlayers,filteredAllHomePlayerStats.get(i).getPlayer_id()).getPosition().equals("POINT_GUARD")) {

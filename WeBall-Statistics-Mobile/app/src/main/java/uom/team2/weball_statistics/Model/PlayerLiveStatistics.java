@@ -25,7 +25,6 @@ public class PlayerLiveStatistics implements firebaseModel {
     private int turnover;
     private double minutes;
 
-
     public PlayerLiveStatistics() {
 
     }

@@ -3,9 +3,6 @@ package uom.team2.weball_statistics.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/*
- * @author Minas - Theodoros Charakopoulos ics20072 and Dionisis Lougaris ics20058
- */
 public class Team implements Serializable {
     private int id;
     private String teamName;

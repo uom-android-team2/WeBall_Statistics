@@ -17,7 +17,7 @@ import uom.team2.weball_statistics.Model.Team;
 
 import uom.team2.weball_statistics.databinding.CompletedMatchStatsBinding;
 /*
- * @author George Stefou ics20051 and Dionisis Lougaris ics20058 and Minas Theodoros Charakopoulos ics20072
+ * @author George Stefou ics20051 and Dionisis Lougaris ics20058
  */
 public class CompletedMatchStats extends Fragment {
 
@@ -28,7 +28,6 @@ public class CompletedMatchStats extends Fragment {
     public CompletedMatchStats() {
 
     }
-
 
     public static uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats getInstance() {
         return new uom.team2.weball_statistics.UI_Controller.Completed_Match_Stats.CompletedMatchStats();

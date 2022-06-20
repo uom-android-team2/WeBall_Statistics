@@ -101,10 +101,6 @@ public class LeadersStats extends Fragment {
                 rebounds = sortByRebounds(returnedObject);
                 fouls = sortByFouls(returnedObject);
 
-//                System.out.println("assist for 1st player " + assists.get(0).getPlayer_id()+" " +assists.get(0).calculateAssistPercentage());
-//                System.out.println("assist for 2nd player " + assists.get(1).getPlayer_id()+" " +assists.get(1).calculateAssistPercentage());
-//                System.out.println("assist for 3rd player " + assists.get(2).getPlayer_id()+" " +assists.get(2).calculateAssistPercentage());
-
                 //add titles
                 addTitles();
 

@@ -14,9 +14,6 @@ import uom.team2.weball_statistics.Model.Team;
 import uom.team2.weball_statistics.Service.DAOAction;
 import uom.team2.weball_statistics.databinding.FragmentLiveGameProgressBinding;
 
-/*
- * @author Minas - Theodoros Charakopoulos ics20072
- */
 public class LiveGameProgress extends Fragment {
 
     private FragmentLiveGameProgressBinding binding;

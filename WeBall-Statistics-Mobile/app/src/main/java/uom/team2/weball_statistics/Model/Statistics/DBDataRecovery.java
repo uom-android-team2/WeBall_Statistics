@@ -32,37 +32,19 @@ public class DBDataRecovery {
                 .build();
         Response response = client.newCall(request).execute();
         String data = response.body().string();
-
-
-
-
-
-
-
         Stats statsObject = createObjectStats(api);
-
-
         statsObject.editJON(data);
 
         return statsObject;
-
-
     }
 
     public void updateDataDB(String api, Stats object) throws IOException {
         Gson gson = new Gson();
-        System.out.println(gson.toJson(object));
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create(gson.toJson(object), MediaType.parse("application/json"));
         Request request = new Request.Builder().url(Config.API_URL + api).method("PUT", body).build();
         Response response = client.newCall(request).execute();
         String data = response.body().string();
-
-
-        System.out.println(data);
-
-
-
     }
 
     private Stats createObjectStats(String api) {

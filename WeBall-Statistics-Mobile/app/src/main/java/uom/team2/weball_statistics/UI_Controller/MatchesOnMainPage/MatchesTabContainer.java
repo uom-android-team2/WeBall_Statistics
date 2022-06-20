@@ -20,9 +20,6 @@ import uom.team2.weball_statistics.UI_Controller.Home;
 import uom.team2.weball_statistics.databinding.FragmentMatchesTabContainerBinding;
 import uom.team2.weball_statistics.utils.Utils;
 
-/*
- * @author Minas - Theodoros Charakopoulos ics20072
- */
 public class MatchesTabContainer extends Fragment {
 
     private FragmentMatchesTabContainerBinding binding;

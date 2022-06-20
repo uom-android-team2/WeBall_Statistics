@@ -76,10 +76,6 @@ public class popupViewOnePoint extends Dialog implements android.view.View.OnCli
         no = findViewById(R.id.dialog_No);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
-
-        //
-
-
     }
 
 

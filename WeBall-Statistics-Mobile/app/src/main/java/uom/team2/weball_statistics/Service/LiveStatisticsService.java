@@ -41,7 +41,6 @@ public class LiveStatisticsService {
                 try {
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
-                    System.out.println(data);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

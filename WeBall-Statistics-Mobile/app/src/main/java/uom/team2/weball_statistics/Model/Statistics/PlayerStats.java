@@ -37,24 +37,19 @@ public class PlayerStats extends Stats {
     @Override
     public void editJON(String data) {
 
-        System.out.println(data);
         try {
              JSONObject json = new JSONObject(data);
              Iterator<String> keys = json.keys();
              HashMap<String , String> hashMapData = new HashMap<String , String>();
 
               while(keys.hasNext()) {
-
                 String key = keys.next();
                 String dataFromKey = json.get(key).toString();
 
                 if(UniqueKeysOfPlayer.contains(key)){
-                    System.out.println(hashMapData);
                     hashMapData.put(key, dataFromKey);
                 }
-
               }
-
               player_id = Integer.parseInt(hashMapData.get("player_id"));
               if(hasMatchPlayed){
                   matches_played = Integer.parseInt(hashMapData.get("matches_played"));
@@ -62,12 +57,9 @@ public class PlayerStats extends Stats {
               }
               minutes = Float.parseFloat(hashMapData.get("minutes"));
               super.editJON(data);
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -132,6 +124,5 @@ public class PlayerStats extends Stats {
     public void setMinutes(float minutes) {
         this.minutes = minutes;
     }
-
 
 }

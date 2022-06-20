@@ -78,10 +78,6 @@ public class popupViewTwoPoints extends Dialog implements
         no = findViewById(R.id.dialog_No);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
-
-        //
-
-
     }
 
 
@@ -145,7 +141,6 @@ public class popupViewTwoPoints extends Dialog implements
         playerStats.setTotalEffort();
         teamStats.setTotalTwoPointer();
         teamStats.setTotalEffort();
-
 
         try {
             dbdatarecovery.updateDataDB(Config.API_PLAYER_STATISTICS_COMPLETED, playerStats);

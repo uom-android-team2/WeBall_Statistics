@@ -5,7 +5,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import uom.team2.weball_statistics.R;
-
+/*
+ *  @author Ampatzidou Elisavet ics20038
+ */
 public class TeamScoreLayout {
     public static View createTeamScoreLayout(Fragment fragment,int pos, String name, int g, int w ,int l, double p){
         View teamScoreLayout = fragment.getLayoutInflater().inflate(R.layout.team_score_layout, null);

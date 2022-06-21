@@ -23,8 +23,9 @@ import uom.team2.weball_statistics.Service.TeamChampioshipStatsService;
 import uom.team2.weball_statistics.Service.TeamService;
 import uom.team2.weball_statistics.UI_Controller.LiveController.Statistics.CallbackListener;
 import uom.team2.weball_statistics.databinding.FragmentTeamScoreBinding;
-
-
+/*
+ *  @author Ampatzidou Elisavet ics20038
+ */
 public class TeamScore extends Fragment {
 
     private FragmentTeamScoreBinding binding;

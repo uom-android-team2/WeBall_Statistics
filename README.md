@@ -20,9 +20,9 @@
 
 <h2>R1 &nbsp;&nbsp; Display matches - Admin Login - Guest Starting Page</h2>
 <div float="left">
-  <img src="screenshots/R1/start-page.png" height="550" />
-  <img src="screenshots/R1/admin-login.png" height="550" />
-  <img src="screenshots/R1/upcoming-matches-admin-view-before-start.png" height="550" />
+  <img src="screenshots/R1/start-page.png" height="450" />
+  <img src="screenshots/R1/admin-login.png" height="450" />
+  <img src="screenshots/R1/upcoming-matches-admin-view-before-start.png" height="450" />
 </div>
 <br>
 <p><b><i>Requirement 1</i></b> is handled by the administrator (admin) and it concerns the match selection, and manage the card of the selected match. This includes the appearance of players and the corresponding ones logos. First, the administrator must enter the username and password in the form is requested, after choosing the button “LOGIN AS ADMIN". The admin account can created by the backend website through it register. It then goes to the “Matches” screen, where there are three columns with the corresponding matches (Previous Matches, Live Matches, Upcoming Matches). From there the administrator can choose a match and edit the tab of. More specifically, by pressing it arrow a popup appears menu, which includes the players of the groups. With the edit button, is transferred to the “Welcome Admin” screen, where it is match management (see R2). <br>
@@ -30,9 +30,9 @@ Note: The edit option concerns ONLY the live and upcoming matches, not the compl
 
 <h2>R2 &nbsp;&nbsp; Match management by Admin</h2>
 <div float="left">
-  <img src="screenshots/R2/admin-live-match-panel.png" height="550" />
-  <img src="screenshots/R2/live-match-admin.png" height="550" />
-  <img src="screenshots/R2/pop-add-points.png" height="550" />
+  <img src="screenshots/R2/admin-live-match-panel.png" height="450" />
+  <img src="screenshots/R2/live-match-admin.png" height="450" />
+  <img src="screenshots/R2/pop-add-points.png" height="450" />
 </div>
 <br>
 <p><b><i>Requirement 2</i></b> constitutes the next possibility of the administrator (admin), which includes all functions related to managing a match (Shoot with
@@ -45,12 +45,12 @@ administrator to press the start button from its graphical interface. On the con
 
 <h2>R4 &nbsp;&nbsp; Watch the progress of the Live Match</h2>
 <div float="left">
-  <img src="screenshots/R4/live-progress-1.png" height="550" />
-  <img src="screenshots/R4/live-progress-2.png" height="550" />
-  <img src="screenshots/R4/live-comments-1.png" height="550" />
+  <img src="screenshots/R4/live-progress-1.png" height="450" />
+  <img src="screenshots/R4/live-progress-2.png" height="450" />
+  <img src="screenshots/R4/live-comments-1.png" height="450" />
 </div>
 <br>
-<p>The purpose of implementing <b><i>requirement 4</i></b> is that users as well as match administrators (admins) can watch the progression of a live match in real time, through verbal descriptions and comments for more details. In order to watch the progress of a live match, one must first choose one, from the list of live matches (Live matches), by clicking anywhere on its layout. Thus, it will be transferred to a new screen, where the 2 teams, the current score, the match week, as well as the current minutes of the match, are shown above. Below, is a menu available where gives the opportunity to watch the match through brief descriptions by selecting the "Progress" tab, as well as through comments and more detailed descriptions by pressing the "Comments" tab. He can also see the statistics of the teams and the respective players by going to the "Statistics" tab (R5). <br>
+<p>The purpose of implementing <b><i>requirement 4</i></b> is that users as well as match administrators (admins) can watch the progression of a live match in real time, through verbal descriptions and comments for more details. In order to watch the progress of a live match, one must first choose one, from the list of live matches (Live matches), by clicking anywhere on its layout. Thus, it will be transferred to a new screen, where the 2 teams, the current score, the match week, as well as the current minutes of the match, are shown above. Below, is a menu available where gives the opportunity to watch the match through brief descriptions by selecting the "Progress" tab, as well as through comments and more detailed descriptions by pressing the "Comments" tab. He can also see the statistics of the teams and the respective players by going to the "Statistics" tab (R5). <br><br>
 About the <b><i>"Progress"</i></b> tab, short descriptions are displayed for actions registered by the admin and performed in the match such as the following: </p>
 <ul>
   <li>Start, complete, pause and resume of the match.</li>

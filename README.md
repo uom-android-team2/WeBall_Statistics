@@ -117,3 +117,5 @@ team and player statistics, and the “TOP 5” button, which leads to the best 
 </div>
 <br>
 <p>In <b><i>requirement 10</i></b>, the best 5 of the Competition are calculated based on the evaluation system (Efficiency meter). By pressing the button "TOP 5" the user enters the page and displays the 5 best players of the matchday (last matchday / current week), according to the position in which they play. For the selection of the top five, the statistics of all players who participated in the completed matches of the current week are gathered, the efficiency index of each player is calculated and then these indices are compared between players of the same position. The player with the greatest efficiency emerges as the best of the week for the position he plays. In addition, the data of the 5 best players is displayed in a frame with a background color that dominates the team they play.</p>
+
+# Local Installation

@@ -69,13 +69,51 @@ About the <b><i>"Progress"</i></b> tab, short descriptions are displayed for act
 <h4>For the implementation of the real time data, the possibility of the real time database offered by the <a href="https://firebase.google.com/">Firebase</a> platform was utilized.</h4>
 
 <h2>R5 &nbsp;&nbsp; Watch the Statistics of the Live Match (Both for Teams and Players)</h2>
+<div float="left">
+  <img src="screenshots/R5/live-team-statistics.png" height="450" />
+  <img src="screenshots/R5/live-players-statistics-1.png" height="450" />
+  <img src="screenshots/R5/live-players-statistics-2.png" height="450" />
+</div>
+<br>
+<p><b><i>Requirement 5</i></b> will give the opportunity to the user to watch live stats of a match as it is live. The user, having selected a live match, has the possibility to see the relevant statistics of the teams from the last column of the "Live Game" screen. Here again the elements on the left side of the screen represent the home team, while the elements on the right represent the away team. In addition, the bars visually show the statistics of the teams by category <i> (Successful effort, Total effort, Successful freethrow, Total freethrow, Successful twopointer, Total twopointer, Successful threepointer, Total threepointer, Steal,
+Assist, Block, Rebound, Foul, Turnover)</i>, while the number above each bar indicates the total number of attempts, successful shots, etc. The “View Players Live Statistics” button at the bottom of the screen, refers the user to the individual player statistics by category again. The team's overall data (e.g. total effort) is displayed on the right and the number representing each player on the left. The bar again indicates the corresponding percentage. Additionally, the user can select the player from the bottom of the screen or change team from the pop-up menu on the top left of the screen.</p>
+<p><b>Note: </b> <b><i>Firebase was used to record and store the data, so that the comments of each match are always updated, without the need for further action by the user (e.g. refreshing the page).</i></b></p>
 
 <h2>R6 &nbsp;&nbsp; Statistics of completed matches</h2>
+<div float="left">
+  <img src="screenshots/R6/completed-match-statistics-1.png" height="450" />
+  <img src="screenshots/R6/completed-match-statistics-2.png" height="450" />
+  <img src="screenshots/R6/completed-match-statistics-3.png" height="450" />
+</div>
+<br>
+<p><b><i>Requirement 6</i></b> will offer the user the option to view the stats of a completed match. From the user's home match screen and the “Previous Matches” column, the user can select a completed match to view its statistics. In more detail, after selecting one, the individual statistics of the five most efficient players of each team are displayed, and below, a list of the leading players in the specific statistics for the selected match. The following are the total statistics of the two teams per category <i>(Team Efficiency, 3 Pointers Made, 2 Pointers Made, Total Freethrows, Team Assists, Total Fouls.
+10)</i>. The left side is for the home team, while the right side is for the away team.</p>
 
 <h2>R7 &nbsp;&nbsp; League Scoreboard</h2>
+<div float="left">
+  <img src="screenshots/R7/score-board.png" height="450" />
+</div>
+<br>
+<p>In <b><i>requirement 7</i></b>, the scores of all the teams will be presented, after they have completed the match in which they are participating. More specifically, the user goes to the scoreboard screen from the "CHAMPIONSHIP LEADERBOARD" button located on the home screen. This screen shows the teams sorted according to their score (PTS). To the left of the columns is the position number of each team (#), followed by the team name, total games played so far (GM), wins (W) and losses (L) respectively and finally the points scored have collected (PTS). Points are calculated as the sum of wins times 2 and losses. Additionally, there are two buttons on this screen. The “STATISTICS” button, which leads to
+team and player statistics, and the “TOP 5” button, which leads to the best 5 players (regardless of team).</p>
 
 <h2>R8 &nbsp;&nbsp; Overall team stats</h2>
+<div float="left">
+  <img src="screenshots/R8/team-stats-all-time.png" height="450" />
+</div>
+<br>
+<p>In <b><i>requirement 8</i></b>, the total statistics of the teams will be displayed. The user from the "STATISTICS" button of requirement 7 goes to the "Championship Statistics" screen, which has two tabs. The second tab “TEAM STATS” (related to R8), contains four tables per category. In each table the five teams with the highest percentages per category <i>(points per game, assists per game, rebounds per game, blocks per game, up to the given moment in the league)</i> are shown. For example, in “Points Per Game”, the user can see the top five teams that collected the most points per game.</p>
 
 <h2>R9 &nbsp;&nbsp; Personal player stats</h2>
+<div float="left">
+  <img src="screenshots/R9/top-players-all-time.png" height="450" />
+</div>
+<br>
+<p>In <b><i>requirement 9</i></b>, the personal statistics of the players throughout the league are displayed. The "STATISTICS" button of requirement 7 navigates the user to the "Championship Statistics" screen, which has two tabs. The first tab on the left (PLAYERS STATS) corresponds to requirement 9 and concerns the statistics of the players by category <i>(points per game, assists per game, rebounds per game, blocks per game, fouls per game)</i>, i.e. how many points, rebounds, assists, etc. collected by the respective player per game (up to the given moment in the league). In each category, the 5 players who collected the highest percentages per category, in the matches they have participated in so far, are displayed. These statistics are updated as the match progresses.</p>
 
 <h2>R10 &nbsp;&nbsp; Top-5 players for each week</h2>
+<div float="left">
+  <img src="screenshots/R10/top5-per-week.png" height="450" />
+</div>
+<br>
+<p>In <b><i>requirement 10</i></b>, the best 5 of the Competition are calculated based on the evaluation system (Efficiency meter). By pressing the button "TOP 5" the user enters the page and displays the 5 best players of the matchday (last matchday / current week), according to the position in which they play. For the selection of the top five, the statistics of all players who participated in the completed matches of the current week are gathered, the efficiency index of each player is calculated and then these indices are compared between players of the same position. The player with the greatest efficiency emerges as the best of the week for the position he plays. In addition, the data of the 5 best players is displayed in a frame with a background color that dominates the team they play.</p>

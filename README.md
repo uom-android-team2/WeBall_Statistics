@@ -118,4 +118,32 @@ team and player statistics, and the “TOP 5” button, which leads to the best 
 <br>
 <p>In <b><i>requirement 10</i></b>, the best 5 of the Competition are calculated based on the evaluation system (Efficiency meter). By pressing the button "TOP 5" the user enters the page and displays the 5 best players of the matchday (last matchday / current week), according to the position in which they play. For the selection of the top five, the statistics of all players who participated in the completed matches of the current week are gathered, the efficiency index of each player is calculated and then these indices are compared between players of the same position. The player with the greatest efficiency emerges as the best of the week for the position he plays. In addition, the data of the 5 best players is displayed in a frame with a background color that dominates the team they play.</p>
 
+# Prerequisites
+<ul>
+  <li>Android Studio</li>
+  <li>XAMPP Control Panel</li>
+  <li>An emulator installed e.g. Nexus 5 API 30, Pixel 3 XL API 29</li>
+  <li>Internet Connection</li>
+</ul>
+
 # Local Installation
+<h4>For the correct use of the application, the following actions are required:</h4>
+
+```
+Run at first the back-end:
+git clone https://github.com/uom-android-team2/WeBall_Statistics-Backend.git or download the zip from github and extract it
+Store or move the root folder WeBall_Statistics-Backend(-master) in <PATH>\xampp\htdocs folder
+Open XAMPP Control Panel and start Apache and MySQL servers
+Visit from your browser http://localhost/WeBall_Statistics-Backend/index/ then register or login and follow the manual
+
+Now, for the Mobile Application:
+git clone https://github.com/uom-android-team2/WeBall_Statistics.git or download the zip from github and extract it
+Store or move the root folder WeBall_Statistics(-main) in <PATH>\AndroidStudioProjects\
+Open Android Studio and the app root folder.
+Config the App:
+public static final String IP = <YOUR_IP>  --> (java/uom/team2/weball_statistics/configuration/Config.java)
+<domain includeSubdomains="true"><YOUR_IP></domain>  --> (res/xml/network_security_config.xml)
+Start any emulator, and then you are ready to launch the app!
+```
+
+<h4>Note: Maybe you will see already data for live matches because of the real time cloud service was used, firebase real-time database!</h4>

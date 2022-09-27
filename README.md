@@ -16,7 +16,7 @@
 </ul>
 
 <h4>Video presentation of the app on YouTube: <a href="https://www.youtube.com/watch?v=ouzMwkUCQ-s&list=LL&index=12"><b><i>presentation video</i></b><a/></h4>
-<h4>Visit the other repo, with the back-end of our application: <a href="https://github.com/uom-android-team2/WeBall_Statistics-Backend"><b><i>back-end</i></b><a/></h4>
+<h4>Visit the other repository, with the back-end of our application: <a href="https://github.com/uom-android-team2/WeBall_Statistics-Backend"><b><i>back-end</i></b><a/></h4>
 
 <h2>R1 &nbsp;&nbsp; Display matches - Admin Login - Guest Starting Page</h2>
 <div float="left">
